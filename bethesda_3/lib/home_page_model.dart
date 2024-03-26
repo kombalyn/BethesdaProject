@@ -67,5 +67,6 @@ class HomePageModel extends HomePageWidget {
 /// Action blocks are added here.
 
 /// Additional helper methods are added here.
+
 }
 

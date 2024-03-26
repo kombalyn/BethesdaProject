@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 //import 'package:video_player/video_player.dart';
+import 'package:bethesda_2/constants/colors.dart'; // Adjust the import path as necessary
 
-import 'home_page_model.dart';
 import 'main.dart';
 export 'home_page_model.dart';
 
@@ -16,7 +16,7 @@ class Regisztracio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Fájdalomkezelés regisztráció',
       theme: ThemeData(
         // This is the theme of your application.
         //

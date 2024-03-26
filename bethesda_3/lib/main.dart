@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
 //import 'package:video_player/video_player.dart';
 
+import 'package:bethesda_2/constants/colors.dart'; // Adjust the import path as necessary
+
 import 'ModuleOpening.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Fájdalomkezelés bejelentkezés',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -88,7 +90,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
     super.dispose();
   }
-
+  Widget orDivider(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Divider(color: Colors.grey),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+            "VAGY",
+            style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
+          ),
+        ),
+        Expanded(
+          child: Divider(color: Colors.grey),
+        ),
+      ],
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -97,7 +117,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white70,
+        backgroundColor: AppColors.lightshade,
+       // backgroundColor: Colors.white70,
         drawer: Drawer(
           elevation: 16,
         ),
@@ -114,22 +135,36 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-
                     SizedBox(height: MediaQuery.of(context).size.height*0.1,),
                     Container(
-                        color: Colors.blue,
+                        color: AppColors.lightaccentcolor,
                         width: MediaQuery.of(context).size.width*0.3,
                         height: MediaQuery.of(context).size.height,
-                        child: Column(
+                      child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
+                            SizedBox(height: MediaQuery.of(context).size.height*0.03,),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 15.0), // Apply padding only on the left side
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20), // Adjust this value to change the roundness
+                                  child: Image.asset(
+                                    "assets/images/bethesda_gyermekkorhaz_logo.png",
+                                    width: MediaQuery.of(context).size.width * 0.05,
+                                  ),
+                                ),
+                              ),
+
+                            ),
+                            //Image.asset("assets/images/bethesda_gyermekkorhaz_logo.png",width: MediaQuery.of(context).size.width*0.1,),
                             SizedBox(height: MediaQuery.of(context).size.height*0.05,),
-                            Image.asset("assets/bethesda_gyermekkorhaz_logo.png",width: MediaQuery.of(context).size.width*0.1,),
+                            Text("Üdvözöljük a Bethesda Gyermekkórház Online Fájdalomkezelő weboldalán!",
+                              textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),),
                             SizedBox(height: MediaQuery.of(context).size.height*0.05,),
-                            Text("Üdvözöljük a Bethesda Gyermekkórház Online Fájdalomkezelő weboldalán!", textAlign: TextAlign.center, style: TextStyle(color: Colors.white),),
-                            SizedBox(height: MediaQuery.of(context).size.height*0.05,),
-                            Image.asset("assets/bear.png"),
+                            Image.asset("assets/images/bear_nobackground.png"),
                           ],
                         ),
                         //SizedBox(width: MediaQuery.of(context).size.width*0.5,height: MediaQuery.of(context).size.height ,),
@@ -143,17 +178,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-
                                 ListTile(
-                                  title: Text(
-                                    'Bethesda Gyermekkórház Online Fájdalomkezelő',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontFamily: 'DancingScript',fontSize: 18),
-                                  ),
+                                  //title: Text(
+                                  //  'Bethesda Gyermekkórház Online Fájdalomkezelő',
+                                   // textAlign: TextAlign.center,
+                                   // style: TextStyle(fontFamily: 'Montserrat',fontSize: 20),
+                                  //),
                                   subtitle: Text(
-                                    'Itt lesz a tájékoztató szöveg... A továbblépéshez kérjük jelentkezzen be felhasználónevének és jelszavának megadásával.',
+                                    'A továbblépéshez kérjük jelentkezzen be az e-mail címének és a korábban megkapott kutatási azonosítójának megadásával.',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(fontFamily: 'DancingScript',fontSize: 15),
+                                    style: TextStyle(fontFamily: 'Montserrat',fontSize: 18),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_forward_ios,
@@ -169,21 +203,28 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               child: Column(
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(0, 0),
+                                    alignment: AlignmentDirectional.centerStart,
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
                                       child: Text(
-                                        'Felhasználónév:',
+                                        'E-mail cím:',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(fontFamily: 'DancingScript',fontSize: 15),
+                                        style: TextStyle(fontFamily: 'Montserrat',fontSize: 18, color: AppColors.darkshade),
                                       ),
                                     ),
                                   ),
 
 
                                 Container(
-                                  color: Colors.grey,
-                                  child: Padding(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.lightshade, // Background color of the container
+                                    border: Border.all(
+                                      color: Colors.grey, // Outline color
+                                      width: 0.5, // Outline thickness
+                                    ),
+                                    // If you also want to have rounded corners, add the borderRadius property
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),                                  child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
                                     child: TextFormField(
                                       controller: _model.textController1,
@@ -191,21 +232,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       autofocus: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.zero, // <-- Set contentPadding to zero
                                         labelText: 'Label here...',
                                         labelStyle:
-                                        TextStyle(fontFamily: 'DancingScript',fontSize: 15),
+                                        TextStyle(fontFamily: 'Montserrat',fontSize: 15, color: AppColors.lightaccentcolor),
                                         //hintStyle: FlutterFlowTheme.of(context).labelMedium,
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.white30,
-                                            width: 2,
+                                            color: Colors.white,
+                                            width: 0,
                                           ),
                                           borderRadius: BorderRadius.circular(8),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.black,
-                                            width: 2,
+                                            color: Colors.white,
+                                            width: 0,
                                           ),
                                           borderRadius: BorderRadius.circular(8),
                                         ),
@@ -224,7 +266,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           borderRadius: BorderRadius.circular(8),
                                         ),
                                       ),
-                                      style: TextStyle(fontFamily: 'DancingScript',fontSize: 15),
+                                      style: TextStyle(fontFamily: 'Montserrat',fontSize: 15),
                                       //validator: _model.textController1Validator.asValidator(context),
                                     ),
                                   ),
@@ -239,20 +281,28 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               child: Column(
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(0, 0),
+                                    alignment: AlignmentDirectional.centerStart,
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
                                       child: Text(
-                                        'Jelszó:',
+                                        'Kutatási azonosító:',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(fontFamily: 'DancingScript',fontSize: 15),
+                                        style: TextStyle(fontFamily: 'Montserrat',fontSize: 18, color: AppColors.darkshade),
                                       ),
                                     ),
                                   ),
 
                                   Container(
-                                    color: Colors.grey,
-                                  child: Padding(
+                                    decoration: BoxDecoration(
+                                      color: AppColors.lightshade, // Background color of the container
+                                      border: Border.all(
+                                        color: Colors.grey, // Outline color
+                                        width: 0.5, // Outline thickness
+                                      ),
+                                      // If you also want to have rounded corners, add the borderRadius property
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
                                     child: TextFormField(
                                       controller: _model.textController1,
@@ -260,9 +310,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       autofocus: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.zero, // <-- Set contentPadding to zero
                                         labelText: 'Label here...',
                                         labelStyle:
-                                        TextStyle(fontFamily: 'DancingScript',fontSize: 15),
+                                        TextStyle(fontFamily: 'Montserrat',fontSize: 15, color: AppColors.lightaccentcolor),
                                         //hintStyle: FlutterFlowTheme.of(context).labelMedium,
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
@@ -273,8 +324,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.black,
-                                            width: 2,
+                                            color: Colors.white,
+                                            width: 0,
                                           ),
                                           borderRadius: BorderRadius.circular(8),
                                         ),
@@ -293,7 +344,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           borderRadius: BorderRadius.circular(8),
                                         ),
                                       ),
-                                      style: TextStyle(fontFamily: 'DancingScript',fontSize: 15),
+                                      style: TextStyle(fontFamily: 'Montserrat',fontSize: 15),
                                       //validator: _model.textController1Validator.asValidator(context),
                                     ),
                                   ),
@@ -311,13 +362,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     );
 
                                     print("gomb");
-                                    }
-                                      , child: Text("Bejelentkezés")
-                                  ),
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(AppColors.lightaccentcolor), // Change the color to your desired color
+                                    ),
+                                       child: Text("Bejelentkezés", textAlign: TextAlign.center,
+                                      style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.bold, fontSize: 20,
+                                          color: AppColors.lightshade),),
+
+        ),
 
 
                                   SizedBox(height: MediaQuery.of(context).size.height*0.02,),
-                                  Container(width: MediaQuery.of(context).size.width*0.4, height: MediaQuery.of(context).size.width*0.005, color: Colors.black),
+                                  orDivider(context),
+
+                                  //Container(width: MediaQuery.of(context).size.width*0.4, height: MediaQuery.of(context).size.width*0.005, color: Colors.black),
                                   SizedBox(height: MediaQuery.of(context).size.height*0.02,),
 
                                   ElevatedButton(onPressed: () async {
@@ -333,7 +392,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
 
                                   }
-                                      , child: Text("Regisztráció")
+                                      , child: Text("Regisztráció",  textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.bold, fontSize: 20, color: AppColors.lightaccentcolor),),
                                   ),
 
 
