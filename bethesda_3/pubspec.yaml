@@ -69,6 +69,7 @@ flutter:
     - assets/images/hatter.jpg
     - assets/images/fox.png
     - assets/images/bear_nobackground.png
+    - assets/fox.png
 
     - assets/videos/animation.mp4
 

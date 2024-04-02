@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
 import 'package:video_player/video_player.dart';
 
+import 'ModuleHipno.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -308,14 +309,12 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                             onPressed: () {
                               print('Button pressed ...');
 
-                              _controller = _controller = VideoPlayerController.asset('assets/videos/animation.mp4')
-                                ..initialize().then((_) {
-                                  setState(() {});
-                                });
-
-                              _controller.value.isPlaying
-                                  ? _controller.pause()
-                                  : _controller.play();
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) => ModuleHipno(),
+                                ),
+                              );
                             },
                             child: Column(
                               children: [
