@@ -102,8 +102,6 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-
-
                 Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -201,10 +199,6 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                     ),
                   ],
                 ),
-
-
-
-
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: Container(
@@ -222,38 +216,6 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-
-                        Text(
-                          'Funkcionális hasi fájdalomzavarok online hipnózis és mozgás-motivációs tréning kezelésének hatásvizsgálata tizenévesek körében',
-                          style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            color: Color(0xFFE41B48),
-                            fontSize: 24,
-                          ),
-                        ),
-
-                        SizedBox(height: MediaQuery.of(context).size.width*0.03),
-
-
-                        Text(
-                          'A kutatás célja',
-                          style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            color: Color(0xFFE41B48),
-                            fontSize: 18,
-                          ),
-                        ),
-
-                        Text(
-                          'A kutatás célja',
-                          style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            color: Color(0xFFE41B48),
-                            fontSize: 18,
-                          ),
-                        ),
-
-
                         Container(
 
                           decoration: BoxDecoration(
