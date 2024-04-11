@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+       // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       home: const HomePageWidget(),
@@ -135,7 +135,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(height: MediaQuery.of(context).size.height*0.1,),
+                    SizedBox(height: MediaQuery.of(context).size.height*0.8,),
                     Container(
                         color: AppColors.lightaccentcolor,
                         width: MediaQuery.of(context).size.width*0.3,
@@ -144,11 +144,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            SizedBox(height: MediaQuery.of(context).size.height*0.03,),
+                            SizedBox(height: MediaQuery.of(context).size.height*0.01,),
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(left: 15.0), // Apply padding only on the left side
+                                padding: EdgeInsets.only(left: 15.0, top:MediaQuery.of(context).size.height*0.0001), // Apply padding only on the left side
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20), // Adjust this value to change the roundness
                                   child: Image.asset(
@@ -163,7 +163,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             SizedBox(height: MediaQuery.of(context).size.height*0.05,),
                             Text("Üdvözöljük a Bethesda Gyermekkórház Online Fájdalomkezelő weboldalán!",
                               textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),),
-                            SizedBox(height: MediaQuery.of(context).size.height*0.05,),
+                            SizedBox(height: MediaQuery.of(context).size.height*0.005,),
                             Image.asset("assets/images/bear_nobackground.png"),
                           ],
                         ),
@@ -233,7 +233,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.zero, // <-- Set contentPadding to zero
-                                        labelText: 'Label here...',
+                                        labelText: 'Kattintson ide...',
                                         labelStyle:
                                         TextStyle(fontFamily: 'Montserrat',fontSize: 15, color: AppColors.lightaccentcolor),
                                         //hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -311,7 +311,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.zero, // <-- Set contentPadding to zero
-                                        labelText: 'Label here...',
+                                        labelText: 'Kattintson ide...',
                                         labelStyle:
                                         TextStyle(fontFamily: 'Montserrat',fontSize: 15, color: AppColors.lightaccentcolor),
                                         //hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -392,7 +392,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
 
                                   }
-                                      , child: Text("Regisztráció",  textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Montserrat',
+                                      , child: Text("Először jársz itt?",  textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Montserrat',
                                         fontWeight: FontWeight.bold, fontSize: 20, color: AppColors.lightaccentcolor),),
                                   ),
 

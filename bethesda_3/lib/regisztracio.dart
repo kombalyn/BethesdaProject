@@ -72,7 +72,6 @@ class ResearcherCard extends StatelessWidget {
 
 
 class ContactInfo extends StatelessWidget {
-  final String email1 = "forgacs.katalin@phd.semmelweis.hu";
   final String email2 = "havran.zsofia@stud.semmelweis.hu";
 
   Future<void> _launchEmail(String email) async {
@@ -102,22 +101,9 @@ class ContactInfo extends StatelessWidget {
           ),
           SizedBox(height: 8),
           InkWell(
-            onTap: () => _launchEmail(email1),
-            child: Text(
-              "Forgács-Kristóf Katalin, MSc - $email1",
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-                // fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: AppColors.darkshade,
-              ),
-            ),
-          ),
-          SizedBox(height: 4),
-          InkWell(
             onTap: () => _launchEmail(email2),
             child: Text(
-              "Havrá Zsófia - $email2",
+              "Havrán Zsófia - $email2",
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 // fontWeight: FontWeight.bold,
@@ -184,7 +170,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
       child: Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.lightshade,
             scrolledUnderElevation: 0.0,
             leading: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -197,7 +183,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
             ),
           ),
           title: Text(
-            "Bethesda Gyermekkórház Fájdalom Ambulancia",
+            "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'Montserrat',
@@ -223,7 +209,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
         ),
 
 
-        backgroundColor: AppColors.lightshade,
+        backgroundColor: AppColors.whitewhite,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
