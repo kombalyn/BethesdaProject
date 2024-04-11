@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  url_launcher: ^6.0.20 # Check for the latest version on pub.dev
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -69,7 +70,8 @@ flutter:
     - assets/images/hatter.jpg
     - assets/images/fox.png
     - assets/images/bear_nobackground.png
-    - assets/fox.png
+    - assets/images/bethesda_white_logo_name.png
+    - assets/images/major_janos.png
 
     - assets/videos/animation.mp4
 
