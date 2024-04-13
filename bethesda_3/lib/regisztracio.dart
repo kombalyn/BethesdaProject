@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
 import 'package:bethesda_2/constants/colors.dart'; // Adjust the import path as necessary
 import 'package:url_launcher/url_launcher.dart';
+import 'gdpr.dart';
 
 import 'main.dart';
 export 'home_page_model.dart';
@@ -43,7 +44,7 @@ class ResearcherCard extends StatelessWidget {
                 children: [
                   Flexible( // Allows text to wrap if it's too long for the screen
                     child: Text(
-                      "Vezető kutató: Dr Major János, PhD",
+                      "Vezető kutató: \nDr Major János, PhD",
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 16,
@@ -72,7 +73,6 @@ class ResearcherCard extends StatelessWidget {
 
 
 class ContactInfo extends StatelessWidget {
-  final String email1 = "forgacs.katalin@phd.semmelweis.hu";
   final String email2 = "havran.zsofia@stud.semmelweis.hu";
 
   Future<void> _launchEmail(String email) async {
@@ -102,22 +102,9 @@ class ContactInfo extends StatelessWidget {
           ),
           SizedBox(height: 8),
           InkWell(
-            onTap: () => _launchEmail(email1),
-            child: Text(
-              "Forgács-Kristóf Katalin, MSc - $email1",
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-                // fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: AppColors.darkshade,
-              ),
-            ),
-          ),
-          SizedBox(height: 4),
-          InkWell(
             onTap: () => _launchEmail(email2),
             child: Text(
-              "Havrá Zsófia - $email2",
+              "Havrán Zsófia - $email2",
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 // fontWeight: FontWeight.bold,
@@ -184,7 +171,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
       child: Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.whitewhite,
             scrolledUnderElevation: 0.0,
             leading: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -197,7 +184,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
             ),
           ),
           title: Text(
-            "Bethesda Gyermekkórház Fájdalom Ambulancia",
+            "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'Montserrat',
@@ -223,7 +210,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
         ),
 
 
-        backgroundColor: AppColors.lightshade,
+        backgroundColor: AppColors.whitewhite,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,7 +233,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                   borderRadius: BorderRadius.circular(20), // Rounded corners for the card
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.009),
                   child: Text(
                     "Funkcionális hasi fájdalomzavarok online hipnózis és mozgás-motivációs tréning kezelésének hatásvizsgálata tizenévesek körében",
                     textAlign: TextAlign.center,
@@ -330,7 +317,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                   borderRadius: BorderRadius.circular(20), // Adjust the radius to get your desired curve
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0), // Add padding around the texts within the container
+                                  padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01), // Add padding around the texts within the container
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min, // Use the minimum space necessary to fit the children
                                     crossAxisAlignment: CrossAxisAlignment.start, // Align texts to the start (left side)
@@ -342,6 +329,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                           fontSize: 20,
                                           color: AppColors.lightshade,
                                         ),
+                                        textAlign: TextAlign.justify, // This ensures the text is justified within the padding
                                       ),
                                       SizedBox(height: MediaQuery.of(context).size.width * 0.01),
                                       Table(
@@ -349,7 +337,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                           TableRow(
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
                                                 child: Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
@@ -361,6 +349,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                                         fontSize: 16,
                                                         color: AppColors.lightshade,
                                                       ),
+                                                      textAlign: TextAlign.justify, // This ensures the text is justified within the padding
                                                     ),
                                                     Text(
                                                       "Online hipnózis terápia, mely a hasi régióra fókuszál\nOnline mozgás-motivációs tréning (M3 Tréning)\nPszichoedukáció a krónikus hasi fájdalmakról\nInterdiszciplináris, multimodális fájdalomterápia",
@@ -369,12 +358,13 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                                         fontSize: 16,
                                                         color: AppColors.lightshade,
                                                       ),
+                                                      textAlign: TextAlign.justify, // This ensures the text is justified within the padding
                                                     ),
                                                   ],
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
                                                 child: Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
@@ -386,6 +376,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                                         fontSize: 16,
                                                         color: AppColors.lightshade,
                                                       ),
+                                                      textAlign: TextAlign.justify, // This ensures the text is justified within the padding
                                                     ),
                                                     Text(
                                                       "1. szakasz: első terápiás lehetőség 12 hétig\n2. szakasz: második terápiás lehetőség újabb 12 hétig\n+ 1 terápiás lehetőség, ha még a panaszok fennállnak: interdiszciplináris, multimodális fájdalomterápia",
@@ -394,6 +385,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                                         fontSize: 16,
                                                         color: AppColors.lightshade,
                                                       ),
+                                                      textAlign: TextAlign.justify, // This ensures the text is justified within the padding
                                                     ),
                                                   ],
                                                 ),
@@ -403,7 +395,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                           TableRow(
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
                                                 child: Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
@@ -415,6 +407,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                                         fontSize: 16,
                                                         color: AppColors.lightshade,
                                                       ),
+                                                      textAlign: TextAlign.justify, // This ensures the text is justified within the padding
                                                     ),
                                                     Text(
                                                       "A kutatás teljes hossza 6+3 hónap, mely 2+1 szakaszra bontható",
@@ -423,12 +416,13 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                                         fontSize: 16,
                                                         color: AppColors.lightshade,
                                                       ),
+                                                      textAlign: TextAlign.justify, // This ensures the text is justified within the padding
                                                     ),
                                                   ],
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
                                                 child: Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
@@ -440,6 +434,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                                         fontSize: 16,
                                                         color: AppColors.lightshade,
                                                       ),
+                                                      textAlign: TextAlign.justify, // This ensures the text is justified within the padding
                                                     ),
                                                     Text(
                                                       "Tippelek: 12-18 alkalom",
@@ -448,6 +443,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                                         fontSize: 16,
                                                         color: AppColors.lightshade,
                                                       ),
+                                                      textAlign: TextAlign.justify, // This ensures the text is justified within the padding
                                                     ),
                                                   ],
                                                 ),
@@ -464,9 +460,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                               ),
 
                               SizedBox(height: MediaQuery.of(context).size.width*0.02),
-                              ContactInfo(), // Insert the ContactInfo widget here
 
-                              SizedBox(height: MediaQuery.of(context).size.width*0.02),
                               ResearcherCard(),
 
 
@@ -525,6 +519,8 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                 ),
                               ),
                               SizedBox(height: MediaQuery.of(context).size.width*0.02),
+                              ContactInfo(), // Insert the ContactInfo widget here
+                              SizedBox(height: MediaQuery.of(context).size.width*0.02),
 
                             ],
                           ),
@@ -566,8 +562,11 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                             SizedBox(height: 16), // Adds space between the text and the button
                             ElevatedButton(
                               onPressed: () {
-                                // Action when the button is pressed
-                              },
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => Gdpr()), // Replace `Gdpr` with the correct widget class name if different
+                                );
+                                },
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(AppColors.lightaccentcolor), // Set the background color
                               ),
@@ -593,6 +592,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
 
                 ],
               ),
+
               Container(
                 color: AppColors.bethesdacolor, // Replace with your desired background color
                 padding: const EdgeInsets.symmetric(vertical: 15), // Adjust padding as needed
