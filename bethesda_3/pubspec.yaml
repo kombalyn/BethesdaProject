@@ -79,7 +79,7 @@ flutter:
     - assets/videos/szia.mp4
     - assets/videos/kronikus_hasi_fajdalom.mp4
 
-    #- assets/sound/A_gondtalan_tengerpart_hangositott.mp3
+    - assets/sound/A_gondtalan_tengerpart_hangositott.mp3
 
   fonts:
     - family: Montserrat

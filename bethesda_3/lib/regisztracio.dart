@@ -3,9 +3,158 @@ import 'package:bethesda_2/home_page_model.dart';
 import 'package:bethesda_2/constants/colors.dart'; // Adjust the import path as necessary
 import 'package:url_launcher/url_launcher.dart';
 import 'gdpr.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'main.dart';
 export 'home_page_model.dart';
+
+class ContactForm extends StatefulWidget {
+  @override
+  _ContactFormState createState() => _ContactFormState();
+}
+
+class _ContactFormState extends State<ContactForm> {
+  final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController messageController = TextEditingController();
+
+  bool _isPressed = false; // State variable to track if the button is pressed
+
+
+  Future<void> sendEmail(String name, String email, String message) async {
+    String username = 'your-email@gmail.com';
+    String password = 'your-email-password';
+    final smtpServer = gmail(username, password);
+
+    final mailMessage = Message()
+      ..from = Address(username, 'Your Name or App Name')
+      ..recipients.add('destination-email@example.com')
+      ..subject = 'New Contact Message from $name'
+      ..text = 'Név: $name\nE-mail: $email\nÜzenet: $message';
+
+    try {
+      final sendReport = await send(mailMessage, smtpServer);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Sikeres üzenetküldés!"),
+        backgroundColor: Colors.green,
+      ));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Sikertelen üzenetküldés."),
+        backgroundColor: Colors.red,
+      ));
+    }
+  }
+
+  Widget formField(String label, TextEditingController controller, {bool isMessage = false}) {
+    return Column(
+      children: [
+        Align(
+          alignment: AlignmentDirectional.topStart,
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+            child: Text(
+              label,
+              style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, color: AppColors.darkshade),
+            ),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.whitewhite, // Ensure this is consistent and set to the right color
+            border: Border.all(
+              color: Colors.grey,
+              width: 0.5,
+            ),
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: TextFormField(
+            controller: controller,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: AppColors.whitewhite, // Make sure this is the correct white
+              contentPadding: EdgeInsets.symmetric(vertical: isMessage ? 20 : 15, horizontal: 20), // Adjust padding
+              labelText: 'Kattintson ide...',
+              labelStyle: TextStyle(fontFamily: 'Montserrat', fontSize: 15, color: AppColors.bethesdacolor),
+              floatingLabelBehavior: FloatingLabelBehavior.auto, // Adjust as necessary
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.whitewhite, width: 1), // Ensure border color matches background
+                borderRadius: BorderRadius.circular(8),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.bethesdacolor, width: 1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            keyboardType: isMessage ? TextInputType.multiline : TextInputType.text,
+            maxLines: isMessage ? null : 1, // Allows multiple lines if it's the message field
+            minLines: isMessage ? 5 : 1, // Sets a minimum line count for the message field
+            style: TextStyle(fontFamily: 'Montserrat', fontSize: 15),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 1,
+      // Adjust margins here to match other components if necessary
+      margin: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+      child: Padding(
+        // Also adjust internal padding to ensure content alignment
+          padding: EdgeInsets.all(16),
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.35,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Ha kérdésed van, küldj nekünk üzenetet!', style: TextStyle(fontFamily: 'Montserrat', fontSize: 20, color: AppColors.bethesdacolor)),
+              formField('Név:', nameController),
+              formField('Email cím:', emailController),
+              formField('Üzenet:', messageController, isMessage: true),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (emailController.text.isNotEmpty) {
+                    sendEmail(nameController.text, emailController.text, messageController.text);
+                  }
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                      return AppColors.bethesdacolor; // Default color
+                    },
+                  ),
+                ),
+                child: Text(
+                  'Üzenet küldése',
+                  style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.whitewhite),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
 
 class ResearcherCard extends StatelessWidget {
   const ResearcherCard({Key? key}) : super(key: key);
@@ -71,53 +220,6 @@ class ResearcherCard extends StatelessWidget {
 }
 }
 
-
-class ContactInfo extends StatelessWidget {
-  final String email2 = "havran.zsofia@stud.semmelweis.hu";
-
-  Future<void> _launchEmail(String email) async {
-    final mailUrl = 'mailto:$email';
-    if (await canLaunch(mailUrl)) {
-      await launch(mailUrl);
-    } else {
-      // Can't launch the email app, handle it gracefully
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Amennyiben kérdésed van a kutatással kapcsolatban:",
-            style: TextStyle(
-              fontFamily: 'Montserrat',
-              // fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: AppColors.bethesdacolor,
-            ),
-          ),
-          SizedBox(height: 8),
-          InkWell(
-            onTap: () => _launchEmail(email2),
-            child: Text(
-              "Havrán Zsófia - $email2",
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-                // fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: AppColors.darkshade,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class Regisztracio extends StatelessWidget {
   const Regisztracio({Key? key}) : super(key: key);
@@ -212,10 +314,13 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
 
         backgroundColor: AppColors.whitewhite,
         body: SingleChildScrollView(
+
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-          Padding(
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02), // Space between rectangle and card
+
+              Padding(
           padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.04),
         child: Row(
           children: [
@@ -519,7 +624,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                 ),
                               ),
                               SizedBox(height: MediaQuery.of(context).size.width*0.02),
-                              ContactInfo(), // Insert the ContactInfo widget here
+                              ContactForm(),
                               SizedBox(height: MediaQuery.of(context).size.width*0.02),
 
                             ],
