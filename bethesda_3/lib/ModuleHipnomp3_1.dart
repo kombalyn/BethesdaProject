@@ -1,19 +1,19 @@
 import 'dart:js';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
-import 'ModuleHipno_page2.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 
 
 
-class ModuleHipno extends StatelessWidget {
-  const ModuleHipno({super.key});
+class ModuleHipnomp3_1 extends StatelessWidget {
+  const ModuleHipnomp3_1({super.key});
 
   // This widget is the root of your application.
   @override
@@ -54,31 +54,45 @@ class ModuleHipnoWidget extends StatefulWidget {
 }
 
 class _ModuleHipnotState extends State<ModuleHipnoWidget> {
+  late Duration _currentPosition;
+  late AssetsAudioPlayer _assetsAudioPlayer;
+  double _sliderValue = 0.0; // A csúszka értéke
+  bool _isDraggingSlider = false;
+
   late HomePageModel _model;
 
   late VideoPlayerController _controller;
   late AnimationController _animationController;
   late double _currentPointOnFunction = 0; // Az aktuális függvényérték
-  late double _sliderValue = 0.0; // A csúszka értéke
+  //late double _sliderValue = 0.0; // A csúszka értéke
   late bool toggle = true;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final Uri _url = Uri.parse('https://www.bethesda.hu/');
 
+  bool isOpened = false;
+
+  //late AssetsAudioPlayer _assetsAudioPlayer;
+  String _audioFilePath = 'hanganyag.mp3';
+  //double _sliderValue = 0.0;
+  //bool _isDraggingSlider = false;
+
   @override
   void initState() {
     super.initState();
     _model = HomePageModel();
+    _assetsAudioPlayer = AssetsAudioPlayer();
 
-    _controller = _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
-      ..initialize().then((_) {
-        setState(() {});
+    _assetsAudioPlayer.currentPosition.listen((duration) {
+      setState(() {
+        if (!_isDraggingSlider) {
+          _currentPosition = duration;
+          _sliderValue = _currentPosition.inSeconds.toDouble();
+        }
       });
+    });
 
-    _controller.value.isPlaying
-        ? _controller.pause()
-        : _controller.play();
   }
 
   @override
@@ -106,35 +120,35 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding:
-                        EdgeInsetsDirectional.fromSTEB(230, 20, 0, 0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width*0.5,
-                          child: Text(
-                            'Üdvözöljük!',
-                            style: TextStyle(
-                              fontFamily: 'Readex Pro',
-                              fontSize: 25,
-                            ),
+                Row(
+                  children: [
+                    Padding(
+                      padding:
+                      EdgeInsetsDirectional.fromSTEB(230, 20, 0, 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width*0.5,
+                        child: Text(
+                          'Üdvözöljük!',
+                          style: TextStyle(
+                            fontFamily: 'Readex Pro',
+                            fontSize: 25,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
 
-                  SizedBox(height: MediaQuery.of(context).size.width*0.025,),
+                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
-                  Row(
-                    children: [
-                      Padding(
-                        padding:
-                        EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width*0.5,
-                          child: Text(
+                Row(
+                  children: [
+                    Padding(
+                      padding:
+                      EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width*0.5,
+                        child: Text(
                           'A világszerte a gyermekek 10-15%-a szenved hasi fájdalomtól, ami elfogadhatatlanul sok! Kutatásaink ugyanakkor azt mutatják, hogy hipnózis felvételek hallgatása ezen gyermekek több mint 70%-ának segít. Az hipnózis gyakorlása csökkenti továbbá az orvoshoz és pszichológushoz fordulások számát, javítja az életminőséget, csökkenti az iskolai hiányzások számát és növeli az önbizalmat. Sőt, még a jobb és pihentetőbb alvásban is segít!',
                           style: TextStyle(
                             fontFamily: 'Readex Pro',
@@ -142,22 +156,22 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                             fontSize: 18,
                           ),
                         ),
-                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
 
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding:
-                        EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width*0.5,
-                          child: Text(
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding:
+                      EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width*0.5,
+                        child: Text(
                           'A hasi fájdalommal élni zavaró és nehéz. A hasi fájdalom a gyermekek életének számos területére hatással van, kihathat az iskolai az iskolai dolgokra, a barátokkal való találkozásra, a sporttal töltött időre. Ezt a folyamatos fájdalmat a túlérzékeny bélműködés okozza. A krónikus hasi fájdalom kialakulásában és fennmaradásában egyaránt szerepet játszhat a genetikai hajlam, a személyiségjegyek és az otthoni vagy az iskolai stressz is. A hipnózisfelvételek hallgatása azonban nagy segítség tud lenni ezeknek a gyermekeknek.',
                           style: TextStyle(
                             fontFamily: 'Readex Pro',
@@ -165,35 +179,72 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                             fontSize: 18,
                           ),
                         ),
-                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
 
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
+
+
                 Container(
 
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.black, width: 4),
-                  ),
-                  child: _controller.value.isInitialized
-                      ?
-                  toggle ? Container(
-                    width: 500,
-                    height: 300,
-                    child: AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: VideoPlayer(_controller),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: Colors.black, width: 4),
                     ),
-                  ) : Container(
-                    color: Colors.black,
-                    width: 500,
-                    height: 300,
-                  )
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Hátralévő idő: ${_currentPosition.toString()}',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(height: 20),
 
-                      : Container(),
+
+                        Slider(
+                          value: _sliderValue,
+                          min: 0.0,
+                          max: 1289,//_assetsAudioPlayer.current.value.audio.duration!.inSeconds.toDouble(),
+                          onChanged: (value) {
+                            setState(() {
+                              _sliderValue = value;
+                              _isDraggingSlider = true;
+                            });
+                          },
+                          onChangeEnd: (value) {
+                            _assetsAudioPlayer.seek(Duration(seconds: value.toInt()));
+                            _isDraggingSlider = false;
+                          },
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.play_arrow),
+                              onPressed: () {
+                                _playAudio();
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.pause),
+                              onPressed: () {
+                                _assetsAudioPlayer.pause();
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.stop),
+                              onPressed: () {
+                                _assetsAudioPlayer.stop();
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
                 ),
 
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
@@ -225,30 +276,6 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                 ),
 
 
-
-                ElevatedButton(
-                  onPressed: () {
-                    print('Button pressed ...');
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => ModuleHipno2(),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      Text('Go To Second Module'),
-                      Icon(
-                        Icons.play_arrow,
-                        size: 15,
-                      ),
-                    ],
-                  ),
-                ),
-
-
-
               ],
             ),
 
@@ -262,6 +289,15 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
     if (!await launchUrl(_url)) {
       throw Exception('Could not launch $_url');
     }
+  }
+
+
+  void _playAudio() {
+    if (isOpened == false){
+      //_assetsAudioPlayer.open(Audio("assets/sound/A_gondtalan_tengerpart_hangositott.mp3"));
+      isOpened = true;
+    }
+    _assetsAudioPlayer.play();
   }
 
 }

@@ -5,15 +5,15 @@ import 'package:bethesda_2/home_page_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
-import 'ModuleHipno_page2.dart';
+import 'ModuleHipnomp3_1.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 
 
 
-class ModuleHipno extends StatelessWidget {
-  const ModuleHipno({super.key});
+class ModuleHipno2 extends StatelessWidget {
+  const ModuleHipno2({super.key});
 
   // This widget is the root of your application.
   @override
@@ -71,7 +71,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
     super.initState();
     _model = HomePageModel();
 
-    _controller = _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
+    _controller = _controller = VideoPlayerController.asset('assets/videos/kronikus_hasi_fajdalom.mp4')
       ..initialize().then((_) {
         setState(() {});
       });
@@ -225,14 +225,13 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                 ),
 
 
-
                 ElevatedButton(
                   onPressed: () {
                     print('Button pressed ...');
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => ModuleHipno2(),
+                        builder: (BuildContext context) => ModuleHipnomp3_1(),
                       ),
                     );
                   },
@@ -246,7 +245,6 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                     ],
                   ),
                 ),
-
 
 
               ],
