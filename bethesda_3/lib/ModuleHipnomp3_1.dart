@@ -294,7 +294,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
 
   void _playAudio() {
     if (isOpened == false){
-      //_assetsAudioPlayer.open(Audio("assets/sound/A_gondtalan_tengerpart_hangositott.mp3"));
+      _assetsAudioPlayer.open(Audio("assets/sound/A_gondtalan_tengerpart_hangositott.mp3"));
       isOpened = true;
     }
     _assetsAudioPlayer.play();
