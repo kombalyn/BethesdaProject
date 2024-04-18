@@ -42,7 +42,7 @@ dependencies:
   #url_launcher: ^6.0.9
   mailer: ^6.1.0  # Add the mailer package here, adjust the version as needed
   flutter_form_builder: ^7.3.0  # Check for the latest version on pub.dev
-
+  gif: ^2.3.0
 
 
 dev_dependencies:
@@ -78,6 +78,10 @@ flutter:
     - assets/images/bear_nobackground.png
     - assets/images/bethesda_white_logo_name.png
     - assets/images/major_janos.png
+    - assets/images/9tLs.gif
+    - assets/images/ordogikor.png
+    - assets/images/gyakorlat1.jpg
+    - assets/images/gyakorlat2.jpg
 
     - assets/videos/animation.mp4
     - assets/videos/szia.mp4

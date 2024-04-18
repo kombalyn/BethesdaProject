@@ -52,8 +52,9 @@ class ModuleOpeningWidget extends StatefulWidget {
 
 class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
   late HomePageModel _model;
-
   late VideoPlayerController _controller;
+  bool _isPlaying = false;
+
   late AnimationController _animationController;
   late double _currentPointOnFunction = 0; // Az aktuális függvényérték
   late double _sliderValue = 0.0; // A csúszka értéke
@@ -66,10 +67,15 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
     super.initState();
     _model = HomePageModel();
 
-    _controller = _controller = VideoPlayerController.asset('assets/videos/animation.mp4')
+    _controller = _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
       ..initialize().then((_) {
         setState(() {});
       });
+    _isPlaying = true;
+
+    _controller.addListener(() {
+      setState(() {});
+    });
 
     _controller.value.isPlaying
         ? _controller.pause()
@@ -79,8 +85,20 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
   @override
   void dispose() {
     _model.dispose();
-
+    _controller.dispose();
     super.dispose();
+  }
+
+  void _playPauseVideo() {
+    setState(() {
+      if (_controller.value.isPlaying) {
+        _controller.pause();
+        _isPlaying = false;
+      } else {
+        _controller.play();
+        _isPlaying = true;
+      }
+    });
   }
 
   @override
@@ -224,39 +242,27 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
 
-                        Text(
-                          'Funkcionális hasi fájdalomzavarok online hipnózis és mozgás-motivációs tréning kezelésének hatásvizsgálata tizenévesek körében',
+                    Padding(
+                    padding:
+                    EdgeInsetsDirectional.fromSTEB(MediaQuery.of(context).size.width*0.15, 0, MediaQuery.of(context).size.width*0.15, 0),
+                    child: Text(
+                          'Szia Zita! Örülünk, hogy újra itt vagy!',
                           style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
                             fontSize: 24,
                           ),
+                          textAlign: TextAlign.center,
                         ),
+                    ),
 
                         SizedBox(height: MediaQuery.of(context).size.width*0.03),
 
 
-                        Text(
-                          'A kutatás célja',
-                          style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            color: Color(0xFFE41B48),
-                            fontSize: 18,
-                          ),
-                        ),
 
-                        Text(
-                          'A kutatás célja',
-                          style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            color: Color(0xFFE41B48),
-                            fontSize: 18,
-                          ),
-                        ),
 
 
                         Container(
-
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(color: Colors.black, width: 4),
@@ -278,14 +284,39 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
 
                               : Container(),
                         ),
+                        // Vezérlők hozzáadása a videóhoz
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                _isPlaying ? Icons.pause : Icons.play_arrow,
+                              ),
+                              onPressed: _playPauseVideo,
+                            ),
+                            if (_controller.value.isInitialized)
+                              Slider(
+                                value: _controller.value.position.inSeconds.toDouble(),
+                                min: 0.0,
+                                max: _controller.value.duration.inSeconds.toDouble(),
+                                onChanged: (double value) {
+                                  _controller.seekTo(Duration(seconds: value.toInt()));
+                                },
+                              ),
+                          ],
+                        ),
+
+
+
+
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
                               padding:
-                              EdgeInsetsDirectional.fromSTEB(230, 20, 0, 0),
+                              EdgeInsetsDirectional.fromSTEB(MediaQuery.of(context).size.width*0.16, MediaQuery.of(context).size.width*0.02, MediaQuery.of(context).size.width*0.16, 0),
                               child: Text(
-                                'How to Use',
+                                'Szia!',
                                 style: TextStyle(
                                   fontFamily: 'Readex Pro',
                                   fontSize: 25,
@@ -295,75 +326,139 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                           ],
                         ),
                         Row(
-                          mainAxisSize: MainAxisSize.max,
+                            //mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding:
+                                EdgeInsetsDirectional.fromSTEB(MediaQuery.of(context).size.width*0.16, 0, MediaQuery.of(context).size.width*0.16, MediaQuery.of(context).size.width*0.02),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width*0.6,
+                                  child: Text(
+                                  'Ezen a honlapon tudod meghallgatni a hipnózis gyakorlatokhat és segít abban is, hogy hol és mikor végezd őket. A legtöbb gyerek nagyon szereti hallgatni ezeket a gyakorlatokat és azt tapasztalja, hogy jót tesznek a pocakjának is.',
+                                  style: TextStyle(
+                                    fontFamily: 'Readex Pro',
+                                    color: Color(0xFFE41B48),
+                                    fontSize: 24,
+                                  ),
+                                ),
+                              ),
+                              ),
+                            ],
+                          ),
+
+                        Row(
+                          //mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
                               padding:
-                              EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
-                              child: Text(
-                                'Welcome to use BethesdaApp. Let\'s understand how to use this course and what you can\n get out of it.\n\n',
-                                style: TextStyle(
-                                  fontFamily: 'Readex Pro',
-                                  color: Color(0xFFE41B48),
-                                  fontSize: 24,
+                              EdgeInsetsDirectional.fromSTEB(MediaQuery.of(context).size.width*0.16, 0, MediaQuery.of(context).size.width*0.16, MediaQuery.of(context).size.width*0.02),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width*0.6,
+                                child: Text(
+                                  'Öt olyan hipnózis gyakorlatot találsz itt a hetek során, melyek hasfájással küzdő általános iskolás és gimnazista tizenévesek számára készültek. Ez a honlap segít abban, hogy milyen sorrendben, mikor és hogyan használd őket. ',
+                                  style: TextStyle(
+                                    fontFamily: 'Readex Pro',
+                                    color: Color(0xFFE41B48),
+                                    fontSize: 24,
+                                  ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-
 
 
                         Row(
-                          mainAxisSize: MainAxisSize.max,
+                          //mainAxisSize: MainAxisSize.max,
                           children: [
-
-                            SizedBox(width: MediaQuery.of(context).size.width*0.15,),
-
-                            Container(
-                              width: MediaQuery.of(context).size.width*0.2,
-                              child: Image.asset("assets/fox.png"),
-                            ),
-
-
                             Padding(
                               padding:
-                              EdgeInsetsDirectional.fromSTEB(50, 0, 0, 0),
-                              child: Text(
-                                'Szia Ádám! Örülünk, hogy újra itt vagy!',
-                                style: TextStyle(
-                                  fontFamily: 'Readex Pro',
-                                  color: Color(0xFFE41B48),
-                                  fontSize: 24,
+                              EdgeInsetsDirectional.fromSTEB(MediaQuery.of(context).size.width*0.16, 0, MediaQuery.of(context).size.width*0.16, MediaQuery.of(context).size.width*0.02),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width*0.6,
+                                child: Text(
+                                  'Reméljük élvezni fogod ezeket a gyakorlatokat és jól szórakozol majd!',
+                                  style: TextStyle(
+                                    fontFamily: 'Readex Pro',
+                                    color: Color(0xFFE41B48),
+                                    fontSize: 24,
+                                  ),
                                 ),
                               ),
                             ),
                           ],
                         ),
 
-                        SizedBox(height: MediaQuery.of(context).size.height*0.05,),
+                        SizedBox(width: MediaQuery.of(context).size.width*0.4,),
 
-                        ElevatedButton(
-                            onPressed: () {
-                              print('Button pressed ...');
 
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) => ModuleHipno(),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: Colors.black, width: 4),
+                          ),
+                          width: MediaQuery.of(context).size.width*0.5,
+                          child:
+                            Row(children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width*0.2,
+                                child: Image.asset("assets/images/fox.png"),
+                              ),
+
+                              SizedBox(width: MediaQuery.of(context).size.height*0.05,),
+
+
+                           Column(children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+
+                                    Container(
+                                      width: MediaQuery.of(context).size.width*0.2,
+                                      child: Padding(
+                                      padding:
+                                      EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                      child: Text(
+                                        'Ha készen állsz az első modulra kattints az alábbi gombra!!',
+                                        style: TextStyle(
+                                          fontFamily: 'Readex Pro',
+                                          fontSize: MediaQuery.of(context).size.width*0.015,
+                                        ),
+                                      ),
+                                    ),
+                                    ),
+                                  ],
                                 ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Text('Begin First Module'),
-                                Icon(
-                                  Icons.play_arrow,
-                                  size: 15,
+
+                             SizedBox(height: MediaQuery.of(context).size.width*0.05,),
+
+                                ElevatedButton(
+                                  onPressed: () {
+                                    print('Button pressed ...');
+
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) => ModuleHipno(),
+                                      ),
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Text('Kezdjük el!', style: TextStyle(fontSize: MediaQuery.of(context).size.width*0.015),),
+                                      Icon(
+                                        Icons.play_arrow,
+                                        size: 15,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
+                              ],),
+                            ],),
                         ),
+
+
 
                         SizedBox(height: MediaQuery.of(context).size.height*0.05,),
 

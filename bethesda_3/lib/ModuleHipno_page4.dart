@@ -5,7 +5,6 @@ import 'package:bethesda_2/home_page_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
-import 'ModuleHipno_page3.dart';
 import 'ModuleHipnomp3_1.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
@@ -60,8 +59,8 @@ class BulletList extends StatelessWidget {
 
 
 
-class ModuleHipno2 extends StatelessWidget {
-  const ModuleHipno2({super.key});
+class ModuleHipno4 extends StatelessWidget {
+  const ModuleHipno4({super.key});
 
   // This widget is the root of your application.
   @override
@@ -119,7 +118,8 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
     super.initState();
     _model = HomePageModel();
 
-    _controller = _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
+    /*
+    _controller = _controller = VideoPlayerController.asset('assets/videos/kronikus_hasi_fajdalom.mp4')
       ..initialize().then((_) {
         setState(() {});
       });
@@ -127,6 +127,8 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
     _controller.value.isPlaying
         ? _controller.pause()
         : _controller.play();
+
+     */
   }
 
   @override
@@ -162,7 +164,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         child: Container(
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Text(
-                            'A hipnózis hatása a hasfájásra!',
+                            'Folyton arról kérdezgetnek a szüleid, hogy fáj-e a hasad?',
                             style: TextStyle(
                               fontFamily: 'Readex Pro',
                               fontSize: 25,
@@ -183,7 +185,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         child: Container(
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Text(
-                          'Bebizonyítottuk, hogy hipnózissal befolyásolható a hasfájás. Két vizsgálatban több mint 300, hozzád hasonlóan hasi problémákkal küzdő gyereknél figyeltük meg, hogy ezek a gyakorlatok sokat segítenek abban, hogy a pocakjuk jobban érezze magát. Fontos, hogy ezeket a gyakorlatokat mindennap hallgasd meg, hogy a módszer tényleg működhessen. Minél többet gyakorolsz, annál jobban működik. Olyan ez, mint amikor úszni vagy focizni tanulsz: minél többet gyakorolsz, annál ügyesebb leszel. Ebben a videóban Doktor Major János elmagyarázza, miért segít olyan sokat a hipnózis a hasfájás enyhítésében.',
+                          'A szüleid állandóan a hasfájásodról kérdezgetnek? Sok szülő teszi ezt. A nagypapák, nagymamák és a barátaid is kérdezhetik, hogy vagy. Vagy talán te magad is állandóan mondod a szüleidnek, hogy éppen mennyire fáj a hasad. Nagyon fontos, hogy te és a körülötted élő emberek ne beszéljenek/kérdezzenek többet a hasfájásodról. Elmagyarázzuk, hogy miért!',
                             style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
@@ -194,30 +196,6 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                       ),
                     ],
                   ),
-
-                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
-
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.black, width: 4),
-                  ),
-                  child: _controller.value.isInitialized
-                      ?
-                  toggle ? Container(
-                    width: 500,
-                    height: 300,
-                    child: AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: VideoPlayer(_controller),
-                    ),
-                  ) : Container(
-                    color: Colors.black,
-                    width: 500,
-                    height: 300,
-                  )
-                      : Container(),
-                ),
 
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
@@ -230,7 +208,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         child: Container(
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Text(
-                          'Mint már tudod, öt hipnózis gyakorlatot rögzítettünk neked. Arra kérünk, hogy naponta legalább egyszer hallgasd meg ezeket a gyakorlatokat, de akár többször is meghallgathatod őket. Fontos, hogy senki ne zavarjon meg téged közben. Ezért az a legjobb, ha a gyakorlatokat a saját szobádban hallgatod. Mindenképpen szólj a többieknek, akik otthon vannak veled, hogy éppen gyakorlatot végzel, nehogy véletlenül besétáljanak a szobádba. A legtöbb gyereknek az működik a legjobban, ha minden nap ugyanabban az időpontban végzi a gyakorlatokat. Például közvetlenül mielőtt lefekszik aludni, vagy amikor hazaért az iskolából. Meg fogod tapasztalni, hogy neked mi válik be a legjobban. ',
+                          'A szüleid mostanra már valószínűleg felismerték, hogy nem igazán tudnak neked segíteni, amikor fáj a hasad. Már egy ideje tartanak ezek a problémáid, és bármit is tesznek, legtöbbször semmi sem segít. Korábban talán bevettél egy tablettát, melegítetted a pocakodat vagy lefeküdtél a kanapéra, hogy megpróbáld jobban érezni magad. Ilyenkor ez egy kicsit segíthet, de a hasfájás folyamatosan visszatér. Az orvosok azonban tudják, hogy minél többet beszélsz a fájdalmadról és minél több figyelmet szentelsz neki, annál jobban fogsz szenvedni tőle. Ezért azt javasoljuk, hogy mától kezdve ne mondd a szüleidnek, ha fáj a hasad. És ha valaki megkérdezi, hogy van a pocakod, akkor mondd, hogy nem szeretnél erről többet beszélni.',
                             style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
@@ -253,7 +231,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.5,
                         child: Text(
-                         'A honlap segítségével nyomon követheted, hogy hányszor hallgattad a gyakorlatokat. Ez segít abban, hogy egészségesebbé és erősebbé válj. Naponta emlékeztetni fogod magadat arra, hogy te vagy a tested ura, és a gyakorlatokat minden egyes gyakorlással egyre ismerősebbnek és természetesebbnek fogod találni.',
+                         'Mostantól kezdve arra kérünk, hogy ha ismét elkezd fájni a hasad, akkor végezd a gyakorlatokat, pontosan úgy, ahogyan ebben a füzetben szerepelnek. Észre fogod venni, hogy ezek a gyakorlatok segítenek abban, hogy a pocakod ismét jobban érezze magát. Természetesen néha beszélhetsz azért a hasfájásról. Megállapodhatsz például a szüleiddel, hogy hetente egyszer vagy kétszer elmondod nekik, hogy hogyan alakulnak a panaszaid. Ha a szüleid a hasfájásodról máskor is kérdeznek, akkor egyszerűen csak mondd, hogy „Anya/Apa, erről nem szeretnék most beszélni". Vagy, hogy „Elmegyek most a gyakorlataimat végezni.”',
                           style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
@@ -266,28 +244,6 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                 ),
 
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
-
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                      EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width*0.5,
-                        child: Text(
-                          'Készen állsz? Akkor kezdjünk hozzá!',
-                          style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            color: Color(0xFFE41B48),
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
 
                 Container(
                   decoration: BoxDecoration(
@@ -313,9 +269,8 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         child: SingleChildScrollView(
 
                           child: BulletList([
-                            'Gyakorolj minden nap',
-                            'Csendes helyen',
-                            'Azonos időben',
+                            'Ne beszéljünk többé a hasfájásról',
+                            'Egyszerűen csak végezd a gyakorlatokat',
                           ]),
                         ),
                       ),
@@ -323,7 +278,9 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                   ),
                 ),
 
+
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
+
 
                 ElevatedButton(
                   onPressed: () {
@@ -331,7 +288,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => ModuleHipno3(),
+                        builder: (BuildContext context) => ModuleHipnomp3_1(),
                       ),
                     );
                   },
@@ -345,6 +302,8 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                     ],
                   ),
                 ),
+
+
 
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),

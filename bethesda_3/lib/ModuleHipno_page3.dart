@@ -5,7 +5,7 @@ import 'package:bethesda_2/home_page_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
-import 'ModuleHipno_page3.dart';
+import 'ModuleHipno_page4.dart';
 import 'ModuleHipnomp3_1.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
@@ -60,8 +60,8 @@ class BulletList extends StatelessWidget {
 
 
 
-class ModuleHipno2 extends StatelessWidget {
-  const ModuleHipno2({super.key});
+class ModuleHipno3 extends StatelessWidget {
+  const ModuleHipno3({super.key});
 
   // This widget is the root of your application.
   @override
@@ -119,7 +119,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
     super.initState();
     _model = HomePageModel();
 
-    _controller = _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
+    _controller = _controller = VideoPlayerController.asset('assets/videos/kronikus_hasi_fajdalom.mp4')
       ..initialize().then((_) {
         setState(() {});
       });
@@ -162,7 +162,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         child: Container(
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Text(
-                            'A hipnózis hatása a hasfájásra!',
+                            'Mi okozza a hasfájást?',
                             style: TextStyle(
                               fontFamily: 'Readex Pro',
                               fontSize: 25,
@@ -183,7 +183,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         child: Container(
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Text(
-                          'Bebizonyítottuk, hogy hipnózissal befolyásolható a hasfájás. Két vizsgálatban több mint 300, hozzád hasonlóan hasi problémákkal küzdő gyereknél figyeltük meg, hogy ezek a gyakorlatok sokat segítenek abban, hogy a pocakjuk jobban érezze magát. Fontos, hogy ezeket a gyakorlatokat mindennap hallgasd meg, hogy a módszer tényleg működhessen. Minél többet gyakorolsz, annál jobban működik. Olyan ez, mint amikor úszni vagy focizni tanulsz: minél többet gyakorolsz, annál ügyesebb leszel. Ebben a videóban Doktor Major János elmagyarázza, miért segít olyan sokat a hipnózis a hasfájás enyhítésében.',
+                          'Lehet, hogy az orvosod már beszélt erről veled. Ismételjünk át néhány dolgot annak érdekében, hogy te is és a szüleid is igazán jól megértsétek ezeket! Az irritábilis bélrendszerrel vagy krónikus hasi fájdalommal küzdő gyermekeknél a belek túlérzékennyé váltak. Mit is jelent ez? Mindannyian tudjuk, hogy ha például megégetjük a kezünket, akkor hirtelen erős fájdalmat érzünk. Ez a fájdalom egy riasztás, ami jelzi, hogy valami nincs rendben a szervezetünkkel. Ha nem éreznénk a fájdalmat, nem lenne okunk arra, hogy elhúzzuk a kezünket a tűztől. A fájdalom tehát egy fontos figyelmeztető jelzés. Azonban a hasadban ez a riasztórendszer túlérzékennyé vált. Olyan ez, mint egy házban a riasztó: akkor kellene bekapcsolnia, amikor betörő van a házban, de ez a rendszer olyan érzékeny, hogy például egy házon átrepülő kis rovar is beindítja. Valami hasonló történik a hasadban is. Fájdalmat érezhetsz, ha például ettél egy megromlott szendvicset, de akkor is érzel fájdalmat, ha egy egészséges és friss szendvicset eszel, vagy akkor is, ha egyáltalán nem is eszel semmit. Bármikor és bárhol fájhat a hasad. Tudjuk, hogy valójában nincsen semmi komoly baja a hasadnak. A pocakod egyszerűen túl érzékennyé vált.',
                             style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
@@ -222,6 +222,27 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
                 Row(
+                  children: [
+                    Padding(
+                      padding:
+                      EdgeInsetsDirectional.fromSTEB(230, 20, 0, 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width*0.5,
+                        child: Text(
+                          'Az ördögi kör',
+                          style: TextStyle(
+                            fontFamily: 'Readex Pro',
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
+
+                Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
@@ -230,7 +251,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         child: Container(
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Text(
-                          'Mint már tudod, öt hipnózis gyakorlatot rögzítettünk neked. Arra kérünk, hogy naponta legalább egyszer hallgasd meg ezeket a gyakorlatokat, de akár többször is meghallgathatod őket. Fontos, hogy senki ne zavarjon meg téged közben. Ezért az a legjobb, ha a gyakorlatokat a saját szobádban hallgatod. Mindenképpen szólj a többieknek, akik otthon vannak veled, hogy éppen gyakorlatot végzel, nehogy véletlenül besétáljanak a szobádba. A legtöbb gyereknek az működik a legjobban, ha minden nap ugyanabban az időpontban végzi a gyakorlatokat. Például közvetlenül mielőtt lefekszik aludni, vagy amikor hazaért az iskolából. Meg fogod tapasztalni, hogy neked mi válik be a legjobban. ',
+                          'Amikor fájdalmat érzel, akkor olyan gondolataid lehetnek, mint: „Remélem, hogy nem lesz rosszabb, mert iskolába akarok menni." vagy „El akarok menni arra a meccsre. Valószínűleg így nem fogok tudni.". Amikor így gondolkodsz, az izmaid megfeszülnek, bár lehet, hogy észre sem veszed. Ettől aggódhatsz és szomorú lehetsz, a szíved elkezdhet gyorsabban verni, és mindezek miatt a fájdalmat még rosszabbnak érezheted. Lehet, hogy másképp is kezdesz lélegezni: a nyugodt, laza és mély hasi légzés helyett talán szaporán kapkodod a levegőt. Mindezek miatt olyan érzésed lehet, hogy egy negatív körben jársz körbe-körbe, amit mi "ördögi körnek" hívunk. Úgy érezheted, hogy tehetetlen vagy.',
                             style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
@@ -253,7 +274,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.5,
                         child: Text(
-                         'A honlap segítségével nyomon követheted, hogy hányszor hallgattad a gyakorlatokat. Ez segít abban, hogy egészségesebbé és erősebbé válj. Naponta emlékeztetni fogod magadat arra, hogy te vagy a tested ura, és a gyakorlatokat minden egyes gyakorlással egyre ismerősebbnek és természetesebbnek fogod találni.',
+                         'Így néz ki ez az ördögi kör:',
                           style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
@@ -267,6 +288,10 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
 
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
+                //Ide
+                Image.asset("assets/images/ordogikor.png"),
+
+                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -276,7 +301,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.5,
                         child: Text(
-                          'Készen állsz? Akkor kezdjünk hozzá!',
+                          'Az (ön)hipnózis gyakorlatok segítségével megtörheted ezt a kört és megtanulhatod, hogyan tudod megállítani a fájdalmat és a fájdalommal kapcsolatos nehéz gondolatokat. Olyan gyerekektől tudjuk ezt, akik a gyakorlás által egyre jobban és jobban érzik magukat. Az ördögi kör megszakad, majd fokozatosan eltűnik.',
                           style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
@@ -289,40 +314,6 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                 ),
 
 
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.black, width: 4),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Tippek a gyakorlatok meghallgatásához:',
-                        style: TextStyle(
-                          fontFamily: 'Readex Pro',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width*0.4,
-                        //height: 327,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(14)),
-                        child: SingleChildScrollView(
-
-                          child: BulletList([
-                            'Gyakorolj minden nap',
-                            'Csendes helyen',
-                            'Azonos időben',
-                          ]),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
                 ElevatedButton(
@@ -331,7 +322,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => ModuleHipno3(),
+                        builder: (BuildContext context) => ModuleHipno4(),
                       ),
                     );
                   },

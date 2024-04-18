@@ -2,6 +2,7 @@ import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
+import 'package:gif/gif.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
@@ -46,6 +47,54 @@ class ModuleHipno extends StatelessWidget {
 
 
 
+class BulletList extends StatelessWidget {
+  final List<String> strings;
+  BulletList(this.strings);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.fromLTRB(16, 15, 16, 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: strings.map((str) {
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '\u2022',
+                style: TextStyle(
+                  fontSize: 16,
+                  height: 1.55,
+                ),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Expanded(
+                child: Container(
+                  child: Text(
+                    str,
+                    textAlign: TextAlign.left,
+                    softWrap: true,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black.withOpacity(0.6),
+                      height: 1.55,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
+
 class ModuleHipnoWidget extends StatefulWidget {
   const ModuleHipnoWidget({super.key});
 
@@ -63,7 +112,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
   late bool toggle = true;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
+  //GifController _controller2 = GifController(vsync: this);
   final Uri _url = Uri.parse('https://www.bethesda.hu/');
 
   @override
@@ -71,14 +120,19 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
     super.initState();
     _model = HomePageModel();
 
+    /*
     _controller = _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
       ..initialize().then((_) {
         setState(() {});
       });
 
+
+
     _controller.value.isPlaying
         ? _controller.pause()
         : _controller.play();
+
+     */
   }
 
   @override
@@ -114,7 +168,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         child: Container(
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Text(
-                            'Üdvözöljük!',
+                            'Mi az a hipnózis?!',
                             style: TextStyle(
                               fontFamily: 'Readex Pro',
                               fontSize: 25,
@@ -135,8 +189,8 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         child: Container(
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Text(
-                          'A világszerte a gyermekek 10-15%-a szenved hasi fájdalomtól, ami elfogadhatatlanul sok! Kutatásaink ugyanakkor azt mutatják, hogy hipnózis felvételek hallgatása ezen gyermekek több mint 70%-ának segít. Az hipnózis gyakorlása csökkenti továbbá az orvoshoz és pszichológushoz fordulások számát, javítja az életminőséget, csökkenti az iskolai hiányzások számát és növeli az önbizalmat. Sőt, még a jobb és pihentetőbb alvásban is segít!',
-                          style: TextStyle(
+                          'Sokszor, amikor hipnózisról beszélünk, a gyerekek és a felnőttek is egy olyan embert képzelnek maguk elé, akinek ijesztő tekintetétől valamiféle önkívületi állapotba kerülünk vagy elalszunk. Azt hiszik, ennek az állapotnak a hatására nem fogunk emlékezni semmire. Sok gyerek még arról is meg van győződve, hogy ez az ijesztő, hipnotizáló ember átveheti a testük felett az irányítást és olyan dolgok megtételére kényszerítheti őket, amit nem is akarnak. Más gyermekek Ká-ra, a kígyóra gondolnak (A dzsungel könyvéből), aki a szemét használja, hogy a fiúcska, Maugli, valamiféle önkívületi állapotba essen és azután mozdulni se tudjon. ',
+                            style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
                             fontSize: 18,
@@ -146,6 +200,28 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                       ),
                     ],
                   ),
+                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
+
+
+                Image.asset(
+                  "assets/images/9tLs.gif",
+                  //height: 125.0,
+                  width: MediaQuery.of(context).size.width*0.4,
+                ),
+             /*
+              Gif(
+                    image: AssetImage("images/animate.gif"),
+                    controller: _controller2, // if duration and fps is null, original gif fps will be used.
+                    //fps: 30,
+                    //duration: const Duration(seconds: 3),
+                    autostart: Autostart.no,
+                    placeholder: (context) => const Text('Loading...'),
+                    onFetchCompleted: () {
+                      _controller2.reset();
+                      _controller2.forward();
+                    },
+                    ),
+              */
 
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
@@ -158,8 +234,8 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         child: Container(
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Text(
-                          'A hasi fájdalommal élni zavaró és nehéz. A hasi fájdalom a gyermekek életének számos területére hatással van, kihathat az iskolai az iskolai dolgokra, a barátokkal való találkozásra, a sporttal töltött időre. Ezt a folyamatos fájdalmat a túlérzékeny bélműködés okozza. A krónikus hasi fájdalom kialakulásában és fennmaradásában egyaránt szerepet játszhat a genetikai hajlam, a személyiségjegyek és az otthoni vagy az iskolai stressz is. A hipnózisfelvételek hallgatása azonban nagy segítség tud lenni ezeknek a gyermekeknek.',
-                          style: TextStyle(
+                          'Valóban ilyesmi a színpadi hipnózis, de ennek semmi köze sincs az orvosi hipnózishoz. Az orvosi hipnózis sokkal inkább az álmodozáshoz hasonlít, álmodozni pedig a legtöbb gyerek szeret és elég jól is tud. Képzeld el, hogy épp az osztályteremben ülsz és valami érdekes dologra gondolsz. Mondjuk a kedvenc hobbidra, például a focira. A képzeletedben éppen focizol, látod a többi játékost, talán néhány barátodat is, odapasszolják neked a labdát, te pedig lőni készülsz…és akkor… A tanár hirtelen felszólít téged. Valószínűleg meglepődsz, mert fogalmad sincs, miről is beszélt a tanár mostanáig. Álmodoztál és ezért egészen másra figyeltél, máshol jártál a képzeletedben.',
+                            style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
                             fontSize: 18,
@@ -172,30 +248,87 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
 
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
-                Container(
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding:
+                      EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width*0.5,
+                        child: Text(
+                          'Az orvosi hipnózis valójában pont ilyen. Gyakorlatokat fogsz hallgatni és közben a gondolataidra figyelsz. Talán még azt is elfelejted majd, hogy a saját szobádban vagy. Ezeket a gyakorlatokat néha képzelet-gyakorlatoknak is nevezzük, mert ilyenkor képeket alkotsz a saját fejedben. Ezek szép és barátságos képek. Egy ilyen kép megmutathat téged egy különleges tengerparton vagy éppen megnézheted, hogy hogyan is néz ki a saját pocakod. Az önhipnózis során semmi olyan nem történhet, amit te nem szeretnél. A hipnózis során teljes mértékben te irányítod az eseményeket.',
+                          style: TextStyle(
+                            fontFamily: 'Readex Pro',
+                            color: Color(0xFFE41B48),
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
 
+                Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.black, width: 4),
                   ),
-                  child: _controller.value.isInitialized
-                      ?
-                  toggle ? Container(
-                    width: 500,
-                    height: 300,
-                    child: AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: VideoPlayer(_controller),
-                    ),
-                  ) : Container(
-                    color: Colors.black,
-                    width: 500,
-                    height: 300,
-                  )
+                  child: Column(
+                    children: [
+                      Text(
+                        'A hipnózis:',
+                        style: TextStyle(
+                          fontFamily: 'Readex Pro',
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width*0.4,
+                        //height: 327,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(14)),
+                        child: SingleChildScrollView(
 
-                      : Container(),
+                          child: BulletList([
+                            'Álmodozás',
+                            'Szép dolgokról',
+                            'Amit te irányítasz',
+                          ]),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 
+
+                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
+
+                ElevatedButton(
+                  onPressed: () {
+                    print('Button pressed ...');
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => ModuleHipno2(),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      Text('Kezdjük az első modult!'),
+                      Icon(
+                        Icons.play_arrow,
+                        size: 15,
+                      ),
+                    ],
+                  ),
+                ),
+
+
+                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
                 TextButton(
@@ -226,26 +359,6 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
 
 
 
-                ElevatedButton(
-                  onPressed: () {
-                    print('Button pressed ...');
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => ModuleHipno2(),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      Text('Go To Second Module'),
-                      Icon(
-                        Icons.play_arrow,
-                        size: 15,
-                      ),
-                    ],
-                  ),
-                ),
 
 
 

@@ -54,6 +54,8 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
   late HomePageModel _model;
 
   late VideoPlayerController _controller;
+  bool _isPlaying = false;
+
   late AnimationController _animationController;
   late double _currentPointOnFunction = 0; // Az aktuális függvényérték
   late double _sliderValue = 0.0; // A csúszka értéke
@@ -66,10 +68,14 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
     super.initState();
     _model = HomePageModel();
 
-    _controller = _controller = VideoPlayerController.asset('assets/videos/animation.mp4')
+    _controller = _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
       ..initialize().then((_) {
         setState(() {});
       });
+
+    _controller.addListener(() {
+      setState(() {});
+    });
 
     _controller.value.isPlaying
         ? _controller.pause()
@@ -80,8 +86,23 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
   void dispose() {
     _model.dispose();
 
+    _controller.dispose();
     super.dispose();
   }
+
+  void _playPauseVideo() {
+    setState(() {
+      if (_controller.value.isPlaying) {
+        _controller.pause();
+        _isPlaying = false;
+      } else {
+        _controller.play();
+        _isPlaying = true;
+      }
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -240,6 +261,29 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
 
                               : Container(),
                         ),
+                        // Vezérlők hozzáadása a videóhoz
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                _isPlaying ? Icons.pause : Icons.play_arrow,
+                              ),
+                              onPressed: _playPauseVideo,
+                            ),
+                            if (_controller.value.isInitialized)
+                              Slider(
+                                value: _controller.value.position.inSeconds.toDouble(),
+                                min: 0.0,
+                                max: _controller.value.duration.inSeconds.toDouble(),
+                                onChanged: (double value) {
+                                  _controller.seekTo(Duration(seconds: value.toInt()));
+                                },
+                              ),
+                          ],
+                        ),
+
+
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [

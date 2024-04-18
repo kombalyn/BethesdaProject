@@ -6,15 +6,14 @@ import 'package:bethesda_2/home_page_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
-import 'ModuleHipnomp3_2.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 
 
 
-class ModuleHipnomp3_1 extends StatelessWidget {
-  const ModuleHipnomp3_1({super.key});
+class ModuleHipnomp3_2 extends StatelessWidget {
+  const ModuleHipnomp3_2({super.key});
 
   // This widget is the root of your application.
   @override
@@ -129,7 +128,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.5,
                         child: Text(
-                          'Az első gyakorlat: Relaxációs gyakorlat!',
+                          'A második gyakorlat: Biztonságos hely',
                           style: TextStyle(
                             fontFamily: 'Readex Pro',
                             fontSize: 25,
@@ -150,7 +149,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.5,
                         child: Text(
-                          'Hamarosan az első gyakorlatot fogod hallani. Ez egy relaxációs gyakorlat, amit már nagyon sok gyerek hallgatott. Ebben a gyakorlatban megtanulod, hogyan tudod a testedben lévő összes különböző izmot megfeszíteni, majd újra ellazítani. Ez egy nagyon jó gyakorlat, amit akkor végezhetsz, ha egy kicsit feszült vagy bizonytalan vagy. Észre fogod venni, hogy ez nagyon meg tud nyugtatni. A legjobb az, ha ma legalább kétszer elvégzed a gyakorlatot, utána pedig majd meglátod mi a jobb neked: ha naponta egyszer, vagy ha inkább kétszer végzed. Most hallgasd meg a gyakorlatot.',
+                          'A következő gyakorlatnak Biztonságos Hely a címe. Ebben a gyakorlatban egy újfajta légzést tanulhatsz meg. Ráadásul azt is megmutatjuk, hogyan tudod a kezeidet a hasadra helyezve átmelegíteni a pocakodat, hogy az még jobban érezze magát. Ezt követően arra kérünk majd, hogy alkoss egy képet a saját biztonságos helyedről. Sok gyerek szereti ezt a gyakorlatot, mert nyugodtnak és magabiztosnak érzi magát tőle. Hallgasd meg a gyakorlatot!',
                           style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
@@ -162,9 +161,10 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                   ],
                 ),
 
+
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
-                Image.asset("assets/images/gyakorlat1.jpg"),
+                Image.asset("assets/images/gyakorlat2.jpg"),
 
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
@@ -239,7 +239,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.5,
                         child: Text(
-                          'Tetszett? Ha valami nem világos, megkérheted a szüleidet, hogy segítsenek neked benne. ',
+                          'Na, mit gondolsz, jól ment? ',
                           style: TextStyle(
                             fontFamily: 'Readex Pro',
                             color: Color(0xFFE41B48),
@@ -253,25 +253,25 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
 
                 SizedBox(height: MediaQuery.of(context).size.width*0.025,),
 
-                ElevatedButton(
-                  onPressed: () {
-                    print('Button pressed ...');
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => ModuleHipnomp3_2(),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding:
+                      EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width*0.5,
+                        child: Text(
+                          'Nos, ennyi volt erre a hétre. Az elkövetkező két hétben az a házi feladatod, hogy hallgasd meg mindkét gyakorlatot, legalább naponta egyszer. Észre fogod venni, hogy minél többet gyakorolsz, annál jobb hatással lesz a hasadra. Vannak, akik azt veszik észre, hogy a hasuk egy kicsit jobban érzi magát a gyakorlatok után, mások pedig lényegesen jobban érzik magukat tőlük. Érdekes lesz megfigyelni, te hogyan fogod érezni magad. Jó szórakozást!',
+                          style: TextStyle(
+                            fontFamily: 'Readex Pro',
+                            color: Color(0xFFE41B48),
+                            fontSize: 18,
+                          ),
+                        ),
                       ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      Text('Kezdjük a következő gyakorlatot!'),
-                      Icon(
-                        Icons.play_arrow,
-                        size: 15,
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
 
 
