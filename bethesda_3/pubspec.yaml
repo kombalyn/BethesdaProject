@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   url_launcher: ^6.0.20 # Check for the latest version on pub.dev
+  flutter_screenutil: ^5.9.0
+
 
   assets_audio_player: ^3.1.1
   # The following adds the Cupertino Icons font to your application.
@@ -82,6 +84,9 @@ flutter:
     - assets/images/ordogikor.png
     - assets/images/gyakorlat1.jpg
     - assets/images/gyakorlat2.jpg
+    - assets/images/bethesda_gyerm_logo_nevvel.png
+    - assets/images/bear_up_nobackground.png
+
 
     - assets/videos/animation.mp4
     - assets/videos/szia.mp4

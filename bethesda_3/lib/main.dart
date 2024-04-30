@@ -2,8 +2,10 @@ import 'package:bethesda_2/regisztracio.dart';
 import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
 //import 'package:video_player/video_player.dart';
+import 'styles.dart'; // Make sure this path is correct based on where you placed the styles.dart file
 
 import 'package:bethesda_2/constants/colors.dart'; // Adjust the import path as necessary
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'ModuleOpening.dart';
 import 'home_page_model.dart';
@@ -20,32 +22,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Fájdalomkezelés bejelentkezés',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-       // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ScreenUtilInit(
+      designSize: Size(1263, 551), // Set your design size based on your design prototype
+      builder: (BuildContext context, Widget? child) => MaterialApp(
+        title: 'Fájdalomkezelés bejelentkezés',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          useMaterial3: true, // Assuming you want to use Material 3
+        ),
+        home: const HomePageWidget(), // Make sure this is the widget you want to start with
       ),
-      home: const HomePageWidget(),
     );
   }
 }
-
 
 
 class HomePageWidget extends StatefulWidget {
@@ -97,10 +86,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           child: Divider(color: Colors.grey),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.005),
           child: Text(
             "VAGY",
-            style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
+            style: MyTextStyles.nagybekezdes(context),
           ),
         ),
         Expanded(
@@ -144,11 +133,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            SizedBox(height: MediaQuery.of(context).size.height*0.01,),
+                            SizedBox(height: MediaQuery.of(context).size.height*0.03,),
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(left: 15.0, top:MediaQuery.of(context).size.height*0.0001), // Apply padding only on the left side
+                                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.02, top:MediaQuery.of(context).size.height*0.0001), // Apply padding only on the left side
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20), // Adjust this value to change the roundness
                                   child: Image.asset(
@@ -159,12 +148,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               ),
 
                             ),
+                            Spacer(),
                             //Image.asset("assets/images/bethesda_gyermekkorhaz_logo.png",width: MediaQuery.of(context).size.width*0.1,),
                             SizedBox(height: MediaQuery.of(context).size.height*0.05,),
                             Text("Üdvözöljük a Bethesda Gyermekkórház Online Fájdalomkezelő weboldalán!",
-                              textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),),
+                              textAlign: TextAlign.center, style: MyTextStyles.feherkovercim(context)),
                             SizedBox(height: MediaQuery.of(context).size.height*0.005,),
-                            Image.asset("assets/images/bear_nobackground.png"),
+                            Spacer(),
+                            Image.asset("assets/images/bear_nobackground.png",
+                              height: MediaQuery.of(context).size.height * 0.6,
+                              fit: BoxFit.cover, // Cover the available space
+
+                            ),
                           ],
                         ),
                         //SizedBox(width: MediaQuery.of(context).size.width*0.5,height: MediaQuery.of(context).size.height ,),
@@ -187,7 +182,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   subtitle: Text(
                                     'A továbblépéshez kérjük jelentkezzen be az e-mail címének és a korábban megkapott kutatási azonosítójának megadásával.',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(fontFamily: 'Montserrat',fontSize: 18),
+                                    style: MyTextStyles.bekezdes(context),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_forward_ios,
@@ -205,11 +200,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   Align(
                                     alignment: AlignmentDirectional.centerStart,
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
+                                      padding: EdgeInsetsDirectional.fromSTEB(0, MediaQuery.of(context).size.width*0.03, 0, 0),
                                       child: Text(
                                         'E-mail cím:',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(fontFamily: 'Montserrat',fontSize: 18, color: AppColors.darkshade),
+                                        style: MyTextStyles.nagybekezdes(context),
                                       ),
                                     ),
                                   ),
@@ -225,7 +220,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     // If you also want to have rounded corners, add the borderRadius property
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(MediaQuery.of(context).size.width*0.005, 0, MediaQuery.of(context).size.width*0.005, 0),
                                     child: TextFormField(
                                       controller: _model.textController1,
                                       focusNode: _model.textFieldFocusNode1,
@@ -235,7 +230,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         contentPadding: EdgeInsets.zero, // <-- Set contentPadding to zero
                                         labelText: 'Kattintson ide...',
                                         labelStyle:
-                                        TextStyle(fontFamily: 'Montserrat',fontSize: 15, color: AppColors.lightaccentcolor),
+                                        MyTextStyles.kicsiszinesbekezdes(context),
                                         //hintStyle: FlutterFlowTheme.of(context).labelMedium,
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
@@ -266,7 +261,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           borderRadius: BorderRadius.circular(8),
                                         ),
                                       ),
-                                      style: TextStyle(fontFamily: 'Montserrat',fontSize: 15),
+                                      style: MyTextStyles.kicsibekezdes(context),
                                       //validator: _model.textController1Validator.asValidator(context),
                                     ),
                                   ),
@@ -283,11 +278,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   Align(
                                     alignment: AlignmentDirectional.centerStart,
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
+                                      padding: EdgeInsetsDirectional.fromSTEB(0, MediaQuery.of(context).size.width*0.03, 0, 0),
                                       child: Text(
                                         'Kutatási azonosító:',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(fontFamily: 'Montserrat',fontSize: 18, color: AppColors.darkshade),
+                                        style: MyTextStyles.nagybekezdes(context),
                                       ),
                                     ),
                                   ),
@@ -303,7 +298,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                     child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(MediaQuery.of(context).size.width*0.005, 0, MediaQuery.of(context).size.width*0.005, 0),
                                     child: TextFormField(
                                       controller: _model.textController1,
                                       focusNode: _model.textFieldFocusNode1,
@@ -313,7 +308,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         contentPadding: EdgeInsets.zero, // <-- Set contentPadding to zero
                                         labelText: 'Kattintson ide...',
                                         labelStyle:
-                                        TextStyle(fontFamily: 'Montserrat',fontSize: 15, color: AppColors.lightaccentcolor),
+                                        MyTextStyles.kicsiszinesbekezdes(context),
                                         //hintStyle: FlutterFlowTheme.of(context).labelMedium,
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
@@ -344,7 +339,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           borderRadius: BorderRadius.circular(8),
                                         ),
                                       ),
-                                      style: TextStyle(fontFamily: 'Montserrat',fontSize: 15),
+                                      style: MyTextStyles.kicsibekezdes(context),
                                       //validator: _model.textController1Validator.asValidator(context),
                                     ),
                                   ),
@@ -367,8 +362,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       backgroundColor: MaterialStateProperty.all<Color>(AppColors.lightaccentcolor), // Change the color to your desired color
                                     ),
                                        child: Text("Bejelentkezés", textAlign: TextAlign.center,
-                                      style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.bold, fontSize: 20,
-                                          color: AppColors.lightshade),),
+                                      style: MyTextStyles.gomb(context),),
 
         ),
 
@@ -383,7 +377,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     print("gomb");
 
 
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (BuildContext context) => Regisztracio(),
@@ -392,8 +386,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
 
                                   }
-                                      , child: Text("Először jársz itt?",  textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Montserrat',
-                                        fontWeight: FontWeight.bold, fontSize: 20, color: AppColors.lightaccentcolor),),
+                                      , child: Text("Először jársz itt?",  textAlign: TextAlign.center, style: MyTextStyles.szinesgomb(context),),
                                   ),
 
 

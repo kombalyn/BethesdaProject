@@ -7,13 +7,13 @@ import 'gdpr.dart'; // Ensure this module is correctly implemented
 
 // Assuming 'main.dart' and 'home_page_model.dart' are correctly set up.
 
-class MyTextStyles {
+/*class MyTextStyles {
   static final TextStyle myCommonStyle = TextStyle(
     fontFamily: 'Montserrat',
     fontSize: 16,
     color: AppColors.darkshade,
   );
-}
+}*/
 
 class Email extends StatelessWidget {
   const Email({Key? key}) : super(key: key);
@@ -114,7 +114,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
             SizedBox(width: 16), // For spacing
           ],
         ),
-        backgroundColor: AppColors.whitewhite,
+        backgroundColor: AppColors.lightshade,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,7 +158,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
 
 
               Container(
-                color: AppColors.bethesdacolor, // Replace with your desired background color
+                color: AppColors.bethesdacolor, // Use your desired background color
                 padding: const EdgeInsets.symmetric(vertical: 15), // Adjust padding as needed
                 child: Column(
                   children: [
@@ -166,15 +166,33 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.12), // Adjust the padding as necessary
+                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05), // Adjust the padding as necessary
+                          child: Image.asset(
+                            "assets/images/bethesda_white_logo_name.png", // Replace with your logo asset path
+                            width: MediaQuery.of(context).size.width * 0.05, // Adjust the size as necessary
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            'Magyarországi Református Egyház Bethesda Gyermekkórháza – 1146 Budapest, Bethesda utca 3. (Zugló)',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: MediaQuery.of(context).size.width * 0.012,
+                              color: AppColors.lightshade,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.05), // Adjust the padding as necessary
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text(
                                 '+36 1 920 6000',
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
-                                  fontSize: 16,
+                                  fontSize: MediaQuery.of(context).size.width * 0.0115,
                                   color: AppColors.lightshade,
                                 ),
                               ),
@@ -182,30 +200,14 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                 'bethesda@bethesda.hu',
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
-                                  fontSize: 16,
+                                  fontSize: MediaQuery.of(context).size.width * 0.0115,
                                   color: AppColors.lightshade,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.12), // Adjust the padding as necessary
-                          child: Image.asset(
-                            "assets/images/bethesda_white_logo_name.png", // Replace with your logo asset path
-                            width: 100, // Adjust the size as necessary
-                          ),
-                        ),
                       ],
-                    ),
-                    SizedBox(height: 20), // Space between rows
-                    Text(
-                      'Magyarországi Református Egyház Bethesda Gyermekkórháza – 1146 Budapest, Bethesda utca 3. (Zugló)',
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 16,
-                        color: AppColors.lightshade,
-                      ),
                     ),
                   ],
                 ),
