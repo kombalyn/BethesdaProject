@@ -140,6 +140,16 @@ class _ContactFormState extends State<ContactForm> {
                       return AppColors.lightaccentcolor; // Default color
                     },
                   ),
+                  shape: MaterialStateProperty.all<
+                      RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          10), // Adjust the value as needed
+                    ),
+                  ),
+                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                    EdgeInsets.symmetric(vertical: 12, horizontal: 24), // Adjust the padding as needed
+                  ),// Change the color to your desired color
                 ),
                 child: Text(
                   'Üzenet küldése',
@@ -238,6 +248,8 @@ class Regisztracio extends StatelessWidget {
         /*colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.deepPurple,
         ),*/
+        useMaterial3: false,
+
         cardTheme: CardTheme(
           color: AppColors.whitewhite, // This sets the background color of cards to white
         ),
@@ -414,21 +426,26 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                       ),
 
                       child: Card(
-                          elevation: 1, // Shadow effect
-                          color: AppColors.whitewhite, // Background color of the card
-                          shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0), // Rounded corners for the card
+                        elevation: 5, // Shadow effect
+                        color: AppColors.whitewhite, // Background color of the card
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0),
+                          // Rounded corners for the card
                           /*side: BorderSide(
-                          color: AppColors.bethesdacolor, // Color of the border
-                          width: 1.0, // Thickness of the border
-                        ),*/
+      color: AppColors.bethesdacolor, // Color of the border
+      width: 1.0, // Thickness of the border
+    ),*/
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0), // Adjust the padding as needed
+                          child: Text(
+                            "Funkcionális hasi fájdalomzavarok online hipnózis és mozgás-motivációs tréning kezelésének hatásvizsgálata tizenévesek körében",
+                            textAlign: TextAlign.center,
+                            style: MyTextStyles.cim(context),
+                          ),
+                        ),
                       ),
-                      child: Text(
-                        "Funkcionális hasi fájdalomzavarok online hipnózis és mozgás-motivációs tréning kezelésének hatásvizsgálata tizenévesek körében",
-                        textAlign: TextAlign.center,
-                        style: MyTextStyles.cim(context),
-                      ),
-                    ),
+
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05, right: MediaQuery.of(context).size.width * 0.03),
@@ -456,11 +473,11 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                           SizedBox(height: MediaQuery.of(context).size.width*0.02),
                           Material(
                             elevation: 5.0,  // Set your desired elevation here
-                            borderRadius: BorderRadius.circular(20),  // Maintain the border radius for consistent design
+                            borderRadius: BorderRadius.circular(0),  // Maintain the border radius for consistent design
                             child: Container(
                             decoration: BoxDecoration(
                               color: AppColors.lightaccentcolor, // Replace with your desired background color
-                              borderRadius: BorderRadius.circular(20), // Adjust the radius to get your desired curve
+                              borderRadius: BorderRadius.circular(0), // Adjust the radius to get your desired curve
                             ),
                             child: Padding(
                               padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01), // Add padding around the texts within the container
@@ -565,7 +582,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                             ),
                           ),
           ),
-                          SizedBox(height: MediaQuery.of(context).size.width*0.02),
+                          SizedBox(height: MediaQuery.of(context).size.width*0.03),
 
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -631,7 +648,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                   ),
                                 ],
                               ),
-                              SizedBox(height: MediaQuery.of(context).size.width * 0.01),
+                              SizedBox(height: MediaQuery.of(context).size.width * 0.03),
                               Center(
                                 child: ResearcherCard(),
                               ),
@@ -641,7 +658,7 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                               Center(
                                 child: ContactForm(),
                               ),
-                              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                              SizedBox(height: MediaQuery.of(context).size.width * 0.03),
                             ],
                           )
 
@@ -695,7 +712,17 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
                                   );
                                 },
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(AppColors.bethesdacolor), // Set the background color
+                                  backgroundColor: MaterialStateProperty.all(AppColors.bethesdacolor),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          10), // Adjust the value as needed
+                                    ),
+                                  ),
+                                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                                    EdgeInsets.symmetric(vertical: 12, horizontal: 24), // Adjust the padding as needed
+                                  ),// Change the color to your desired color// Set the background color
                                 ),
                                 child: Text(
                                   "Igen,\n részt veszek!",

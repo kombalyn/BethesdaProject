@@ -23,6 +23,8 @@ class Email extends StatelessWidget {
     return MaterialApp(
       title: 'Fájdalomkezelés regisztráció',
       theme: ThemeData(
+        useMaterial3: false,
+
         cardTheme: CardTheme(
           color: Colors.white, // This sets the background color of cards to white
         ),
@@ -80,39 +82,59 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
         key: scaffoldKey,
         appBar: AppBar(
           backgroundColor: AppColors.whitewhite,
-          scrolledUnderElevation: 0.0,
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                "assets/images/bethesda_gyermekkorhaz_logo.png",
-                width: MediaQuery.of(context).size.width * 0.05,
-              ),
-            ),
-          ),
-          title: const Text(
-            "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Montserrat',
-              fontSize: 20,
-              color: AppColors.bethesdacolor,
-            ),
-          ),
-          actions: const [
-            Center(
-              child: Text(
-                'Kutatási fázis',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontSize: 20,
-                  color: AppColors.bethesdacolor,
+          scrolledUnderElevation: 3.0,
+          elevation: 3,
+          shadowColor: Colors.grey,  // Custom shadow color
+
+          leading: SizedBox(
+            width: MediaQuery.of(context)
+                .size
+                .width, // Wide enough to fit image and title
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.03), // Spacer
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      "assets/images/bethesda_gyermekkorhaz_logo.png",
+                      width: MediaQuery.of(context).size.width * 0.05,
+                    ),
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: Text(
+                    "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 20,
+                      color: AppColors.bethesdacolor,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width *
+                          0.05), // Add padding to the right of the text
+                  child: Text(
+                    "Kutatási fázis",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 20,
+                      color: AppColors.bethesdacolor,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(width: 16), // For spacing
-          ],
+          ),
+          leadingWidth: MediaQuery.of(context)
+              .size
+              .width, // Ensure the leading area is wide enough
         ),
         backgroundColor: AppColors.lightshade,
         body: SingleChildScrollView(

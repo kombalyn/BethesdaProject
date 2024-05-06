@@ -30,6 +30,22 @@ class MyTextStyles {
       color: AppColors.darkshade, // Replace with your color variable if you have a custom one like AppColors.darkshade
     );
   }
+  static TextStyle vastagbekezdes(BuildContext context) {
+    return TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16.sp,  // This scales based on the screen width
+      fontWeight: FontWeight.bold,
+      color: AppColors.darkshade, // Replace with your color variable if you have a custom one like AppColors.darkshade
+    );
+  }
+  static TextStyle vastagnagybekezdes(BuildContext context) {
+    return TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 20.sp,  // This scales based on the screen width
+      fontWeight: FontWeight.bold,
+      color: AppColors.darkshade, // Replace with your color variable if you have a custom one like AppColors.darkshade
+    );
+  }
   static TextStyle feherbekezdes(BuildContext context) {
     return TextStyle(
       fontFamily: 'Montserrat',
@@ -73,7 +89,7 @@ class MyTextStyles {
       fontFamily: 'Montserrat',
       fontSize: 20.sp,  // This scales based on the screen width
       fontWeight: FontWeight.bold,
-      color: AppColors.lightshade, // Replace with your color variable if you have a custom one like AppColors.darkshade
+      color: AppColors.whitewhite, // Replace with your color variable if you have a custom one like AppColors.darkshade
     );
   }
   static TextStyle szinesgomb(BuildContext context) {

@@ -28,6 +28,8 @@ class Gdpr extends StatelessWidget {
     return MaterialApp(
       title: 'Fájdalomkezelés regisztráció',
       theme: ThemeData(
+        useMaterial3: false,
+
         cardTheme: CardTheme(
           color: Colors.white, // This sets the background color of cards to white
         ),
@@ -84,71 +86,61 @@ class _HomePageWidgetGdprState extends State<HomePageWidgetGdpr> {
       child: Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
-        backgroundColor: AppColors.whitewhite,  // Base color, but will be covered.
-        elevation: 0,  // No shadow.
-        leadingWidth: 0,  // Remove space for leading icon if not needed.
-        titleSpacing: 0,  // Remove default spacing on all sides.
-        title: LayoutBuilder(
-          builder: (context, constraints) {
-            return Container(
-              width: constraints.maxWidth,
-              height: kToolbarHeight,  // Use standard AppBar height.
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 4,  // 3 parts of the space for the left section.
-                    child: Container(
-                      color: AppColors.whitewhite,  // Color for the left section.
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 16),  // Optional, adjust as needed.
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset(
-                                "assets/images/bethesda_gyermekkorhaz_logo.png",
-                                width: MediaQuery.of(context).size.width * 0.05,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 8),  // Space between the logo and the text.
-                          Expanded(
-                            child: Text(
-                              "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: MediaQuery.of(context).size.width * 0.016,
-                                color: AppColors.bethesdacolor,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+          backgroundColor: AppColors.whitewhite,
+          scrolledUnderElevation: 3.0,
+          elevation: 3,
+          shadowColor: Colors.grey,  // Custom shadow color
+
+          leading: SizedBox(
+            width: MediaQuery.of(context)
+                .size
+                .width, // Wide enough to fit image and title
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.03), // Spacer
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      "assets/images/bethesda_gyermekkorhaz_logo.png",
+                      width: MediaQuery.of(context).size.width * 0.05,
                     ),
                   ),
-                  Expanded(
-                    flex: 1,  // 1 part of the space for the right section.
-                    child: Container(
-                      color: AppColors.whitewhite,  // Color for the right section.
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Kutatási fázis',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: MediaQuery.of(context).size.width * 0.016,
-                          color: AppColors.bethesdacolor,
-                        ),
-                      ),
+                ),
+                Expanded(
+                  child: Text(
+                    "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 20,
+                      color: AppColors.bethesdacolor,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width *
+                          0.05), // Add padding to the right of the text
+                  child: Text(
+                    "Kutatási fázis",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 20,
+                      color: AppColors.bethesdacolor,
                     ),
                   ),
-                ],
-              ),
-            );
-          },
+                ),
+              ],
+            ),
+          ),
+          leadingWidth: MediaQuery.of(context)
+              .size
+              .width, // Ensure the leading area is wide enough
         ),
-        automaticallyImplyLeading: false,  // No back button or menu automatically implied.
-      ),
 
 
       backgroundColor: AppColors.lightshade,
@@ -371,11 +363,14 @@ class _HomePageWidgetGdprState extends State<HomePageWidgetGdpr> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.bethesdacolor, // Button color
                         foregroundColor: Colors.white, // Text and icon color
+                        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24), // Padding inside the button
                       ),
-                      child: Text("Tovább",
-                          style: MyTextStyles.gomb(context),
+                      child: Text(
+                        "Tovább",
+                        style: MyTextStyles.gomb(context),
                       ),
                     ),
+
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
 
                   ],
