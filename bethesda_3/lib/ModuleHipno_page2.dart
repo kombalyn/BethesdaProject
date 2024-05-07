@@ -7,7 +7,20 @@ import 'package:video_player/video_player.dart';
 
 import 'ModuleHipno_page3.dart';
 import 'ModuleHipnomp3_1.dart';
-import 'home_page_model.dart';
+export 'home_page_model.dart';
+
+import 'package:bethesda_2/styles.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:video_player/video_player.dart';
+import 'package:bethesda_2/constants/colors.dart'; // Make sure this path is correct
+import 'ModuleHipno_page2.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+
+import 'ModuleHipno_page3.dart';
+import 'ModuleHipnomp3_1.dart';
+import 'ModuleOpening.dart';
+
+import 'ModuleHipno.dart';
 export 'home_page_model.dart';
 
 class BulletList extends StatelessWidget {
@@ -58,8 +71,6 @@ class BulletList extends StatelessWidget {
   }
 }
 
-
-
 class ModuleHipno2 extends StatelessWidget {
   const ModuleHipno2({super.key});
 
@@ -84,15 +95,13 @@ class ModuleHipno2 extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.bethesdacolor),
+        useMaterial3: false,
       ),
       home: const ModuleHipnoWidget(),
     );
   }
 }
-
-
 
 class ModuleHipnoWidget extends StatefulWidget {
   const ModuleHipnoWidget({super.key});
@@ -119,14 +128,13 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
     super.initState();
     _model = HomePageModel();
 
-    _controller = _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
-      ..initialize().then((_) {
-        setState(() {});
-      });
+    _controller =
+        _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
+          ..initialize().then((_) {
+            setState(() {});
+          });
 
-    _controller.value.isPlaying
-        ? _controller.pause()
-        : _controller.play();
+    _controller.value.isPlaying ? _controller.pause() : _controller.play();
   }
 
   @override
@@ -144,245 +152,524 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white70,
-        drawer: Drawer(
-          elevation: 16,
-        ),
-        body: SafeArea(
-          top: true,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
+        appBar: AppBar(
+          backgroundColor: AppColors.whitewhite,
+          scrolledUnderElevation: 3.0,
+          elevation: 3,
+          shadowColor: Colors.grey,
+          // Custom shadow color
+
+          leading: SizedBox(
+            width: MediaQuery.of(context)
+                .size
+                .width, // Wide enough to fit image and title
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding:
-                        EdgeInsetsDirectional.fromSTEB(230, 20, 0, 0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width*0.5,
-                          child: Text(
-                            'A hipnózis hatása a hasfájásra!',
-                            style: TextStyle(
-                              fontFamily: 'Readex Pro',
-                              fontSize: 25,
+                SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.03), // Spacer
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      "assets/images/bethesda_gyermekkorhaz_logo.png",
+                      width: MediaQuery.of(context).size.width * 0.05,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 20,
+                      color: AppColors.bethesdacolor,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width *
+                          0.05), // Add padding to the right of the text
+                  child: Text(
+                    "Kutatási fázis",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 20,
+                      color: AppColors.bethesdacolor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          leadingWidth: MediaQuery.of(context)
+              .size
+              .width, // Ensure the leading area is wide enough
+        ),
+        body: Stack(
+          children: [
+            // Background Layer
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    color: AppColors.lightshade,
+                    // Use your desired background color
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.33,
+                        right: MediaQuery.of(context).size.width * 0.05),
+                    // Indentation for the rows
+                    child: Column(
+                      children: [
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.03),
+                        Row(
+                          children: [
+                            Expanded(
+                              // This will allow text to wrap within the row.
+                              child: Text("Szia!",
+                                  style: MyTextStyles.bethesdagomb(context)),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.02),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              // Allocates 3 parts of the space to the text
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Itt az ideje egy új gyakorlatnak. Győződj meg arról, hogy jó helyet találtál az otthonodban a felvételek hallgatására. A mai új gyakorlatnak A Színek Bolygója a címe. Ez egy szórakoztató feladat, amellyel több önbizalmat és kellemes, egészséges érzéseket élhetsz át. Arra fogunk kérni, hogy képzelj el különböző színeket, amelyek olyan érzésekhez kapcsolódnak, amiket érezni szeretnél. A gyakorlat elvégzése után le is írhatod, hogy melyik szín melyik érzéshez tartozik. Most helyezd magadat kényelembe és hallgasd meg a harmadik gyakorlatot!",
+                                    style: MyTextStyles.bekezdes(context),
+                                    textAlign: TextAlign.justify,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                    MediaQuery.of(context).size.width * 0.03),
+                            Expanded(
+                              flex: 2,
+                              // Allocates 2 parts of the space to the image
+                              child: Container(
+                                width: 300,
+                                height: 200,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Stack(
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/3-4rainbow.png',
+                                        width: 300,
+                                        height: 200,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            colors: [
+                                              Colors.transparent,
+                                              Colors.white.withOpacity(0.7),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.1),
+                        Row(
+                          children: [
+                            Expanded(
+                              // This ensures the text fits within the available space and wraps.
+                              child: Text(
+                                "Eddig ennyiszer hallgattad meg ezt a hanganyagot:",
+                                style: MyTextStyles.bekezdes(context),
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                    MediaQuery.of(context).size.width * 0.03),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10), // Maintain the same border radius
+                              ),
+                              color: AppColors.whitewhite,
+                              // Background color of the card
+                              child: InkWell(
+                                child: Padding(
+                                  padding: EdgeInsets.all(12),
+                                  // Adjust padding to fit your design needs
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    // Use the minimum space required by the children
+                                    children: [
+                                      Text(
+                                        'Szám', // Your button text
+                                        style: MyTextStyles.bluegomb(context),
+                                      ),
+                                      // Add more widgets if needed
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.03),
+                        Container(
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColors.blueish, // Color of the border
+                              width: 3, // Width of the border
+                            ),
+                            borderRadius:
+                                BorderRadius.circular(20), // Rounded corners
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Melyik szín és melyik érzés tartozik össze számodra?",
+                                      style: MyTextStyles.vastagbekezdes(context),
+                                      textAlign: TextAlign.justify,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              InputForm(),
+                              // Make sure InputForm is defined and correctly imported
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.03),
+                        Row(
+                          children: [
+                            Expanded(
+                              // This ensures the text fits within the available space and wraps.
+                              child: Text(
+                                "Sok gyereknek segít, ha készítenek valamit, amihez felhasználják a számukra fontos színeket. Csinálhatsz például egy karkötőt olyan színű gyöngyökből, amilyeneket választottál a gyakorlat során. Amikor szükséged van valamelyik érzésre elég ránézned a karkötődre vagy megérinteni azt. Rajzolhatsz is valami szépet a Színek Bolygójáról és kiteheted a szobádba. Itt van még néhány ötlet, hogy mi mindent készíthetsz a számodra fontos színekkel.",
+                                style: MyTextStyles.bekezdes(context),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.03),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColors.blueish, // Color of the border
+                              width: 4, // Thickness of the border
+                            ),
+                            borderRadius:
+                                BorderRadius.circular(20), // Rounded corners
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.asset(
+                              'assets/images/3-4-karkoto.png',
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(height: MediaQuery.of(context).size.width*0.025,),
-
-                  Row(
-                    children: [
-                      Padding(
-                        padding:
-                        EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width*0.5,
-                          child: Text(
-                          'Bebizonyítottuk, hogy hipnózissal befolyásolható a hasfájás. Két vizsgálatban több mint 300, hozzád hasonlóan hasi problémákkal küzdő gyereknél figyeltük meg, hogy ezek a gyakorlatok sokat segítenek abban, hogy a pocakjuk jobban érezze magát. Fontos, hogy ezeket a gyakorlatokat mindennap hallgasd meg, hogy a módszer tényleg működhessen. Minél többet gyakorolsz, annál jobban működik. Olyan ez, mint amikor úszni vagy focizni tanulsz: minél többet gyakorolsz, annál ügyesebb leszel. Ebben a videóban Doktor Major János elmagyarázza, miért segít olyan sokat a hipnózis a hasfájás enyhítésében.',
-                            style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            color: Color(0xFFE41B48),
-                            fontSize: 18,
-                          ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.03),
+                        Row(
+                          children: [
+                            Expanded(
+                              // This ensures the text fits within the available space and wraps.
+                              child: Text(
+                                "A következő két hétben minden nap hallgasd meg a Színek Bolygóját. Ha szeretnéd, akkor ráadásként maghallgathatod az első gyakorlatot is (Relaxációs gyakorlat). Ez lesz a feladatod a harmadik és a negyedik hétre.",
+                                style: MyTextStyles.bekezdes(context),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                          ],
                         ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.03),
+                        Row(
+                          children: [
+                            Expanded(
+                              // This ensures the text fits within the available space and wraps.
+                              child: Text(
+                                "Jó szórakozást!",
+                                style: MyTextStyles.bethesdagomb(context),
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-
-                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
-
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.black, width: 4),
-                  ),
-                  child: _controller.value.isInitialized
-                      ?
-                  toggle ? Container(
-                    width: 500,
-                    height: 300,
-                    child: AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: VideoPlayer(_controller),
-                    ),
-                  ) : Container(
-                    color: Colors.black,
-                    width: 500,
-                    height: 300,
-                  )
-                      : Container(),
-                ),
-
-                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
-
-                Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding:
-                        EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width*0.5,
-                          child: Text(
-                          'Mint már tudod, öt hipnózis gyakorlatot rögzítettünk neked. Arra kérünk, hogy naponta legalább egyszer hallgasd meg ezeket a gyakorlatokat, de akár többször is meghallgathatod őket. Fontos, hogy senki ne zavarjon meg téged közben. Ezért az a legjobb, ha a gyakorlatokat a saját szobádban hallgatod. Mindenképpen szólj a többieknek, akik otthon vannak veled, hogy éppen gyakorlatot végzel, nehogy véletlenül besétáljanak a szobádba. A legtöbb gyereknek az működik a legjobban, ha minden nap ugyanabban az időpontban végzi a gyakorlatokat. Például közvetlenül mielőtt lefekszik aludni, vagy amikor hazaért az iskolából. Meg fogod tapasztalni, hogy neked mi válik be a legjobban. ',
-                            style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            color: Color(0xFFE41B48),
-                            fontSize: 18,
-                          ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.width * 0.05,
                         ),
-                        ),
-                      ),
-                    ],
-                  ),
 
-                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
-
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                      EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width*0.5,
-                        child: Text(
-                         'A honlap segítségével nyomon követheted, hogy hányszor hallgattad a gyakorlatokat. Ez segít abban, hogy egészségesebbé és erősebbé válj. Naponta emlékeztetni fogod magadat arra, hogy te vagy a tested ura, és a gyakorlatokat minden egyes gyakorlással egyre ismerősebbnek és természetesebbnek fogod találni.',
-                          style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            color: Color(0xFFE41B48),
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
-
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                      EdgeInsetsDirectional.fromSTEB(230, 0, 0, 0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width*0.5,
-                        child: Text(
-                          'Készen állsz? Akkor kezdjünk hozzá!',
-                          style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            color: Color(0xFFE41B48),
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.black, width: 4),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Tippek a gyakorlatok meghallgatásához:',
-                        style: TextStyle(
-                          fontFamily: 'Readex Pro',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width*0.4,
-                        //height: 327,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(14)),
-                        child: SingleChildScrollView(
-
-                          child: BulletList([
-                            'Gyakorolj minden nap',
-                            'Csendes helyen',
-                            'Azonos időben',
-                          ]),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
-
-                ElevatedButton(
-                  onPressed: () {
-                    print('Button pressed ...');
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => ModuleHipno3(),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      Text('Go To Second Module'),
-                      Icon(
-                        Icons.play_arrow,
-                        size: 15,
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
-                SizedBox(height: MediaQuery.of(context).size.width*0.025,),
-
-                TextButton(
-                  onPressed: () {
-                    navigateTo('https://www.bethesda.hu/');
-                  },
-                  child: Text(
-                    'https://www.bethesda.hu/',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline,
+                        // You can add more rows as needed
+                      ],
                     ),
                   ),
-                ),
-
-                TextButton(
-                  onPressed: () {
-                    navigateTo('https://www.bethesda.hu/');
-                  },
-                  child: Text(
-                    'Tudjon meg többet a krónikus hasi fájdalomról!',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-
-
-
-
-
-              ],
+                ],
+              ),
             ),
 
-          ),
+            // Front Layer with Clickable parts
+            Positioned(
+              top: 0,
+              left: 0,
+              bottom: 0,
+              child: Container(
+                  width:
+                      MediaQuery.of(context).size.width * 0.3, // Sidebar width
+                  color: Colors.white.withOpacity(1), // Slightly transparent
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.07,
+                        left: MediaQuery.of(context).size.height *
+                            0.08), // Set the desired top and left padding
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      // Sidebar width
+                      color: Colors.white.withOpacity(0.3),
+                      // Fully opaque white
+                      child: Column(
+                        children: [
+                          Text(
+                            'Fájdalomkezelési kisokos',
+                            textAlign: TextAlign.left,
+                            style: MyTextStyles.huszonkettobekezdes(context),
+                          ),
+                          Container(
+                            color: AppColors.whitewhite,
+                            // Set a different background color for the outer container
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.07,
+                              decoration: BoxDecoration(
+                                color: AppColors.whitewhite,
+                                // Inner container color
+                                borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(
+                                      20.0), // Rounded corner for inner container
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: AppColors.whitewhite,
+                              // Use your specific color variable
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.0),
+                                // Adjust the radius as needed
+                                bottomLeft: Radius.circular(20.0),
+                              ),
+                            ),
+                            child: ListTile(
+                              leading: Image.asset('assets/images/2icon.png'),
+                              // Replace 'your_image.png' with your image path
+                              title: Text(
+                                'Üdvözlő',
+                                style: MyTextStyles.vastagbekezdes(context),
+                              ),
+                              onTap: () async {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ModuleOpening(),
+                                  ),
+                                );
+
+                                print("gomb");
+                              },
+                            ),
+                          ),
+                          Container(
+                            color: AppColors.whitewhite,
+                            // Set a different background color for the outer container
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.03,
+                              decoration: BoxDecoration(
+                                color: AppColors.whitewhite,
+                                // Inner container color
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(
+                                      20.0), // Rounded corner for inner container
+                                ),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            'Anyagok',
+                            textAlign: TextAlign.left,
+                            style: MyTextStyles.huszonegybekezdes(context),
+                          ),
+                          Container(
+                            color: AppColors.whitewhite,
+                            // Set a different background color for the outer container
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.03,
+                              decoration: BoxDecoration(
+                                color: AppColors.whitewhite,
+                                // Inner container color
+                                borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(
+                                      20.0), // Rounded corner for inner container
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: AppColors.whitewhite,
+                              // Use your specific color variable
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.0),
+                                // Adjust the radius as needed
+                                bottomLeft: Radius.circular(20.0),
+                              ),
+                            ),
+                            child: ListTile(
+                              leading: Image.asset('assets/images/3icon.png'),
+                              // Replace 'your_image.png' with your image path
+                              title: Text(
+                                '1-2. hét anyaga',
+                                style: MyTextStyles.vastagbekezdes(context),
+                              ),
+                              subtitle: Text(
+                                'Elérhető',
+                                // Replace this text with what you want as a subtitle
+                                style: MyTextStyles.kicsibekezdes(context),
+                              ),
+                              onTap: () {
+                                print('Button pressed ...');
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ModuleHipno(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          Container(
+                            color: AppColors.lightshade,
+                            // Set a different background color for the outer container
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.03,
+                              decoration: BoxDecoration(
+                                color: AppColors.whitewhite,
+                                // Inner container color
+                                borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(
+                                      20.0), // Rounded corner for inner container
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: AppColors.lightshade,
+                              // Use your specific color variable
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.0),
+                                // Adjust the radius as needed
+                                bottomLeft: Radius.circular(20.0),
+                              ),
+                            ),
+                            child: ListTile(
+                              leading: Image.asset('assets/images/1icon.png'),
+                              // Replace 'your_image.png' with your image path
+                              title: Text(
+                                '3-4. hét anyaga',
+                                style: MyTextStyles.vastagbekezdes(context),
+                              ),
+                              subtitle: Text(
+                                'Zárolva',
+                                // Replace this text with what you want as a subtitle
+                                style: MyTextStyles.kicsibekezdes(context),
+                              ),
+                              onTap: () {
+                                print('Button pressed ...');
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ModuleHipno2(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          Container(
+                            color: AppColors.lightshade,
+                            // Set a different background color for the outer container
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.03,
+                              decoration: BoxDecoration(
+                                color: AppColors.whitewhite,
+                                // Inner container color
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(
+                                      20.0), // Rounded corner for inner container
+                                ),
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            leading: Image.asset('assets/images/4icon.png'),
+                            // Replace 'your_image.png' with your image path
+                            title: Text(
+                              '5-6. hét anyaga',
+                              style: MyTextStyles.vastagbekezdes(context),
+                            ),
+                            subtitle: Text(
+                              'Zárolva',
+                              // Replace this text with what you want as a subtitle
+                              style: MyTextStyles.kicsibekezdes(context),
+                            ),
+                            onTap: () {
+                              print('Button pressed ...');
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ModuleHipno3(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  )),
+            ),
+          ],
         ),
       ),
     );
@@ -393,7 +680,6 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
       throw Exception('Could not launch $_url');
     }
   }
-
 }
 
 // Ez a függvény navigál a megadott URL-re a webes alkalmazásban
@@ -410,4 +696,93 @@ void navigateTo(String url) {
   //import 'dart:js';
   //context['window'].callMethod('open', [url]);
   context['window'].location.href = url.replaceAll(' ', '');
+}
+
+class InputForm extends StatefulWidget {
+  @override
+  _InputFormState createState() => _InputFormState();
+}
+
+class _InputFormState extends State<InputForm> {
+  final _formKey = GlobalKey<FormState>();
+  List<String> colors = ['', '', '', ''];
+  List<String> feelings = ['', '', '', ''];
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (int i = 0; i < 4; i++) ...[
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "${i + 1}. Szín ",
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) => setState(() => colors[i] = value),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Expanded(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "${i + 1}. Érzés ",
+                        hintText: "Enter feeling",
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) => setState(() => feelings[i] = value),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+            ],
+            ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  // Process data
+                  print("Színek: $colors");
+                  print("Érzések: $feelings");
+                }
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  AppColors.whitewhite,
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                  EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                ),
+              ),
+              child: Text(
+                "Küldés!",
+                style: MyTextStyles.bluegomb(context),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

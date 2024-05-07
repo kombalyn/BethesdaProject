@@ -1,4 +1,10 @@
 import 'dart:js';
+
+import 'package:flutter/material.dart';
+import 'package:bethesda_2/home_page_model.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:video_player/video_player.dart';
+import 'dart:js';
 import 'package:bethesda_2/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
@@ -12,8 +18,8 @@ import 'ModuleHipno_page3.dart';
 import 'ModuleHipno.dart';
 import 'ModuleHipnomp3_1.dart';
 import 'ModuleOpening.dart';
-
-import 'ModuleHipno.dart';
+import 'ModuleHipnomp3_1.dart';
+import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 class BulletList extends StatelessWidget {
@@ -66,8 +72,8 @@ class BulletList extends StatelessWidget {
 
 
 
-class ModuleHipno4 extends StatelessWidget {
-  const ModuleHipno4({super.key});
+class ModuleHipno5 extends StatelessWidget {
+  const ModuleHipno5({super.key});
 
   // This widget is the root of your application.
   @override
@@ -239,67 +245,31 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.03),
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              // Allocates 3 parts of the space to the text
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Máris eltelt hat hét. Itt az ideje egy újabb gyakorlatnak, aminek a címe: A Csúszda. Ez egy szuper felvétel, ami úgy segít a hasadnak ellazulni, hogy közben egyre jobban érzed magad. Minél többet gyakorlod ezt, annál boldogabb lesz a pocakod is.",
-                                    style: MyTextStyles.bekezdes(context),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                ],
-                              ),
-                            ),
-
-
-                            SizedBox(
-                                width:
-                                MediaQuery.of(context).size.width * 0.03),
-                            Expanded(
-                              flex: 2,
-                              // Allocates 2 parts of the space to the image
-                              child:
-                              Container(
-                                width: 200,
-                                height: 195,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Stack(
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/7-8.png',
-                                        width: 200,
-                                        height: 195,
-                                        fit: BoxFit.cover,
-                                      ),
-
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03),
-                        Row(
                           children: [
                             Expanded(
                               // This ensures the text fits within the available space and wraps.
                               child: Text(
-                                "A következő két hét során mindennap hallgasd meg ezt a gyakorlatot legalább naponta egyszer. Továbbá arra kérünk, hogy az előző négy felvétel valamelyikét is hallgasd meg minden nap. Váltogathatod őket a különböző napokon, vagy hallgathatod mindennap ugyanazt. Ahogyan neked jobb. \nReméljük tetszeni fog!",
+                                "Eltelt nyolc hét. A következő hetekben szabadon kiválaszthatod, hogy melyik nap melyik felvételt szeretnéd hallgatni. Aszerint válassz, hogy mi tetszett a legjobban és mi segített a legtöbbet. Váltogass a felvételek között bátran, ahogy neked jólesik. Vannak, akiknek ennyi idő után már nem is kell hallgatni a felvételeket, mert szóról szóra megtanulták őket és maguktól is tudják végezni a gyakorlatokat. Még arra is van lehetőség, hogy módosítsd a gyakorlatokat, átírd vagy kiegészítsd őket, ha úgy többet segítenek neked.\n\nA következő négy hétben hallgass meg mindennap egy vagy két gyakorlatot. Ahogyan ezt teszed, észre fogod venni, hogy a hasad egyre jobban és jobban érzi magát. Az is elképzelhető, hogy mostanra a pocakod teljesen egészségesnek érzi magát. Ilyenkor is fontos még folytatni a gyakorlást, mert ez segít abban, hogy a hasad megőrizze ezeket a jó érzéseket. Ha előfordul még hasfájás, akkor is folytasd a felvételek hallgatását, mert van akinek egy kicsit több időre és türelemre van szüksége ahhoz, hogy jobban érezze magát a hipnózisnak köszönhetően. Ez is teljesen rendben van.",
                                 style: MyTextStyles.bekezdes(context),
                                 textAlign: TextAlign.justify,
                               ),
                             ),
                           ],
                         ),
-
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.03),
+                        Row(
+                          children: [
+                            Expanded(
+                              // This ensures the text fits within the available space and wraps.
+                              child: Text(
+                                "Sok sikert a következő hetekhez!",
+                                style: MyTextStyles.bethesdagomb(context),
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                          ],
+                        ),
                         SizedBox(
                             height: MediaQuery.of(context).size.width * 0.1),
                         Row(
@@ -307,7 +277,21 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                             Expanded(
                               // This ensures the text fits within the available space and wraps.
                               child: Text(
-                                "Eddig ennyiszer hallgattad meg ezt a hanganyagot:",
+                                "Eltelt nyolc hét. A következő hetekben szabadon kiválaszthatod, hogy melyik nap melyik felvételt szeretnéd hallgatni. Aszerint válassz, hogy mi tetszett a legjobban és mi segített a legtöbbet. Váltogass a felvételek között bátran, ahogy neked jólesik. Vannak, akiknek ennyi idő után már nem is kell hallgatni a felvételeket, mert szóról szóra megtanulták őket és maguktól is tudják végezni a gyakorlatokat. Még arra is van lehetőség, hogy módosítsd a gyakorlatokat, átírd vagy kiegészítsd őket, ha úgy többet segítenek neked.\n\nA következő négy hétben hallgass meg mindennap egy vagy két gyakorlatot. Ahogyan ezt teszed, észre fogod venni, hogy a hasad egyre jobban és jobban érzi magát. Az is elképzelhető, hogy mostanra a pocakod teljesen egészségesnek érzi magát. Ilyenkor is fontos még folytatni a gyakorlást, mert ez segít abban, hogy a hasad megőrizze ezeket a jó érzéseket. Ha előfordul még hasfájás, akkor is folytasd a felvételek hallgatását, mert van akinek egy kicsit több időre és türelemre van szüksége ahhoz, hogy jobban érezze magát a hipnózisnak köszönhetően. Ez is teljesen rendben van.",
+                                style: MyTextStyles.bekezdes(context),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.01),
+                        Row(
+                          children: [
+                            Expanded(
+                              // This ensures the text fits within the available space and wraps.
+                              child: Text(
+                                "Eddig ennyiszer hallgattad meg a Színek Bolygója hanganyagot:",
                                 style: MyTextStyles.bekezdes(context),
                                 textAlign: TextAlign.right,
                               ),
@@ -345,6 +329,96 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                           ],
                         ),
 
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.1),
+                        Row(
+                          children: [
+                            Expanded(
+                              // This ensures the text fits within the available space and wraps.
+                              child: Text(
+                                "Eddig ennyiszer hallgattad meg ezt a Gondtalan Tengerpart hanganyagot:",
+                                style: MyTextStyles.bekezdes(context),
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width * 0.03),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10), // Maintain the same border radius
+                              ),
+                              color: AppColors.whitewhite,
+                              // Background color of the card
+                              child: InkWell(
+
+                                child: Padding(
+                                  padding: EdgeInsets.all(12),
+                                  // Adjust padding to fit your design needs
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    // Use the minimum space required by the children
+                                    children: [
+                                      Text(
+                                        'Szám!', // Your button text
+                                        style:
+                                        MyTextStyles.bluegomb(context),
+                                      ),
+                                      // Add more widgets if needed
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+
+
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.1),
+                        Row(
+                          children: [
+                            Expanded(
+                              // This ensures the text fits within the available space and wraps.
+                              child: Text(
+                                "Eddig ennyiszer hallgattad meg ezt A Csúszda hanganyagot:",
+                                style: MyTextStyles.bekezdes(context),
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width * 0.03),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10), // Maintain the same border radius
+                              ),
+                              color: AppColors.whitewhite,
+                              // Background color of the card
+                              child: InkWell(
+
+                                child: Padding(
+                                  padding: EdgeInsets.all(12),
+                                  // Adjust padding to fit your design needs
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    // Use the minimum space required by the children
+                                    children: [
+                                      Text(
+                                        'Szám!', // Your button text
+                                        style:
+                                        MyTextStyles.bluegomb(context),
+                                      ),
+                                      // Add more widgets if needed
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
 
 
                         SizedBox(

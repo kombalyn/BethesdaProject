@@ -2,9 +2,13 @@ import 'package:bethesda_2/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'ModuleHipno_page2.dart';
+
+import 'ModuleHipno_page3.dart';
+import 'ModuleHipnomp3_1.dart';
 
 import 'ModuleHipno.dart';
-import 'home_page_model.dart';
 export 'home_page_model.dart';
 import 'package:bethesda_2/constants/colors.dart'; // Make sure this path is correct
 
@@ -88,7 +92,8 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
         backgroundColor: AppColors.whitewhite,
         scrolledUnderElevation: 3.0,
         elevation: 3,
-        shadowColor: Colors.grey,  // Custom shadow color
+        shadowColor: Colors.grey,
+        // Custom shadow color
 
         leading: SizedBox(
           width: MediaQuery.of(context)
@@ -140,7 +145,6 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
             .size
             .width, // Ensure the leading area is wide enough
       ),
-
       body: Stack(
         children: [
           // Background Layer
@@ -156,14 +160,24 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                   // Indentation for the rows
                   child: Column(
                     children: [
-                      SizedBox(height: MediaQuery.of(context).size.width * 0.3),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.05),
+                      Center(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width *
+                              0.43, // Adjust the width as needed
+                          child: HtmlWidget(
+                            '<iframe width="100%" height="315" src="https://youtu.be/uhQa31RVPso" frameborder="0" allowfullscreen></iframe>',
+                          ),
+                        ),
+                      ),
                       Row(
                         children: [
                           Expanded(
                             // This will allow text to wrap within the row.
                             child: Text("Szia!",
                                 style:
-                                    MyTextStyles.vastagnagybekezdes(context)),
+                                    MyTextStyles.bethesdagomb(context)),
                           ),
                         ],
                       ),
@@ -217,81 +231,72 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: Colors.black, width: 4),
+                          color: AppColors.blueish,
+                          border:
+                              Border.all(color: AppColors.whitewhite, width: 4),
                         ),
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: Row(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: Stack(
                           children: [
                             Container(
-                              width: MediaQuery.of(context).size.width * 0.2,
-                              child: Image.asset("assets/images/fox.png"),
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10.0),
+                                // Adjust the radius as needed
+                                child: Image.asset(
+                                    "assets/images/fox-horizontal-nobackground_2.png"),
+                              ),
                             ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.height * 0.05,
+                            Positioned(
+                              top: MediaQuery.of(context).size.width * 0.025,
+                              right: MediaQuery.of(context).size.width * 0.005,
+                              child: Text(
+                                'Ha készen állsz az első modulra \nkattints az alábbi gombra!',
+                                style: MyTextStyles.feherkovercim(context),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                            Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 0),
-                                        child: Text(
-                                          'Ha készen állsz az első modulra kattints az alábbi gombra!!',
-                                          style: MyTextStyles.nagybekezdes(context),
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.width * 0.09,
+                              right: MediaQuery.of(context).size.width * 0.04,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  print('Button pressed ...');
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          ModuleHipno(),
                                     ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.width * 0.05,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    print('Button pressed ...');
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            ModuleHipno(),
-                                      ),
-                                    );
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty
-                                        .all<Color>(AppColors
-                                        .whitewhite),
-                                    shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            10), // Adjust the value as needed
-                                      ),
-                                    ),
-                                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                                      EdgeInsets.symmetric(vertical: 12, horizontal: 24), // Adjust the padding as needed
-                                    ),// Change the color to your desired color
+                                  );
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    AppColors.whitewhite,
                                   ),
-                                  child: Text(
-                                    "Kezdjük!",
-                                    textAlign: TextAlign.center,
-                                    style: MyTextStyles.szinesgomb(context),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  padding: MaterialStateProperty.all<
+                                      EdgeInsetsGeometry>(
+                                    EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 24),
                                   ),
                                 ),
-
-                              ],
+                                child: Text(
+                                  "Kezdjük!",
+                                  style: MyTextStyles.bethesdagomb(context),
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
+
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.07),
 
@@ -313,7 +318,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                 color: Colors.white.withOpacity(1), // Slightly transparent
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.08,
+                      top: MediaQuery.of(context).size.height * 0.07,
                       left: MediaQuery.of(context).size.height *
                           0.08), // Set the desired top and left padding
                   child: Container(
@@ -325,13 +330,13 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         Text(
                           'Fájdalomkezelési kisokos',
                           textAlign: TextAlign.left,
-                          style: MyTextStyles.vastagbekezdes(context),
+                          style: MyTextStyles.huszonkettobekezdes(context),
                         ),
                         Container(
                           color: AppColors.lightshade,
                           // Set a different background color for the outer container
                           child: Container(
-                            height: MediaQuery.of(context).size.height * 0.02,
+                            height: MediaQuery.of(context).size.height * 0.07,
                             decoration: BoxDecoration(
                               color: AppColors.whitewhite,
                               // Inner container color
@@ -353,18 +358,30 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                             ),
                           ),
                           child: ListTile(
+                            leading: Image.asset('assets/images/2icon.png'),
+                            // Replace 'your_image.png' with your image path
                             title: Text(
                               'Üdvözlő',
                               style: MyTextStyles.vastagbekezdes(context),
                             ),
-                            onTap: () => print('Clicked Üdvözlő'),
+                            onTap: () async {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ModuleOpening(),
+                                ),
+                              );
+
+                              print("gomb");
+                            },
                           ),
                         ),
                         Container(
                           color: AppColors.lightshade,
                           // Set a different background color for the outer container
                           child: Container(
-                            height: MediaQuery.of(context).size.height * 0.02,
+                            height: MediaQuery.of(context).size.height * 0.03,
                             decoration: BoxDecoration(
                               color: AppColors.whitewhite,
                               // Inner container color
@@ -378,11 +395,26 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         Text(
                           'Anyagok',
                           textAlign: TextAlign.left,
-                          style: MyTextStyles.vastagbekezdes(context),
+                          style: MyTextStyles.huszonegybekezdes(context),
                         ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02),
+                        Container(
+                          color: AppColors.whitewhite,
+                          // Set a different background color for the outer container
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.03,
+                            decoration: BoxDecoration(
+                              color: AppColors.whitewhite,
+                              // Inner container color
+                              borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(
+                                    20.0), // Rounded corner for inner container
+                              ),
+                            ),
+                          ),
+                        ),
                         ListTile(
+                          leading: Image.asset('assets/images/3icon.png'),
+                          // Replace 'your_image.png' with your image path
                           title: Text(
                             '1-2. hét anyaga',
                             style: MyTextStyles.vastagbekezdes(context),
@@ -392,11 +424,35 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                             // Replace this text with what you want as a subtitle
                             style: MyTextStyles.kicsibekezdes(context),
                           ),
-                          onTap: () => print('Clicked 1-2 hét anyaga'),
+                          onTap: () {
+                            print('Button pressed ...');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    ModuleHipno(),
+                              ),
+                            );
+                          },
                         ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02),
+                        Container(
+                          color: AppColors.whitewhite,
+                          // Set a different background color for the outer container
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.03,
+                            decoration: BoxDecoration(
+                              color: AppColors.whitewhite,
+                              // Inner container color
+                              borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(
+                                    20.0), // Rounded corner for inner container
+                              ),
+                            ),
+                          ),
+                        ),
                         ListTile(
+                          leading: Image.asset('assets/images/1icon.png'),
+                          // Replace 'your_image.png' with your image path
                           title: Text(
                             '3-4. hét anyaga',
                             style: MyTextStyles.vastagbekezdes(context),
@@ -406,13 +462,37 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                             // Replace this text with what you want as a subtitle
                             style: MyTextStyles.kicsibekezdes(context),
                           ),
-                          onTap: () => print('Clicked 3-4 hét anyaga'),
+                          onTap: () {
+                            print('Button pressed ...');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    ModuleHipno2(),
+                              ),
+                            );
+                          },
                         ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02),
+                        Container(
+                          color: AppColors.whitewhite,
+                          // Set a different background color for the outer container
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.03,
+                            decoration: BoxDecoration(
+                              color: AppColors.whitewhite,
+                              // Inner container color
+                              borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(
+                                    20.0), // Rounded corner for inner container
+                              ),
+                            ),
+                          ),
+                        ),
                         ListTile(
+                          leading: Image.asset('assets/images/4icon.png'),
+                          // Replace 'your_image.png' with your image path
                           title: Text(
-                            '5-6 hét anyaga',
+                            '5-6. hét anyaga',
                             style: MyTextStyles.vastagbekezdes(context),
                           ),
                           subtitle: Text(
@@ -420,7 +500,31 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                             // Replace this text with what you want as a subtitle
                             style: MyTextStyles.kicsibekezdes(context),
                           ),
-                          onTap: () => print('Clicked 5-6 hét anyaga'),
+                          onTap: () {
+                            print('Button pressed ...');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    ModuleHipno3(),
+                              ),
+                            );
+                          },
+                        ),
+                        Container(
+                          color: AppColors.whitewhite,
+                          // Set a different background color for the outer container
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.03,
+                            decoration: BoxDecoration(
+                              color: AppColors.whitewhite,
+                              // Inner container color
+                              borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(
+                                    20.0), // Rounded corner for inner container
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),

@@ -32,6 +32,10 @@ dependencies:
     sdk: flutter
   url_launcher: ^6.0.20 # Check for the latest version on pub.dev
   flutter_screenutil: ^5.9.0
+  webview_flutter: ^4.0.1 # or the latest version
+  flutter_inappwebview: ^5.0.0 # or the latest version
+  web: ^0.3.0
+  flutter_widget_from_html: ^0.15.0
 
 
   assets_audio_player: ^3.1.1
@@ -86,6 +90,20 @@ flutter:
     - assets/images/gyakorlat2.jpg
     - assets/images/bethesda_gyerm_logo_nevvel.png
     - assets/images/bear_up_nobackground.png
+    - assets/images/1icon.png
+    - assets/images/2icon.png
+    - assets/images/3icon.png
+    - assets/images/4icon.png
+    - assets/images/fox_nobackground.png
+    - assets/images/fox-horizontal-nobackground.png
+    - assets/images/fox-horizontal-nobackground_2.png
+    - assets/images/ka.png
+    - assets/images/3-4-karkoto.png
+    - assets/images/3-4rainbow.png
+    - assets/images/5-6tengerpart.jpg
+    - assets/images/5-6tengerpart_2.png
+    - assets/images/7-8.png
+
 
 
     - assets/videos/animation.mp4
