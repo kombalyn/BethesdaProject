@@ -7,7 +7,8 @@ import 'ModuleHipno_page2.dart';
 
 import 'ModuleHipno_page3.dart';
 import 'ModuleHipnomp3_1.dart';
-
+import 'ModuleHipno_page5.dart';
+import 'ModuleHipno_page4.dart';
 import 'ModuleHipno.dart';
 export 'home_page_model.dart';
 import 'package:bethesda_2/constants/colors.dart'; // Make sure this path is correct
@@ -145,11 +146,14 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
             .size
             .width, // Ensure the leading area is wide enough
       ),
-      body: Stack(
+      body:
+      SingleChildScrollView( child:
+      Column(
+        children: [
+      Stack(
         children: [
           // Background Layer
-          SingleChildScrollView(
-            child: Column(
+            Column(
               children: [
                 Container(
                   color: AppColors.lightshade,
@@ -164,10 +168,10 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                           height: MediaQuery.of(context).size.height * 0.05),
                       Center(
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width *
-                              0.43, // Adjust the width as needed
+                          width: MediaQuery.of(context).size.width * 0.73, // 73% of the screen width
+                          height: MediaQuery.of(context).size.width * 0.4,  // Increase height proportionately
                           child: HtmlWidget(
-                            '<iframe width="100%" height="315" src="https://youtu.be/uhQa31RVPso" frameborder="0" allowfullscreen></iframe>',
+                            '<iframe width="100%" height="100%" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/szia.mp4" frameborder="0" allowfullscreen></iframe>',
                           ),
                         ),
                       ),
@@ -306,7 +310,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                 ),
               ],
             ),
-          ),
+
 
           // Front Layer with Clickable parts
           Positioned(
@@ -314,109 +318,119 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
             left: 0,
             bottom: 0,
             child: Container(
-                width: MediaQuery.of(context).size.width * 0.3, // Sidebar width
-                color: Colors.white.withOpacity(1), // Slightly transparent
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.07,
-                      left: MediaQuery.of(context).size.height *
-                          0.08), // Set the desired top and left padding
-                  child: Container(
-                    width: MediaQuery.of(context).size.width *
-                        0.3, // Sidebar width
-                    color: Colors.white.withOpacity(0.3), // Fully opaque white
-                    child: Column(
-                      children: [
-                        Text(
-                          'Fájdalomkezelési kisokos',
-                          textAlign: TextAlign.left,
-                          style: MyTextStyles.huszonkettobekezdes(context),
-                        ),
-                        Container(
-                          color: AppColors.lightshade,
-                          // Set a different background color for the outer container
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.07,
-                            decoration: BoxDecoration(
-                              color: AppColors.whitewhite,
-                              // Inner container color
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(
-                                    20.0), // Rounded corner for inner container
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: AppColors.lightshade,
-                            // Use your specific color variable
+              width: MediaQuery.of(context).size.width * 0.3, // Sidebar width
+              color: Colors.white.withOpacity(1), // Slightly transparent
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.width * 0.03,
+                    left: MediaQuery.of(context).size.width * 0.04), // Set the desired top and left padding
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  // Sidebar width
+                  color: Colors.white.withOpacity(0.3),
+                  // Fully opaque white
+                  child: Column(
+                    children: [
+                      Text(
+                        'Fájdalomkezelési kisokos',
+                        textAlign: TextAlign.left,
+                        style: MyTextStyles.huszonkettobekezdes(context),
+                      ),
+                      Container(
+                        color: AppColors.lightshade,
+                        // Set a different background color for the outer container
+                        child: Container(
+                          height: MediaQuery.of(context).size.width * 0.03,
+                          decoration: BoxDecoration(
+                            color: AppColors.whitewhite,
+                            // Inner container color
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20.0),
-                              // Adjust the radius as needed
-                              bottomLeft: Radius.circular(20.0),
+                              bottomRight: Radius.circular(
+                                  20.0), // Rounded corner for inner container
                             ),
-                          ),
-                          child: ListTile(
-                            leading: Image.asset('assets/images/2icon.png'),
-                            // Replace 'your_image.png' with your image path
-                            title: Text(
-                              'Üdvözlő',
-                              style: MyTextStyles.vastagbekezdes(context),
-                            ),
-                            onTap: () async {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      ModuleOpening(),
-                                ),
-                              );
-
-                              print("gomb");
-                            },
                           ),
                         ),
-                        Container(
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
                           color: AppColors.lightshade,
-                          // Set a different background color for the outer container
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.03,
-                            decoration: BoxDecoration(
-                              color: AppColors.whitewhite,
-                              // Inner container color
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(
-                                    20.0), // Rounded corner for inner container
-                              ),
-                            ),
+                          // Use your specific color variable
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.0),
+                            // Adjust the radius as needed
+                            bottomLeft: Radius.circular(20.0),
                           ),
                         ),
-                        Text(
-                          'Anyagok',
-                          textAlign: TextAlign.left,
-                          style: MyTextStyles.huszonegybekezdes(context),
-                        ),
-                        Container(
-                          color: AppColors.whitewhite,
-                          // Set a different background color for the outer container
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.03,
-                            decoration: BoxDecoration(
-                              color: AppColors.whitewhite,
-                              // Inner container color
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(
-                                    20.0), // Rounded corner for inner container
-                              ),
-                            ),
-                          ),
-                        ),
-                        ListTile(
-                          leading: Image.asset('assets/images/3icon.png'),
+                        child: ListTile(
+                          leading: Image.asset('assets/images/2icon.png'),
                           // Replace 'your_image.png' with your image path
                           title: Text(
-                            '1-2. hét anyaga',
+                            'Üdvözlő',
+                            style: MyTextStyles.vastagbekezdes(context),
+                          ),
+                          onTap: () async {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    ModuleOpening(),
+                              ),
+                            );
+
+                            print("gomb");
+                          },
+                        ),
+                      ),
+                      Container(
+                        color: AppColors.lightshade,
+                        // Set a different background color for the outer container
+                        child: Container(
+                          height: MediaQuery.of(context).size.width * 0.02,
+                          decoration: BoxDecoration(
+                            color: AppColors.whitewhite,
+                            // Inner container color
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(
+                                  20.0), // Rounded corner for inner container
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'Anyagok',
+                        textAlign: TextAlign.left,
+                        style: MyTextStyles.huszonegybekezdes(context),
+                      ),
+                      Container(
+                        color: AppColors.whitewhite,
+                        // Set a different background color for the outer container
+                        child: Container(
+                          height: MediaQuery.of(context).size.width * 0.03,
+                          decoration: BoxDecoration(
+                            color: AppColors.whitewhite,
+                            // Inner container color
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(
+                                  20.0), // Rounded corner for inner container
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: AppColors.whitewhite,
+                          // Use your specific color variable
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.0),
+                            // Adjust the radius as needed
+                            bottomLeft: Radius.circular(20.0),
+                          ),
+                        ),
+                        child: ListTile(
+                          leading: Image.asset('assets/images/5icon.png'),
+                          // Replace 'your_image.png' with your image path
+                          title: Text(
+                            '1-2. hét',
                             style: MyTextStyles.vastagbekezdes(context),
                           ),
                           subtitle: Text(
@@ -435,104 +449,188 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                             );
                           },
                         ),
-                        Container(
-                          color: AppColors.whitewhite,
-                          // Set a different background color for the outer container
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.03,
-                            decoration: BoxDecoration(
-                              color: AppColors.whitewhite,
-                              // Inner container color
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(
-                                    20.0), // Rounded corner for inner container
-                              ),
+                      ),
+                      Container(
+                        color: AppColors.whitewhite,
+                        // Set a different background color for the outer container
+                        child: Container(
+                          height: MediaQuery.of(context).size.width * 0.02,
+                          decoration: BoxDecoration(
+                            color: AppColors.whitewhite,
+                            // Inner container color
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(
+                                  20.0), // Rounded corner for inner container
                             ),
                           ),
                         ),
-                        ListTile(
-                          leading: Image.asset('assets/images/1icon.png'),
-                          // Replace 'your_image.png' with your image path
-                          title: Text(
-                            '3-4. hét anyaga',
-                            style: MyTextStyles.vastagbekezdes(context),
-                          ),
-                          subtitle: Text(
-                            'Zárolva',
-                            // Replace this text with what you want as a subtitle
-                            style: MyTextStyles.kicsibekezdes(context),
-                          ),
-                          onTap: () {
-                            print('Button pressed ...');
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    ModuleHipno2(),
-                              ),
-                            );
-                          },
+                      ),
+                      ListTile(
+                        leading: Image.asset('assets/images/4icon.png'),
+                        // Replace 'your_image.png' with your image path
+                        title: Text(
+                          '3-4. hét',
+                          style: MyTextStyles.vastagbekezdes(context),
                         ),
-                        Container(
-                          color: AppColors.whitewhite,
-                          // Set a different background color for the outer container
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.03,
-                            decoration: BoxDecoration(
-                              color: AppColors.whitewhite,
-                              // Inner container color
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(
-                                    20.0), // Rounded corner for inner container
-                              ),
+                        subtitle: Text(
+                          'Zárolva',
+                          // Replace this text with what you want as a subtitle
+                          style: MyTextStyles.kicsibekezdes(context),
+                        ),
+                        onTap: () {
+                          print('Button pressed ...');
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  ModuleHipno2(),
+                            ),
+                          );
+                        },
+                      ),
+                      Container(
+                        color: AppColors.whitewhite,
+                        // Set a different background color for the outer container
+                        child: Container(
+                          height: MediaQuery.of(context).size.width * 0.02,
+                          decoration: BoxDecoration(
+                            color: AppColors.whitewhite,
+                            // Inner container color
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(
+                                  20.0), // Rounded corner for inner container
                             ),
                           ),
                         ),
-                        ListTile(
-                          leading: Image.asset('assets/images/4icon.png'),
-                          // Replace 'your_image.png' with your image path
-                          title: Text(
-                            '5-6. hét anyaga',
-                            style: MyTextStyles.vastagbekezdes(context),
-                          ),
-                          subtitle: Text(
-                            'Zárolva',
-                            // Replace this text with what you want as a subtitle
-                            style: MyTextStyles.kicsibekezdes(context),
-                          ),
-                          onTap: () {
-                            print('Button pressed ...');
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    ModuleHipno3(),
-                              ),
-                            );
-                          },
+                      ),
+                      ListTile(
+                        leading: Image.asset('assets/images/6icon.png'),
+                        // Replace 'your_image.png' with your image path
+                        title: Text(
+                          '5-6. hét',
+                          style: MyTextStyles.vastagbekezdes(context),
                         ),
-                        Container(
-                          color: AppColors.whitewhite,
-                          // Set a different background color for the outer container
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.03,
-                            decoration: BoxDecoration(
-                              color: AppColors.whitewhite,
-                              // Inner container color
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(
-                                    20.0), // Rounded corner for inner container
-                              ),
+                        subtitle: Text(
+                          'Zárolva',
+                          // Replace this text with what you want as a subtitle
+                          style: MyTextStyles.kicsibekezdes(context),
+                        ),
+                        onTap: () {
+                          print('Button pressed ...');
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  ModuleHipno3(),
+                            ),
+                          );
+                        },
+                      ),
+                      Container(
+                        color: AppColors.whitewhite,
+                        // Set a different background color for the outer container
+                        child: Container(
+                          height: MediaQuery.of(context).size.width * 0.02,
+                          decoration: BoxDecoration(
+                            color: AppColors.whitewhite,
+                            // Inner container color
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(
+                                  20.0), // Rounded corner for inner container
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      ListTile(
+                        leading: Image.asset('assets/images/3icon.png'),
+                        // Replace 'your_image.png' with your image path
+                        title: Text(
+                          '7-8. hét',
+                          style: MyTextStyles.vastagbekezdes(context),
+                        ),
+                        subtitle: Text(
+                          'Zárolva',
+                          // Replace this text with what you want as a subtitle
+                          style: MyTextStyles.kicsibekezdes(context),
+                        ),
+                        onTap: () {
+                          print('Button pressed ...');
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  ModuleHipno4(),
+                            ),
+                          );
+                        },
+                      ),
+                      Container(
+                        color: AppColors.whitewhite,
+                        // Set a different background color for the outer container
+                        child: Container(
+                          height: MediaQuery.of(context).size.width * 0.02,
+                          decoration: BoxDecoration(
+                            color: AppColors.whitewhite,
+                            // Inner container color
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(
+                                  20.0), // Rounded corner for inner container
+                            ),
+                          ),
+                        ),
+                      ),
+                      ListTile(
+                        leading: Image.asset('assets/images/7icon.png'),
+                        // Replace 'your_image.png' with your image path
+                        title: Text(
+                          '9-12. hét',
+                          style: MyTextStyles.vastagbekezdes(context),
+                        ),
+                        subtitle: Text(
+                          'Zárolva',
+                          // Replace this text with what you want as a subtitle
+                          style: MyTextStyles.kicsibekezdes(context),
+                        ),
+                        onTap: () {
+                          print('Button pressed ...');
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  ModuleHipno5(),
+                            ),
+                          );
+                        },
+                      ),
+                      Container(
+                        color: AppColors.whitewhite,
+                        // Set a different background color for the outer container
+                        child: Container(
+                          height: MediaQuery.of(context).size.width * 0.02,
+                          decoration: BoxDecoration(
+                            color: AppColors.whitewhite,
+                            // Inner container color
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(
+                                  20.0), // Rounded corner for inner container
+                            ),
+                          ),
+                        ),
+                      ),
+
+
+                    ],
                   ),
-                )),
+                ),
+              ),
+            ),
           ),
         ],
       ),
+      // ide kell záró
+    ],
+    ),
+    ),
     );
   }
 }

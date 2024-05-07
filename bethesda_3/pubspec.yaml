@@ -34,8 +34,11 @@ dependencies:
   flutter_screenutil: ^5.9.0
   webview_flutter: ^4.0.1 # or the latest version
   flutter_inappwebview: ^5.0.0 # or the latest version
+  permission_handler: ^10.0.0
   web: ^0.3.0
   flutter_widget_from_html: ^0.15.0
+  flutter_html: ^3.0.0-beta.2
+  audioplayers: ^0.18.3 # Use the latest version that is compatible with your other packages
 
 
   assets_audio_player: ^3.1.1
@@ -94,6 +97,10 @@ flutter:
     - assets/images/2icon.png
     - assets/images/3icon.png
     - assets/images/4icon.png
+    - assets/images/5icon.png
+    - assets/images/6icon.png
+    - assets/images/7icon.png
+
     - assets/images/fox_nobackground.png
     - assets/images/fox-horizontal-nobackground.png
     - assets/images/fox-horizontal-nobackground_2.png
@@ -105,6 +112,7 @@ flutter:
     - assets/images/7-8.png
 
 
+    - assets/html/audio_player.html
 
     - assets/videos/animation.mp4
     - assets/videos/szia.mp4
