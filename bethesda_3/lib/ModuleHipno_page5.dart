@@ -21,6 +21,7 @@ import 'ModuleOpening.dart';
 import 'ModuleHipnomp3_1.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class BulletList extends StatelessWidget {
   final List<String> strings;
@@ -94,7 +95,7 @@ class ModuleHipno5 extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.bethesdacolor),
         useMaterial3: false,
       ),
       home: const ModuleHipnoWidget(),
@@ -274,11 +275,143 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
 
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.01),
+                                    MediaQuery.of(context).size.width * 0.05),
 
+
+                            Center(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10), // Adjust the corner radius
+                                ),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
+                                  height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
+                                  child: HtmlWidget(
+                                    '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/Progr_relax_nagyoknak.mp3" ></audio>',
+                                    // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  // This ensures the text fits within the available space and wraps.
+                                  child: Text(
+                                    "Eddig ennyiszer hallgattad meg a Relaxációs hanganyagot:",
+                                    style: MyTextStyles.bekezdes(context),
+                                    textAlign: TextAlign.right,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.03),
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        10), // Maintain the same border radius
+                                  ),
+                                  color: AppColors.whitewhite,
+                                  // Background color of the card
+                                  child: InkWell(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(12),
+                                      // Adjust padding to fit your design needs
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        // Use the minimum space required by the children
+                                        children: [
+                                          Text(
+                                            'Szám!', // Your button text
+                                            style:
+                                            MyTextStyles.bluegomb(context),
+                                          ),
+                                          // Add more widgets if needed
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                             SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.1),
+                                height: MediaQuery.of(context).size.width *
+                                    0.05),
+                            Center(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10), // Adjust the corner radius
+                                ),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
+                                  height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
+                                  child: HtmlWidget(
+                                    '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/Progr_relax_nagyoknak.mp3" ></audio>',
+                                    // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  // This ensures the text fits within the available space and wraps.
+                                  child: Text(
+                                    "Eddig ennyiszer hallgattad meg a Biztonságos Hely hanganyagot:",
+                                    style: MyTextStyles.bekezdes(context),
+                                    textAlign: TextAlign.right,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.03),
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        10), // Maintain the same border radius
+                                  ),
+                                  color: AppColors.whitewhite,
+                                  // Background color of the card
+                                  child: InkWell(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(12),
+                                      // Adjust padding to fit your design needs
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        // Use the minimum space required by the children
+                                        children: [
+                                          Text(
+                                            'Szám!', // Your button text
+                                            style:
+                                            MyTextStyles.bluegomb(context),
+                                          ),
+                                          // Add more widgets if needed
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                                height: MediaQuery.of(context).size.width *
+                                    0.05),
+//IDEKELL
+                            Center(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10), // Adjust the corner radius
+                                ),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
+                                  height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
+                                  child: HtmlWidget(
+                                    '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" ></audio>',
+                                    // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
+                                  ),
+                                ),
+                              ),
+                            ),
                             Row(
                               children: [
                                 Expanded(
@@ -310,7 +443,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                           Text(
                                             'Szám!', // Your button text
                                             style:
-                                                MyTextStyles.bluegomb(context),
+                                            MyTextStyles.bluegomb(context),
                                           ),
                                           // Add more widgets if needed
                                         ],
@@ -322,14 +455,30 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                             ),
 
                             SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.1),
+                                height: MediaQuery.of(context).size.width *
+                                    0.05),
+
+                            Center(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10), // Adjust the corner radius
+                                ),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
+                                  height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
+                                  child: HtmlWidget(
+                                    '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A gondtalan tengerpart.mp3" ></audio>',
+                                    // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
+                                  ),
+                                ),
+                              ),
+                            ),
                             Row(
                               children: [
                                 Expanded(
                                   // This ensures the text fits within the available space and wraps.
                                   child: Text(
-                                    "Eddig ennyiszer hallgattad meg ezt a Gondtalan Tengerpart hanganyagot:",
+                                    "Eddig ennyiszer hallgattad meg a Gondtalan Tengerpart hanganyagot:",
                                     style: MyTextStyles.bekezdes(context),
                                     textAlign: TextAlign.right,
                                   ),
@@ -367,14 +516,29 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                             ),
 
                             SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.1),
+                                height: MediaQuery.of(context).size.width *
+                                    0.05),
+                            Center(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10), // Adjust the corner radius
+                                ),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
+                                  height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
+                                  child: HtmlWidget(
+                                    '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A csuszda.mp3" ></audio>',
+                                    // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
+                                  ),
+                                ),
+                              ),
+                            ),
                             Row(
                               children: [
                                 Expanded(
                                   // This ensures the text fits within the available space and wraps.
                                   child: Text(
-                                    "Eddig ennyiszer hallgattad meg ezt A Csúszda hanganyagot:",
+                                    "Eddig ennyiszer hallgattad meg A Csúszda hanganyagot:",
                                     style: MyTextStyles.bekezdes(context),
                                     textAlign: TextAlign.right,
                                   ),

@@ -11,6 +11,8 @@ import 'ModuleHipno_page4.dart';
 import 'ModuleHipno_page3.dart';
 import 'ModuleHipno.dart';
 import 'ModuleHipnomp3_1.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+
 import 'ModuleOpening.dart';
 
 import 'ModuleHipno.dart';
@@ -90,7 +92,7 @@ class ModuleHipno4 extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.bethesdacolor),
         useMaterial3: false,
       ),
       home: const ModuleHipnoWidget(),
@@ -227,7 +229,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                     child: Column(
                       children: [
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03),
+                            height: MediaQuery.of(context).size.width * 0.03),
                         Row(
                           children: [
                             Expanded(
@@ -238,7 +240,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                           ],
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03),
+                            height: MediaQuery.of(context).size.width * 0.03),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -249,7 +251,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Máris eltelt hat hét. Itt az ideje egy újabb gyakorlatnak, aminek a címe: A Csúszda. Ez egy szuper felvétel, ami úgy segít a hasadnak ellazulni, hogy közben egyre jobban érzed magad. Minél többet gyakorlod ezt, annál boldogabb lesz a pocakod is.",
+                                    "Máris eltelt hat hét. Itt az ideje egy újabb gyakorlatnak, aminek a címe: A Csúszda. Ez egy szuper felvétel, ami úgy segít a hasadnak ellazulni, hogy közben egyre jobban érzed magad. Minél többet gyakorlod ezt, annál boldogabb lesz a pocakod is.A következő két hét során mindennap hallgasd meg ezt a gyakorlatot legalább naponta egyszer. Továbbá arra kérünk, hogy az előző négy felvétel valamelyikét is hallgasd meg minden nap. Váltogathatod őket a különböző napokon, vagy hallgathatod mindennap ugyanazt. Ahogyan neked jobb.",
                                     style: MyTextStyles.bekezdes(context),
                                     textAlign: TextAlign.justify,
                                   ),
@@ -262,38 +264,42 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                 width:
                                 MediaQuery.of(context).size.width * 0.03),
                             Expanded(
-                              flex: 2,
+                              flex: 1,
                               // Allocates 2 parts of the space to the image
                               child:
                               Container(
-                                width: 200,
-                                height: 195,
+                                width: MediaQuery.of(context).size.width * 0.15, // 15% of the screen width
+                                height: MediaQuery.of(context).size.width * 0.15, // Same as width to maintain aspect ratio
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                    color: AppColors.blueish, // Set border color here
+                                    width: 3, // Set border width here
+                                  ),
+                                ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
-                                  child: Stack(
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/7-8.png',
-                                        width: 200,
-                                        height: 195,
-                                        fit: BoxFit.cover,
-                                      ),
-
-                                    ],
+                                  child: Image.asset(
+                                    'assets/images/7-8.png',
+                                    width: MediaQuery.of(context).size.width * 0.15,
+                                    height: MediaQuery.of(context).size.width * 0.15,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
+
+
                             ),
                           ],
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03),
+                            height: MediaQuery.of(context).size.width * 0.03),
                         Row(
                           children: [
                             Expanded(
                               // This ensures the text fits within the available space and wraps.
                               child: Text(
-                                "A következő két hét során mindennap hallgasd meg ezt a gyakorlatot legalább naponta egyszer. Továbbá arra kérünk, hogy az előző négy felvétel valamelyikét is hallgasd meg minden nap. Váltogathatod őket a különböző napokon, vagy hallgathatod mindennap ugyanazt. Ahogyan neked jobb. \nReméljük tetszeni fog!",
+                                "Reméljük tetszeni fog!",
                                 style: MyTextStyles.bekezdes(context),
                                 textAlign: TextAlign.justify,
                               ),
@@ -302,7 +308,22 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         ),
 
                         SizedBox(
-                            height: MediaQuery.of(context).size.width * 0.1),
+                            height: MediaQuery.of(context).size.width * 0.02),
+                        Center(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10), // Adjust the corner radius
+                            ),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
+                              height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
+                              child: HtmlWidget(
+                                '<audio controls style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A csuszda.mp3" ></audio>',
+                                // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
+                              ),
+                            ),
+                          ),
+                        ),
                         Row(
                           children: [
                             Expanded(

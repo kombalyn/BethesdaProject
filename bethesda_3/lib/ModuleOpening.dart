@@ -21,7 +21,7 @@ class ModuleOpening extends StatelessWidget {
     return MaterialApp(
       title: 'Fájdalomkezelés - hipnózis',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.bethesdacolor),
         useMaterial3: false,
       ),
       home: const ModuleOpeningWidget(),
@@ -52,7 +52,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
     super.initState();
     _model = HomePageModel();
 
-    _controller =
+    /*_controller =
         _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
           ..initialize().then((_) {
             setState(() {});
@@ -64,6 +64,8 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
     });
 
     _controller.value.isPlaying ? _controller.pause() : _controller.play();
+
+     */
   }
 
   @override
@@ -165,13 +167,13 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                   child: Column(
                     children: [
                       SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.05),
+                          height: MediaQuery.of(context).size.width * 0.05),
                       Center(
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.73, // 73% of the screen width
                           height: MediaQuery.of(context).size.width * 0.4,  // Increase height proportionately
                           child: HtmlWidget(
-                            '<iframe width="100%" height="100%" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/szia.mp4" frameborder="0" allowfullscreen></iframe>',
+                            '<video controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/szia.mp4" ></video>',
                           ),
                         ),
                       ),
@@ -186,7 +188,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ],
                       ),
                       SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.03),
+                          height: MediaQuery.of(context).size.width * 0.02),
                       Row(
                         children: [
                           Expanded(
@@ -200,7 +202,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ],
                       ),
                       SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.03),
+                          height: MediaQuery.of(context).size.height * 0.02),
                       Row(
                         children: [
                           Expanded(
@@ -214,7 +216,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ],
                       ),
                       SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.03),
+                          height: MediaQuery.of(context).size.width * 0.02),
                       Row(
                         children: [
                           Expanded(
@@ -228,10 +230,8 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ],
                       ),
                       SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.07),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                      ),
+                          height: MediaQuery.of(context).size.width * 0.02),
+
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),

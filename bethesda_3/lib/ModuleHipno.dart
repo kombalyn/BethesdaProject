@@ -40,7 +40,7 @@ class ModuleHipno extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.bethesdacolor),
         useMaterial3: false,
       ),
       home: const ModuleHipnoWidget(),
@@ -229,7 +229,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                           children: [
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.04),
+                                    MediaQuery.of(context).size.width * 0.03),
                             Row(
                               children: [
                                 Expanded(
@@ -432,7 +432,8 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                     (9 / 16),
                                 // Maintain a 16:9 aspect ratio
                                 child: HtmlWidget(
-                                  '<iframe width="100%" height="100%" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/mi%C3%A9rt%20j%C3%B3%20a%20hipn%C3%B3zis%20hasi%20f%C3%A1jdalomra.mp4" frameborder="0" allowfullscreen></iframe>',
+                                  '<video controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/mi%C3%A9rt%20j%C3%B3%20a%20hipn%C3%B3zis%20hasi%20f%C3%A1jdalomra.mp4" ></video>',
+                                  // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
                                 ),
                               ),
                             ),
@@ -590,7 +591,8 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                     (9 / 16),
                                 // Maintain a 16:9 aspect ratio
                                 child: HtmlWidget(
-                                  '<iframe width="100%" height="100%" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/hogyan%20alakul%20ki%20a%20%C3%BAl%C3%A9rz%C3%A9keny%20b%C3%A9lm%C5%B1k%C3%B6d%C3%A9s.mp4" frameborder="0" allowfullscreen></iframe>',
+                                  '<video controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/hogyan%20alakul%20ki%20a%20%C3%BAl%C3%A9rz%C3%A9keny%20b%C3%A9lm%C5%B1k%C3%B6d%C3%A9s.mp4" ></video>',
+
                                 ),
                               ),
                             ),

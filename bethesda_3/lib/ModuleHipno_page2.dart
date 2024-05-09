@@ -29,63 +29,7 @@ export 'home_page_model.dart';
 
 
 
-class HtmlAudioPlayer {
-  late html.AudioElement _audioElement;
 
-  HtmlAudioPlayer(String src) {
-    _audioElement = html.AudioElement()
-      ..src = src
-      ..controls = true
-      ..autoplay = false; // Set to true if you want the audio to start playing as soon as it's loaded
-
-    html.document.body!.children.add(_audioElement);
-  }
-
-  void play() {
-    _audioElement.play();
-  }
-
-  void pause() {
-    _audioElement.pause();
-  }
-
-  void dispose() {
-    _audioElement.remove(); // Remove the audio element when disposing of the player
-  }
-}
-
-class AudioPlayerPage extends StatelessWidget {
-  final HtmlAudioPlayer audioPlayer;
-
-  AudioPlayerPage({required this.audioPlayer});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        ElevatedButton(
-          onPressed: audioPlayer.play,  // Play the audio
-          child: Text('Play'),
-        ),
-        ElevatedButton(
-          onPressed: audioPlayer.pause, // Pause the audio
-          child: Text('Pause'),
-        ),
-      ],
-    );
-  }
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final audioPlayer = HtmlAudioPlayer('http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A%20gondtalan%20tengerpart.mp3');
-    return MaterialApp(
-      home: AudioPlayerPage(audioPlayer: audioPlayer),
-    );
-  }
-}
 
 class BulletList extends StatelessWidget {
   final List<String> strings;
@@ -186,7 +130,6 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
   late double _currentPointOnFunction = 0;
   late double _sliderValue = 0.0;
   late bool toggle = true;
-  late HtmlAudioPlayer audioPlayer;  // Correctly declare as a late variable
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   late Uri _url;
@@ -195,7 +138,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
   void initState() {
     super.initState();
     _model = HomePageModel();
-    audioPlayer = HtmlAudioPlayer('http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A%20gondtalan%20tengerpart.mp3');
+    /*
     _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
       ..initialize().then((_) {
         setState(() {});
@@ -207,11 +150,11 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
       }).catchError((error) {
         print('Error initializing video player: $error');
       });
+    */
   }
 
   @override
   void dispose() {
-    audioPlayer.dispose();
     _controller.dispose();
     _model.dispose();
     super.dispose();
@@ -335,11 +278,8 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                 width:
                                     MediaQuery.of(context).size.width * 0.03),
                             Expanded(
-                              flex: 2,
-                              // Allocates 2 parts of the space to the image
+                              flex: 2, // Allocates 2 parts of the space to the image
                               child: Container(
-                                width: 300,
-                                height: 200,
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     color: AppColors.whitewhite, // Change this to your desired border color
@@ -353,9 +293,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                     children: [
                                       Image.asset(
                                         'assets/images/3-4rainbow.png',
-                                        width: 300,
-                                        height: 200,
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.contain, // Change to BoxFit.contain to ensure the entire image is visible without cropping
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
@@ -375,10 +313,11 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                               ),
                             ),
 
+
                           ],
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.width * 0.02),
+                            height: MediaQuery.of(context).size.width * 0.04),
 
 
                        /* Html(
@@ -389,30 +328,18 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
           </audio>
           """,
                         ), */
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            ElevatedButton(
-                              onPressed: audioPlayer.play,  // Play the audio
-                              child: Text('Play'),
-                            ),
-                            ElevatedButton(
-                              onPressed: audioPlayer.pause, // Pause the audio
-                              child: Text('Pause'),
-                            ),
-                          ],
-                        ),
+
                         Center(
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10), // Adjust the corner radius
-                                border: Border.all(color: Colors.grey) // Optional: adds a border
                             ),
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
-                              height: 100, // Adjust the height to make it thin
+                              height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
                               child: HtmlWidget(
-                                '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
+                              '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" ></audio>',
+                               // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
                               ),
                             ),
                           ),
