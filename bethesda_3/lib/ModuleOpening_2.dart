@@ -13,8 +13,8 @@ import 'ModuleHipno.dart';
 export 'home_page_model.dart';
 import 'package:bethesda_2/constants/colors.dart'; // Make sure this path is correct
 
-class ModuleOpening extends StatelessWidget {
-  const ModuleOpening({super.key});
+class ModuleOpening2 extends StatelessWidget {
+  const ModuleOpening2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +24,19 @@ class ModuleOpening extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.bethesdacolor),
         useMaterial3: false,
       ),
-      home: const ModuleOpeningWidget(),
+      home: const ModuleOpening2Widget(),
     );
   }
 }
 
-class ModuleOpeningWidget extends StatefulWidget {
-  const ModuleOpeningWidget({super.key});
+class ModuleOpening2Widget extends StatefulWidget {
+  const ModuleOpening2Widget({super.key});
 
   @override
-  State<ModuleOpeningWidget> createState() => _ModuleOpeningWidgetState();
+  State<ModuleOpening2Widget> createState() => _ModuleOpening2WidgetState();
 }
 
-class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
+class _ModuleOpening2WidgetState extends State<ModuleOpening2Widget> {
   late HomePageModel _model;
   late VideoPlayerController _controller;
   bool _isPlaying = false;
@@ -167,16 +167,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                   child: Column(
                     children: [
                       SizedBox(
-                          height: MediaQuery.of(context).size.width * 0.05),
-                      Center(
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.73, // 73% of the screen width
-                          height: MediaQuery.of(context).size.width * 0.4,  // Increase height proportionately
-                          child: HtmlWidget(
-                            '<video controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/szia.mp4" ></video>',
-                          ),
-                        ),
-                      ),
+                          height: MediaQuery.of(context).size.width * 0.04),
                       Row(
                         children: [
                           Expanded(
@@ -194,7 +185,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                           Expanded(
                             // This ensures the text fits within the available space and wraps.
                             child: Text(
-                              "Ezen a honlapon tudod meghallgatni a hipnózis gyakorlatokhat és segít abban is, hogy hol és mikor végezd őket. A legtöbb gyerek nagyon szereti hallgatni ezeket a gyakorlatokat és azt tapasztalja, hogy jót tesznek a pocakjának is.",
+                              "A legtöbb gyerek mostanra sokkal jobban érzi magát, akár újra teljesen egészséges a pocakja is. Nekik azt üzenjük, hogy szuper munkát végeztek és csak így tovább, folytassák a gyakorlást, hogy a hasuk továbbra is jól érezze magát!\nVannak gyerekek, akiknek viszont lehetnek még hasfájásai, akár egészen gyakran is. Ha a hasad még mindig fáj, akkor is jó ötlet folytatni a gyakorlást, mert a kutatásainkból tudjuk, hogy van, akinek valamivel több idő kell ahhoz, hogy újra jól és egészségesnek érezze magát.\nA következő héttől a kutatás új szakaszába lépsz. Erről szeretnénk mondani néhány gondolatot most.",
                               style: MyTextStyles.bekezdes(context),
                               textAlign: TextAlign.justify,
                             ),
@@ -203,100 +194,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                       ),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.02),
-                      Row(
-                        children: [
-                          Expanded(
-                            // This ensures the text fits within the available space and wraps.
-                            child: Text(
-                              "Öt olyan hipnózis gyakorlatot találsz itt a hetek során, melyek hasfájással küzdő általános iskolás és gimnazista tizenévesek számára készültek. Ez a honlap segít abban, hogy milyen sorrendben, mikor és hogyan használd őket.",
-                              style: MyTextStyles.bekezdes(context),
-                              textAlign: TextAlign.justify,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.width * 0.02),
-                      Row(
-                        children: [
-                          Expanded(
-                            // This ensures the text fits within the available space and wraps.
-                            child: Text(
-                              "Reméljük élvezni fogod ezeket a gyakorlatokat és jól szórakozol majd!",
-                              style: MyTextStyles.bekezdes(context),
-                              textAlign: TextAlign.justify,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.width * 0.02),
 
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: AppColors.blueish,
-                          border:
-                              Border.all(color: AppColors.whitewhite, width: 4),
-                        ),
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.45,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10.0),
-                                // Adjust the radius as needed
-                                child: Image.asset(
-                                    "assets/images/fox-horizontal-nobackground_2.png"),
-                              ),
-                            ),
-                            Positioned(
-                              top: MediaQuery.of(context).size.width * 0.017,
-                              right: MediaQuery.of(context).size.width * 0.005,
-                              child: Text(
-                                'Ha készen állsz a következő \nmodulra kattints az \nalábbi gombra!',
-                                style: MyTextStyles.feherkovercim(context),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Positioned(
-                              top: MediaQuery.of(context).size.width * 0.09,
-                              right: MediaQuery.of(context).size.width * 0.04,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  print('Button pressed ...');
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          ModuleHipno(),
-                                    ),
-                                  );
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    AppColors.whitewhite,
-                                  ),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                  padding: MaterialStateProperty.all<
-                                      EdgeInsetsGeometry>(
-                                    EdgeInsets.symmetric(
-                                        vertical: 12, horizontal: 24),
-                                  ),
-                                ),
-                                child: Text(
-                                  "Kezdjük!",
-                                  style: MyTextStyles.bethesdagomb(context),
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -362,18 +260,18 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                           ),
                         ),
                         child: ListTile(
-                          leading: Image.asset('assets/images/2icon_2.png'),
+                          leading: Image.asset('assets/images/2icon.png'),
                           // Replace 'your_image.png' with your image path
                           title: Text(
                             'Üdvözlő',
-                            style: MyTextStyles.vastagblueish(context),
+                            style: MyTextStyles.vastagbekezdes(context),
                           ),
                           onTap: () async {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    ModuleOpening(),
+                                    ModuleOpening2(),
                               ),
                             );
 
@@ -427,7 +325,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                           ),
                         ),
                         child: ListTile(
-                          leading: Image.asset('assets/images/5icon_2.png'),
+                          leading: Image.asset('assets/images/5icon.png'),
                           // Replace 'your_image.png' with your image path
                           title: Text(
                             '1-2. hét',
@@ -466,7 +364,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ),
                       ),
                       ListTile(
-                        leading: Image.asset('assets/images/4icon_2.png'),
+                        leading: Image.asset('assets/images/4icon.png'),
                         // Replace 'your_image.png' with your image path
                         title: Text(
                           '3-4. hét',
@@ -504,7 +402,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ),
                       ),
                       ListTile(
-                        leading: Image.asset('assets/images/6icon_2.png'),
+                        leading: Image.asset('assets/images/6icon.png'),
                         // Replace 'your_image.png' with your image path
                         title: Text(
                           '5-6. hét',
@@ -542,7 +440,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ),
                       ),
                       ListTile(
-                        leading: Image.asset('assets/images/3icon_2.png'),
+                        leading: Image.asset('assets/images/3icon.png'),
                         // Replace 'your_image.png' with your image path
                         title: Text(
                           '7-8. hét',
@@ -580,7 +478,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ),
                       ),
                       ListTile(
-                        leading: Image.asset('assets/images/7icon_2.png'),
+                        leading: Image.asset('assets/images/7icon.png'),
                         // Replace 'your_image.png' with your image path
                         title: Text(
                           '9-12. hét',

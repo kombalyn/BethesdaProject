@@ -244,7 +244,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                             ),
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.03),
+                                    MediaQuery.of(context).size.width * 0.02),
                             Row(
                               children: [
                                 Expanded(
@@ -594,6 +594,8 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                           0.3, // Sidebar width
                       color:
                           Colors.white.withOpacity(1), // Slightly transparent
+// IDE
+
                       child: Padding(
                         padding: EdgeInsets.only(
                             top: MediaQuery.of(context).size.width * 0.03,
@@ -715,7 +717,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                     style: MyTextStyles.vastagbekezdes(context),
                                   ),
                                   subtitle: Text(
-                                    'Elérhető',
+                                    'Zárolva',
                                     // Replace this text with what you want as a subtitle
                                     style: MyTextStyles.kicsibekezdes(context),
                                   ),
@@ -916,10 +918,10 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                   // Replace 'your_image.png' with your image path
                                   title: Text(
                                     '9-12. hét',
-                                    style: MyTextStyles.vastagbekezdes(context),
+                                    style: MyTextStyles.vastagblueish(context),
                                   ),
                                   subtitle: Text(
-                                    'Zárolva',
+                                    'Elérhető',
                                     // Replace this text with what you want as a subtitle
                                     style: MyTextStyles.kicsibekezdes(context),
                                   ),
@@ -955,8 +957,12 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                           ),
                         ),
                       ),
+
+                      //IDE
+
                     ),
                   ),
+
                 ],
               ),
             ],

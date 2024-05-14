@@ -30,6 +30,13 @@ class MyTextStyles {
       color: AppColors.darkshade, // Replace with your color variable if you have a custom one like AppColors.darkshade
     );
   }
+  static TextStyle bluebekezdes(BuildContext context) {
+    return TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16.sp,  // This scales based on the screen width
+      color: AppColors.blueish, // Replace with your color variable if you have a custom one like AppColors.darkshade
+    );
+  }
   static TextStyle huszonkettobekezdes(BuildContext context) {
     return TextStyle(
       fontFamily: 'Montserrat',
@@ -52,6 +59,14 @@ class MyTextStyles {
       color: AppColors.darkshade, // Replace with your color variable if you have a custom one like AppColors.darkshade
     );
   }
+  static TextStyle vastagblueish(BuildContext context) {
+    return TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16.sp,  // This scales based on the screen width
+      fontWeight: FontWeight.bold,
+      color: AppColors.blueish, // Replace with your color variable if you have a custom one like AppColors.darkshade
+    );
+  }
   static TextStyle vastagnagybekezdes(BuildContext context) {
     return TextStyle(
       fontFamily: 'Montserrat',
@@ -71,6 +86,13 @@ class MyTextStyles {
     return TextStyle(
       fontFamily: 'Montserrat',
       fontSize: 20.sp,  // This scales based on the screen width
+      color: AppColors.bethesdacolor, // Replace with your color variable if you have a custom one like AppColors.darkshade
+    );
+  }
+  static TextStyle bethesdabekezdes(BuildContext context) {
+    return TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 18.sp,  // This scales based on the screen width
       color: AppColors.bethesdacolor, // Replace with your color variable if you have a custom one like AppColors.darkshade
     );
   }
@@ -117,7 +139,7 @@ class MyTextStyles {
   static TextStyle bethesdagomb(BuildContext context) {
     return TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 22.sp,  // This scales based on the screen width
+      fontSize: 24.sp,  // This scales based on the screen width
       fontWeight: FontWeight.bold,
       color: AppColors.bethesdacolor, // Replace with your color variable if you have a custom one like AppColors.darkshade
     );
@@ -137,11 +159,27 @@ class MyTextStyles {
       color: AppColors.darkshade, // Replace with your color variable if you have a custom one like AppColors.darkshade
     );
   }
+  static TextStyle kicsibluebekezdes(BuildContext context) {
+    return TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 14.sp,  // This scales based on the screen width
+      color: AppColors.blueish,
+      fontWeight: FontWeight.bold,
+// Replace with your color variable if you have a custom one like AppColors.darkshade
+    );
+  }
   static TextStyle kicsiszinesbekezdes(BuildContext context) {
     return TextStyle(
       fontFamily: 'Montserrat',
       fontSize: 14.sp,  // This scales based on the screen width
       color: AppColors.lightaccentcolor, // Replace with your color variable if you have a custom one like AppColors.darkshade
+    );
+  }
+  static TextStyle kicsisbethesdabekezdes(BuildContext context) {
+    return TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 14.sp,  // This scales based on the screen width
+      color: AppColors.bethesdacolor, // Replace with your color variable if you have a custom one like AppColors.darkshade
     );
   }
 }

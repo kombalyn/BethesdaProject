@@ -7,7 +7,8 @@ class AppColors {
   static const Color darkaccentcolor = Color(0xFFA58598); // Lilás
   static const Color lightshade = Color(0xFFF3EFEF); // Fehéres
   static const Color darkshade = Color(0xFF262536); // Almost black
-  static const Color blueish = Color(0xFF5BB8BF);
+  static const Color lilac = Color(0xFF5BB8BF);
+  static const Color blueish = Color(0xFF623C9A);
 
 }
 // ez kellene még 5BB8BF

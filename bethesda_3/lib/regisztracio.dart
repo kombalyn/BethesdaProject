@@ -24,7 +24,6 @@ class _ContactFormState extends State<ContactForm> {
 
   bool _isPressed = false; // State variable to track if the button is pressed
 
-
   Future<void> sendEmail(String name, String email, String message) async {
     String username = 'your-email@gmail.com';
     String password = 'your-email-password';
@@ -50,7 +49,8 @@ class _ContactFormState extends State<ContactForm> {
     }
   }
 
-  Widget formField(String label, TextEditingController controller, {bool isMessage = false}) {
+  Widget formField(String label, TextEditingController controller,
+      {bool isMessage = false}) {
     return Column(
       children: [
         Align(
@@ -59,13 +59,14 @@ class _ContactFormState extends State<ContactForm> {
             padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
             child: Text(
               label,
-              style:MyTextStyles.bekezdes(context),
+              style: MyTextStyles.bekezdes(context),
             ),
           ),
         ),
         Container(
           decoration: BoxDecoration(
-            color: AppColors.whitewhite, // Ensure this is consistent and set to the right color
+            color: AppColors.whitewhite,
+            // Ensure this is consistent and set to the right color
             border: Border.all(
               color: Colors.grey,
               width: 0.5,
@@ -76,17 +77,23 @@ class _ContactFormState extends State<ContactForm> {
             controller: controller,
             decoration: InputDecoration(
               filled: true,
-              fillColor: AppColors.whitewhite, // Make sure this is the correct white
-              contentPadding: EdgeInsets.symmetric(vertical: isMessage ? 20 : 15, horizontal: 20), // Adjust padding
+              fillColor: AppColors.whitewhite,
+              // Make sure this is the correct white
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: isMessage ? 20 : 15, horizontal: 20),
+              // Adjust padding
               labelText: 'Kattints ide...',
-              labelStyle: MyTextStyles.kicsiszinesbekezdes(context),
-              floatingLabelBehavior: FloatingLabelBehavior.auto, // Adjust as necessary
+              labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
+              floatingLabelBehavior: FloatingLabelBehavior.auto,
+              // Adjust as necessary
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.whitewhite, width: 1), // Ensure border color matches background
+                borderSide: BorderSide(color: AppColors.whitewhite, width: 1),
+                // Ensure border color matches background
                 borderRadius: BorderRadius.circular(8),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.bethesdacolor, width: 1),
+                borderSide:
+                    BorderSide(color: AppColors.bethesdacolor, width: 1),
                 borderRadius: BorderRadius.circular(8),
               ),
               errorBorder: OutlineInputBorder(
@@ -98,9 +105,12 @@ class _ContactFormState extends State<ContactForm> {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            keyboardType: isMessage ? TextInputType.multiline : TextInputType.text,
-            maxLines: isMessage ? null : 1, // Allows multiple lines if it's the message field
-            minLines: isMessage ? 5 : 1, // Sets a minimum line count for the message field
+            keyboardType:
+                isMessage ? TextInputType.multiline : TextInputType.text,
+            maxLines: isMessage ? null : 1,
+            // Allows multiple lines if it's the message field
+            minLines: isMessage ? 5 : 1,
+            // Sets a minimum line count for the message field
             style: MyTextStyles.kicsibekezdes(context),
           ),
         ),
@@ -111,6 +121,7 @@ class _ContactFormState extends State<ContactForm> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: AppColors.whitewhite, // Set the background color of the Card
       elevation: 5,
       // Adjust margins here to match other components if necessary
       margin: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
@@ -122,7 +133,9 @@ class _ContactFormState extends State<ContactForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Ha kérdésed van, küldj nekünk üzenetet!', style: MyTextStyles.cim(context),
+              Text(
+                'Ha kérdésed van, küldj nekünk üzenetet!',
+                style: MyTextStyles.bethesdabekezdes(context),
               ),
               formField('Név:', nameController),
               formField('Email cím:', emailController),
@@ -131,25 +144,27 @@ class _ContactFormState extends State<ContactForm> {
               ElevatedButton(
                 onPressed: () {
                   if (emailController.text.isNotEmpty) {
-                    sendEmail(nameController.text, emailController.text, messageController.text);
+                    sendEmail(nameController.text, emailController.text,
+                        messageController.text);
                   }
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                      return AppColors.lightaccentcolor; // Default color
+                    (Set<MaterialState> states) {
+                      return AppColors.bethesdacolor; // Default color
                     },
                   ),
-                  shape: MaterialStateProperty.all<
-                      RoundedRectangleBorder>(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
-                          10), // Adjust the value as needed
+                          13), // Adjust the value as needed
                     ),
                   ),
                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                    EdgeInsets.symmetric(vertical: 12, horizontal: 24), // Adjust the padding as needed
-                  ),// Change the color to your desired color
+                    EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 24), // Adjust the padding as needed
+                  ), // Change the color to your desired color
                 ),
                 child: Text(
                   'Üzenet küldése',
@@ -164,10 +179,6 @@ class _ContactFormState extends State<ContactForm> {
   }
 }
 
-
-
-
-
 class ResearcherCard extends StatelessWidget {
   const ResearcherCard({Key? key}) : super(key: key);
 
@@ -176,12 +187,14 @@ class ResearcherCard extends StatelessWidget {
   void _launchURL() async {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
+
   @override
   Widget build(BuildContext context) {
     // Calculate dynamic sizes based on screen width
     double screenWidth = MediaQuery.of(context).size.width;
     double paddingValue = screenWidth * 0.005;
-    double avatarRadius = screenWidth * 0.05; // Adjust this value as needed for your design
+    double avatarRadius =
+        screenWidth * 0.05; // Adjust this value as needed for your design
     double spaceWidth = screenWidth * 0.02; // Space between avatar and text
 
     return Card(
@@ -191,51 +204,56 @@ class ResearcherCard extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(paddingValue), // Inner spacing
         child: Row(
-          mainAxisSize: MainAxisSize.min, // Use the minimum space that's necessary for the children
+          mainAxisSize: MainAxisSize.min,
+          // Use the minimum space that's necessary for the children
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage("assets/images/major_janos.png"), // Replace with your image path
+              backgroundImage: AssetImage("assets/images/major_janos.png"),
+              // Replace with your image path
               radius: avatarRadius, // Dynamically adjusted size
             ),
             SizedBox(width: spaceWidth),
-            Flexible( // Makes the column flexible to prevent overflow
+            Flexible(
+              // Makes the column flexible to prevent overflow
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min, // Use the minimum space that's necessary for the children
+                mainAxisSize: MainAxisSize.min,
+                // Use the minimum space that's necessary for the children
                 children: [
-                  Flexible( // Allows text to wrap if it's too long for the screen
+                  Flexible(
+                    // Allows text to wrap if it's too long for the screen
                     child: Text(
                       "Vezető kutató:",
-                      style:MyTextStyles.cim(context),
+                      style: MyTextStyles.bethesdabekezdes(context),
                     ),
                   ),
-                  Flexible( // New text widget added
+                  SizedBox(height: MediaQuery.of(context).size.width * 0.005),
+                  Flexible(
+                    // New text widget added
                     child: Text(
                       "Dr Major János, PhD",
                       style: MyTextStyles.bekezdes(context),
                     ),
                   ),
+                  SizedBox(height: MediaQuery.of(context).size.width * 0.005),
                   InkWell(
                     onTap: _launchURL,
                     child: Text(
                       _url,
-                      style: TextStyle(decoration: TextDecoration.underline, color: Colors.blue),
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Colors.blue),
                     ),
                   ),
                 ],
-
-
               ),
             ),
           ],
         ),
       ),
     );
-
-
   }
 }
-
 
 class Regisztracio extends StatelessWidget {
   const Regisztracio({Key? key}) : super(key: key);
@@ -251,7 +269,8 @@ class Regisztracio extends StatelessWidget {
         useMaterial3: false,
 
         cardTheme: CardTheme(
-          color: AppColors.whitewhite, // This sets the background color of cards to white
+          color: AppColors
+              .whitewhite, // This sets the background color of cards to white
         ),
         // Other theme configurations
       ),
@@ -264,10 +283,12 @@ class HomePageWidgetRegisztracio extends StatefulWidget {
   const HomePageWidgetRegisztracio({Key? key}) : super(key: key);
 
   @override
-  State<HomePageWidgetRegisztracio> createState() => _HomePageWidgetRegisztracioState();
+  State<HomePageWidgetRegisztracio> createState() =>
+      _HomePageWidgetRegisztracioState();
 }
 
-class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio> {
+class _HomePageWidgetRegisztracioState
+    extends State<HomePageWidgetRegisztracio> {
   late HomePageModel _model;
 
   late double _currentPointOnFunction = 0; // Az aktuális függvényérték
@@ -357,19 +378,15 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
           automaticallyImplyLeading: false,  // No back button or menu automatically implied.
         ), */
 
-
-
-
-
-
         backgroundColor: AppColors.lightshade,
         body: Column(
-            children: [
-        Row(
-        children: [
-
-        SizedBox(width: MediaQuery.of(context).size.width * 0.09), // Space between rectangle and card
-         /* Expanded(
+          children: [
+            Row(
+              children: [
+                SizedBox(
+                    width: MediaQuery.of(context).size.width *
+                        0.09), // Space between rectangle and card
+                /* Expanded(
             child: Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.width * 0.009, //0.009
@@ -402,359 +419,530 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
             ),
           ),*/
 
-
-
-          SizedBox(width: MediaQuery.of(context).size.width * 0.05), // Space between rectangle and card
-
-        ],
-        ),
-
-          Expanded(
-        child: Row(
-          children: [
+                SizedBox(
+                    width: MediaQuery.of(context).size.width *
+                        0.05), // Space between rectangle and card
+              ],
+            ),
             Expanded(
-              flex: 4,
-              child: SingleChildScrollView( // Make only this column scrollable
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          MediaQuery.of(context).size.width * 0.05, // Left padding
-                          MediaQuery.of(context).size.width * 0.02, // Top padding
-                          MediaQuery.of(context).size.width * 0.03, // Right padding
-                          MediaQuery.of(context).size.width * 0.02  // Bottom padding
-                      ),
-
-                      child: Card(
-                        elevation: 5, // Shadow effect
-                        color: AppColors.whitewhite, // Background color of the card
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0),
-                          // Rounded corners for the card
-                          /*side: BorderSide(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: SingleChildScrollView(
+                      // Make only this column scrollable
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                MediaQuery.of(context).size.width *
+                                    0.05, // Left padding
+                                MediaQuery.of(context).size.width *
+                                    0.02, // Top padding
+                                MediaQuery.of(context).size.width *
+                                    0.03, // Right padding
+                                MediaQuery.of(context).size.width *
+                                    0.02 // Bottom padding
+                                ),
+                            child: Card(
+                              elevation: 5,
+                              // Shadow effect
+                              color: AppColors.whitewhite,
+                              // Background color of the card
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(0),
+                                // Rounded corners for the card
+                                /*side: BorderSide(
       color: AppColors.bethesdacolor, // Color of the border
       width: 1.0, // Thickness of the border
     ),*/
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(16.0), // Adjust the padding as needed
-                          child: Text(
-                            "Funkcionális hasi fájdalomzavarok online hipnózis és mozgás-motivációs tréning kezelésének hatásvizsgálata tizenévesek körében",
-                            textAlign: TextAlign.center,
-                            style: MyTextStyles.cim(context),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(16.0),
+                                // Adjust the padding as needed
+                                child: Text(
+                                  "Funkcionális hasi fájdalomzavarok online hipnózis és mozgás-motivációs tréning kezelésének hatásvizsgálata tizenévesek körében",
+                                  textAlign: TextAlign.center,
+                                  style: MyTextStyles.bethesdabekezdes(context),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05, right: MediaQuery.of(context).size.width * 0.03),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: MediaQuery.of(context).size.width*0.01),
-                          Text("A kutatás célja",
-                            style: MyTextStyles.cim(context),
-                          ),
-                          SizedBox(height: MediaQuery.of(context).size.width*0.01),
-                          Text("A funkcionális hasi fájdalomzavarral élő serdülők részére kifejlesztett, különböző online és személyes terápiás módszerek összehasonlítása és azok hatékonyságának vizsgálata. \nEz a kutatás nagy előrelépést jelenthet a krónikus gyermekkori hasi fájdalom kezelésében, ami gyakran jelentős terhet jelent a betegek és családjaik számára. Az eredmények segíthetnek optimalizálni a kezelési protokollokat és módszereket, hogy hatékonyabb és kevésbé invazív megközelítést biztosítsanak a fájdalom csillapítására. Ezenkívül az online terápiás lehetőségek fejlesztése és hatékonyságának igazolása segíthet elérhetővé tenni az ilyen típusú kezeléseket az olyan területeken élő fiatalok számára is, ahol ezek a terápiás lehetőségek nehezen elérhetőek.",
-                            style: MyTextStyles.bekezdes(context),
-                            textAlign: TextAlign.justify, // This ensures the text is justified within the padding
-                          ),
-                          SizedBox(height: MediaQuery.of(context).size.width*0.03),
-                          Text("Miért érdemes részt venned a kutatásban?",
-                            style: MyTextStyles.cim(context),
-                          ),
-                          SizedBox(height: MediaQuery.of(context).size.width*0.01),
-                          Text("A legjobb dolog, amit tehetsz, hogy minél jobban megismered a saját fájdalmadat és tanulsz róla. Ugyanis minél jobban ismered a fájdalmadat, annál több mindent tudsz tenni azért, hogy jobban legyél! Mi ebben tudunk segíteni Neked. Magyarországon elsőként próbálhatsz ki akár több olyan online és személyes terápiát is, amelyeket kifejezetten funkcionális hasi fájdalmakkal élő serdülőknek fejlesztettünk ki.",
-                            style: MyTextStyles.bekezdes(context),
-                            textAlign: TextAlign.justify, // This ensures the text is justified within the padding
-                          ),
-                          SizedBox(height: MediaQuery.of(context).size.width*0.02),
-                          Material(
-                            elevation: 5.0,  // Set your desired elevation here
-                            borderRadius: BorderRadius.circular(0),  // Maintain the border radius for consistent design
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.05,
+                                right:
+                                    MediaQuery.of(context).size.width * 0.03),
                             child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.lightaccentcolor, // Replace with your desired background color
-                              borderRadius: BorderRadius.circular(0), // Adjust the radius to get your desired curve
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01), // Add padding around the texts within the container
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min, // Use the minimum space necessary to fit the children
-                                crossAxisAlignment: CrossAxisAlignment.start, // Align texts to the start (left side)
-                                children: [
-                                  Text(
-                                    "Ez mit foglal magában?",
-                                    style: MyTextStyles.fehercim(context),
-                                    textAlign: TextAlign.justify, // This ensures the text is justified within the padding
+                              decoration: BoxDecoration(
+                                color: Colors.white, // Background color of the Container
+                                borderRadius: BorderRadius.circular(0), // Rounded corners for the container
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5), // Shadow color with some transparency
+                                    spreadRadius: 1,
+                                    blurRadius: 10,
+                                    offset: Offset(0, 4), // Vertical offset for the shadow
                                   ),
-                                  SizedBox(height: MediaQuery.of(context).size.width * 0.01),
-                                  Table(
-                                    children: [
-                                      TableRow(
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Milyen terápiákról van szó?",
-                                                  style: MyTextStyles.feherkicsikovercim(context),
-                                                  textAlign: TextAlign.justify, // This ensures the text is justified within the padding
-                                                ),
-                                                Text(
-                                                  "Online hipnózis terápia, mely a hasi régióra fókuszál\nOnline mozgás-motivációs tréning (M3 Tréning)\nPszichoedukáció a krónikus hasi fájdalmakról\nInterdiszciplináris, multimodális fájdalomterápia",
-                                                  style: MyTextStyles.feherbekezdes(context),
-                                                  textAlign: TextAlign.justify, // This ensures the text is justified within the padding
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Hogy néz ki a folyamat?",
-                                                  style: MyTextStyles.feherkicsikovercim(context),
-                                                  textAlign: TextAlign.justify, // This ensures the text is justified within the padding
-                                                ),
-                                                Text(
-                                                  "1. szakasz: első terápiás lehetőség 12 hétig\n2. szakasz: második terápiás lehetőség újabb 12 hétig\n+ 1 terápiás lehetőség, ha még a panaszok fennállnak: interdiszciplináris, multimodális fájdalomterápia",
-                                                  style: MyTextStyles.feherbekezdes(context),
-                                                  textAlign: TextAlign.justify, // This ensures the text is justified within the padding
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      TableRow(
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Meddig tart a kutatás?",
-                                                  style: MyTextStyles.feherkicsikovercim(context),
-                                                  textAlign: TextAlign.justify, // This ensures the text is justified within the padding
-                                                ),
-                                                Text(
-                                                  "A kutatás teljes hossza 6+3 hónap, mely 2+1 szakaszra bontható",
-                                                  style: MyTextStyles.feherbekezdes(context),
-                                                  textAlign: TextAlign.justify, // This ensures the text is justified within the padding
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Hány alkalommal keresünk meg Téged a vizsgálat alatt?",
-                                                  style: MyTextStyles.feherkicsikovercim(context),
-                                                  textAlign: TextAlign.justify, // This ensures the text is justified within the padding
-                                                ),
-                                                Text(
-                                                  "Tippelek: 12-18 alkalom",
-                                                  style: MyTextStyles.feherbekezdes(context),
-                                                  textAlign: TextAlign.justify, // This ensures the text is justified within the padding
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-
-                                  // Add more Text widgets as needed
                                 ],
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width *
+                                        0.01,
+                                    right: MediaQuery.of(context).size.width *
+                                        0.01),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.01),
+                                    Text(
+                                      "A kutatás célja",
+                                      style: MyTextStyles.bethesdabekezdes(
+                                          context),
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.01),
+                                    Text(
+                                      "A funkcionális hasi fájdalomzavarral élő serdülők részére kifejlesztett, különböző online és személyes terápiás módszerek összehasonlítása és azok hatékonyságának vizsgálata. \nEz a kutatás nagy előrelépést jelenthet a krónikus gyermekkori hasi fájdalom kezelésében, ami gyakran jelentős terhet jelent a betegek és családjaik számára. Az eredmények segíthetnek optimalizálni a kezelési protokollokat és módszereket, hogy hatékonyabb és kevésbé invazív megközelítést biztosítsanak a fájdalom csillapítására. Ezenkívül az online terápiás lehetőségek fejlesztése és hatékonyságának igazolása segíthet elérhetővé tenni az ilyen típusú kezeléseket az olyan területeken élő fiatalok számára is, ahol ezek a terápiás lehetőségek nehezen elérhetőek.",
+                                      style: MyTextStyles.bekezdes(context),
+                                      textAlign: TextAlign
+                                          .justify, // This ensures the text is justified within the padding
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.03),
+                                    Text(
+                                      "Miért érdemes részt venned a kutatásban?",
+                                      style: MyTextStyles.bethesdabekezdes(
+                                          context),
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.01),
+                                    Text(
+                                      "A legjobb dolog, amit tehetsz, hogy minél jobban megismered a saját fájdalmadat és tanulsz róla. Ugyanis minél jobban ismered a fájdalmadat, annál több mindent tudsz tenni azért, hogy jobban legyél! Mi ebben tudunk segíteni Neked. Magyarországon elsőként próbálhatsz ki akár több olyan online és személyes terápiát is, amelyeket kifejezetten funkcionális hasi fájdalmakkal élő serdülőknek fejlesztettünk ki.",
+                                      style: MyTextStyles.bekezdes(context),
+                                      textAlign: TextAlign
+                                          .justify, // This ensures the text is justified within the padding
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
+                                    Material(
+                                      elevation: 5.0,
+                                      // Set your desired elevation here
+                                      borderRadius: BorderRadius.circular(13),
+                                      // Maintain the border radius for consistent design
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: AppColors.whitewhite,
+                                          // Replace with your desired background color
+                                          borderRadius:
+                                              BorderRadius.circular(13),
+                                          /* border: Border.all(
+                                color: AppColors.bethesdacolor,  // Outline with your custom Bethesda color
+                                width: 1,  // Outline thickness
+                              ),   */
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(
+                                              MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.01),
+                                          // Add padding around the texts within the container
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            // Use the minimum space necessary to fit the children
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            // Align texts to the start (left side)
+                                            children: [
+                                              Text(
+                                                "Ez mit foglal magában?",
+                                                style: MyTextStyles
+                                                    .bethesdabekezdes(context),
+                                                textAlign: TextAlign
+                                                    .justify, // This ensures the text is justified within the padding
+                                              ),
+                                              SizedBox(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.01),
+                                              Table(
+                                                children: [
+                                                  TableRow(
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets.all(
+                                                            MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.01),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              "Milyen terápiákról van szó?",
+                                                              style: MyTextStyles
+                                                                  .bethesdabekezdes(
+                                                                      context),
+                                                              textAlign: TextAlign
+                                                                  .justify, // This ensures the text is justified within the padding
+                                                            ),
+                                                            Text(
+                                                              "Online hipnózis terápia, mely a hasi régióra fókuszál\nOnline mozgás-motivációs tréning (M3 Tréning)\nPszichoedukáció a krónikus hasi fájdalmakról\nInterdiszciplináris, multimodális fájdalomterápia",
+                                                              style: MyTextStyles
+                                                                  .bekezdes(
+                                                                      context),
+                                                              textAlign: TextAlign
+                                                                  .justify, // This ensures the text is justified within the padding
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: EdgeInsets.all(
+                                                            MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.01),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              "Hogy néz ki a folyamat?",
+                                                              style: MyTextStyles
+                                                                  .bethesdabekezdes(
+                                                                      context),
+                                                              textAlign: TextAlign
+                                                                  .justify, // This ensures the text is justified within the padding
+                                                            ),
+                                                            Text(
+                                                              "1. szakasz: első terápiás lehetőség 12 hétig\n2. szakasz: második terápiás lehetőség újabb 12 hétig\n+ 1 terápiás lehetőség, ha még a panaszok fennállnak: interdiszciplináris, multimodális fájdalomterápia",
+                                                              style: MyTextStyles
+                                                                  .bekezdes(
+                                                                      context),
+                                                              textAlign: TextAlign
+                                                                  .justify, // This ensures the text is justified within the padding
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  TableRow(
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets.all(
+                                                            MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.01),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              "Meddig tart a kutatás?",
+                                                              style: MyTextStyles
+                                                                  .bethesdabekezdes(
+                                                                      context),
+                                                              textAlign: TextAlign
+                                                                  .justify, // This ensures the text is justified within the padding
+                                                            ),
+                                                            Text(
+                                                              "A kutatás teljes hossza 6+3 hónap, mely 2+1 szakaszra bontható",
+                                                              style: MyTextStyles
+                                                                  .bekezdes(
+                                                                      context),
+                                                              textAlign: TextAlign
+                                                                  .justify, // This ensures the text is justified within the padding
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: EdgeInsets.all(
+                                                            MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.01),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              "Hány alkalommal keresünk meg Téged a vizsgálat alatt?",
+                                                              style: MyTextStyles
+                                                                  .bethesdabekezdes(
+                                                                      context),
+                                                              textAlign: TextAlign
+                                                                  .justify, // This ensures the text is justified within the padding
+                                                            ),
+                                                            Text(
+                                                              "Tippelek: 12-18 alkalom",
+                                                              style: MyTextStyles
+                                                                  .bekezdes(
+                                                                      context),
+                                                              textAlign: TextAlign
+                                                                  .justify, // This ensures the text is justified within the padding
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+
+                                              // Add more Text widgets as needed
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.03),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        // First Row
+                                        Row(
+                                          children: <Widget>[
+                                            Expanded(
+                                              flex: 2,
+                                              // You can adjust flex ratios if needed for better spacing
+                                              child: Text(
+                                                  "A kutatás engedélyszáma:",
+                                                  style: MyTextStyles
+                                                      .bethesdabekezdes(
+                                                          context)),
+                                            ),
+                                            Expanded(
+                                              flex: 3,
+                                              // Providing more space for the value
+                                              child: Text("VALAMI",
+                                                  style: MyTextStyles.bekezdes(
+                                                      context)),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.02),
+
+                                        // Second Row
+                                        Row(
+                                          children: <Widget>[
+                                            Expanded(
+                                              flex: 2,
+                                              child: Text("A kutatás kezdete:",
+                                                  style: MyTextStyles
+                                                      .bethesdabekezdes(
+                                                          context)),
+                                            ),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Text("VALAMI",
+                                                  style: MyTextStyles.bekezdes(
+                                                      context)),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.02),
+
+                                        // Third Row
+                                        Row(
+                                          children: <Widget>[
+                                            Expanded(
+                                              flex: 2,
+                                              child: Text("A bevonási időszak:",
+                                                  style: MyTextStyles
+                                                      .bethesdabekezdes(
+                                                          context)),
+                                            ),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Text(
+                                                  "2024. 04. 01. - 2026. 02. 28.",
+                                                  style: MyTextStyles.bekezdes(
+                                                      context)),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.03),
+                                        Center(
+                                          child: ResearcherCard(),
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.02),
+
+                                        // Contact Form Centered
+                                        Center(
+                                          child: ContactForm(),
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.03),
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-          ),
-                          SizedBox(height: MediaQuery.of(context).size.width*0.03),
-
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              // First Row
-                              Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    flex: 2, // You can adjust flex ratios if needed for better spacing
-                                    child: Text(
-                                      "A kutatás engedélyszáma:",
-                                      style: MyTextStyles.cim(context)
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 3, // Providing more space for the value
-                                    child: Text(
-                                      "VALAMI",
-                                      style: MyTextStyles.bekezdes(context)
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-
-                              // Second Row
-                              Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      "A kutatás kezdete:",
-                                      style: MyTextStyles.cim(context)
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Text(
-                                      "VALAMI",
-                                      style: MyTextStyles.bekezdes(context)
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-
-                              // Third Row
-                              Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      "A bevonási időszak:",
-                                      style: MyTextStyles.cim(context)
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Text(
-                                      "2024.04.01.-2026. 02. 28.",
-                                      style: MyTextStyles.bekezdes(context)
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-                              Center(
-                                child: ResearcherCard(),
-                              ),
-                              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-
-                              // Contact Form Centered
-                              Center(
-                                child: ContactForm(),
-                              ),
-                              SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-                            ],
-                          )
-
-
-
                         ],
                       ),
                     ),
-                  ],
-                ),
-             ),
-
-
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                color: AppColors.lightshade, // Set your desired background color here
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Aligns children to start, center, and end of main axis
-                  children: [
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.17), // Adds more space at the top
-                    Center( // Centering the content vertically and horizontally
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.9, // Adjust width to 90% of screen width
-                        margin: EdgeInsets.symmetric(
-                          horizontal: MediaQuery.of(context).size.width * 0.001, // Minimal horizontal margin
-                        ),
-                        child: Card(
-                          elevation: 5, // Set the elevation for the Card
-                          color: AppColors.whitewhite, // Background color for Card
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(13), // Adjust the border radius of the Card
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min, // Minimizes the column height to the height of its children
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(height: MediaQuery.of(context).size.width * 0.007), // Space inside the card before text
-                              Text(
-                                "Te is szívesen részt vennél ebben a kutatásban?",
-                                textAlign: TextAlign.center, // Center align text horizontally
-                                style: MyTextStyles.bekezdes(context)
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: AppColors.lightshade,
+                      // Set your desired background color here
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // Aligns children to start, center, and end of main axis
+                        children: [
+                          SizedBox(
+                              height: MediaQuery.of(context).size.height *
+                                  0.17), // Adds more space at the top
+                          Center(
+                            // Centering the content vertically and horizontally
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              // Adjust width to 90% of screen width
+                              margin: EdgeInsets.symmetric(
+                                horizontal: MediaQuery.of(context).size.width *
+                                    0.001, // Minimal horizontal margin
                               ),
-                              SizedBox(height: MediaQuery.of(context).size.width * 0.007), // Space between text and button
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => Gdpr()), // Navigate to GDPR page
-                                  );
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(AppColors.bethesdacolor),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          10), // Adjust the value as needed
+                              child: Card(
+                                elevation: 5,
+                                // Set the elevation for the Card
+                                color: AppColors.whitewhite,
+                                // Background color for Card
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      13), // Adjust the border radius of the Card
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  // Minimizes the column height to the height of its children
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.007),
+                                    // Space inside the card before text
+                                    Text(
+                                        "Te is szívesen részt vennél ebben a kutatásban?",
+                                        textAlign: TextAlign.center,
+                                        // Center align text horizontally
+                                        style: MyTextStyles.bekezdes(context)),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.007),
+                                    // Space between text and button
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Gdpr()), // Navigate to GDPR page
+                                        );
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                AppColors.bethesdacolor),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                10), // Adjust the value as needed
+                                          ),
+                                        ),
+                                        padding: MaterialStateProperty.all<
+                                            EdgeInsetsGeometry>(
+                                          EdgeInsets.symmetric(
+                                              vertical: 12,
+                                              horizontal:
+                                                  24), // Adjust the padding as needed
+                                        ), // Change the color to your desired color// Set the background color
+                                      ),
+                                      child: Text("Igen,\n részt veszek!",
+                                          textAlign: TextAlign.center,
+                                          style: MyTextStyles.gomb(context)),
                                     ),
-                                  ),
-                                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                                    EdgeInsets.symmetric(vertical: 12, horizontal: 24), // Adjust the padding as needed
-                                  ),// Change the color to your desired color// Set the background color
-                                ),
-                                child: Text(
-                                  "Igen,\n részt veszek!",
-                                  textAlign: TextAlign.center,
-                                  style: MyTextStyles.gomb(context)
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.007),
+                                    // Space inside the card after button
+                                  ],
                                 ),
                               ),
-                              SizedBox(height: MediaQuery.of(context).size.width * 0.007), // Space inside the card after button
-                            ],
+                            ),
                           ),
-                        ),
+                          Spacer(), // Pushes the card and image apart
+                          Image.asset(
+                            "assets/images/bear_up_nobackground.png",
+                            // Path to your image
+                            width: MediaQuery.of(context)
+                                .size
+                                .width, // Fit to the width of the screen
+                            fit: BoxFit.cover, // Cover the available space
+                          ),
+                        ],
                       ),
                     ),
-                    Spacer(), // Pushes the card and image apart
-                    Image.asset(
-                      "assets/images/bear_up_nobackground.png", // Path to your image
-                      width: MediaQuery.of(context).size.width, // Fit to the width of the screen
-                      fit: BoxFit.cover, // Cover the available space
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-
-
-
-
-
           ],
-        ),
-      ),
-        ],
         ),
 /*
         bottomNavigationBar: LayoutBuilder(
@@ -828,9 +1016,6 @@ class _HomePageWidgetRegisztracioState extends State<HomePageWidgetRegisztracio>
         ),
 
 */
-
-
-
       ),
     );
   }

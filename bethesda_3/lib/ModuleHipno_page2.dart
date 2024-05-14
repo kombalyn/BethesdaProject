@@ -610,7 +610,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                               style: MyTextStyles.vastagbekezdes(context),
                             ),
                             subtitle: Text(
-                              'Elérhető',
+                              'Zárolva',
                               // Replace this text with what you want as a subtitle
                               style: MyTextStyles.kicsibekezdes(context),
                             ),
@@ -656,10 +656,10 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                             // Replace 'your_image.png' with your image path
                             title: Text(
                               '3-4. hét',
-                              style: MyTextStyles.vastagbekezdes(context),
+                              style: MyTextStyles.vastagblueish(context),
                             ),
                             subtitle: Text(
-                              'Zárolva',
+                              'Elérhető',
                               // Replace this text with what you want as a subtitle
                               style: MyTextStyles.kicsibekezdes(context),
                             ),
@@ -871,7 +871,7 @@ class _InputFormState extends State<InputForm> {
                   Expanded(
                     child: TextFormField(
                       decoration: InputDecoration(
-                        labelText: "${i + 1}. Szín ",
+                        labelText: "${i + 1}. Szín *",
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -886,7 +886,7 @@ class _InputFormState extends State<InputForm> {
                   Expanded(
                     child: TextFormField(
                       decoration: InputDecoration(
-                        labelText: "${i + 1}. Érzés ",
+                        labelText: "${i + 1}. Érzés *",
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {

@@ -240,7 +240,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                           ],
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.width * 0.03),
+                            height: MediaQuery.of(context).size.width * 0.02),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -502,7 +502,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                               style: MyTextStyles.vastagbekezdes(context),
                             ),
                             subtitle: Text(
-                              'Elérhető',
+                              'Zárolva',
                               // Replace this text with what you want as a subtitle
                               style: MyTextStyles.kicsibekezdes(context),
                             ),
@@ -648,10 +648,10 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                             // Replace 'your_image.png' with your image path
                             title: Text(
                               '7-8. hét',
-                              style: MyTextStyles.vastagbekezdes(context),
+                              style: MyTextStyles.vastagblueish(context),
                             ),
                             subtitle: Text(
-                              'Zárolva',
+                              'Elérhető',
                               // Replace this text with what you want as a subtitle
                               style: MyTextStyles.kicsibekezdes(context),
                             ),
