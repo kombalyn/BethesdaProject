@@ -120,11 +120,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
               Expanded(
                 child: Text(
                   "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 20,
-                    color: AppColors.bethesdacolor,
-                  ),
+                  style: MyTextStyles.cim(context),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -134,11 +130,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         0.05), // Add padding to the right of the text
                 child: Text(
                   "Kutatási fázis",
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 20,
-                    color: AppColors.bethesdacolor,
-                  ),
+                  style:MyTextStyles.cim(context),
                 ),
               ),
             ],
@@ -362,7 +354,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                           ),
                         ),
                         child: ListTile(
-                          leading: Image.asset('assets/images/2icon_2.png'),
+                          leading: Image.asset('assets/images/2icon_b.png'),
                           // Replace 'your_image.png' with your image path
                           title: Text(
                             'Üdvözlő',
@@ -427,7 +419,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                           ),
                         ),
                         child: ListTile(
-                          leading: Image.asset('assets/images/5icon_2.png'),
+                          leading: Image.asset('assets/images/5icon_b.png'),
                           // Replace 'your_image.png' with your image path
                           title: Text(
                             '1-2. hét',
@@ -466,7 +458,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ),
                       ),
                       ListTile(
-                        leading: Image.asset('assets/images/4icon_2.png'),
+                        leading: Image.asset('assets/images/4icon_b.png'),
                         // Replace 'your_image.png' with your image path
                         title: Text(
                           '3-4. hét',
@@ -504,7 +496,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ),
                       ),
                       ListTile(
-                        leading: Image.asset('assets/images/6icon_2.png'),
+                        leading: Image.asset('assets/images/6icon_b.png'),
                         // Replace 'your_image.png' with your image path
                         title: Text(
                           '5-6. hét',
@@ -542,7 +534,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ),
                       ),
                       ListTile(
-                        leading: Image.asset('assets/images/3icon_2.png'),
+                        leading: Image.asset('assets/images/3icon_b.png'),
                         // Replace 'your_image.png' with your image path
                         title: Text(
                           '7-8. hét',
@@ -580,7 +572,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         ),
                       ),
                       ListTile(
-                        leading: Image.asset('assets/images/7icon_2.png'),
+                        leading: Image.asset('assets/images/7icon_b.png'),
                         // Replace 'your_image.png' with your image path
                         title: Text(
                           '9-12. hét',

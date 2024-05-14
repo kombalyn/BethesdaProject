@@ -96,6 +96,14 @@ class MyTextStyles {
       color: AppColors.bethesdacolor, // Replace with your color variable if you have a custom one like AppColors.darkshade
     );
   }
+  static TextStyle bethesdavastagbekezdes(BuildContext context) {
+    return TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 18.sp,  // This scales based on the screen width
+      color: AppColors.bethesdacolor, // Replace with your color variable if you have a custom one like AppColors.darkshade
+      fontWeight: FontWeight.bold, // This scales based on the screen width
+    );
+  }
 
   static TextStyle fehercim(BuildContext context) {
     return TextStyle(

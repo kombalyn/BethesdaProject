@@ -245,6 +245,8 @@ class ResearcherCard extends StatelessWidget {
                           color: Colors.blue),
                     ),
                   ),
+                  SizedBox(height: MediaQuery.of(context).size.width * 0.01),
+
                 ],
               ),
             ),
@@ -475,7 +477,7 @@ class _HomePageWidgetRegisztracioState
                                     MediaQuery.of(context).size.width * 0.03),
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.white, // Background color of the Container
+                                color: AppColors.whitewhite, // Background color of the Container
                                 borderRadius: BorderRadius.circular(0), // Rounded corners for the container
                                 boxShadow: [
                                   BoxShadow(
@@ -745,7 +747,7 @@ class _HomePageWidgetRegisztracioState
                                             Expanded(
                                               flex: 3,
                                               // Providing more space for the value
-                                              child: Text("VALAMI",
+                                              child: Text("BM/9151-1/2024",
                                                   style: MyTextStyles.bekezdes(
                                                       context)),
                                             ),
@@ -769,7 +771,7 @@ class _HomePageWidgetRegisztracioState
                                             ),
                                             Expanded(
                                               flex: 3,
-                                              child: Text("VALAMI",
+                                              child: Text("2024.06.01",
                                                   style: MyTextStyles.bekezdes(
                                                       context)),
                                             ),

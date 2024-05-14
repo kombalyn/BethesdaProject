@@ -25,16 +25,15 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: Size(1263, 551),
       // Set your design size based on your design prototype
-      builder: (BuildContext context, Widget? child) =>
-          MaterialApp(
-            title: 'Fájdalomkezelés bejelentkezés',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-              useMaterial3: false,
-            ),
-            home:
+      builder: (BuildContext context, Widget? child) => MaterialApp(
+        title: 'Fájdalomkezelés bejelentkezés',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          useMaterial3: false,
+        ),
+        home:
             const HomePageWidget(), // Make sure this is the widget you want to start with
-          ),
+      ),
     );
   }
 }
@@ -90,10 +89,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         ),
         Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.005),
+              horizontal: MediaQuery.of(context).size.width * 0.005),
           child: Text(
             "VAGY",
             style: MyTextStyles.nagybekezdes(context),
@@ -109,8 +105,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-      _model.unfocusNode.canRequestFocus
+      onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -134,44 +129,26 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height * 0.8,
+                      height: MediaQuery.of(context).size.height * 0.8,
                     ),
                     Container(
                       color: AppColors.lightaccentcolor,
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width * 0.3,
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height,
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.height,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           SizedBox(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * 0.03,
+                            height: MediaQuery.of(context).size.height * 0.03,
                           ),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(
                                   left:
-                                  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width * 0.02,
-                                  top: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height *
+                                      MediaQuery.of(context).size.width * 0.02,
+                                  top: MediaQuery.of(context).size.height *
                                       0.0001),
                               // Apply padding only on the left side
                               child: ClipRRect(
@@ -180,10 +157,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 child: Image.asset(
                                   "assets/images/bethesda_gyermekkorhaz_logo.png",
                                   width:
-                                  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width * 0.05,
+                                      MediaQuery.of(context).size.width * 0.05,
                                 ),
                               ),
                             ),
@@ -191,28 +165,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           Spacer(),
                           //Image.asset("assets/images/bethesda_gyermekkorhaz_logo.png",width: MediaQuery.of(context).size.width*0.1,),
                           SizedBox(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * 0.05,
+                            height: MediaQuery.of(context).size.height * 0.05,
                           ),
                           Text(
                               "Üdvözlünk a Bethesda Gyermekkórház Online Fájdalomkezelő weboldalán!",
                               textAlign: TextAlign.center,
                               style: MyTextStyles.feherkovercim(context)),
                           SizedBox(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * 0.005,
+                            height: MediaQuery.of(context).size.height * 0.005,
                           ),
                           Spacer(),
                           Image.asset(
                             "assets/images/bear_nobackground.png",
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * 0.6,
+                            height: MediaQuery.of(context).size.height * 0.6,
                             fit: BoxFit.cover, // Cover the available space
                           ),
                         ],
@@ -220,10 +185,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       //SizedBox(width: MediaQuery.of(context).size.width*0.5,height: MediaQuery.of(context).size.height ,),
                     ),
                     Container(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width * 0.7,
+                      width: MediaQuery.of(context).size.width * 0.7,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -247,10 +209,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             dense: false,
                           ),
                           Container(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width * 0.35,
+                            width: MediaQuery.of(context).size.width * 0.35,
                             child: Column(
                               children: [
                                 Align(
@@ -258,10 +217,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0,
-                                        MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width *
+                                        MediaQuery.of(context).size.width *
                                             0.03,
                                         0,
                                         0),
@@ -285,16 +241,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width *
+                                        MediaQuery.of(context).size.width *
                                             0.005,
                                         0,
-                                        MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width *
+                                        MediaQuery.of(context).size.width *
                                             0.005,
                                         0),
                                     child: TextFormField(
@@ -307,8 +257,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         // <-- Set contentPadding to zero
                                         labelText: 'Kattintson ide...',
                                         labelStyle:
-                                        MyTextStyles.kicsiszinesbekezdes(
-                                            context),
+                                            MyTextStyles.kicsiszinesbekezdes(
+                                                context),
                                         //hintStyle: FlutterFlowTheme.of(context).labelMedium,
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
@@ -316,7 +266,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             width: 0,
                                           ),
                                           borderRadius:
-                                          BorderRadius.circular(8),
+                                              BorderRadius.circular(8),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
@@ -324,7 +274,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             width: 0,
                                           ),
                                           borderRadius:
-                                          BorderRadius.circular(8),
+                                              BorderRadius.circular(8),
                                         ),
                                         errorBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
@@ -332,20 +282,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             width: 2,
                                           ),
                                           borderRadius:
-                                          BorderRadius.circular(8),
+                                              BorderRadius.circular(8),
                                         ),
                                         focusedErrorBorder:
-                                        UnderlineInputBorder(
+                                            UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Colors.red,
                                             width: 2,
                                           ),
                                           borderRadius:
-                                          BorderRadius.circular(8),
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                       style:
-                                      MyTextStyles.kicsibekezdes(context),
+                                          MyTextStyles.kicsibekezdes(context),
                                       //validator: _model.textController1Validator.asValidator(context),
                                     ),
                                   ),
@@ -354,204 +304,191 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             ),
                           ),
                           Container(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width * 0.35,
+                            width: MediaQuery.of(context).size.width * 0.35,
                             child: Column(
                               children: [
-                              Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0,
-                                    MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width *
-                                        0.03,
-                                    0,
-                                    0),
-                                child: Text(
-                                  'Kutatási azonosító:',
-                                  textAlign: TextAlign.center,
-                                  style: MyTextStyles.nagybekezdes(context),
+                                Align(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0,
+                                        MediaQuery.of(context).size.width *
+                                            0.03,
+                                        0,
+                                        0),
+                                    child: Text(
+                                      'Kutatási azonosító:',
+                                      textAlign: TextAlign.center,
+                                      style: MyTextStyles.nagybekezdes(context),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
 
-                            Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.lightshade,
-                                // Background color of the container
-                                border: Border.all(
-                                  color: Colors.grey, // Outline color
-                                  width: 0.5, // Outline thickness
-                                ),
-                                // If you also want to have rounded corners, add the borderRadius property
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width *
-                                        0.005,
-                                    0,
-                                    MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width *
-                                        0.005,
-                                    0),
-                                child: TextFormField(
-                                  controller: _model.textController1,
-                                  focusNode: _model.textFieldFocusNode1,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.zero,
-                                    // <-- Set contentPadding to zero
-                                    labelText: 'Kattintson ide...',
-                                    labelStyle:
-                                    MyTextStyles.kicsiszinesbekezdes(
-                                        context),
-                                    //hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.white30,
-                                        width: 2,
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.lightshade,
+                                    // Background color of the container
+                                    border: Border.all(
+                                      color: Colors.grey, // Outline color
+                                      width: 0.5, // Outline thickness
+                                    ),
+                                    // If you also want to have rounded corners, add the borderRadius property
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        MediaQuery.of(context).size.width *
+                                            0.005,
+                                        0,
+                                        MediaQuery.of(context).size.width *
+                                            0.005,
+                                        0),
+                                    child: TextFormField(
+                                      controller: _model.textController1,
+                                      focusNode: _model.textFieldFocusNode1,
+                                      autofocus: true,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.zero,
+                                        // <-- Set contentPadding to zero
+                                        labelText: 'Kattintson ide...',
+                                        labelStyle:
+                                            MyTextStyles.kicsiszinesbekezdes(
+                                                context),
+                                        //hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Colors.white30,
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Colors.white,
+                                            width: 0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        errorBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Colors.red,
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        focusedErrorBorder:
+                                            UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Colors.red,
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
                                       ),
-                                      borderRadius:
-                                      BorderRadius.circular(8),
+                                      style:
+                                          MyTextStyles.kicsibekezdes(context),
+                                      //validator: _model.textController1Validator.asValidator(context),
                                     ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.white,
-                                        width: 0,
+                                  ),
+                                ),
+
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.02,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            ModuleOpening(),
                                       ),
-                                      borderRadius:
-                                      BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
+                                    );
+
+                                    print("gomb");
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            AppColors.lightaccentcolor),
+                                    // Change the color to your desired color
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10), // Adjust the value as needed
                                       ),
-                                      borderRadius:
-                                      BorderRadius.circular(8),
                                     ),
-                                    focusedErrorBorder:
-                                    UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
+                                    padding: MaterialStateProperty.all<
+                                        EdgeInsetsGeometry>(
+                                      EdgeInsets.symmetric(
+                                          vertical: 12,
+                                          horizontal:
+                                              24), // Adjust the padding as needed
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "Bejelentkezés",
+                                    textAlign: TextAlign.center,
+                                    style: MyTextStyles.gomb(context),
+                                  ),
+                                ),
+
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.02,
+                                ),
+                                orDivider(context),
+
+                                //Container(width: MediaQuery.of(context).size.width*0.4, height: MediaQuery.of(context).size.width*0.005, color: Colors.black),
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.02,
+                                ),
+
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    print("gomb");
+
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            Regisztracio(),
                                       ),
-                                      borderRadius:
-                                      BorderRadius.circular(8),
+                                    );
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            AppColors.whitewhite),
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10), // Adjust the value as needed
+                                      ),
                                     ),
+                                    padding: MaterialStateProperty.all<
+                                        EdgeInsetsGeometry>(
+                                      EdgeInsets.symmetric(
+                                          vertical: 12,
+                                          horizontal:
+                                              24), // Adjust the padding as needed
+                                    ), // Change the color to your desired color
                                   ),
-                                  style:
-                                  MyTextStyles.kicsibekezdes(context),
-                                  //validator: _model.textController1Validator.asValidator(context),
-                                ),
-                              ),
-                            ),
-
-                            SizedBox(
-                              height:
-                              MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height * 0.02,
-                            ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        ModuleOpening(),
+                                  child: Text(
+                                    "Először jársz itt?",
+                                    textAlign: TextAlign.center,
+                                    style: MyTextStyles.szinesgomb(context),
                                   ),
-                                );
-
-                                print("gomb");
-                              },
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty
-                                    .all<Color>(AppColors
-                                    .lightaccentcolor),
-                                // Change the color to your desired color
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                          10), // Adjust the value as needed
-                                  ),
-                                  ),
-                                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                                  EdgeInsets.symmetric(vertical: 12, horizontal: 24), // Adjust the padding as needed
                                 ),
-                                ),
-                                child: Text(
-                                  "Bejelentkezés",
-                                  textAlign: TextAlign.center,
-                                  style: MyTextStyles.gomb(context),
-                                ),
-                              ),
-
-                              SizedBox(
-                                height:
-                                MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height * 0.02,
-                              ),
-                              orDivider(context),
-
-                              //Container(width: MediaQuery.of(context).size.width*0.4, height: MediaQuery.of(context).size.width*0.005, color: Colors.black),
-                              SizedBox(
-                                height:
-                                MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height * 0.02,
-                              ),
-
-                              ElevatedButton(
-                                onPressed: () async {
-                                  print("gomb");
-
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          Regisztracio(),
-                                    ),
-                                  );
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty
-                                      .all<Color>(AppColors
-                                      .whitewhite),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          10), // Adjust the value as needed
-                                    ),
-                                  ),
-                                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                                    EdgeInsets.symmetric(vertical: 12, horizontal: 24), // Adjust the padding as needed
-                                  ),// Change the color to your desired color
-                                ),
-                                child: Text(
-                                  "Először jársz itt?",
-                                  textAlign: TextAlign.center,
-                                  style: MyTextStyles.szinesgomb(context),
-                                ),
-                              ),
                               ],
                             ),
                           )
