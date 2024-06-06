@@ -4,9 +4,11 @@ import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:bethesda_2/home_page_model.dart';
 import 'package:bethesda_2/constants/colors.dart'; // Make sure this path is correct
+import 'package:web_socket_channel/web_socket_channel.dart';
 import 'gdpr.dart'; // Ensure this module is correctly implemented
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'main.dart';
 import 'styles.dart'; // Make sure this path is correct based on where you placed the styles.dart file
 
 // Assuming 'main.dart' and 'home_page_model.dart' are correctly set up.
@@ -46,6 +48,13 @@ class HomePageWidgetEmail extends StatefulWidget {
 }
 
 class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
+
+  late WebSocketChannel _channel = WebSocketChannel.connect(
+    //Uri.parse('ws://34.72.67.6:8089'),
+    Uri.parse('ws://146.148.43.137:8089'),
+  );
+
+
   late HomePageModel _model;
   String? _selectedOption; // Change to String?
   bool _showBigContainer = false;
@@ -61,6 +70,13 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
     super.initState();
     _model =
         HomePageModel(); // Ensure that HomePageModel is correctly initialized
+
+    _model.textController1 = TextEditingController();
+    _model.textController2 = TextEditingController();
+    _model.textController3 = TextEditingController();
+    _model.textController4 = TextEditingController();
+    _model.textController5 = TextEditingController();
+
   }
 
   @override
@@ -462,7 +478,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                       0.005,
                                                   0),
                                           child: TextFormField(
-                                            controller: _model.textController1,
+                                            controller: _model.textController3,
                                             focusNode:
                                                 _model.textFieldFocusNode1,
                                             autofocus: true,
@@ -699,7 +715,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                         0),
                                                 child: TextFormField(
                                                   controller:
-                                                      _model.textController1,
+                                                      _model.textController4,
                                                   focusNode: _model
                                                       .textFieldFocusNode1,
                                                   autofocus: true,
@@ -786,7 +802,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                         0),
                                                 child: TextFormField(
                                                   controller:
-                                                      _model.textController2,
+                                                  _model.textController5,
                                                   focusNode: _model
                                                       .textFieldFocusNode2,
                                                   autofocus: true,
@@ -857,7 +873,75 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                 ElevatedButton(
                                   onPressed: () {
                                     setState(() {
+                                      print("regisztracio most en");
                                       _showBigContainer = true;
+
+                                      String? szov1 = _model.textController1?.text;
+                                      String? szov2 = _model.textController2?.text;
+                                      String? szov3 = _model.textController3?.text;
+                                      String? szov4 = _model.textController4?.text;
+                                      String? szov5 = _model.textController5?.text;
+                                      //String? szov6 = _model.textController6?.text;
+                                      print("regisztracio|$szov3-$szov1,$szov2,$_selectedOption,NULL,BARMI");
+
+
+                                      _channel = WebSocketChannel.connect(
+                                      //Uri.parse('ws://34.72.67.6:8089'),
+                                      Uri.parse('ws://146.148.43.137:8089'),
+                                      );
+                                      //kerdes = "$_selectedLocaleId | $kerdes";
+                                      _channel.sink.add("regisztracio|$szov3-$szov1,$szov2,$_selectedOption,NULL,BARMI");
+                                      //_channel.sink.add("bejelentkezes|adam@ali.com");
+                                      _channel.stream.listen(
+                                      (message) {
+                                        print('Received message: $message');
+                                        if(message=="True"){
+                                          showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) => AlertDialog(
+                                              title: Text("Regisztrációs Hiba"),
+                                              content: Text("A bevitt adatokkal már regisztráltak. Kérem lépjen be regisztráció helyett a létező fiókjába az email-ben kapott azonosító segítségével."),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                                  child: const Text('OK'),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  MyApp(),
+                                            ),
+                                          );
+                                        }else{
+                                          showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) => AlertDialog(
+                                              title: Text("Regisztráció Sikeres"),
+                                              content: Text("Regisztrációját sikeresen mentettük."),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                                  child: const Text('OK'),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  MyApp(),
+                                            ),
+                                          );
+                                        }
+
+                                      });
+
+                                      print("regisztracio vege");
                                     });
                                   },
                                   style: ButtonStyle(

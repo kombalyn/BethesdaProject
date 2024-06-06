@@ -1,6 +1,7 @@
 import 'package:bethesda_2/regisztracio.dart';
 import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 //import 'package:video_player/video_player.dart';
 import 'styles.dart'; // Make sure this path is correct based on where you placed the styles.dart file
@@ -48,6 +49,11 @@ class HomePageWidget extends StatefulWidget {
 class _HomePageWidgetState extends State<HomePageWidget> {
   late HomePageModel _model;
 
+  late WebSocketChannel _channel = WebSocketChannel.connect(
+    //Uri.parse('ws://34.72.67.6:8089'),
+    Uri.parse('ws://146.148.43.137:8089'),
+  );
+
   //late VideoPlayerController _controller;
   late AnimationController _animationController;
   late double _currentPointOnFunction = 0; // Az aktuális függvényérték
@@ -60,7 +66,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   void initState() {
     super.initState();
     _model = HomePageModel();
-
+    _model.textController1 = TextEditingController();
+    _model.textController2 = TextEditingController();
     /*
     _controller = _controller = VideoPlayerController.asset('assets/videos/animation.mp4')
       ..initialize().then((_) {
@@ -344,7 +351,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             0.005,
                                         0),
                                     child: TextFormField(
-                                      controller: _model.textController1,
+                                      controller: _model.textController2,
                                       focusNode: _model.textFieldFocusNode1,
                                       autofocus: true,
                                       obscureText: false,
@@ -403,15 +410,51 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () async {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            ModuleOpening(),
-                                      ),
+
+                                    _channel = WebSocketChannel.connect(
+                                    //Uri.parse('ws://34.72.67.6:8089'),
+                                    Uri.parse('ws://146.148.43.137:8089'),
                                     );
 
-                                    print("gomb");
+                                    //kerdes = "$_selectedLocaleId | $kerdes";
+                                    String? szov = _model.textController1?.text;
+                                    String? szov2 = _model.textController2?.text;
+                                    print("bejelentkezes|$szov-$szov2");
+                                    _channel.sink.add("bejelentkezes|$szov-$szov2");
+                                    //_channel.sink.add("bejelentkezes|adam@ali.com");
+                                    _channel.stream.listen(
+                                    (message) {
+                                      print('Received message: $message');
+
+
+                                    if(message=="True"){
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              ModuleOpening(),
+                                        ),
+                                      );
+                                    }else{
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) => AlertDialog(
+                                          title: Text("Bejelentkezési Hiba"),
+                                          content: Text("A bejelentkezési email cím vagy az azonosító hibás, nem ismert. Ha még nem regisztráltál, akkor kérlek kattints az \"Először jársz itt\" gombra."),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(context, 'OK'),
+                                              child: const Text('OK'),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }
+
+                                    });
+
+
+                                    print("TODO: Küldes a szerverre");
                                   },
                                   style: ButtonStyle(
                                     backgroundColor:

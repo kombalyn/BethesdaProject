@@ -421,7 +421,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
 
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.07),
+                                    MediaQuery.of(context).size.width * 0.15),
 
                             // You can add more rows as needed
                           ],
