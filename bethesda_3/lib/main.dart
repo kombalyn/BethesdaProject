@@ -8,6 +8,7 @@ import 'styles.dart'; // Make sure this path is correct based on where you place
 
 import 'package:bethesda_2/constants/colors.dart'; // Adjust the import path as necessary
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'ModuleOpening_M3.dart';
 
 import 'ModuleOpening.dart';
 import 'home_page_model.dart';
@@ -53,6 +54,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     //Uri.parse('ws://34.72.67.6:8089'),
     Uri.parse('ws://146.148.43.137:8089'),
   );
+
 
   //late VideoPlayerController _controller;
   late AnimationController _animationController;
@@ -412,8 +414,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   onPressed: () async {
 
                                     _channel = WebSocketChannel.connect(
-                                    //Uri.parse('ws://34.72.67.6:8089'),
-                                    Uri.parse('ws://146.148.43.137:8089'),
+                                      //Uri.parse('ws://34.72.67.6:8089'),
+                                      Uri.parse('ws://146.148.43.137:8089'),
                                     );
 
                                     //kerdes = "$_selectedLocaleId | $kerdes";
@@ -423,35 +425,35 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     _channel.sink.add("bejelentkezes|$szov-$szov2");
                                     //_channel.sink.add("bejelentkezes|adam@ali.com");
                                     _channel.stream.listen(
-                                    (message) {
-                                      print('Received message: $message');
+                                            (message) {
+                                          print('Received message: $message');
 
 
-                                    if(message=="True"){
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              ModuleOpening(),
-                                        ),
-                                      );
-                                    }else{
-                                      showDialog<String>(
-                                        context: context,
-                                        builder: (BuildContext context) => AlertDialog(
-                                          title: Text("Bejelentkezési Hiba"),
-                                          content: Text("A bejelentkezési email cím vagy az azonosító hibás, nem ismert. Ha még nem regisztráltál, akkor kérlek kattints az \"Először jársz itt\" gombra."),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(context, 'OK'),
-                                              child: const Text('OK'),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }
+                                          if(message=="True"){
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (BuildContext context) =>
+                                                    ModuleOpening_M3(),
+                                              ),
+                                            );
+                                          }else{
+                                            showDialog<String>(
+                                              context: context,
+                                              builder: (BuildContext context) => AlertDialog(
+                                                title: Text("Bejelentkezési Hiba"),
+                                                content: Text("A bejelentkezési email cím vagy az azonosító hibás, nem ismert. Ha még nem regisztráltál, akkor kérlek kattints az \"Először jársz itt\" gombra."),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () => Navigator.pop(context, 'OK'),
+                                                    child: const Text('OK'),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          }
 
-                                    });
+                                        });
 
 
                                     print("TODO: Küldes a szerverre");
