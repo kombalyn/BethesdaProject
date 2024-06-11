@@ -407,6 +407,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                           ),
                           onTap: () {
                             print('Button pressed ...');
+                            print('Button pressed ...');
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

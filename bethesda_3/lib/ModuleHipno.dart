@@ -1,12 +1,18 @@
+import 'dart:convert';
 import 'dart:js';
+import 'dart:typed_data';
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bethesda_2/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 import 'package:video_player/video_player.dart';
 import 'package:bethesda_2/constants/colors.dart'; // Make sure this path is correct
+import 'AudioPlayerPage.dart';
 import 'ModuleHipno_page2.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'ModuleHipno_page5.dart';
@@ -106,6 +112,26 @@ class ModuleHipnoWidget extends StatefulWidget {
 }
 
 class _ModuleHipnotState extends State<ModuleHipnoWidget> {
+  late Duration _currentPosition;
+  late AssetsAudioPlayer _assetsAudioPlayer;
+  double _sliderValue = 0.0; // A csúszka értéke
+  bool _isDraggingSlider = false;
+  bool isOpened = false;
+
+  bool _play = false;
+
+  void _playAudio() {
+    print("play");
+    if (isOpened == false){
+      _assetsAudioPlayer.open(Audio("assets/sound/A_gondtalan_tengerpart_hangositott.mp3"));
+      isOpened = true;
+    }
+    _assetsAudioPlayer.play();
+  }
+
+
+
+
   late HomePageModel _model;
   bool is1TextVisible = false; // To control the visibility of the text section
   bool is2TextVisible = false; // To control the visibility of the text section
@@ -124,18 +150,29 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
   bool is7Checked = false; // Controls the state of the checkbox
 
   late double _currentPointOnFunction = 0; // Az aktuális függvényérték
-  late double _sliderValue = 0.0; // A csúszka értéke
+  //late double _sliderValue = 0.0; // A csúszka értéke
   late bool toggle = true;
   final ScrollController _scrollController = ScrollController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final Uri _url = Uri.parse('https://www.bethesda.hu/');
+  //AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
   void initState() {
     super.initState();
     _model = HomePageModel();
 
+    _assetsAudioPlayer = AssetsAudioPlayer();
+    _assetsAudioPlayer.currentPosition.listen((duration) {
+      //_currentPosition = 0;
+      setState(() {
+        if (!_isDraggingSlider) {
+          _currentPosition = duration;
+          _sliderValue = _currentPosition.inSeconds.toDouble();
+        }
+      });
+    });
   }
 
   @override
@@ -147,6 +184,8 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+    
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       // To dismiss the keyboard when tapping outside of inputs
@@ -1803,6 +1842,21 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                                         .height *
                                                     0.03),
                                             // You can add more rows as needed
+                                            /*Center(
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  ElevatedButton(
+                                                    onPressed: () => _audioPlayer.play('http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/Progr_relax_nagyoknak.mp3'),
+                                                    child: Text('Play'),
+                                                  ),
+                                                  ElevatedButton(
+                                                    onPressed: () => _audioPlayer.pause(),
+                                                    child: Text('Pause'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),*/
                                             Center(
                                               child: Container(
                                                 decoration: BoxDecoration(
@@ -1817,18 +1871,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                                     ),
                                                   ],
                                                 ),
-                                                child: SizedBox(
-                                                  width: 300.0, // Set a fixed width
-                                                  height: 200.0, // Set a fixed height
-                                                  child: HtmlWidget(
-                                                    '''
-                                                        <audio controls controlsList="nodownload" style="width: 100%; height: auto;">
-                                                          <source src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/Progr_relax_nagyoknak.mp3" type="audio/mpeg">
-                                                          Your browser does not support the audio element.
-                                                        </audio>
-                                                        '''
-                                                ),
-                                                ),
+                                                child:  AudioPlayerPage("assets/sound/Progr_relax_nagyoknak.mp3"),
                                               ),
                                             ),
                                             SizedBox(
@@ -1965,26 +2008,18 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                             Center(
                                               child: Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10), // Adjust the corner radius
+                                                  borderRadius: BorderRadius.circular(10), // Adjust the corner radius
+                                                  color: Colors.white, // Add a background color to ensure visibility
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey.withOpacity(0.5),
+                                                      spreadRadius: 5,
+                                                      blurRadius: 7,
+                                                      offset: Offset(0, 3), // changes position of shadow
+                                                    ),
+                                                  ],
                                                 ),
-                                                child: SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.43,
-                                                  // Adjust the width as needed
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.05,
-                                                  // Adjust the height to make it thin
-                                                  child: HtmlWidget(
-                                                    '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" ></audio>',
-                                                    // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
-                                                  ),
-                                                ),
+                                                child:  AudioPlayerPage("assets/sound/A_szinek_bolygoja.mp3"),
                                               ),
                                             ),
                                             SizedBox(

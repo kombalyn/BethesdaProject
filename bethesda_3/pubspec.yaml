@@ -131,6 +131,9 @@ flutter:
     - assets/videos/kronikus_hasi_fajdalom.mp4
 
     - assets/sound/A_gondtalan_tengerpart_hangositott.mp3
+    - assets/sound/Progr_relax_kicsiknek.mp3
+    - assets/sound/Progr_relax_nagyoknak.mp3
+    - assets/sound/A_szinek_bolygoja.mp3
 
   fonts:
     - family: Montserrat
