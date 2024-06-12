@@ -10,6 +10,9 @@ class HomePageModel extends HomePageWidget {
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
   TextEditingController? textController2;
+  TextEditingController? textController3;
+  TextEditingController? textController4;
+  TextEditingController? textController5;
   TextEditingController? registrationController1;
   TextEditingController? registrationController2;
   TextEditingController? registrationController3;
@@ -28,6 +31,9 @@ class HomePageModel extends HomePageWidget {
   void initState(BuildContext context) {
     textController1 = TextEditingController();
     textController2 = TextEditingController();
+    textController3 = TextEditingController();
+    textController4 = TextEditingController();
+    textController5 = TextEditingController();
 
     /*
     registrationController1 = TextEditingController();
@@ -57,6 +63,9 @@ class HomePageModel extends HomePageWidget {
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
     textController2?.dispose();
+    textController3?.dispose();
+    textController4?.dispose();
+    textController5?.dispose();
     registrationController1?.dispose();
     registrationController2?.dispose();
 

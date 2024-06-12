@@ -38,7 +38,6 @@ class ModuleOpeningWidget extends StatefulWidget {
 
 class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
   late HomePageModel _model;
-  late VideoPlayerController _controller;
   bool _isPlaying = false;
   late AnimationController _animationController;
   late double _currentPointOnFunction = 0; // Az aktuális függvényérték
@@ -52,40 +51,16 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
     super.initState();
     _model = HomePageModel();
 
-    /*_controller =
-        _controller = VideoPlayerController.asset('assets/videos/szia.mp4')
-          ..initialize().then((_) {
-            setState(() {});
-          });
-    _isPlaying = true;
 
-    _controller.addListener(() {
-      setState(() {});
-    });
 
-    _controller.value.isPlaying ? _controller.pause() : _controller.play();
-
-     */
   }
 
   @override
   void dispose() {
     _model.dispose();
-    _controller.dispose();
     super.dispose();
   }
 
-  void _playPauseVideo() {
-    setState(() {
-      if (_controller.value.isPlaying) {
-        _controller.pause();
-        _isPlaying = false;
-      } else {
-        _controller.play();
-        _isPlaying = true;
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -431,6 +406,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                             style: MyTextStyles.kicsibekezdes(context),
                           ),
                           onTap: () {
+                            print('Button pressed ...');
                             print('Button pressed ...');
                             Navigator.pushReplacement(
                               context,

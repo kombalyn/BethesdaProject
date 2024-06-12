@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
 import 'dart:html' as html;
+import 'AudioPlayerPage.dart';
 import 'ModuleHipno_page3.dart';
 import 'ModuleHipnomp3_1.dart';
 export 'home_page_model.dart';
@@ -324,18 +325,21 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                         Center(
                           child: Container(
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10), // Adjust the corner radius
+                              borderRadius: BorderRadius.circular(10), // Adjust the corner radius
+                              color: Colors.white, // Add a background color to ensure visibility
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(0, 3), // changes position of shadow
+                                ),
+                              ],
                             ),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
-                              height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
-                              child: HtmlWidget(
-                              '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" ></audio>',
-                               // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
-                              ),
-                            ),
+                            child:  AudioPlayerPage("assets/sound/Progr_relax_nagyoknak.mp3"),
                           ),
                         ),
+
 
 
                         Row(

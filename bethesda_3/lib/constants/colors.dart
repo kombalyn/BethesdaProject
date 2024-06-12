@@ -9,6 +9,11 @@ class AppColors {
   static const Color darkshade = Color(0xFF262536); // Almost black
   static const Color lilac = Color(0xFF5BB8BF);
   static const Color blueish = Color(0xFF623C9A);
+ // KICSIT SZEBB DE LEHET MARADJON LILA INKÁBB static const Color blueish = Color(0xFF2F3C7E);
+// SZEBB MINT A BETHESDA  static const Color reddish = Color(0xFFCC313D);
+
+  static const Color yellow = Color(0xFFF1AF6B); // PREVIOUS YELLOW
+  //static const Color yellow = Color(0xFFB85042);
 
 }
 // ez kellene még 5BB8BF
