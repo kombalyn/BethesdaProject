@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) => MaterialApp(
         title: 'Fájdalomkezelés bejelentkezés',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.deepOrange,
           useMaterial3: false,
         ),
         home:
@@ -186,7 +186,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           Spacer(),
                           Image.asset(
                             "assets/images/bear_nobackground.png",
-                            height: MediaQuery.of(context).size.height * 0.6,
+                            //"assets/images/probaelsohatter.png",
                             fit: BoxFit.cover, // Cover the available space
                           ),
                         ],

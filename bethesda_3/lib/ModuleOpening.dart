@@ -66,54 +66,68 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
+      appBar:  AppBar(
         backgroundColor: AppColors.whitewhite,
         scrolledUnderElevation: 3.0,
         elevation: 3,
-        shadowColor: Colors.grey,
-        // Custom shadow color
-
+        shadowColor: Colors.grey.shade300,
         leading: SizedBox(
-          width: MediaQuery.of(context)
-              .size
-              .width, // Wide enough to fit image and title
+          width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.03), // Spacer
+              SizedBox(width: MediaQuery.of(context).size.width * 0.025),
               Padding(
                 padding: EdgeInsets.all(8.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    "assets/images/bethesda_gyermekkorhaz_logo.png",
-                    width: MediaQuery.of(context).size.width * 0.05,
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () async {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => ModuleOpening(),
+                        ),
+                      );
+                      print("homegomb");
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        child: Image.asset(
+                          "assets/images/bethesda_gyermekkorhaz_logo.png",
+                          width: MediaQuery.of(context).size.width * 0.05,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              Expanded(
-                child: Text(
-                  "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
-                  style: MyTextStyles.cim(context),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width *
-                        0.05), // Add padding to the right of the text
-                child: Text(
-                  "Kutatási fázis",
-                  style:MyTextStyles.cim(context),
+
+              // Expanded(
+              //   child: Text(
+              //     "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
+              //     style: MyTextStyles.bekezdes(context),
+              //     overflow: TextOverflow.ellipsis,
+              //   ),
+              // ),
+              Spacer(),
+
+              Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.05),
+                  child: Text(
+                    "Kutatási fázis",
+                    style: MyTextStyles.huszonkettobekezdes(context),
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        leadingWidth: MediaQuery.of(context)
-            .size
-            .width, // Ensure the leading area is wide enough
+        leadingWidth: MediaQuery.of(context).size.width,
       ),
       body:
       SingleChildScrollView( child:
@@ -297,6 +311,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                   color: Colors.white.withOpacity(0.3),
                   // Fully opaque white
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Fájdalomkezelési kisokos',
@@ -372,7 +387,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                         color: AppColors.whitewhite,
                         // Set a different background color for the outer container
                         child: Container(
-                          height: MediaQuery.of(context).size.width * 0.03,
+                          height: MediaQuery.of(context).size.width * 0.02,
                           decoration: BoxDecoration(
                             color: AppColors.whitewhite,
                             // Inner container color
@@ -591,6 +606,15 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                   ),
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.width * 0.029, // Adjust to match the text's top padding
+            left: 0, // Adjust to position next to the text
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.03, // Adjust the width as needed
+              height: MediaQuery.of(context).size.height * 0.05, // Adjust the height as needed
+              color: AppColors.blueish, // Adjust the color as needed
             ),
           ),
         ],

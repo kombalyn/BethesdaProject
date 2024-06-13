@@ -17,7 +17,7 @@ class ModuleOpening_M3 extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => QuizProvider1(),
       child: MaterialApp(
-        title: 'Fájdalomkezelés - hipnózis',
+        title: 'Fájdalomkezelés - M3',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.bethesdacolor),
           useMaterial3: false,

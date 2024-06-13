@@ -149,9 +149,9 @@ class QuizProvider1 with ChangeNotifier {
     Question( //CSINÁLNI
       text: '5.2 kérdés: Most hogy rangsoroltad, hogy milyen mozgást csinálnál  szívesen, kérlek gondolkozz el azon, hogy milyen céljaid vannak az egyes mozgásokkal, amiket felsoroltál! Például: séta – heti 3x 30 perc azért, hogy kimozduljak otthonról, vagy otthoni torna – heti 2x 45 perc azért, mert szeretnék megerősödni',
       index: 19,
-        requiresRanking: true,
+        requiresRanking: false,
         answers: [
-          Answer(nextQuestionIndex: 20, isRankable: true),
+          Answer(nextQuestionIndex: 20, isRankable: false),
         ],
         rankableOptions: [
           'Activity 1',

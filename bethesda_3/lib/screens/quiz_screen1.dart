@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-//import 'package:reorderables/reorderables.dart'; // Import the package
 import '../providers/quiz_provider1.dart';
 import 'result_screen1.dart';
 import 'package:bethesda_2/constants/colors.dart';
@@ -21,6 +20,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
   List<String> _rankableOptions = [];
   bool _isReordering = false;
   double _sliderValue = 0.0;
+  final ScrollController _scrollController = ScrollController();
+  int _selectedAnswerIndex = -1;
 
   @override
   void initState() {
@@ -34,7 +35,16 @@ class _QuizScreenState1 extends State<QuizScreen1> {
     for (var controller in _optionControllers) {
       controller.dispose();
     }
+    _scrollController.dispose();
     super.dispose();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0.0,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
   }
 
   @override
@@ -48,36 +58,58 @@ class _QuizScreenState1 extends State<QuizScreen1> {
         backgroundColor: AppColors.whitewhite,
         scrolledUnderElevation: 3.0,
         elevation: 3,
-        shadowColor: Colors.grey,
+        shadowColor: Colors.grey.shade300,
         leading: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(width: MediaQuery.of(context).size.width * 0.03),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.025),
               Padding(
                 padding: EdgeInsets.all(8.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    "assets/images/bethesda_gyermekkorhaz_logo.png",
-                    width: MediaQuery.of(context).size.width * 0.05,
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () async {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => ModuleOpening_M3(),
+                        ),
+                      );
+                      print("homegomb");
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        child: Image.asset(
+                          "assets/images/bethesda_gyermekkorhaz_logo.png",
+                          width: MediaQuery.of(context).size.width * 0.05,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              Expanded(
-                child: Text(
-                  "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
-                  style: MyTextStyles.cim(context),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width * 0.05),
-                child: Text(
-                  "Kutatási fázis",
-                  style: MyTextStyles.cim(context),
+
+              // Expanded(
+              //   child: Text(
+              //     "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
+              //     style: MyTextStyles.bekezdes(context),
+              //     overflow: TextOverflow.ellipsis,
+              //   ),
+              // ),
+              Spacer(),
+
+              Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.05),
+                  child: Text(
+                    "Kutatási fázis",
+                    style: MyTextStyles.huszonkettobekezdes(context),
+                  ),
                 ),
               ),
             ],
@@ -86,6 +118,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
         leadingWidth: MediaQuery.of(context).size.width,
       ),
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             Stack(
@@ -95,7 +128,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                     Container(
                       color: AppColors.lightshade,
                       padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.33,
+                        left: MediaQuery.of(context).size.width * 0.28,
                         right: MediaQuery.of(context).size.width * 0.05,
                       ),
                       child: Column(
@@ -107,7 +140,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               children: [
                                 Container(
                                   width:
-                                  MediaQuery.of(context).size.width * 0.55,
+                                      MediaQuery.of(context).size.width * 0.55,
                                   // Fixed width for the container
                                   margin: EdgeInsets.only(top: 20.0),
                                   padding: EdgeInsets.all(16.0),
@@ -119,13 +152,6 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       width: 2.0, // Outline width
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
-                                    // boxShadow: [
-                                    //   BoxShadow(
-                                    //     color: Colors.black26,
-                                    //     blurRadius: 10.0,
-                                    //     offset: Offset(0, 2),
-                                    //   ),
-                                    // ],
                                   ),
                                   child: Text(
                                     currentQuestion.text,
@@ -143,8 +169,6 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   left: 30,
                                   right: 30,
                                   child: Container(
-                                    //margin: EdgeInsets.symmetric(horizontal: 16.0),
-                                    //padding: EdgeInsets.symmetric(vertical: 10.0),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20.0),
                                       border: Border.all(
@@ -155,13 +179,13 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     ),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(18.0),
-                                      // Adjust this to fit inside the outline
                                       child: LinearProgressIndicator(
                                         value: progressValue,
                                         backgroundColor: AppColors.whitewhite,
                                         valueColor:
-                                        AlwaysStoppedAnimation<Color>(
-                                            Colors.yellow),
+                                            AlwaysStoppedAnimation<Color>(
+                                          Colors.yellow,
+                                        ),
                                         minHeight: 20.0,
                                       ),
                                     ),
@@ -177,38 +201,62 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                 if (_optionControllers.isNotEmpty)
                                   if (!_isReordering)
                                     Container(
-                                      width: MediaQuery.of(context).size.width * 0.5, // Set the width to be narrower
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      // Set the width to be narrower
                                       child: ListView.builder(
                                         shrinkWrap: true,
                                         physics: NeverScrollableScrollPhysics(),
                                         itemCount: _optionControllers.length,
                                         itemBuilder: (context, index) {
-                                          var controller = _optionControllers[index];
+                                          var controller =
+                                              _optionControllers[index];
                                           return Padding(
                                             key: ValueKey(controller),
-                                            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0, vertical: 4.0),
                                             child: Row(
                                               children: [
                                                 Container(
-                                                  width: MediaQuery.of(context).size.width * 0.4, // Make the cells narrower
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+                                                  // Make the cells narrower
                                                   child: TextField(
                                                     controller: controller,
                                                     decoration: InputDecoration(
-                                                      labelText: 'Az ötleted...',
-                                                      labelStyle: TextStyle(color: Colors.grey.shade600),
-                                                      border: OutlineInputBorder(
-                                                        borderSide: BorderSide(color: Colors.green, width: 2.0),
+                                                      labelText:
+                                                          'Az ötleted...',
+                                                      labelStyle: TextStyle(
+                                                          color: Colors
+                                                              .grey.shade600),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors.green,
+                                                            width: 2.0),
                                                       ),
-                                                      focusedBorder: OutlineInputBorder(
-                                                        borderSide: BorderSide(color: Colors.yellow, width: 2.0),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                Colors.yellow,
+                                                            width: 2.0),
                                                       ),
-                                                      enabledBorder: OutlineInputBorder(
-                                                        borderSide: BorderSide(color: Colors.grey.shade600, width: 2.0),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .grey.shade600,
+                                                            width: 2.0),
                                                       ),
                                                       filled: true,
                                                       fillColor: Colors.white,
                                                     ),
-                                                    style: TextStyle(color: Colors.grey.shade800),
+                                                    style: TextStyle(
+                                                        color: Colors
+                                                            .grey.shade800),
                                                     maxLines: null,
                                                   ),
                                                 ),
@@ -216,7 +264,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                                   icon: Icon(Icons.delete),
                                                   onPressed: () {
                                                     setState(() {
-                                                      _optionControllers.removeAt(index);
+                                                      _optionControllers
+                                                          .removeAt(index);
                                                     });
                                                   },
                                                 ),
@@ -228,7 +277,9 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     ),
                                 if (_isReordering)
                                   Container(
-                                    width: MediaQuery.of(context).size.width * 0.3, // Set the width to be narrower
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.3,
+                                    // Set the width to be narrower
                                     child: ReorderableListView(
                                       shrinkWrap: true,
                                       physics: NeverScrollableScrollPhysics(),
@@ -237,161 +288,215 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                           if (newIndex > oldIndex) {
                                             newIndex -= 1;
                                           }
-                                          final item = _rankableOptions.removeAt(oldIndex);
-                                          _rankableOptions.insert(newIndex, item);
+                                          final item = _rankableOptions
+                                              .removeAt(oldIndex);
+                                          _rankableOptions.insert(
+                                              newIndex, item);
                                         });
                                       },
                                       children: [
-                                        for (int index = 0; index < _rankableOptions.length; index++)
+                                        for (int index = 0;
+                                            index < _rankableOptions.length;
+                                            index++)
                                           Padding(
-                                            key: ValueKey(_rankableOptions[index]),
-                                            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                            key: ValueKey(
+                                                _rankableOptions[index]),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0, vertical: 4.0),
                                             child: Container(
-                                              width: MediaQuery.of(context).size.width * 0.4, // Make the cells narrower
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.4,
+                                              // Make the cells narrower
                                               decoration: BoxDecoration(
-                                                color: AppColors.whitewhite, // Background color for the container
-                                                border: Border.all(color: Colors.grey.shade600, width: 1.0), // Border color and width
-                                                borderRadius: BorderRadius.circular(8.0), // Border radius
+                                                color: AppColors.whitewhite,
+                                                // Background color for the container
+                                                border: Border.all(
+                                                    color: Colors.grey.shade600,
+                                                    width: 1.0),
+                                                // Border color and width
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        8.0), // Border radius
                                               ),
                                               child: ListTile(
                                                 title: Text(
                                                   _rankableOptions[index],
-                                                  style: TextStyle(color: Colors.grey.shade800), // Text color
+                                                  style: TextStyle(
+                                                      color: Colors.grey
+                                                          .shade800), // Text color
                                                 ),
-                                                tileColor: Colors.grey.shade100, // Background color for the tile
+                                                tileColor: Colors.grey
+                                                    .shade100, // Background color for the tile
                                               ),
                                             ),
                                           ),
                                       ],
                                     ),
                                   ),
-                                SizedBox(height: MediaQuery.of(context).size.width*0.02),
-                                if (_optionControllers.isNotEmpty && _isReordering)
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.02),
+                                if (_optionControllers.isNotEmpty &&
+                                    _isReordering)
                                   Container(
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey.shade600, width: 2.0),
+                                      border: Border.all(
+                                          color: Colors.grey.shade600,
+                                          width: 2.0),
                                       borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     child: ElevatedButton(
                                       onPressed: () {
                                         setState(() {
-                                          _isReordering = false; // Switch back to editing mode
+                                          _isReordering =
+                                              false; // Switch back to editing mode
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.yellow,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                        primary: AppColors.whitewhite,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24.0, vertical: 12.0),
                                         textStyle: TextStyle(fontSize: 20.0),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
                                         ),
                                       ),
                                       child: Text(
                                         'Szerkesztés',
-                                        style: TextStyle(color: Colors.grey.shade800),
+                                        style: TextStyle(
+                                            color: Colors.grey.shade800),
                                       ),
                                     ),
                                   ),
-                                SizedBox(height: MediaQuery.of(context).size.width*0.02),
-                                if (_optionControllers.isNotEmpty && _isReordering)
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.02),
+                                if (_optionControllers.isNotEmpty &&
+                                    _isReordering)
                                   Container(
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey.shade600, width: 2.0),
+                                      border: Border.all(
+                                          color: Colors.grey.shade600,
+                                          width: 2.0),
                                       borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     child: ElevatedButton(
                                       onPressed: () {
                                         // Save the reordered list here if needed
-                                        quizProvider1.nextQuestion(); // Move to the next question
+                                        quizProvider1
+                                            .nextQuestion(); // Move to the next question
+                                        _scrollToTop(); // Scroll to top when question changes
                                         if (quizProvider1.isQuizFinished) {
-                                          Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
+                                          Navigator.of(context)
+                                              .pushReplacementNamed(
+                                                  ResultScreen1.routeName);
                                         }
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.yellow,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                        primary: AppColors.yellow,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24.0, vertical: 12.0),
                                         textStyle: TextStyle(fontSize: 20.0),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
                                         ),
                                       ),
                                       child: Text(
                                         'Sorbarendezés mentése',
-                                        style: TextStyle(color: Colors.grey.shade800),
+                                        style: TextStyle(
+                                            color: AppColors.whitewhite),
                                       ),
                                     ),
                                   ),
-                                if (_optionControllers.isEmpty || !_isReordering)
+                                if (_optionControllers.isEmpty ||
+                                    !_isReordering)
                                   Container(
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey.shade600, width: 2.0),
+                                      border: Border.all(
+                                          color: Colors.grey.shade600,
+                                          width: 2.0),
                                       borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     child: ElevatedButton(
                                       onPressed: () {
                                         setState(() {
-                                          _optionControllers.add(TextEditingController());
+                                          _optionControllers
+                                              .add(TextEditingController());
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.yellow,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                        primary: AppColors.whitewhite,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24.0, vertical: 12.0),
                                         textStyle: TextStyle(fontSize: 20.0),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
                                         ),
                                       ),
                                       child: Text(
                                         'Új megadása',
-                                        style: TextStyle(color: Colors.grey.shade800),
+                                        style: TextStyle(
+                                            color: Colors.grey.shade800),
                                       ),
                                     ),
                                   ),
-                                SizedBox(height: MediaQuery.of(context).size.width*0.02),
-                                if (_optionControllers.isNotEmpty && !_isReordering)
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.02),
+                                if (_optionControllers.isNotEmpty &&
+                                    !_isReordering)
                                   Container(
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey.shade600, width: 2.0),
+                                      border: Border.all(
+                                          color: Colors.grey.shade600,
+                                          width: 2.0),
                                       borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     child: ElevatedButton(
                                       onPressed: () {
                                         setState(() {
                                           _rankableOptions = _optionControllers
-                                              .map((controller) => controller.text)
+                                              .map((controller) =>
+                                                  controller.text)
                                               .where((text) => text.isNotEmpty)
                                               .toList();
-                                          _isReordering = true; // Toggle reordering state
+                                          _isReordering =
+                                              true; // Toggle reordering state
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
                                         primary: Colors.yellow,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24.0, vertical: 12.0),
                                         textStyle: TextStyle(fontSize: 20.0),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
                                         ),
                                       ),
                                       child: Text(
                                         'Eddigiek mentése, sorbarendezés megkezdése',
-                                        style: TextStyle(color: Colors.grey.shade800),
+                                        style: TextStyle(
+                                            color: Colors.grey.shade800),
                                       ),
                                     ),
                                   ),
                               ],
                             ),
-                          ]
-
-
-                          else
+                          ] else
                             ...currentQuestion.answers.map((answer) {
                               if (answer.isScale) {
                                 return Column(
                                   children: [
                                     SizedBox(
                                         height:
-                                        MediaQuery.of(context).size.width *
-                                            0.02),
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
                                     Slider(
                                       value: _sliderValue,
                                       min: 0.0,
@@ -411,12 +516,12 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     ),
                                     SizedBox(
                                         height:
-                                        MediaQuery.of(context).size.width *
-                                            0.02),
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
                                     Container(
                                       decoration: BoxDecoration(
                                         border: Border.all(
-                                          color: Colors.grey.shade600,
+                                          color: AppColors.whitewhite,
                                           // Outline color
                                           width: 2.0, // Outline width
                                         ),
@@ -427,14 +532,15 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         onPressed: () {
                                           quizProvider1.answerQuestion(
                                               answer.nextQuestionIndex);
+                                          _scrollToTop(); // Scroll to top when question changes
                                           if (quizProvider1.isQuizFinished) {
                                             Navigator.of(context)
                                                 .pushReplacementNamed(
-                                                ResultScreen1.routeName);
+                                                    ResultScreen1.routeName);
                                           }
                                         },
                                         style: ElevatedButton.styleFrom(
-                                          primary: Colors.yellow,
+                                          primary: AppColors.yellow,
                                           // Background color
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 24.0, vertical: 12.0),
@@ -449,8 +555,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         child: Text(
                                           'Tovább',
                                           style: TextStyle(
-                                              color: Colors
-                                                  .grey.shade800), // Text color
+                                              color: AppColors
+                                                  .whitewhite), // Text color
                                         ),
                                       ),
                                     ),
@@ -462,21 +568,14 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     Center(
                                       child: ClipRRect(
                                         borderRadius:
-                                        BorderRadius.circular(20.0),
+                                            BorderRadius.circular(20.0),
                                         // Adjust the radius as needed
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: Colors.grey.shade700,
-                                              // Outline color
-                                              width: 2.0, // Outline width
-                                            ),
                                             borderRadius: BorderRadius.circular(
                                                 20.0), // Same border radius as ClipRRect
                                           ),
                                           child: SizedBox(
-                                            // width: MediaQuery.of(context).size.width * 0.6,
-                                            // height: MediaQuery.of(context).size.width * 0.3,
                                             child: HtmlWidget(
                                               '<video controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="${answer.video}"></video>',
                                             ),
@@ -486,13 +585,14 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     ),
                                     SizedBox(
                                         height:
-                                        MediaQuery.of(context).size.width *
-                                            0.02),
-
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
                                     Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.2,
                                       decoration: BoxDecoration(
                                         border: Border.all(
-                                          color: Colors.grey.shade600,
+                                          color: AppColors.whitewhite,
                                           // Outline color
                                           width: 2.0, // Outline width
                                         ),
@@ -503,14 +603,15 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         onPressed: () {
                                           quizProvider1.answerQuestion(
                                               answer.nextQuestionIndex);
+                                          _scrollToTop(); // Scroll to top when question changes
                                           if (quizProvider1.isQuizFinished) {
                                             Navigator.of(context)
                                                 .pushReplacementNamed(
-                                                ResultScreen1.routeName);
+                                                    ResultScreen1.routeName);
                                           }
                                         },
                                         style: ElevatedButton.styleFrom(
-                                          primary: Colors.yellow,
+                                          primary: AppColors.yellow,
                                           // Background color
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 24.0, vertical: 12.0),
@@ -525,51 +626,85 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         child: Text(
                                           'Megnéztem',
                                           style: TextStyle(
-                                              color: Colors
-                                                  .grey.shade800), // Text color
+                                              color: AppColors
+                                                  .whitewhite), // Text color
                                         ),
                                       ),
                                     ),
-
-                                    // Place the SizedBox here as a sibling
                                   ],
                                 );
                               }
                               return Column(
                                 children: [
+                                  Column(
+                                    children: quizProvider1
+                                        .currentQuestion.answers
+                                        .map((answer) {
+                                      int index = quizProvider1
+                                          .currentQuestion.answers
+                                          .indexOf(answer);
+                                      return RadioListTile(
+                                        title: Text(answer.text),
+                                        value: index,
+                                        groupValue: _selectedAnswerIndex,
+                                        onChanged: (int? value) {
+                                          setState(() {
+                                            _selectedAnswerIndex = value!;
+                                          });
+                                        },
+                                      );
+                                    }).toList(),
+                                  ),
                                   ElevatedButton(
                                     onPressed: () {
-                                      quizProvider1.answerQuestion(
-                                          answer.nextQuestionIndex);
-                                      if (quizProvider1.isQuizFinished) {
-                                        Navigator.of(context)
-                                            .pushReplacementNamed(
-                                            ResultScreen1.routeName);
+                                      if (_selectedAnswerIndex != -1) {
+                                        quizProvider1.answerQuestion(
+                                            quizProvider1
+                                                .currentQuestion
+                                                .answers[_selectedAnswerIndex]
+                                                .nextQuestionIndex);
+                                        _scrollToTop(); // Scroll to top when question changes
+                                        if (quizProvider1.isQuizFinished) {
+                                          Navigator.of(context)
+                                              .pushReplacementNamed(
+                                                  ResultScreen1.routeName);
+                                        }
                                       }
                                     },
                                     style: ButtonStyle(
-                                      backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          AppColors.yellow),
-                                      // Change to your desired color
+                                      backgroundColor: MaterialStateProperty
+                                          .resolveWith<Color>(
+                                        (Set<MaterialState> states) {
+                                          if (states.contains(
+                                              MaterialState.pressed)) {
+                                            return Colors
+                                                .yellow; // Background color when clicked
+                                          } else if (states.contains(
+                                              MaterialState.hovered)) {
+                                            return Colors
+                                                .yellow; // Background color when hovered
+                                          } else {
+                                            return Colors
+                                                .white; // Default background color
+                                          }
+                                        },
+                                      ),
                                       foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Colors.grey.shade800),
-                                      // Text color
+                                          MaterialStateProperty.all<Color>(
+                                        Colors.grey.shade800,
+                                      ),
                                       overlayColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Colors.yellow), // Splash color
+                                          MaterialStateProperty.all<Color>(
+                                        Colors.yellow.withOpacity(
+                                            0.3), // Splash color on hover/click
+                                      ),
                                     ),
-                                    child: Text(
-                                      answer.text.isEmpty
-                                          ? 'Next'
-                                          : answer.text,
-                                    ),
+                                    child: Text('Tovább'),
                                   ),
                                   SizedBox(
-                                      height:
-                                      MediaQuery.of(context).size.width *
-                                          0.01),
+                                    height: MediaQuery.of(context).size.width *
+                                        0.01,
+                                  ),
                                 ],
                               );
                             }).toList(),
@@ -579,7 +714,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               decoration: InputDecoration(
                                 labelText: 'A válaszod...',
                                 labelStyle:
-                                TextStyle(color: Colors.grey.shade600),
+                                    TextStyle(color: Colors.grey.shade600),
                                 // Label text color
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -608,14 +743,13 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               // Text color
                               maxLines: null,
                             ),
-
                             SizedBox(
                                 height:
-                                MediaQuery.of(context).size.width * 0.02),
+                                    MediaQuery.of(context).size.width * 0.02),
                             Container(
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Colors.grey.shade600, // Outline color
+                                  color: AppColors.whitewhite, // Outline color
                                   width: 2.0, // Outline width
                                 ),
                                 borderRadius: BorderRadius.circular(
@@ -625,10 +759,11 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                 onPressed: () {
                                   if (_controller.text.isNotEmpty) {
                                     quizProvider1.nextQuestion();
+                                    _scrollToTop(); // Scroll to top when question changes
                                     if (quizProvider1.isQuizFinished) {
                                       Navigator.of(context)
                                           .pushReplacementNamed(
-                                          ResultScreen1.routeName);
+                                              ResultScreen1.routeName);
                                     }
                                     _controller.clear();
                                   } else {
@@ -640,7 +775,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  primary: Colors.yellow,
+                                  primary: AppColors.yellow,
                                   // Background color
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 24.0, vertical: 12.0),
@@ -656,12 +791,10 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   'Tovább',
                                   style: TextStyle(
                                       color:
-                                      Colors.grey.shade800), // Text color
+                                          AppColors.whitewhite), // Text color
                                 ),
                               ),
                             ),
-
-                            // Place the SizedBox here as a sibling
                           ],
                         ],
                       ),
@@ -678,7 +811,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                   left: 0,
                   bottom: 0,
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.3,
+                    width: MediaQuery.of(context).size.width * 0.25,
                     color: Colors.white.withOpacity(1),
                     child: Padding(
                       padding: EdgeInsets.only(
@@ -689,6 +822,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                         width: MediaQuery.of(context).size.width * 0.3,
                         color: Colors.white.withOpacity(0.3),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Fájdalomkezelési kisokos',
@@ -699,7 +833,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.lightshade,
                               child: Container(
                                 height:
-                                MediaQuery.of(context).size.width * 0.03,
+                                    MediaQuery.of(context).size.width * 0.03,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -718,7 +852,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               ),
                               child: ListTile(
                                 leading:
-                                Image.asset('assets/images/2icon_m.png'),
+                                    Image.asset('assets/images/2icon_m.png'),
                                 title: Text(
                                   'Kérdések',
                                   style: MyTextStyles.vastagyellow(context),
@@ -739,7 +873,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.lightshade,
                               child: Container(
                                 height:
-                                MediaQuery.of(context).size.width * 0.02,
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -757,7 +891,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                MediaQuery.of(context).size.width * 0.03,
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -776,7 +910,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               ),
                               child: ListTile(
                                 leading:
-                                Image.asset('assets/images/5icon_m.png'),
+                                    Image.asset('assets/images/5icon_m.png'),
                                 title: Text(
                                   '1-2. hét terve',
                                   style: MyTextStyles.vastagbekezdes(context),
@@ -800,7 +934,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                MediaQuery.of(context).size.width * 0.02,
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -833,7 +967,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                MediaQuery.of(context).size.width * 0.02,
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -866,7 +1000,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                MediaQuery.of(context).size.width * 0.02,
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -899,7 +1033,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                MediaQuery.of(context).size.width * 0.02,
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -932,7 +1066,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                MediaQuery.of(context).size.width * 0.02,
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -945,6 +1079,18 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                         ),
                       ),
                     ),
+                  ),
+                ),
+                Positioned(
+                  top: MediaQuery.of(context).size.width *
+                      0.029, // Adjust to match the text's top padding
+                  left: 0, // Adjust to position next to the text
+                  child: Container(
+                    width: MediaQuery.of(context).size.width *
+                        0.03, // Adjust the width as needed
+                    height: MediaQuery.of(context).size.height *
+                        0.05, // Adjust the height as needed
+                    color: AppColors.yellow, // Adjust the color as needed
                   ),
                 ),
               ],
