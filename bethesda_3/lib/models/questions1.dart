@@ -5,6 +5,7 @@ class Question {
   final bool requiresRanking;
   final bool requiresVideo;
   final String video; // Add this property
+  final bool two_column;
 
   final List<Answer> answers;
   List<String> rankableOptions;
@@ -17,7 +18,8 @@ class Question {
     this.requiresVideo = false,
     required this.answers,
     this.rankableOptions = const [],
-    this.video = '', // Initialize with an empty string
+    this.video = '',
+    required this.two_column, // Initialize with an empty string
   });
 }
 
