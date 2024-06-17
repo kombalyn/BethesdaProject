@@ -103,54 +103,68 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        appBar: AppBar(
+        appBar:  AppBar(
           backgroundColor: AppColors.whitewhite,
           scrolledUnderElevation: 3.0,
           elevation: 3,
-          shadowColor: Colors.grey,
-          // Custom shadow color
-
+          shadowColor: Colors.grey.shade300,
           leading: SizedBox(
-            width: MediaQuery.of(context)
-                .size
-                .width, // Wide enough to fit image and title
+            width: MediaQuery.of(context).size.width,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.03), // Spacer
+                SizedBox(width: MediaQuery.of(context).size.width * 0.025),
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      "assets/images/bethesda_gyermekkorhaz_logo.png",
-                      width: MediaQuery.of(context).size.width * 0.05,
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () async {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => HomePageWidgetEmail(),
+                          ),
+                        );
+                        print("homegomb");
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          child: Image.asset(
+                            "assets/images/bethesda_gyermekkorhaz_logo.png",
+                            width: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Text(
-                    "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
-                    style: MyTextStyles.cim(context),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      right: MediaQuery.of(context).size.width *
-                          0.05), // Add padding to the right of the text
-                  child: Text(
-                    "Kutatási fázis",
-                    style: MyTextStyles.cim(context),
+
+                // Expanded(
+                //   child: Text(
+                //     "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
+                //     style: MyTextStyles.bekezdes(context),
+                //     overflow: TextOverflow.ellipsis,
+                //   ),
+                // ),
+                Spacer(),
+
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.05),
+                    child: Text(
+                      "Kutatási fázis",
+                      style: MyTextStyles.huszonkettobekezdes(context),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          leadingWidth: MediaQuery.of(context)
-              .size
-              .width, // Ensure the leading area is wide enough
+          leadingWidth: MediaQuery.of(context).size.width,
         ),
         backgroundColor: AppColors.lightshade,
         body: SingleChildScrollView(
@@ -557,7 +571,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                   0,
                                                   0),
                                           child: Text(
-                                            'Milyen formában(???) regisztrál :',
+                                            'Szülőként vagy gyermekként regisztrálsz:',
                                             textAlign: TextAlign.center,
                                             style:
                                                 MyTextStyles.bekezdes(context),
@@ -679,8 +693,8 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                   0),
                                           child: Text(
                                             _selectedOption == 'szülő'
-                                                ? 'Kutatásban résztvevő gyermekének neve:'
-                                                : 'Kapcsolattartó szülő neve:',
+                                                ? 'Kutatásban résztvevő gyermekének a TAJ száma:'
+                                                : 'A TAJ számod:',
                                             textAlign: TextAlign.center,
                                             style:
                                                 MyTextStyles.bekezdes(context),

@@ -7,9 +7,10 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'styles.dart'; // Make sure this path is correct based on where you placed the styles.dart file
-
+import 'package:lottie/lottie.dart';
 import 'main.dart';
 export 'home_page_model.dart';
+
 
 class ContactForm extends StatefulWidget {
   @override
@@ -93,7 +94,7 @@ class _ContactFormState extends State<ContactForm> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide:
-                    BorderSide(color: AppColors.bethesdacolor, width: 1),
+                BorderSide(color: AppColors.bethesdacolor, width: 1),
                 borderRadius: BorderRadius.circular(8),
               ),
               errorBorder: OutlineInputBorder(
@@ -106,7 +107,7 @@ class _ContactFormState extends State<ContactForm> {
               ),
             ),
             keyboardType:
-                isMessage ? TextInputType.multiline : TextInputType.text,
+            isMessage ? TextInputType.multiline : TextInputType.text,
             maxLines: isMessage ? null : 1,
             // Allows multiple lines if it's the message field
             minLines: isMessage ? 5 : 1,
@@ -150,7 +151,7 @@ class _ContactFormState extends State<ContactForm> {
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
+                        (Set<MaterialState> states) {
                       return AppColors.bethesdacolor; // Default color
                     },
                   ),
@@ -290,8 +291,9 @@ class HomePageWidgetRegisztracio extends StatefulWidget {
 }
 
 class _HomePageWidgetRegisztracioState
-    extends State<HomePageWidgetRegisztracio> {
+    extends State<HomePageWidgetRegisztracio> with SingleTickerProviderStateMixin {
   late HomePageModel _model;
+  late AnimationController _controller;
 
   late double _currentPointOnFunction = 0; // Az aktuális függvényérték
   late double _sliderValue = 0.0; // A csúszka értéke
@@ -300,7 +302,16 @@ class _HomePageWidgetRegisztracioState
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this);
+    _model = HomePageModel();  // Initialize the model
+    // Initialize other necessary fields here
+  }
+
+  @override
   void dispose() {
+    _controller.dispose();
     _model.dispose();
     super.dispose();
   }
@@ -445,7 +456,7 @@ class _HomePageWidgetRegisztracioState
                                     0.03, // Right padding
                                 MediaQuery.of(context).size.width *
                                     0.02 // Bottom padding
-                                ),
+                            ),
                             child: Card(
                               elevation: 5,
                               // Shadow effect
@@ -474,7 +485,7 @@ class _HomePageWidgetRegisztracioState
                             padding: EdgeInsets.only(
                                 left: MediaQuery.of(context).size.width * 0.05,
                                 right:
-                                    MediaQuery.of(context).size.width * 0.03),
+                                MediaQuery.of(context).size.width * 0.03),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: AppColors.whitewhite, // Background color of the Container
@@ -499,8 +510,8 @@ class _HomePageWidgetRegisztracioState
                                   children: [
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.01),
+                                        MediaQuery.of(context).size.width *
+                                            0.01),
                                     Text(
                                       "A kutatás célja",
                                       style: MyTextStyles.bethesdabekezdes(
@@ -508,8 +519,8 @@ class _HomePageWidgetRegisztracioState
                                     ),
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.01),
+                                        MediaQuery.of(context).size.width *
+                                            0.01),
                                     Text(
                                       "A funkcionális hasi fájdalomzavarral élő serdülők részére kifejlesztett, különböző online és személyes terápiás módszerek összehasonlítása és azok hatékonyságának vizsgálata. \nEz a kutatás nagy előrelépést jelenthet a krónikus gyermekkori hasi fájdalom kezelésében, ami gyakran jelentős terhet jelent a betegek és családjaik számára. Az eredmények segíthetnek optimalizálni a kezelési protokollokat és módszereket, hogy hatékonyabb és kevésbé invazív megközelítést biztosítsanak a fájdalom csillapítására. Ezenkívül az online terápiás lehetőségek fejlesztése és hatékonyságának igazolása segíthet elérhetővé tenni az ilyen típusú kezeléseket az olyan területeken élő fiatalok számára is, ahol ezek a terápiás lehetőségek nehezen elérhetőek.",
                                       style: MyTextStyles.bekezdes(context),
@@ -518,8 +529,8 @@ class _HomePageWidgetRegisztracioState
                                     ),
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.03),
+                                        MediaQuery.of(context).size.width *
+                                            0.03),
                                     Text(
                                       "Miért érdemes részt venned a kutatásban?",
                                       style: MyTextStyles.bethesdabekezdes(
@@ -527,8 +538,8 @@ class _HomePageWidgetRegisztracioState
                                     ),
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.01),
+                                        MediaQuery.of(context).size.width *
+                                            0.01),
                                     Text(
                                       "A legjobb dolog, amit tehetsz, hogy minél jobban megismered a saját fájdalmadat és tanulsz róla. Ugyanis minél jobban ismered a fájdalmadat, annál több mindent tudsz tenni azért, hogy jobban legyél! Mi ebben tudunk segíteni Neked. Magyarországon elsőként próbálhatsz ki akár több olyan online és személyes terápiát is, amelyeket kifejezetten funkcionális hasi fájdalmakkal élő serdülőknek fejlesztettünk ki.",
                                       style: MyTextStyles.bekezdes(context),
@@ -537,8 +548,8 @@ class _HomePageWidgetRegisztracioState
                                     ),
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.02),
+                                        MediaQuery.of(context).size.width *
+                                            0.02),
                                     Material(
                                       elevation: 5.0,
                                       // Set your desired elevation here
@@ -549,7 +560,7 @@ class _HomePageWidgetRegisztracioState
                                           color: AppColors.whitewhite,
                                           // Replace with your desired background color
                                           borderRadius:
-                                              BorderRadius.circular(13),
+                                          BorderRadius.circular(13),
                                           /* border: Border.all(
                                 color: AppColors.bethesdacolor,  // Outline with your custom Bethesda color
                                 width: 1,  // Outline thickness
@@ -558,15 +569,15 @@ class _HomePageWidgetRegisztracioState
                                         child: Padding(
                                           padding: EdgeInsets.all(
                                               MediaQuery.of(context)
-                                                      .size
-                                                      .width *
+                                                  .size
+                                                  .width *
                                                   0.01),
                                           // Add padding around the texts within the container
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             // Use the minimum space necessary to fit the children
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                             // Align texts to the start (left side)
                                             children: [
                                               Text(
@@ -578,8 +589,8 @@ class _HomePageWidgetRegisztracioState
                                               ),
                                               SizedBox(
                                                   height: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
+                                                      .size
+                                                      .width *
                                                       0.01),
                                               Table(
                                                 children: [
@@ -588,20 +599,20 @@ class _HomePageWidgetRegisztracioState
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
+                                                                context)
+                                                                .size
+                                                                .width *
                                                                 0.01),
                                                         child: Column(
                                                           crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                          CrossAxisAlignment
+                                                              .start,
                                                           children: [
                                                             Text(
                                                               "Milyen terápiákról van szó?",
                                                               style: MyTextStyles
                                                                   .bethesdabekezdes(
-                                                                      context),
+                                                                  context),
                                                               textAlign: TextAlign
                                                                   .justify, // This ensures the text is justified within the padding
                                                             ),
@@ -609,7 +620,7 @@ class _HomePageWidgetRegisztracioState
                                                               "Online hipnózis terápia, mely a hasi régióra fókuszál\nOnline mozgás-motivációs tréning (M3 Tréning)\nPszichoedukáció a krónikus hasi fájdalmakról\nInterdiszciplináris, multimodális fájdalomterápia",
                                                               style: MyTextStyles
                                                                   .bekezdes(
-                                                                      context),
+                                                                  context),
                                                               textAlign: TextAlign
                                                                   .justify, // This ensures the text is justified within the padding
                                                             ),
@@ -619,20 +630,20 @@ class _HomePageWidgetRegisztracioState
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
+                                                                context)
+                                                                .size
+                                                                .width *
                                                                 0.01),
                                                         child: Column(
                                                           crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                          CrossAxisAlignment
+                                                              .start,
                                                           children: [
                                                             Text(
                                                               "Hogy néz ki a folyamat?",
                                                               style: MyTextStyles
                                                                   .bethesdabekezdes(
-                                                                      context),
+                                                                  context),
                                                               textAlign: TextAlign
                                                                   .justify, // This ensures the text is justified within the padding
                                                             ),
@@ -640,7 +651,7 @@ class _HomePageWidgetRegisztracioState
                                                               "1. szakasz: első terápiás lehetőség 12 hétig\n2. szakasz: második terápiás lehetőség újabb 12 hétig\n+ 1 terápiás lehetőség, ha még a panaszok fennállnak: interdiszciplináris, multimodális fájdalomterápia",
                                                               style: MyTextStyles
                                                                   .bekezdes(
-                                                                      context),
+                                                                  context),
                                                               textAlign: TextAlign
                                                                   .justify, // This ensures the text is justified within the padding
                                                             ),
@@ -654,20 +665,20 @@ class _HomePageWidgetRegisztracioState
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
+                                                                context)
+                                                                .size
+                                                                .width *
                                                                 0.01),
                                                         child: Column(
                                                           crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                          CrossAxisAlignment
+                                                              .start,
                                                           children: [
                                                             Text(
                                                               "Meddig tart a kutatás?",
                                                               style: MyTextStyles
                                                                   .bethesdabekezdes(
-                                                                      context),
+                                                                  context),
                                                               textAlign: TextAlign
                                                                   .justify, // This ensures the text is justified within the padding
                                                             ),
@@ -675,7 +686,7 @@ class _HomePageWidgetRegisztracioState
                                                               "A kutatás teljes hossza 6+3 hónap, mely 2+1 szakaszra bontható",
                                                               style: MyTextStyles
                                                                   .bekezdes(
-                                                                      context),
+                                                                  context),
                                                               textAlign: TextAlign
                                                                   .justify, // This ensures the text is justified within the padding
                                                             ),
@@ -685,20 +696,20 @@ class _HomePageWidgetRegisztracioState
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
+                                                                context)
+                                                                .size
+                                                                .width *
                                                                 0.01),
                                                         child: Column(
                                                           crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                          CrossAxisAlignment
+                                                              .start,
                                                           children: [
                                                             Text(
                                                               "Hány alkalommal keresünk meg Téged a vizsgálat alatt?",
                                                               style: MyTextStyles
                                                                   .bethesdabekezdes(
-                                                                      context),
+                                                                  context),
                                                               textAlign: TextAlign
                                                                   .justify, // This ensures the text is justified within the padding
                                                             ),
@@ -706,7 +717,7 @@ class _HomePageWidgetRegisztracioState
                                                               "Tippelek: 12-18 alkalom",
                                                               style: MyTextStyles
                                                                   .bekezdes(
-                                                                      context),
+                                                                  context),
                                                               textAlign: TextAlign
                                                                   .justify, // This ensures the text is justified within the padding
                                                             ),
@@ -726,11 +737,11 @@ class _HomePageWidgetRegisztracioState
                                     ),
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.03),
+                                        MediaQuery.of(context).size.width *
+                                            0.03),
                                     Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: <Widget>[
                                         // First Row
                                         Row(
@@ -742,7 +753,7 @@ class _HomePageWidgetRegisztracioState
                                                   "A kutatás engedélyszáma:",
                                                   style: MyTextStyles
                                                       .bethesdabekezdes(
-                                                          context)),
+                                                      context)),
                                             ),
                                             Expanded(
                                               flex: 3,
@@ -755,8 +766,8 @@ class _HomePageWidgetRegisztracioState
                                         ),
                                         SizedBox(
                                             height: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                                .size
+                                                .width *
                                                 0.02),
 
                                         // Second Row
@@ -767,7 +778,7 @@ class _HomePageWidgetRegisztracioState
                                               child: Text("A kutatás kezdete:",
                                                   style: MyTextStyles
                                                       .bethesdabekezdes(
-                                                          context)),
+                                                      context)),
                                             ),
                                             Expanded(
                                               flex: 3,
@@ -779,8 +790,8 @@ class _HomePageWidgetRegisztracioState
                                         ),
                                         SizedBox(
                                             height: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                                .size
+                                                .width *
                                                 0.02),
 
                                         // Third Row
@@ -791,7 +802,7 @@ class _HomePageWidgetRegisztracioState
                                               child: Text("A bevonási időszak:",
                                                   style: MyTextStyles
                                                       .bethesdabekezdes(
-                                                          context)),
+                                                      context)),
                                             ),
                                             Expanded(
                                               flex: 3,
@@ -804,27 +815,101 @@ class _HomePageWidgetRegisztracioState
                                         ),
                                         SizedBox(
                                             height: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                                .size
+                                                .width *
                                                 0.03),
                                         Center(
                                           child: ResearcherCard(),
                                         ),
                                         SizedBox(
                                             height: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                                .size
+                                                .width *
                                                 0.02),
+                                        Center(child:ContactForm(),
+                                        ),
+                                        Stack(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                                                Text(
+                                                  "Te is szívesen részt vennél ebben a kutatásban?",
+                                                  textAlign: TextAlign.center,
+                                                  style: MyTextStyles.bethesdabekezdes(context),
+                                                ),
+                                                SizedBox(height: MediaQuery.of(context).size.width * 0.01),
+                                                Text(
+                                                  "Amennyiben igen, kattints a Medve feletti gombra!",
+                                                  style: MyTextStyles.bekezdes(context),
+                                                  textAlign: TextAlign.justify,
+                                                ),
+                                                SizedBox(height: MediaQuery.of(context).size.width * 0.1),
+                                                SizedBox(
+                                                    height: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                        0.05),
+                                              ],
+                                            ),
+                                            Positioned(
+                                              top: 0, // Adjust the 'top' value to position the animation correctly
+                                              right: 0,
+                                              left:0,
+                                              child: Lottie.asset(
+                                                'assets/images/utolsonyil.json',
+                                                // controller: _controller,
+                                                // onLoaded: (composition) {
+                                                //   // Configure the AnimationController with the duration of the Lottie file
+                                                //   _controller
+                                                //     ..duration = composition.duration
+                                                //     ..forward();
+                                                // },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Image.asset("assets/images/giff.gif"),
+                                        Image.asset("assets/images/probapro.json"),
 
                                         // Contact Form Centered
-                                        Center(
-                                          child: ContactForm(),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.03),
+                                        // Center(
+                                        //   child: ContactForm(),
+                                        // ),
+                                        // SizedBox(
+                                        //     height: MediaQuery.of(context)
+                                        //         .size
+                                        //         .width *
+                                        //         0.03),
+                                        //
+                                        // Text(
+                                        //     "Te is szívesen részt vennél ebben a kutatásban?",
+                                        //     textAlign: TextAlign.center,
+                                        //     // Center align text horizontally
+                                        //     style: MyTextStyles.bethesdabekezdes(context)),
+                                        // SizedBox(
+                                        //     height:
+                                        //     MediaQuery.of(context).size.width *
+                                        //         0.01),
+                                        // Text(
+                                        //   "Amennyiben igen, kattints a Medve feletti gombra!",
+                                        //   style: MyTextStyles.bekezdes(context),
+                                        //   textAlign: TextAlign
+                                        //       .justify, // This ensures the text is justified within the padding
+                                        // ),
+                                        //
+                                        // Lottie.asset(
+                                        //   'assets/images/anim2.json',
+                                        //   // controller: _controller,
+                                        //   // onLoaded: (composition) {
+                                        //   //   // Configure the AnimationController with the duration of the Lottie file
+                                        //   //   _controller
+                                        //   //     ..duration = composition.duration
+                                        //   //     ..forward();
+                                        //   // },
+                                        // ),
+
+
                                       ],
                                     )
                                   ],
@@ -873,8 +958,8 @@ class _HomePageWidgetRegisztracioState
                                   children: [
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.007),
+                                        MediaQuery.of(context).size.width *
+                                            0.007),
                                     // Space inside the card before text
                                     Text(
                                         "Te is szívesen részt vennél ebben a kutatásban?",
@@ -883,8 +968,8 @@ class _HomePageWidgetRegisztracioState
                                         style: MyTextStyles.bekezdes(context)),
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.007),
+                                        MediaQuery.of(context).size.width *
+                                            0.007),
                                     // Space between text and button
                                     ElevatedButton(
                                       onPressed: () {
@@ -897,8 +982,8 @@ class _HomePageWidgetRegisztracioState
                                       },
                                       style: ButtonStyle(
                                         backgroundColor:
-                                            MaterialStateProperty.all(
-                                                AppColors.bethesdacolor),
+                                        MaterialStateProperty.all(
+                                            AppColors.bethesdacolor),
                                         shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
                                           RoundedRectangleBorder(
@@ -911,7 +996,7 @@ class _HomePageWidgetRegisztracioState
                                           EdgeInsets.symmetric(
                                               vertical: 12,
                                               horizontal:
-                                                  24), // Adjust the padding as needed
+                                              24), // Adjust the padding as needed
                                         ), // Change the color to your desired color// Set the background color
                                       ),
                                       child: Text("Igen,\n részt veszek!",
@@ -920,8 +1005,8 @@ class _HomePageWidgetRegisztracioState
                                     ),
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.007),
+                                        MediaQuery.of(context).size.width *
+                                            0.007),
                                     // Space inside the card after button
                                   ],
                                 ),

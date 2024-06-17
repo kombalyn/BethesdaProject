@@ -276,65 +276,422 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       ),
                                     ),
                                 if (_isReordering)
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.3,
-                                    // Set the width to be narrower
-                                    child: ReorderableListView(
-                                      shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      onReorder: (int oldIndex, int newIndex) {
-                                        setState(() {
+                                          Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                          Container(
+                                          width:
+                                          (currentQuestion.two_column) ? MediaQuery.of(context).size.width * 0.45 : MediaQuery.of(context).size.width * 0.3,
+                                          // Set the width to be narrower
+                                          child:
+                                          (currentQuestion.two_column) ? ListView(
+                                          shrinkWrap: true,
+                                          physics: NeverScrollableScrollPhysics(),
+                                          /*onReorder: (int oldIndex, int newIndex) {
+                                          setState(() {
                                           if (newIndex > oldIndex) {
-                                            newIndex -= 1;
+                                          newIndex -= 1;
                                           }
                                           final item = _rankableOptions
                                               .removeAt(oldIndex);
                                           _rankableOptions.insert(
-                                              newIndex, item);
-                                        });
-                                      },
-                                      children: [
-                                        for (int index = 0;
-                                            index < _rankableOptions.length;
-                                            index++)
+                                          newIndex, item);
+                                          });
+                                          },*/
+                                          children: [
+                                          for (int index = 0;
+                                          index < _rankableOptions.length;
+                                          index++)
                                           Padding(
-                                            key: ValueKey(
-                                                _rankableOptions[index]),
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8.0, vertical: 4.0),
-                                            child: Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.4,
-                                              // Make the cells narrower
-                                              decoration: BoxDecoration(
-                                                color: AppColors.whitewhite,
-                                                // Background color for the container
-                                                border: Border.all(
-                                                    color: Colors.grey.shade600,
-                                                    width: 1.0),
-                                                // Border color and width
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        8.0), // Border radius
-                                              ),
-                                              child: ListTile(
-                                                title: Text(
-                                                  _rankableOptions[index],
-                                                  style: TextStyle(
-                                                      color: Colors.grey
-                                                          .shade800), // Text color
+                                          key: ValueKey(
+                                          _rankableOptions[index]),
+                                          padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0, vertical: 4.0),
+                                          child: // Adam tette be, kesobb kiveheto:
+                                          Row(
+                                          children: [
+                                          Container(
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width *
+                                          0.2,
+                                          // Make the cells narrower
+                                          decoration: BoxDecoration(
+                                          color: AppColors.whitewhite,
+                                          // Background color for the container
+                                          border: Border.all(
+                                          color: Colors.grey.shade600,
+                                          width: 1.0),
+                                          // Border color and width
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                          8.0), // Border radius
+                                          ),
+                                          child: ListTile(
+                                          title: Text(
+                                          _rankableOptions[index],
+                                          style: TextStyle(
+                                          color: Colors.grey
+                                              .shade800), // Text color
+                                          ),
+                                          tileColor: Colors.grey
+                                              .shade100, // Background color for the tile
+                                          ),
+                                          ),
+                                          if(currentQuestion.two_column)
+                                          Container(
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width *
+                                          0.2,
+                                          // Make the cells narrower
+                                          decoration: BoxDecoration(
+                                          color: AppColors.whitewhite,
+                                          // Background color for the container
+                                          border: Border.all(
+                                          color: Colors.grey.shade600,
+                                          width: 1.0),
+                                          // Border color and width
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                          8.0), // Border radius
+                                          ),
+                                          child: ListTile(
+                                          title: TextField(
+                                          style: TextStyle(
+                                          color: Colors.grey
+                                              .shade800), // Text color
+                                          ),
+                                          tileColor: Colors.grey
+                                              .shade100, // Background color for the tile
+                                          ),
+                                          ),
+
+                                          ],
+                                          ),
+
+                                          ),
+                                          ],
+                                          )
+                                              :
+                                          ReorderableListView(
+                                            shrinkWrap: true,
+                                            physics: NeverScrollableScrollPhysics(),
+                                            onReorder: (int oldIndex, int newIndex) {
+                                          setState(() {
+                                          if (newIndex > oldIndex) {
+                                          newIndex -= 1;
+                                          }
+                                          final item = _rankableOptions
+                                              .removeAt(oldIndex);
+                                          _rankableOptions.insert(
+                                          newIndex, item);
+                                          });
+                                          },
+                                            children: [
+                                              for (int index = 0;
+                                              index < _rankableOptions.length;
+                                              index++)
+                                                Padding(
+                                                  key: ValueKey(
+                                                      _rankableOptions[index]),
+                                                  padding: const EdgeInsets.symmetric(
+                                                      horizontal: 8.0, vertical: 4.0),
+                                                  child: // Adam tette be, kesobb kiveheto:
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        width: MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                            0.2,
+                                                        // Make the cells narrower
+                                                        decoration: BoxDecoration(
+                                                          color: AppColors.whitewhite,
+                                                          // Background color for the container
+                                                          border: Border.all(
+                                                              color: Colors.grey.shade600,
+                                                              width: 1.0),
+                                                          // Border color and width
+                                                          borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0), // Border radius
+                                                        ),
+                                                        child: ListTile(
+                                                          title: Text(
+                                                            _rankableOptions[index],
+                                                            style: TextStyle(
+                                                                color: Colors.grey
+                                                                    .shade800), // Text color
+                                                          ),
+                                                          tileColor: Colors.grey
+                                                              .shade100, // Background color for the tile
+                                                        ),
+                                                      ),
+                                                      if(currentQuestion.two_column)
+                                                        Container(
+                                                          width: MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                              0.2,
+                                                          // Make the cells narrower
+                                                          decoration: BoxDecoration(
+                                                            color: AppColors.whitewhite,
+                                                            // Background color for the container
+                                                            border: Border.all(
+                                                                color: Colors.grey.shade600,
+                                                                width: 1.0),
+                                                            // Border color and width
+                                                            borderRadius:
+                                                            BorderRadius.circular(
+                                                                8.0), // Border radius
+                                                          ),
+                                                          child: ListTile(
+                                                            title: TextField(
+                                                              style: TextStyle(
+                                                                  color: Colors.grey
+                                                                      .shade800), // Text color
+                                                            ),
+                                                            tileColor: Colors.grey
+                                                                .shade100, // Background color for the tile
+                                                          ),
+                                                        ),
+
+                                                    ],
+                                                  ),
+
                                                 ),
-                                                tileColor: Colors.grey
-                                                    .shade100, // Background color for the tile
+                                            ],
+                                          ),
+                                          ),
+
+    /*
+                                      Container(
+                                      width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                      // Set the width to be narrower
+                                      child:
+                                      ReorderableListView(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        onReorder: (int oldIndex, int newIndex) {
+                                          setState(() {
+                                            if (newIndex > oldIndex) {
+                                              newIndex -= 1;
+                                            }
+                                            final item = _rankableOptions
+                                                .removeAt(oldIndex);
+                                            _rankableOptions.insert(
+                                                newIndex, item);
+                                          });
+                                        },
+                                        children: [
+                                          for (int index = 0;
+                                          index < _rankableOptions.length;
+                                          index++)
+                                            Padding(
+                                              key: ValueKey(
+                                                  _rankableOptions[index]),
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 8.0, vertical: 4.0),
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.2,
+                                                // Make the cells narrower
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.whitewhite,
+                                                  // Background color for the container
+                                                  border: Border.all(
+                                                      color: Colors.grey.shade600,
+                                                      width: 1.0),
+                                                  // Border color and width
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                      8.0), // Border radius
+                                                ),
+                                                child: ListTile(
+                                                  title: TextField(
+                                                    style: TextStyle(
+                                                        color: Colors.grey
+                                                            .shade800), // Text color
+                                                  ),
+                                                  tileColor: Colors.grey
+                                                      .shade100, // Background color for the tile
+                                                ),
                                               ),
                                             ),
-                                          ),
+                                        ],
+                                      ),
+                                      ),
+
+                                       */
+
+
                                       ],
-                                    ),
+
+
+                                      ),
+                                  /*
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                      width:
+                                      (currentQuestion.two_column) ? MediaQuery.of(context).size.width * 0.45 : MediaQuery.of(context).size.width * 0.3,
+                                      // Set the width to be narrower
+                                      child:
+                                      ReorderableListView(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        onReorder: (int oldIndex, int newIndex) {
+                                          setState(() {
+                                            if (newIndex > oldIndex) {
+                                              newIndex -= 1;
+                                            }
+                                            final item = _rankableOptions
+                                                .removeAt(oldIndex);
+                                            _rankableOptions.insert(
+                                                newIndex, item);
+                                          });
+                                        },
+                                        children: [
+                                          for (int index = 0;
+                                          index < _rankableOptions.length;
+                                          index++)
+                                            Padding(
+                                              key: ValueKey(
+                                                  _rankableOptions[index]),
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 8.0, vertical: 4.0),
+                                              child: // Adam tette be, kesobb kiveheto:
+                                              Row(
+                                              children: [
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                      0.2,
+                                                  // Make the cells narrower
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.whitewhite,
+                                                    // Background color for the container
+                                                    border: Border.all(
+                                                        color: Colors.grey.shade600,
+                                                        width: 1.0),
+                                                    // Border color and width
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        8.0), // Border radius
+                                                  ),
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      _rankableOptions[index],
+                                                      style: TextStyle(
+                                                          color: Colors.grey
+                                                              .shade800), // Text color
+                                                    ),
+                                                    tileColor: Colors.grey
+                                                        .shade100, // Background color for the tile
+                                                  ),
+                                                ),
+                                                if(currentQuestion.two_column)
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                      0.2,
+                                                  // Make the cells narrower
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.whitewhite,
+                                                    // Background color for the container
+                                                    border: Border.all(
+                                                        color: Colors.grey.shade600,
+                                                        width: 1.0),
+                                                    // Border color and width
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        8.0), // Border radius
+                                                  ),
+                                                  child: ListTile(
+                                                    title: TextField(
+                                                      style: TextStyle(
+                                                          color: Colors.grey
+                                                              .shade800), // Text color
+                                                    ),
+                                                    tileColor: Colors.grey
+                                                        .shade100, // Background color for the tile
+                                                  ),
+                                                ),
+
+                                              ],
+                                               ),
+
+                                            ),
+                                        ],
+                                      ),
+                                      ),
+
+
+
+
+
+                                      ],
+
+
                                   ),
+                                    */
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.02),
+                               // Text(
+                               //    'Szerkesztés',
+                               //    style: TextStyle(
+                               //        color: Colors.grey.shade800),
+                               //  ),
+                                // ADAM tette be. Kiveheto majd
+                                /*GridView.count(
+                                  primary: false,
+                                  padding: const EdgeInsets.all(20),
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10,
+                                  crossAxisCount: 2,
+                                  children: <Widget>[
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      color: Colors.teal[100],
+                                      child: const Text("He'd have you all unravel at the"),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      color: Colors.teal[200],
+                                      child: const Text('Heed not the rabble'),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      color: Colors.teal[300],
+                                      child: const Text('Sound of screams but the'),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      color: Colors.teal[400],
+                                      child: const Text('Who scream'),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      color: Colors.teal[500],
+                                      child: const Text('Revolution is coming...'),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      color: Colors.teal[600],
+                                      child: const Text('Revolution, they...'),
+                                    ),
+                                  ],
+                                ),*/
+
+
                                 SizedBox(
                                     height: MediaQuery.of(context).size.width *
                                         0.02),
@@ -406,7 +763,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         ),
                                       ),
                                       child: Text(
-                                        'Sorbarendezés mentése',
+                                        'Válasz mentése',
                                         style: TextStyle(
                                             color: AppColors.whitewhite),
                                       ),
@@ -832,8 +1189,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.lightshade,
                               child: Container(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.03,
+                                height: MediaQuery.of(context).size.width * 0.03,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(

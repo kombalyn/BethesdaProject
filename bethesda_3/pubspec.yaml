@@ -53,6 +53,7 @@ dependencies:
   mailer: ^6.1.0  # Add the mailer package here, adjust the version as needed
   flutter_form_builder: ^7.3.0  # Check for the latest version on pub.dev
   gif: ^2.3.0
+  lottie: ^2.2.0
 
 
 dev_dependencies:
@@ -131,6 +132,19 @@ flutter:
     - assets/images/6icon_m.png
     - assets/images/7icon_m.png
     - assets/images/probaelsohatter.png
+    - assets/images/nyil2.png
+    - assets/images/nyil3.png
+    - assets/images/nyilanim.json
+    - assets/images/nyilanim2.json
+    - assets/images/anim.json
+    - assets/images/anim2.json
+    - assets/images/nyil1.json
+    - assets/images/utolsonyil.json
+    - assets/images/giff.gif
+    - assets/images/gifke.gif
+    - assets/images/javitott.gif
+    - assets/images/proba.json
+    - assets/images/probapro.json
 
 
     - assets/html/audio_player.html
