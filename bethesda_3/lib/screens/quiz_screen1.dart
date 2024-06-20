@@ -91,16 +91,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                   ),
                 ),
               ),
-
-              // Expanded(
-              //   child: Text(
-              //     "Bethesda Gyermekkórház Fájdalomkezelő Centrum",
-              //     style: MyTextStyles.bekezdes(context),
-              //     overflow: TextOverflow.ellipsis,
-              //   ),
-              // ),
               Spacer(),
-
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
@@ -139,8 +130,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               alignment: Alignment.center,
                               children: [
                                 Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.55,
+                                  width: MediaQuery.of(context).size.width * 0.55,
                                   // Fixed width for the container
                                   margin: EdgeInsets.only(top: 20.0),
                                   padding: EdgeInsets.all(16.0),
@@ -183,7 +173,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         value: progressValue,
                                         backgroundColor: AppColors.whitewhite,
                                         valueColor:
-                                            AlwaysStoppedAnimation<Color>(
+                                        AlwaysStoppedAnimation<Color>(
                                           Colors.yellow,
                                         ),
                                         minHeight: 20.0,
@@ -194,6 +184,43 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               ],
                             ),
                           ),
+                          if (currentQuestion.hasInfoButton) ...[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Nincs ötleted? Szeretnéd, hogy segítsek?",
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.grey.shade800, // Change this to your desired color
+                                  ),
+                                ),
+                                SizedBox(width: 8.0), // A
+                                IconButton(
+                                  icon: Icon(Icons.info_outline),
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('Information'),
+                                          content: Text(currentQuestion.infoButtonText),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: Text('Close'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
                           SizedBox(height: 20.0),
                           if (currentQuestion.requiresRanking) ...[
                             Column(
@@ -210,7 +237,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         itemCount: _optionControllers.length,
                                         itemBuilder: (context, index) {
                                           var controller =
-                                              _optionControllers[index];
+                                          _optionControllers[index];
                                           return Padding(
                                             key: ValueKey(controller),
                                             padding: const EdgeInsets.symmetric(
@@ -219,33 +246,33 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                               children: [
                                                 Container(
                                                   width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
+                                                      .size
+                                                      .width *
                                                       0.4,
                                                   // Make the cells narrower
                                                   child: TextField(
                                                     controller: controller,
                                                     decoration: InputDecoration(
                                                       labelText:
-                                                          'Az ötleted...',
+                                                      'Az ötleted...',
                                                       labelStyle: TextStyle(
                                                           color: Colors
                                                               .grey.shade600),
                                                       border:
-                                                          OutlineInputBorder(
+                                                      OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color: Colors.green,
                                                             width: 2.0),
                                                       ),
                                                       focusedBorder:
-                                                          OutlineInputBorder(
+                                                      OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color:
-                                                                Colors.yellow,
+                                                            Colors.yellow,
                                                             width: 2.0),
                                                       ),
                                                       enabledBorder:
-                                                          OutlineInputBorder(
+                                                      OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color: Colors
                                                                 .grey.shade600,
@@ -276,422 +303,237 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       ),
                                     ),
                                 if (_isReordering)
-                                          Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                          Container(
-                                          width:
-                                          (currentQuestion.two_column) ? MediaQuery.of(context).size.width * 0.45 : MediaQuery.of(context).size.width * 0.3,
-                                          // Set the width to be narrower
-                                          child:
-                                          (currentQuestion.two_column) ? ListView(
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width:
+                                        (currentQuestion.two_column)
+                                            ? MediaQuery.of(context).size.width * 0.45
+                                            : MediaQuery.of(context).size.width * 0.3,
+                                        // Set the width to be narrower
+                                        child: (currentQuestion.two_column)
+                                            ? ListView(
                                           shrinkWrap: true,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          /*onReorder: (int oldIndex, int newIndex) {
-                                          setState(() {
-                                          if (newIndex > oldIndex) {
-                                          newIndex -= 1;
-                                          }
-                                          final item = _rankableOptions
-                                              .removeAt(oldIndex);
-                                          _rankableOptions.insert(
-                                          newIndex, item);
-                                          });
-                                          },*/
+                                          physics:
+                                          NeverScrollableScrollPhysics(),
                                           children: [
-                                          for (int index = 0;
-                                          index < _rankableOptions.length;
-                                          index++)
-                                          Padding(
-                                          key: ValueKey(
-                                          _rankableOptions[index]),
-                                          padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0, vertical: 4.0),
-                                          child: // Adam tette be, kesobb kiveheto:
-                                          Row(
-                                          children: [
-                                          Container(
-                                          width: MediaQuery.of(context)
-                                              .size
-                                              .width *
-                                          0.2,
-                                          // Make the cells narrower
-                                          decoration: BoxDecoration(
-                                          color: AppColors.whitewhite,
-                                          // Background color for the container
-                                          border: Border.all(
-                                          color: Colors.grey.shade600,
-                                          width: 1.0),
-                                          // Border color and width
-                                          borderRadius:
-                                          BorderRadius.circular(
-                                          8.0), // Border radius
-                                          ),
-                                          child: ListTile(
-                                          title: Text(
-                                          _rankableOptions[index],
-                                          style: TextStyle(
-                                          color: Colors.grey
-                                              .shade800), // Text color
-                                          ),
-                                          tileColor: Colors.grey
-                                              .shade100, // Background color for the tile
-                                          ),
-                                          ),
-                                          if(currentQuestion.two_column)
-                                          Container(
-                                          width: MediaQuery.of(context)
-                                              .size
-                                              .width *
-                                          0.2,
-                                          // Make the cells narrower
-                                          decoration: BoxDecoration(
-                                          color: AppColors.whitewhite,
-                                          // Background color for the container
-                                          border: Border.all(
-                                          color: Colors.grey.shade600,
-                                          width: 1.0),
-                                          // Border color and width
-                                          borderRadius:
-                                          BorderRadius.circular(
-                                          8.0), // Border radius
-                                          ),
-                                          child: ListTile(
-                                          title: TextField(
-                                          style: TextStyle(
-                                          color: Colors.grey
-                                              .shade800), // Text color
-                                          ),
-                                          tileColor: Colors.grey
-                                              .shade100, // Background color for the tile
-                                          ),
-                                          ),
-
-                                          ],
-                                          ),
-
-                                          ),
-                                          ],
-                                          )
-                                              :
-                                          ReorderableListView(
-                                            shrinkWrap: true,
-                                            physics: NeverScrollableScrollPhysics(),
-                                            onReorder: (int oldIndex, int newIndex) {
-                                          setState(() {
-                                          if (newIndex > oldIndex) {
-                                          newIndex -= 1;
-                                          }
-                                          final item = _rankableOptions
-                                              .removeAt(oldIndex);
-                                          _rankableOptions.insert(
-                                          newIndex, item);
-                                          });
-                                          },
-                                            children: [
-                                              for (int index = 0;
-                                              index < _rankableOptions.length;
-                                              index++)
-                                                Padding(
-                                                  key: ValueKey(
-                                                      _rankableOptions[index]),
-                                                  padding: const EdgeInsets.symmetric(
-                                                      horizontal: 8.0, vertical: 4.0),
-                                                  child: // Adam tette be, kesobb kiveheto:
-                                                  Row(
-                                                    children: [
+                                            for (int index = 0;
+                                            index <
+                                                _rankableOptions
+                                                    .length;
+                                            index++)
+                                              Padding(
+                                                key: ValueKey(
+                                                    _rankableOptions[
+                                                    index]),
+                                                padding: const EdgeInsets
+                                                    .symmetric(
+                                                    horizontal: 8.0,
+                                                    vertical: 4.0),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      width: MediaQuery.of(
+                                                          context)
+                                                          .size
+                                                          .width *
+                                                          0.2,
+                                                      // Make the cells narrower
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        color: AppColors
+                                                            .whitewhite,
+                                                        // Background color for the container
+                                                        border:
+                                                        Border.all(
+                                                          color: Colors
+                                                              .grey
+                                                              .shade600,
+                                                          width: 1.0,
+                                                        ),
+                                                        // Border color and width
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            8.0), // Border radius
+                                                      ),
+                                                      child: ListTile(
+                                                        title: Text(
+                                                          _rankableOptions[
+                                                          index],
+                                                          style: TextStyle(
+                                                              color: Colors
+                                                                  .grey
+                                                                  .shade800), // Text color
+                                                        ),
+                                                        tileColor: Colors
+                                                            .grey.shade100, // Background color for the tile
+                                                      ),
+                                                    ),
+                                                    if (currentQuestion
+                                                        .two_column)
                                                       Container(
-                                                        width: MediaQuery.of(context)
+                                                        width: MediaQuery.of(
+                                                            context)
                                                             .size
                                                             .width *
                                                             0.2,
                                                         // Make the cells narrower
-                                                        decoration: BoxDecoration(
-                                                          color: AppColors.whitewhite,
+                                                        decoration:
+                                                        BoxDecoration(
+                                                          color: AppColors
+                                                              .whitewhite,
                                                           // Background color for the container
-                                                          border: Border.all(
-                                                              color: Colors.grey.shade600,
-                                                              width: 1.0),
+                                                          border:
+                                                          Border.all(
+                                                            color: Colors
+                                                                .grey
+                                                                .shade600,
+                                                            width: 1.0,
+                                                          ),
                                                           // Border color and width
                                                           borderRadius:
-                                                          BorderRadius.circular(
+                                                          BorderRadius
+                                                              .circular(
                                                               8.0), // Border radius
                                                         ),
                                                         child: ListTile(
-                                                          title: Text(
-                                                            _rankableOptions[index],
+                                                          title:
+                                                          TextField(
                                                             style: TextStyle(
-                                                                color: Colors.grey
+                                                                color: Colors
+                                                                    .grey
                                                                     .shade800), // Text color
                                                           ),
-                                                          tileColor: Colors.grey
-                                                              .shade100, // Background color for the tile
+                                                          tileColor: Colors
+                                                              .grey.shade100, // Background color for the tile
                                                         ),
                                                       ),
-                                                      if(currentQuestion.two_column)
-                                                        Container(
-                                                          width: MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                              0.2,
-                                                          // Make the cells narrower
-                                                          decoration: BoxDecoration(
-                                                            color: AppColors.whitewhite,
-                                                            // Background color for the container
-                                                            border: Border.all(
-                                                                color: Colors.grey.shade600,
-                                                                width: 1.0),
-                                                            // Border color and width
-                                                            borderRadius:
-                                                            BorderRadius.circular(
-                                                                8.0), // Border radius
-                                                          ),
-                                                          child: ListTile(
-                                                            title: TextField(
-                                                              style: TextStyle(
-                                                                  color: Colors.grey
-                                                                      .shade800), // Text color
-                                                            ),
-                                                            tileColor: Colors.grey
-                                                                .shade100, // Background color for the tile
-                                                          ),
-                                                        ),
-
-                                                    ],
-                                                  ),
-
-                                                ),
-                                            ],
-                                          ),
-                                          ),
-
-    /*
-                                      Container(
-                                      width:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                      // Set the width to be narrower
-                                      child:
-                                      ReorderableListView(
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        onReorder: (int oldIndex, int newIndex) {
-                                          setState(() {
-                                            if (newIndex > oldIndex) {
-                                              newIndex -= 1;
-                                            }
-                                            final item = _rankableOptions
-                                                .removeAt(oldIndex);
-                                            _rankableOptions.insert(
-                                                newIndex, item);
-                                          });
-                                        },
-                                        children: [
-                                          for (int index = 0;
-                                          index < _rankableOptions.length;
-                                          index++)
-                                            Padding(
-                                              key: ValueKey(
-                                                  _rankableOptions[index]),
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 8.0, vertical: 4.0),
-                                              child: Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                    0.2,
-                                                // Make the cells narrower
-                                                decoration: BoxDecoration(
-                                                  color: AppColors.whitewhite,
-                                                  // Background color for the container
-                                                  border: Border.all(
-                                                      color: Colors.grey.shade600,
-                                                      width: 1.0),
-                                                  // Border color and width
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      8.0), // Border radius
-                                                ),
-                                                child: ListTile(
-                                                  title: TextField(
-                                                    style: TextStyle(
-                                                        color: Colors.grey
-                                                            .shade800), // Text color
-                                                  ),
-                                                  tileColor: Colors.grey
-                                                      .shade100, // Background color for the tile
+                                                  ],
                                                 ),
                                               ),
-                                            ),
-                                        ],
-                                      ),
-                                      ),
-
-                                       */
-
-
-                                      ],
-
-
-                                      ),
-                                  /*
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                      width:
-                                      (currentQuestion.two_column) ? MediaQuery.of(context).size.width * 0.45 : MediaQuery.of(context).size.width * 0.3,
-                                      // Set the width to be narrower
-                                      child:
-                                      ReorderableListView(
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        onReorder: (int oldIndex, int newIndex) {
-                                          setState(() {
-                                            if (newIndex > oldIndex) {
-                                              newIndex -= 1;
-                                            }
-                                            final item = _rankableOptions
-                                                .removeAt(oldIndex);
-                                            _rankableOptions.insert(
-                                                newIndex, item);
-                                          });
-                                        },
-                                        children: [
-                                          for (int index = 0;
-                                          index < _rankableOptions.length;
-                                          index++)
-                                            Padding(
-                                              key: ValueKey(
-                                                  _rankableOptions[index]),
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 8.0, vertical: 4.0),
-                                              child: // Adam tette be, kesobb kiveheto:
-                                              Row(
-                                              children: [
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      0.2,
-                                                  // Make the cells narrower
-                                                  decoration: BoxDecoration(
-                                                    color: AppColors.whitewhite,
-                                                    // Background color for the container
-                                                    border: Border.all(
-                                                        color: Colors.grey.shade600,
-                                                        width: 1.0),
-                                                    // Border color and width
-                                                    borderRadius:
-                                                    BorderRadius.circular(
-                                                        8.0), // Border radius
-                                                  ),
-                                                  child: ListTile(
-                                                    title: Text(
-                                                      _rankableOptions[index],
-                                                      style: TextStyle(
-                                                          color: Colors.grey
-                                                              .shade800), // Text color
+                                          ],
+                                        )
+                                            : ReorderableListView(
+                                          shrinkWrap: true,
+                                          physics:
+                                          NeverScrollableScrollPhysics(),
+                                          onReorder: (int oldIndex,
+                                              int newIndex) {
+                                            setState(() {
+                                              if (newIndex > oldIndex) {
+                                                newIndex -= 1;
+                                              }
+                                              final item =
+                                              _rankableOptions
+                                                  .removeAt(
+                                                  oldIndex);
+                                              _rankableOptions.insert(
+                                                  newIndex, item);
+                                            });
+                                          },
+                                          children: [
+                                            for (int index = 0;
+                                            index <
+                                                _rankableOptions
+                                                    .length;
+                                            index++)
+                                              Padding(
+                                                key: ValueKey(
+                                                    _rankableOptions[
+                                                    index]),
+                                                padding: const EdgeInsets
+                                                    .symmetric(
+                                                    horizontal: 8.0,
+                                                    vertical: 4.0),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      width: MediaQuery.of(
+                                                          context)
+                                                          .size
+                                                          .width *
+                                                          0.2,
+                                                      // Make the cells narrower
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        color: AppColors
+                                                            .whitewhite,
+                                                        // Background color for the container
+                                                        border:
+                                                        Border.all(
+                                                          color: Colors
+                                                              .grey
+                                                              .shade600,
+                                                          width: 1.0,
+                                                        ),
+                                                        // Border color and width
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            8.0), // Border radius
+                                                      ),
+                                                      child: ListTile(
+                                                        title: Text(
+                                                          _rankableOptions[
+                                                          index],
+                                                          style: TextStyle(
+                                                              color: Colors
+                                                                  .grey
+                                                                  .shade800), // Text color
+                                                        ),
+                                                        tileColor: Colors
+                                                            .grey.shade100, // Background color for the tile
+                                                      ),
                                                     ),
-                                                    tileColor: Colors.grey
-                                                        .shade100, // Background color for the tile
-                                                  ),
+                                                    if (currentQuestion
+                                                        .two_column)
+                                                      Container(
+                                                        width: MediaQuery.of(
+                                                            context)
+                                                            .size
+                                                            .width *
+                                                            0.2,
+                                                        // Make the cells narrower
+                                                        decoration:
+                                                        BoxDecoration(
+                                                          color: AppColors
+                                                              .whitewhite,
+                                                          // Background color for the container
+                                                          border:
+                                                          Border.all(
+                                                            color: Colors
+                                                                .grey
+                                                                .shade600,
+                                                            width: 1.0,
+                                                          ),
+                                                          // Border color and width
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              8.0), // Border radius
+                                                        ),
+                                                        child: ListTile(
+                                                          title:
+                                                          TextField(
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade800), // Text color
+                                                          ),
+                                                          tileColor: Colors
+                                                              .grey.shade100, // Background color for the tile
+                                                        ),
+                                                      ),
+                                                  ],
                                                 ),
-                                                if(currentQuestion.two_column)
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      0.2,
-                                                  // Make the cells narrower
-                                                  decoration: BoxDecoration(
-                                                    color: AppColors.whitewhite,
-                                                    // Background color for the container
-                                                    border: Border.all(
-                                                        color: Colors.grey.shade600,
-                                                        width: 1.0),
-                                                    // Border color and width
-                                                    borderRadius:
-                                                    BorderRadius.circular(
-                                                        8.0), // Border radius
-                                                  ),
-                                                  child: ListTile(
-                                                    title: TextField(
-                                                      style: TextStyle(
-                                                          color: Colors.grey
-                                                              .shade800), // Text color
-                                                    ),
-                                                    tileColor: Colors.grey
-                                                        .shade100, // Background color for the tile
-                                                  ),
-                                                ),
-
-                                              ],
-                                               ),
-
-                                            ),
-                                        ],
+                                              ),
+                                          ],
+                                        ),
                                       ),
-                                      ),
-
-
-
-
-
-                                      ],
-
-
+                                    ],
                                   ),
-                                    */
-                                SizedBox(
-                                    height: MediaQuery.of(context).size.width *
-                                        0.02),
-                               // Text(
-                               //    'Szerkesztés',
-                               //    style: TextStyle(
-                               //        color: Colors.grey.shade800),
-                               //  ),
-                                // ADAM tette be. Kiveheto majd
-                                /*GridView.count(
-                                  primary: false,
-                                  padding: const EdgeInsets.all(20),
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10,
-                                  crossAxisCount: 2,
-                                  children: <Widget>[
-                                    Container(
-                                      padding: const EdgeInsets.all(8),
-                                      color: Colors.teal[100],
-                                      child: const Text("He'd have you all unravel at the"),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(8),
-                                      color: Colors.teal[200],
-                                      child: const Text('Heed not the rabble'),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(8),
-                                      color: Colors.teal[300],
-                                      child: const Text('Sound of screams but the'),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(8),
-                                      color: Colors.teal[400],
-                                      child: const Text('Who scream'),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(8),
-                                      color: Colors.teal[500],
-                                      child: const Text('Revolution is coming...'),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(8),
-                                      color: Colors.teal[600],
-                                      child: const Text('Revolution, they...'),
-                                    ),
-                                  ],
-                                ),*/
-
-
                                 SizedBox(
                                     height: MediaQuery.of(context).size.width *
                                         0.02),
@@ -708,7 +550,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       onPressed: () {
                                         setState(() {
                                           _isReordering =
-                                              false; // Switch back to editing mode
+                                          false; // Switch back to editing mode
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -718,7 +560,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         textStyle: TextStyle(fontSize: 20.0),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(4.0),
+                                          BorderRadius.circular(4.0),
                                         ),
                                       ),
                                       child: Text(
@@ -749,7 +591,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         if (quizProvider1.isQuizFinished) {
                                           Navigator.of(context)
                                               .pushReplacementNamed(
-                                                  ResultScreen1.routeName);
+                                              ResultScreen1.routeName);
                                         }
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -759,7 +601,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         textStyle: TextStyle(fontSize: 20.0),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(4.0),
+                                          BorderRadius.circular(4.0),
                                         ),
                                       ),
                                       child: Text(
@@ -792,7 +634,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         textStyle: TextStyle(fontSize: 20.0),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(4.0),
+                                          BorderRadius.circular(4.0),
                                         ),
                                       ),
                                       child: Text(
@@ -819,11 +661,11 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         setState(() {
                                           _rankableOptions = _optionControllers
                                               .map((controller) =>
-                                                  controller.text)
+                                          controller.text)
                                               .where((text) => text.isNotEmpty)
                                               .toList();
                                           _isReordering =
-                                              true; // Toggle reordering state
+                                          true; // Toggle reordering state
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -833,7 +675,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         textStyle: TextStyle(fontSize: 20.0),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(4.0),
+                                          BorderRadius.circular(4.0),
                                         ),
                                       ),
                                       child: Text(
@@ -845,233 +687,201 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   ),
                               ],
                             ),
-                          ] else
-                            ...currentQuestion.answers.map((answer) {
-                              if (answer.isScale) {
-                                return Column(
-                                  children: [
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.width *
-                                                0.02),
-                                    Slider(
-                                      value: _sliderValue,
-                                      min: 0.0,
-                                      max: 10.0,
-                                      divisions: 10,
-                                      label: _sliderValue.round().toString(),
-                                      onChanged: (double value) {
-                                        setState(() {
-                                          _sliderValue = value;
-                                        });
-                                      },
-                                      activeColor: Colors.yellow,
-                                      // Color of the active portion of the slider
-                                      inactiveColor: AppColors.whitewhite,
-                                      // Color of the inactive portion of the slider
-                                      thumbColor: Colors.grey.shade600,
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.width *
-                                                0.02),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: AppColors.whitewhite,
-                                          // Outline color
-                                          width: 2.0, // Outline width
-                                        ),
-                                        borderRadius: BorderRadius.circular(
-                                            4.0), // Border radius to match the button
-                                      ),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          quizProvider1.answerQuestion(
-                                              answer.nextQuestionIndex);
-                                          _scrollToTop(); // Scroll to top when question changes
-                                          if (quizProvider1.isQuizFinished) {
-                                            Navigator.of(context)
-                                                .pushReplacementNamed(
-                                                    ResultScreen1.routeName);
-                                          }
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: AppColors.yellow,
-                                          // Background color
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 24.0, vertical: 12.0),
-                                          // Button padding
-                                          textStyle: TextStyle(fontSize: 20.0),
-                                          // Text size
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                4.0), // Border radius to match the container
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Tovább',
-                                          style: TextStyle(
-                                              color: AppColors
-                                                  .whitewhite), // Text color
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                          ] else if (currentQuestion.requiresRadioOptions) ...[
+                            Column(
+                              children: currentQuestion.radioOptions.map((radioOption) {
+                                int index = currentQuestion.radioOptions.indexOf(radioOption);
+                                return RadioListTile(
+                                  title: Text(radioOption.text),
+                                  value: index,
+                                  groupValue: _selectedAnswerIndex,
+                                  onChanged: (int? value) {
+                                    setState(() {
+                                      _selectedAnswerIndex = value!;
+                                    });
+                                  },
                                 );
-                              } else if (answer.isVideo) {
-                                return Column(
-                                  children: [
-                                    Center(
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        // Adjust the radius as needed
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                20.0), // Same border radius as ClipRRect
-                                          ),
-                                          child: SizedBox(
-                                            child: HtmlWidget(
-                                              '<video controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="${answer.video}"></video>',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.width *
-                                                0.02),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: AppColors.whitewhite,
-                                          // Outline color
-                                          width: 2.0, // Outline width
-                                        ),
-                                        borderRadius: BorderRadius.circular(
-                                            4.0), // Border radius to match the button
-                                      ),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          quizProvider1.answerQuestion(
-                                              answer.nextQuestionIndex);
-                                          _scrollToTop(); // Scroll to top when question changes
-                                          if (quizProvider1.isQuizFinished) {
-                                            Navigator.of(context)
-                                                .pushReplacementNamed(
-                                                    ResultScreen1.routeName);
-                                          }
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: AppColors.yellow,
-                                          // Background color
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 24.0, vertical: 12.0),
-                                          // Button padding
-                                          textStyle: TextStyle(fontSize: 20.0),
-                                          // Text size
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                4.0), // Border radius to match the container
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Megnéztem',
-                                          style: TextStyle(
-                                              color: AppColors
-                                                  .whitewhite), // Text color
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              }
+                              }).toList(),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (_selectedAnswerIndex != -1) {
+                                  quizProvider1.answerQuestion(
+                                      currentQuestion.radioOptions[_selectedAnswerIndex].nextQuestionIndex);
+                                  _scrollToTop(); // Scroll to top when question changes
+                                  if (quizProvider1.isQuizFinished) {
+                                    Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
+                                  }
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: AppColors.yellow,
+                                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                textStyle: TextStyle(fontSize: 20.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                ),
+                              ),
+                              child: Text(
+                                'Tovább',
+                                style: TextStyle(color: AppColors.whitewhite),
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.width * 0.01,
+                            ),
+                          ] else ...currentQuestion.answers.map((answer) {
+                            if (answer.isScale) {
                               return Column(
                                 children: [
-                                  Column(
-                                    children: quizProvider1
-                                        .currentQuestion.answers
-                                        .map((answer) {
-                                      int index = quizProvider1
-                                          .currentQuestion.answers
-                                          .indexOf(answer);
-                                      return RadioListTile(
-                                        title: Text(answer.text),
-                                        value: index,
-                                        groupValue: _selectedAnswerIndex,
-                                        onChanged: (int? value) {
-                                          setState(() {
-                                            _selectedAnswerIndex = value!;
-                                          });
-                                        },
-                                      );
-                                    }).toList(),
+                                  SizedBox(
+                                      height: MediaQuery.of(context).size.width *
+                                          0.02),
+                                  Slider(
+                                    value: _sliderValue,
+                                    min: 0.0,
+                                    max: 10.0,
+                                    divisions: 10,
+                                    label: _sliderValue.round().toString(),
+                                    onChanged: (double value) {
+                                      setState(() {
+                                        _sliderValue = value;
+                                      });
+                                    },
+                                    activeColor: Colors.yellow,
+                                    // Color of the active portion of the slider
+                                    inactiveColor: AppColors.whitewhite,
+                                    // Color of the inactive portion of the slider
+                                    thumbColor: Colors.grey.shade600,
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      if (_selectedAnswerIndex != -1) {
+                                  SizedBox(
+                                      height: MediaQuery.of(context).size.width *
+                                          0.02),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: AppColors.whitewhite,
+                                        // Outline color
+                                        width: 2.0, // Outline width
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                          4.0), // Border radius to match the button
+                                    ),
+                                    child: ElevatedButton(
+                                      onPressed: () {
                                         quizProvider1.answerQuestion(
-                                            quizProvider1
-                                                .currentQuestion
-                                                .answers[_selectedAnswerIndex]
-                                                .nextQuestionIndex);
+                                            answer.nextQuestionIndex);
                                         _scrollToTop(); // Scroll to top when question changes
                                         if (quizProvider1.isQuizFinished) {
                                           Navigator.of(context)
                                               .pushReplacementNamed(
-                                                  ResultScreen1.routeName);
+                                              ResultScreen1.routeName);
                                         }
-                                      }
-                                    },
-                                    style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty
-                                          .resolveWith<Color>(
-                                        (Set<MaterialState> states) {
-                                          if (states.contains(
-                                              MaterialState.pressed)) {
-                                            return Colors
-                                                .yellow; // Background color when clicked
-                                          } else if (states.contains(
-                                              MaterialState.hovered)) {
-                                            return Colors
-                                                .yellow; // Background color when hovered
-                                          } else {
-                                            return Colors
-                                                .white; // Default background color
-                                          }
-                                        },
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: AppColors.yellow,
+                                        // Background color
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24.0, vertical: 12.0),
+                                        // Button padding
+                                        textStyle: TextStyle(fontSize: 20.0),
+                                        // Text size
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              4.0), // Border radius to match the container
+                                        ),
                                       ),
-                                      foregroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                        Colors.grey.shade800,
-                                      ),
-                                      overlayColor:
-                                          MaterialStateProperty.all<Color>(
-                                        Colors.yellow.withOpacity(
-                                            0.3), // Splash color on hover/click
+                                      child: Text(
+                                        'Tovább',
+                                        style: TextStyle(
+                                            color: AppColors
+                                                .whitewhite), // Text color
                                       ),
                                     ),
-                                    child: Text('Tovább'),
-                                  ),
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.width *
-                                        0.01,
                                   ),
                                 ],
                               );
-                            }).toList(),
+                            } else if (answer.isVideo) {
+                              return Column(
+                                children: [
+                                  Center(
+                                    child: ClipRRect(
+                                      borderRadius:
+                                      BorderRadius.circular(20.0),
+                                      // Adjust the radius as needed
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              20.0), // Same border radius as ClipRRect
+                                        ),
+                                        child: SizedBox(
+                                          child: HtmlWidget(
+                                            '<video controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="${answer.video}"></video>',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      height:
+                                      MediaQuery.of(context).size.width *
+                                          0.02),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.2,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: AppColors.whitewhite,
+                                        // Outline color
+                                        width: 2.0, // Outline width
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                          4.0), // Border radius to match the button
+                                    ),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        quizProvider1.answerQuestion(
+                                            answer.nextQuestionIndex);
+                                        _scrollToTop(); // Scroll to top when question changes
+                                        if (quizProvider1.isQuizFinished) {
+                                          Navigator.of(context)
+                                              .pushReplacementNamed(
+                                              ResultScreen1.routeName);
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: AppColors.yellow,
+                                        // Background color
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24.0, vertical: 12.0),
+                                        // Button padding
+                                        textStyle: TextStyle(fontSize: 20.0),
+                                        // Text size
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              4.0), // Border radius to match the container
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'Megnéztem',
+                                        style: TextStyle(
+                                            color: AppColors
+                                                .whitewhite), // Text color
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }
+                            return Container();
+                          }).toList(),
                           if (currentQuestion.requiresTextInput) ...[
                             TextField(
                               controller: _controller,
                               decoration: InputDecoration(
                                 labelText: 'A válaszod...',
                                 labelStyle:
-                                    TextStyle(color: Colors.grey.shade600),
+                                TextStyle(color: Colors.grey.shade600),
                                 // Label text color
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -1102,7 +912,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             ),
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02),
+                                MediaQuery.of(context).size.width * 0.02),
                             Container(
                               decoration: BoxDecoration(
                                 border: Border.all(
@@ -1120,7 +930,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     if (quizProvider1.isQuizFinished) {
                                       Navigator.of(context)
                                           .pushReplacementNamed(
-                                              ResultScreen1.routeName);
+                                          ResultScreen1.routeName);
                                     }
                                     _controller.clear();
                                   } else {
@@ -1148,7 +958,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   'Tovább',
                                   style: TextStyle(
                                       color:
-                                          AppColors.whitewhite), // Text color
+                                      AppColors.whitewhite), // Text color
                                 ),
                               ),
                             ),
@@ -1208,7 +1018,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               ),
                               child: ListTile(
                                 leading:
-                                    Image.asset('assets/images/2icon_m.png'),
+                                Image.asset('assets/images/2icon_m.png'),
                                 title: Text(
                                   'Kérdések',
                                   style: MyTextStyles.vastagyellow(context),
@@ -1229,7 +1039,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.lightshade,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1247,7 +1057,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1266,7 +1076,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               ),
                               child: ListTile(
                                 leading:
-                                    Image.asset('assets/images/5icon_m.png'),
+                                Image.asset('assets/images/5icon_m.png'),
                                 title: Text(
                                   '1-2. hét terve',
                                   style: MyTextStyles.vastagbekezdes(context),
@@ -1290,7 +1100,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1323,11 +1133,11 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(20.0),
+                                    topRight: Radius.circular(20.0),
                                   ),
                                 ),
                               ),
@@ -1356,7 +1166,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1389,7 +1199,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1422,7 +1232,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(

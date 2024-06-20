@@ -14,7 +14,8 @@ export 'home_page_model.dart';
 import 'package:bethesda_2/constants/colors.dart'; // Make sure this path is correct
 
 class ModuleOpening extends StatelessWidget {
-  const ModuleOpening({super.key});
+  String Azonosito = '';
+  ModuleOpening(String s, {super.key}){Azonosito=s;}
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +25,17 @@ class ModuleOpening extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.bethesdacolor),
         useMaterial3: false,
       ),
-      home: const ModuleOpeningWidget(),
+      home:  ModuleOpeningWidget(Azonosito),
     );
   }
 }
 
 class ModuleOpeningWidget extends StatefulWidget {
-  const ModuleOpeningWidget({super.key});
+  String Azonosito = '';
+  ModuleOpeningWidget(String azonosito, {super.key}){Azonosito=azonosito;}
 
   @override
-  State<ModuleOpeningWidget> createState() => _ModuleOpeningWidgetState();
+  State<ModuleOpeningWidget> createState() => _ModuleOpeningWidgetState(Azonosito);
 }
 
 class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
@@ -45,6 +47,8 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
   late bool toggle = true;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  String Azonosito = '';
+  _ModuleOpeningWidgetState(String azonosito){Azonosito=azonosito;}
 
   @override
   void initState() {

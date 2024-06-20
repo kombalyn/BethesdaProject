@@ -132,19 +132,10 @@ flutter:
     - assets/images/6icon_m.png
     - assets/images/7icon_m.png
     - assets/images/probaelsohatter.png
-    - assets/images/nyil2.png
-    - assets/images/nyil3.png
-    - assets/images/nyilanim.json
-    - assets/images/nyilanim2.json
-    - assets/images/anim.json
-    - assets/images/anim2.json
-    - assets/images/nyil1.json
-    - assets/images/utolsonyil.json
-    - assets/images/giff.gif
-    - assets/images/gifke.gif
-    - assets/images/javitott.gif
-    - assets/images/proba.json
-    - assets/images/probapro.json
+    - assets/images/nyil.json
+    - assets/images/sokszin.svg
+    - assets/images/sokszin.png
+    - assets/images/hatterke.png
 
 
     - assets/html/audio_player.html
