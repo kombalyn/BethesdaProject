@@ -9,9 +9,15 @@ class QuizProvider1 with ChangeNotifier {
       index: 0,
       requiresTextInput: false,
       two_column: false,
+<<<<<<< HEAD
       answers: [
         Answer(nextQuestionIndex: 1, isVideo: true, video: 'http://pigssh.ddns.net:8080/assets/assets/Video_1_1.mp4',), // Provide the video URL here
       ],
+=======
+        answers: [
+          Answer(nextQuestionIndex: 1, isVideo:true, video: 'http://pigssh.ddns.net:8080/assets/assets/Video_1_1.mp4',), // Provide the video URL here
+        ],
+>>>>>>> e160abca6aecc22a95a25aadc5e406b72d100989
     ),
     Question(
       two_column: false,
@@ -168,13 +174,18 @@ class QuizProvider1 with ChangeNotifier {
       ],
     ),
     Question(
+<<<<<<< HEAD
       two_column: false,
+=======
+      two_column: false,//CSINÁLNI
+>>>>>>> e160abca6aecc22a95a25aadc5e406b72d100989
       text: '5.1 kérdés: Kérlek, írj legalább 5 olyan mozgást, sportot vagy aktív tevékenységet, amit szívesen csinálnál, vagy akár régebben csináltad és most újrakezdenéd! Először jöjjenek az ötletek, aztán utána rendezd őket sorrendbe! Az első legyen az, amit most a legszívesebben csinálnál, kipróbálnál és így tovább.',
       index: 18,
       requiresRanking: true,
       answers: [
         Answer(nextQuestionIndex: 19, isRankable: true),
       ],
+<<<<<<< HEAD
       rankableOptions: [],
     ),
     Question(
@@ -193,6 +204,26 @@ class QuizProvider1 with ChangeNotifier {
       ],
     ),
     Question(
+=======
+      rankableOptions: [
+      ],    ), // Opcionális gomb: Nincs ötleted? Szeretnéd, hogy segítsek? (Megj.:Ha erre kattint akkor lista jelenik meg a feladatokról, amiket mozgatni tud a rangsorba.)Szöveg: Itt egy lista arról, hogy milyen mozgásokat végeznek szívesen a kortársaid (ide akár betehetnénk erről egy hivatkozást is, ha megjelenik a cikk)
+    Question( //CSINÁLNI
+      text: '5.2 kérdés: Most hogy rangsoroltad, hogy milyen mozgást csinálnál szívesen, kérlek gondolkozz el azon, hogy milyen céljaid vannak az egyes mozgásokkal, amiket felsoroltál! Például: séta – heti 3x 30 perc azért, hogy kimozduljak otthonról, vagy otthoni torna – heti 2x 45 perc azért, mert szeretnék megerősödni',
+      index: 19,
+        requiresRanking: true,
+        two_column: true,
+        answers: [
+          Answer(nextQuestionIndex: 20, isRankable: false),
+        ],
+        rankableOptions: [
+          'Activity 1',
+          'Activity 2',
+          'Activity 3',
+          'Activity 4',
+        ],
+    ), //Válasz: kitöltős (Megj: itt a rangsorba állított mozgások újra megjelennének külön sorokban, de mint fix szöveg és utána lenne kijelölt rész arra, hogy mellé írja a célokat)
+    Question(
+>>>>>>> e160abca6aecc22a95a25aadc5e406b72d100989
       two_column: false,
       text: 'Most kérlek nézd meg ezt a videót!',
       index: 20,
@@ -201,8 +232,13 @@ class QuizProvider1 with ChangeNotifier {
         Answer(nextQuestionIndex: 21, isVideo: true, video: 'http://pigssh.ddns.net:8080/assets/assets/Video_1_7.mp4',), // Provide the video URL here
       ],
     ),
+<<<<<<< HEAD
     Question(
       two_column: false,
+=======
+    Question( //CSINÁLNI
+    two_column: false,
+>>>>>>> e160abca6aecc22a95a25aadc5e406b72d100989
       text: '6.1 kérdés: Jelenleg mi okoz számodra nehézséget abban, hogy többet mozogj? Gondold végig és írd le, mik azok, amik miatt mégis megéri Neked mozogni!',
       index: 22,
       requiresTextInput: true,
@@ -215,7 +251,6 @@ class QuizProvider1 with ChangeNotifier {
       requiresTextInput: true,
       answers: [],
     ),
-
     Question(
       two_column: false,
       text: '7.1 kérdés: Az előbb megnevezett legalább 5 mozgásos cél közül mi lesz az, amit az elkövetkező 2 hétben elkezdesz megvalósítani?',
