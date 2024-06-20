@@ -799,8 +799,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                           borderRadius: BorderRadius.circular(
                                               4.0), // Border radius to match the container
                                         ),
-                                        borderRadius: BorderRadius.circular(
-                                            4.0), // Border radius to match the button
+
                                       ),
                                       child: Text(
                                         'Tovább',
@@ -880,7 +879,6 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                                 .whitewhite), // Text color
                                       ),
                                     ),
-                                    child: Text('Tovább'),
                                   ),
                                   SizedBox(
                                     height: MediaQuery.of(context).size.width *

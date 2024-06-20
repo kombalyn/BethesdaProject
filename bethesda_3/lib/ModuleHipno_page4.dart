@@ -452,7 +452,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      ModuleOpening(),
+                                      ModuleOpening('Azonosito'),
                                 ),
                               );
 

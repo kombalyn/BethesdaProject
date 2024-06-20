@@ -90,7 +90,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (BuildContext context) => ModuleOpening(),
+                          builder: (BuildContext context) => ModuleOpening('Azonosito'),
                         ),
                       );
                       print("homegomb");
@@ -359,7 +359,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                               context,
                               MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    ModuleOpening(),
+                                    ModuleOpening('Azonosito'),
                               ),
                             );
 
