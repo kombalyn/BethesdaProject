@@ -220,7 +220,7 @@ class QuizProvider1 with ChangeNotifier {
       prosText: 'Nehézségek', // Custom text for pros
       consText: 'Előnyök, amiért megéri', // Custom text for cons
     ),
-
+// TO DO ADAM
 // Second question displaying the readonly table with an additional editable row
     Question(
       twoColumn: true, // Enable two-column input

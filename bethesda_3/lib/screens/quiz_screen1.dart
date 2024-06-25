@@ -606,6 +606,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                 SizedBox(height: MediaQuery.of(context).size.width * 0.01),
                               ],
                             ),
+
+                            ///TO DO ADAM
                           ]else if (currentQuestion.twoColumn) ...[
                             Column(
                               children: [
