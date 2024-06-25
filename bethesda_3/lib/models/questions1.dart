@@ -5,15 +5,19 @@ class Question {
   final bool requiresRanking;
   final bool requiresVideo;
   final String video;
-  final bool two_column;
+  final bool twoColumn;
   final bool requiresRadioOptions;
-  final List<RadioOption> radioOptions; // Change this property to a list of RadioOption objects
-
+  final List<RadioOption> radioOptions;
   final List<Answer> answers;
   List<String> rankableOptions;
-
-  final bool hasInfoButton; // Indicates if the question has an info button
-  final String infoButtonText; // Text for the info button
+  final bool hasInfoButton;
+  final String infoButtonText;
+  final bool allowsComment;
+  final String commentText;
+  final List<TwoColumnEntry> twoColumnEntries;
+  final String prosText;
+  final String consText;
+  final List<TwoColumnEntry> readonlyTwoColumnEntries;
 
   Question({
     required this.text,
@@ -24,13 +28,20 @@ class Question {
     required this.answers,
     this.rankableOptions = const [],
     this.video = '',
-    required this.two_column,
+    required this.twoColumn,
     this.requiresRadioOptions = false,
-    this.radioOptions = const [], // Initialize with an empty list
-    this.hasInfoButton = false, // Default to false if not provided
-    this.infoButtonText = '', // Default to empty string if not provided
+    this.radioOptions = const [],
+    this.hasInfoButton = false,
+    this.infoButtonText = '',
+    this.allowsComment = false,
+    this.commentText = '',
+    this.twoColumnEntries = const [],
+    this.prosText = 'Előnyök',
+    this.consText = 'Hátrányok',
+    this.readonlyTwoColumnEntries = const [],
   });
 }
+
 
 class RadioOption {
   final String text;
@@ -59,5 +70,18 @@ class Answer {
     this.isRankable = false,
     this.isVideo = false,
     this.video = '',
+  });
+}
+
+// New class to represent a 2-column table entry
+class TwoColumnEntry {
+  final String pros;
+  final String cons;
+  final bool isFillable;
+
+  TwoColumnEntry({
+    required this.pros,
+    required this.cons,
+    this.isFillable = true, // Default to true, assuming most entries will be fillable unless specified otherwise
   });
 }
