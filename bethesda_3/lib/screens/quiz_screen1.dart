@@ -768,7 +768,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                           ),
                                         ),
                                       SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                      if (_optionControllers.isNotEmpty && !_isReordering)
+                                      if (_optionControllers2.isNotEmpty )
                                         Container(
                                           decoration: BoxDecoration(
                                             border: Border.all(color: AppColors.whitewhite, width: 2.0),
