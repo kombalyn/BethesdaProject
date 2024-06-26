@@ -20,7 +20,10 @@ class _QuizScreenState1 extends State<QuizScreen1> {
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _commentController = TextEditingController(); // Controller for comment input
   List<TextEditingController> _optionControllers = [];
+  List<TextEditingController> _optionControllers2 = []; // Nehézségek
+  List<TextEditingController> _optionControllers3 = []; // Előnyök
   List<String> _rankableOptions = [];
+  List<String> hatosOptions = [];
   List<TextEditingController> _prosControllers = [];
   List<TextEditingController> _consControllers = [];
   bool _isReordering = false;
@@ -499,6 +502,9 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                               .where((text) => text.isNotEmpty)
                                               .toList();
                                           _isReordering = true;
+
+                                          //TODO
+
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -637,106 +643,169 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     ),
                                   ],
                                 ),
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: currentQuestion.twoColumnEntries.length,
-                                  itemBuilder: (context, index) {
-                                    var entry = currentQuestion.twoColumnEntries[index];
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                                      child: entry.isFillable
-                                          ? Row(
-                                        children: [
-                                          Expanded(
-                                            child: TextField(
-                                              decoration: InputDecoration(
-                                                labelText: '${currentQuestion.prosText}...',
-                                                labelStyle: TextStyle(color: Colors.grey.shade600),
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.green, width: 2.0),
-                                                ),
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.yellow, width: 2.0),
-                                                ),
-                                                enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.grey.shade600, width: 2.0),
-                                                ),
-                                                filled: true,
-                                                fillColor: Colors.white,
+
+
+
+
+
+
+
+                                //if (currentQuestion.requiresRanking) ...[
+                                  Column(
+                                    children: [
+                                      //if (_optionControllers.isNotEmpty)
+                                        //if (!_isReordering)
+
+
+                                      Container(
+                                        width: MediaQuery.of(context).size.width * 0.5,
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          physics: NeverScrollableScrollPhysics(),
+                                          itemCount: _optionControllers2.length,
+                                          itemBuilder: (context, index) {
+                                            var controller = _optionControllers2[index];
+                                            var controller2 = _optionControllers3[index];
+                                            return Padding(
+                                              key: ValueKey(controller),
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 8.0, vertical: 4.0),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width: MediaQuery.of(context).size.width * 0.2,
+                                                    child: TextField(
+                                                      controller: controller,
+                                                      decoration: InputDecoration(
+                                                        labelText: 'nehézség...',
+                                                        labelStyle: TextStyle(
+                                                            color: Colors.grey.shade600),
+                                                        border: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              color: Colors.green,
+                                                              width: 2.0),
+                                                        ),
+                                                        focusedBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              color: Colors.yellow,
+                                                              width: 2.0),
+                                                        ),
+                                                        enabledBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              color: Colors.grey.shade600,
+                                                              width: 2.0),
+                                                        ),
+                                                        filled: true,
+                                                        fillColor: Colors.white,
+                                                      ),
+                                                      style: TextStyle(color: Colors.grey.shade800),
+                                                      maxLines: null,
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    width: MediaQuery.of(context).size.width * 0.2,
+                                                    child: TextField(
+                                                      controller: controller2,
+                                                      decoration: InputDecoration(
+                                                        labelText: 'előny...',
+                                                        labelStyle: TextStyle(
+                                                            color: Colors.grey.shade600),
+                                                        border: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              color: Colors.green,
+                                                              width: 2.0),
+                                                        ),
+                                                        focusedBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              color: Colors.yellow,
+                                                              width: 2.0),
+                                                        ),
+                                                        enabledBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              color: Colors.grey.shade600,
+                                                              width: 2.0),
+                                                        ),
+                                                        filled: true,
+                                                        fillColor: Colors.white,
+                                                      ),
+                                                      style: TextStyle(color: Colors.grey.shade800),
+                                                      maxLines: null,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              style: TextStyle(color: Colors.grey.shade800),
-                                              maxLines: null,
-                                            ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.grey.shade600, width: 2.0),
+                                            borderRadius: BorderRadius.circular(4.0),
                                           ),
-                                          SizedBox(width: 8.0),
-                                          Expanded(
-                                            child: TextField(
-                                              decoration: InputDecoration(
-                                                labelText: '${currentQuestion.consText}...',
-                                                labelStyle: TextStyle(color: Colors.grey.shade600),
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.green, width: 2.0),
-                                                ),
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.yellow, width: 2.0),
-                                                ),
-                                                enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.grey.shade600, width: 2.0),
-                                                ),
-                                                filled: true,
-                                                fillColor: Colors.white,
-                                              ),
-                                              style: TextStyle(color: Colors.grey.shade800),
-                                              maxLines: null,
-                                            ),
-                                          ),
-                                          IconButton(
-                                            icon: Icon(Icons.delete),
+                                          child: ElevatedButton(
                                             onPressed: () {
                                               setState(() {
-                                                currentQuestion.twoColumnEntries.removeAt(index);
+                                                _optionControllers2.add(TextEditingController());
+                                                _optionControllers3.add(TextEditingController());
+                                                // TODO
+                                                //print("MEGNYOMTAD");
                                               });
                                             },
-                                          ),
-                                        ],
-                                      )
-                                          : Row(
-                                        children: [
-                                          Expanded(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                border: Border.all(color: Colors.grey.shade600),
+                                            style: ElevatedButton.styleFrom(
+                                              primary: AppColors.whitewhite,
+                                              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                              textStyle: TextStyle(fontSize: 20.0),
+                                              shape: RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.circular(4.0),
-                                                color: Colors.grey.shade300,
-                                              ),
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                entry.pros,
-                                                style: TextStyle(color: Colors.grey.shade800),
                                               ),
                                             ),
-                                          ),
-                                          SizedBox(width: 8.0),
-                                          Expanded(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                border: Border.all(color: Colors.grey.shade600),
-                                                borderRadius: BorderRadius.circular(4.0),
-                                                color: Colors.grey.shade300,
-                                              ),
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                entry.cons,
-                                                style: TextStyle(color: Colors.grey.shade800),
-                                              ),
+                                            child: Text(
+                                              'Új megadása',
+                                              style: TextStyle(color: Colors.grey.shade800),
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
+                                        ),
+                                      SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                                      if (_optionControllers.isNotEmpty && !_isReordering)
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: AppColors.whitewhite, width: 2.0),
+                                            borderRadius: BorderRadius.circular(4.0),
+                                          ),
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                _rankableOptions = _optionControllers
+                                                    .map((controller) => controller.text)
+                                                    .where((text) => text.isNotEmpty)
+                                                    .toList();
+                                                _isReordering = true;
+
+                                                //TODO
+                                                //_optionControllers.clear();
+                                              });
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Colors.yellow,
+                                              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                              textStyle: TextStyle(fontSize: 20.0),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(4.0),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              'Eddigiek mentése, sorbarendezés megkezdése',
+                                              style: TextStyle(color: Colors.grey.shade800),
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                //]
+
+                                /*
                                 if (currentQuestion.twoColumnEntries.any((entry) => entry.isFillable)) ...[
                                   Container(
                                     decoration: BoxDecoration(
@@ -747,6 +816,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       onPressed: () {
                                         setState(() {
                                           currentQuestion.twoColumnEntries.add(TwoColumnEntry(pros: '', cons: '', isFillable: true));
+                                          //hatosOptions.add("ADAM");
+
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -792,6 +863,11 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     ),
                                   ),
                                 ],
+
+                                 */
+
+
+
                               ],
                             ),
                           ]

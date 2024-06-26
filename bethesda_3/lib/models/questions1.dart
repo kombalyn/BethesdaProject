@@ -10,6 +10,8 @@ class Question {
   final List<RadioOption> radioOptions;
   final List<Answer> answers;
   List<String> rankableOptions;
+  List<String> NotFillableOptions;
+  int NotFillableindex = 0;
   final bool hasInfoButton;
   final String infoButtonText;
   final bool allowsComment;
@@ -27,6 +29,7 @@ class Question {
     this.requiresVideo = false,
     required this.answers,
     this.rankableOptions = const [],
+    this.NotFillableOptions = const [],
     this.video = '',
     required this.twoColumn,
     this.requiresRadioOptions = false,
@@ -39,6 +42,7 @@ class Question {
     this.prosText = 'Előnyök',
     this.consText = 'Hátrányok',
     this.readonlyTwoColumnEntries = const [],
+
   });
 }
 
