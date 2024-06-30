@@ -30,6 +30,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
   double _sliderValue = 0.0;
   final ScrollController _scrollController = ScrollController();
   int _selectedAnswerIndex = -1;
+  bool is_hat_ketto = true;
 
   @override
   void initState() {
@@ -657,7 +658,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         //if (!_isReordering)
 
 
-                                      Container(
+                                      is_hat_ketto ? Container(
                                         width: MediaQuery.of(context).size.width * 0.5,
                                         child: ListView.builder(
                                           shrinkWrap: true,
@@ -737,8 +738,64 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                             );
                                           },
                                         ),
+                                      )
+                                          :
+                                      Container(
+                                        width: MediaQuery.of(context).size.width * 0.5,
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          physics: NeverScrollableScrollPhysics(),
+                                          itemCount: _optionControllers2.length,
+                                          itemBuilder: (context, index) {
+                                            var text2 = _optionControllers2[index].text;
+                                            var text3 = _optionControllers3[index].text;
+                                            return Padding(
+                                              key: ValueKey(text2),
+                                              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width: MediaQuery.of(context).size.width * 0.2,
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(color: Colors.grey.shade600, width: 2.0),
+                                                        borderRadius: BorderRadius.circular(4.0),
+                                                        color: Colors.white,
+                                                      ),
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Text(
+                                                        text2,
+                                                        style: TextStyle(color: Colors.grey.shade800),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 8.0),
+                                                  Container(
+                                                    width: MediaQuery.of(context).size.width * 0.2,
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(color: Colors.grey.shade600, width: 2.0),
+                                                        borderRadius: BorderRadius.circular(4.0),
+                                                        color: Colors.white,
+                                                      ),
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Text(
+                                                        text3,
+                                                        style: TextStyle(color: Colors.grey.shade800),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        ),
                                       ),
 
+
+
+
+                                        if(is_hat_ketto)
                                         Container(
                                           decoration: BoxDecoration(
                                             border: Border.all(color: Colors.grey.shade600, width: 2.0),
@@ -768,7 +825,75 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                           ),
                                         ),
                                       SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+
+
+                                      if(currentQuestion.index==22 || currentQuestion.index==23)
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: AppColors.whitewhite, width: 2.0),
+                                          borderRadius: BorderRadius.circular(4.0),
+                                        ),
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                                setState(() {
+                                                  is_hat_ketto = false;
+                                                });
+                                              quizProvider1.nextQuestion();
+                                              _scrollToTop();
+                                              if (quizProvider1.isQuizFinished) {
+                                                Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
+                                              }
+                                              _controller.clear();
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            primary: AppColors.yellow,
+                                            padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                            textStyle: TextStyle(fontSize: 20.0),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(4.0),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            'Tovább',
+                                            style: TextStyle(color: AppColors.whitewhite),
+                                          ),
+                                        ),
+                                      ),
+                                      
+                                      /*
                                       if (_optionControllers2.isNotEmpty )
+                                        Container(
+                                        decoration: BoxDecoration(
+                                        border: Border.all(color: AppColors.whitewhite, width: 2.0),
+                                        borderRadius: BorderRadius.circular(4.0),
+                                        ),
+                                        child: ElevatedButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            is_hat_ketto = false;
+                                          });
+                                        quizProvider1.nextQuestion();
+                                        _scrollToTop();
+                                        if (quizProvider1.isQuizFinished) {
+                                        Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
+                                        }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                        primary: AppColors.yellow,
+                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                        textStyle: TextStyle(fontSize: 20.0),
+                                        shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(4.0),
+                                        ),
+                                        ),
+                                        child: Text(
+                                        'Válasz mentése',
+                                        style: TextStyle(color: AppColors.whitewhite),
+                                        ),
+                                        ),
+                                        ),
+
+
                                         Container(
                                           decoration: BoxDecoration(
                                             border: Border.all(color: AppColors.whitewhite, width: 2.0),
@@ -800,7 +925,9 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                               style: TextStyle(color: Colors.grey.shade800),
                                             ),
                                           ),
-                                        ),
+                                        ),*/
+
+
                                     ],
                                   ),
                                 //]
@@ -901,6 +1028,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       ),
                                       child: ElevatedButton(
                                         onPressed: () {
+                                          print("TOVABBB");
                                           quizProvider1.answerQuestion(answer.nextQuestionIndex);
                                           _scrollToTop();
                                           if (quizProvider1.isQuizFinished) {
@@ -976,7 +1104,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               }
                               return Container();
                             }).toList(),
-                          if (currentQuestion.requiresTextInput) ...[
+                          if (currentQuestion.requiresTextInput && is_hat_ketto) ...[
                             TextField(
                               controller: _controller,
                               decoration: InputDecoration(
@@ -1006,6 +1134,12 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   if (_controller.text.isNotEmpty) {
+                                    if(currentQuestion.index == 23){
+                                      setState(() {
+                                        is_hat_ketto = false;
+                                      });
+                                    }
+
                                     quizProvider1.nextQuestion();
                                     _scrollToTop();
                                     if (quizProvider1.isQuizFinished) {

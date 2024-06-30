@@ -63,6 +63,7 @@ class Answer {
   final bool isNumeric;
   final bool isScale;
   final bool isRankable;
+  final bool isHat;
   final bool isVideo;
   final String video;
 
@@ -72,6 +73,7 @@ class Answer {
     this.isNumeric = false,
     this.isScale = false,
     this.isRankable = false,
+    this.isHat = false,
     this.isVideo = false,
     this.video = '',
   });
