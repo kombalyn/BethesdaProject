@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/quiz_provider1.dart';
 import '../models/questions1.dart';
-
-import 'result_screen1.dart';
 import 'package:bethesda_2/constants/colors.dart';
 import 'package:bethesda_2/styles.dart';
 import '../ModuleOpening_M3.dart';
@@ -26,7 +24,6 @@ class _QuizScreenState1 extends State<QuizScreen1> {
   List<TextEditingController> _optionControllers3 = []; // Előnyök
   List<String> _rankableOptions = [];
   List<String> hatosOptions = [];
-
   List<TextEditingController> _prosControllers = [];
   List<TextEditingController> _consControllers = [];
   bool _isReordering = false;
@@ -527,8 +524,6 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                                     ),
                                                 ],
                                               ),
-                                          ],
-                                        ),
                                       ),
                                     ],
                                   ),
@@ -626,9 +621,9 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     },
                                     showIcon: true, // Show the icon
                                   ),
-                                SizedBox(
-                                    height: MediaQuery.of(context).size.width *
-                                        0.02),
+                                // SizedBox(
+                                //     height: MediaQuery.of(context).size.width *
+                                //         0.02),
                                 if (_optionControllers.isEmpty ||
                                     !_isReordering)
                                   // Container(
@@ -852,12 +847,11 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   },
                                   showIcon: true, // Show the icon
                                 ),
-
                               ],
                             ),
 
                             ///TO DO ADAM
-                          ]else if (currentQuestion.twoColumn) ...[
+                          ] else if (currentQuestion.twoColumn) ...[
                             Column(
                               children: [
                                 Row(
@@ -868,7 +862,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         style: TextStyle(
                                           fontSize: 18.0,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.grey.shade600,
+                                          color: Colors.grey.shade800,
                                         ),
                                         textAlign: TextAlign.center,
                                       ),
@@ -879,412 +873,378 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         style: TextStyle(
                                           fontSize: 18.0,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.grey.shade600,
+                                          color: Colors.grey.shade800,
                                         ),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
                                   ],
                                 ),
-
-
-
-
-
-
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.02),
 
                                 //if (currentQuestion.requiresRanking) ...[
-                                  Column(
-                                    children: [
-                                      //if (_optionControllers.isNotEmpty)
-                                        //if (!_isReordering)
+                                Column(
+                                  children: [
+                                    //if (_optionControllers.isNotEmpty)
+                                    //if (!_isReordering)
 
+                                    is_hat_ketto
+                                        ? Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.5,
+                                            child: ListView.builder(
+                                              shrinkWrap: true,
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
+                                              itemCount:
+                                                  _optionControllers2.length,
+                                              itemBuilder: (context, index) {
+                                                var controller =
+                                                    _optionControllers2[index];
+                                                var controller2 =
+                                                    _optionControllers3[index];
+                                                return Padding(
+                                                  key: ValueKey(controller),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 8.0,
+                                                      vertical: 4.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.2,
+                                                        child: TextField(
+                                                          controller:
+                                                              controller,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            labelText:
+                                                                'nehézség...',
+                                                            labelStyle: TextStyle(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600),
+                                                            border:
+                                                                OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .green,
+                                                                  width: 2.0),
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .yellow,
+                                                                  width: 2.0),
+                                                            ),
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade600,
+                                                                  width: 2.0),
+                                                            ),
+                                                            filled: true,
+                                                            fillColor:
+                                                                Colors.white,
+                                                          ),
+                                                          style: TextStyle(
+                                                              color: Colors.grey
+                                                                  .shade800),
+                                                          maxLines: null,
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.2,
+                                                        child: TextField(
+                                                          controller:
+                                                              controller2,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            labelText:
+                                                                'előny...',
+                                                            labelStyle: TextStyle(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600),
+                                                            border:
+                                                                OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .green,
+                                                                  width: 2.0),
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .yellow,
+                                                                  width: 2.0),
+                                                            ),
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade600,
+                                                                  width: 2.0),
+                                                            ),
+                                                            filled: true,
+                                                            fillColor:
+                                                                Colors.white,
+                                                          ),
+                                                          style: TextStyle(
+                                                              color: Colors.grey
+                                                                  .shade800),
+                                                          maxLines: null,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          )
+                                        : Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.5,
+                                            child: ListView.builder(
+                                              shrinkWrap: true,
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
+                                              itemCount:
+                                                  _optionControllers2.length,
+                                              itemBuilder: (context, index) {
+                                                var text2 =
+                                                    _optionControllers2[index]
+                                                        .text;
+                                                var text3 =
+                                                    _optionControllers3[index]
+                                                        .text;
+                                                return Padding(
+                                                  key: ValueKey(text2),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 8.0,
+                                                      vertical: 4.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.2,
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600,
+                                                                width: 2.0),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4.0),
+                                                            color: Colors.white,
+                                                          ),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Text(
+                                                            text2,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade800),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(width: 8.0),
+                                                      Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.2,
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600,
+                                                                width: 2.0),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4.0),
+                                                            color: Colors.white,
+                                                          ),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Text(
+                                                            text3,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade800),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
 
-                                      is_hat_ketto ? Container(
-                                        width: MediaQuery.of(context).size.width * 0.5,
-                                        child: ListView.builder(
-                                          shrinkWrap: true,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          itemCount: _optionControllers2.length,
-                                          itemBuilder: (context, index) {
-                                            var controller = _optionControllers2[index];
-                                            var controller2 = _optionControllers3[index];
-                                            return Padding(
-                                              key: ValueKey(controller),
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 8.0, vertical: 4.0),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    width: MediaQuery.of(context).size.width * 0.2,
-                                                    child: TextField(
-                                                      controller: controller,
-                                                      decoration: InputDecoration(
-                                                        labelText: 'nehézség...',
-                                                        labelStyle: TextStyle(
-                                                            color: Colors.grey.shade600),
-                                                        border: OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color: Colors.green,
-                                                              width: 2.0),
-                                                        ),
-                                                        focusedBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color: Colors.yellow,
-                                                              width: 2.0),
-                                                        ),
-                                                        enabledBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color: Colors.grey.shade600,
-                                                              width: 2.0),
-                                                        ),
-                                                        filled: true,
-                                                        fillColor: Colors.white,
-                                                      ),
-                                                      style: TextStyle(color: Colors.grey.shade800),
-                                                      maxLines: null,
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    width: MediaQuery.of(context).size.width * 0.2,
-                                                    child: TextField(
-                                                      controller: controller2,
-                                                      decoration: InputDecoration(
-                                                        labelText: 'előny...',
-                                                        labelStyle: TextStyle(
-                                                            color: Colors.grey.shade600),
-                                                        border: OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color: Colors.green,
-                                                              width: 2.0),
-                                                        ),
-                                                        focusedBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color: Colors.yellow,
-                                                              width: 2.0),
-                                                        ),
-                                                        enabledBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color: Colors.grey.shade600,
-                                                              width: 2.0),
-                                                        ),
-                                                        filled: true,
-                                                        fillColor: Colors.white,
-                                                      ),
-                                                      style: TextStyle(color: Colors.grey.shade800),
-                                                      maxLines: null,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      )
-                                          :
-                                      Container(
-                                        width: MediaQuery.of(context).size.width * 0.5,
-                                        child: ListView.builder(
-                                          shrinkWrap: true,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          itemCount: _optionControllers2.length,
-                                          itemBuilder: (context, index) {
-                                            var text2 = _optionControllers2[index].text;
-                                            var text3 = _optionControllers3[index].text;
-                                            return Padding(
-                                              key: ValueKey(text2),
-                                              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    width: MediaQuery.of(context).size.width * 0.2,
-                                                    child: Container(
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(color: Colors.grey.shade600, width: 2.0),
-                                                        borderRadius: BorderRadius.circular(4.0),
-                                                        color: Colors.white,
-                                                      ),
-                                                      padding: const EdgeInsets.all(8.0),
-                                                      child: Text(
-                                                        text2,
-                                                        style: TextStyle(color: Colors.grey.shade800),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(width: 8.0),
-                                                  Container(
-                                                    width: MediaQuery.of(context).size.width * 0.2,
-                                                    child: Container(
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(color: Colors.grey.shade600, width: 2.0),
-                                                        borderRadius: BorderRadius.circular(4.0),
-                                                        color: Colors.white,
-                                                      ),
-                                                      padding: const EdgeInsets.all(8.0),
-                                                      child: Text(
-                                                        text3,
-                                                        style: TextStyle(color: Colors.grey.shade800),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                    if (is_hat_ketto)
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.02),
+                                    GradientButton(
+                                      text: 'ÚJ MEGADÁSA',
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          AppColors.whitewhite,
+                                          Colors.yellow
+                                        ],
                                       ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _optionControllers2
+                                              .add(TextEditingController());
+                                          _optionControllers3
+                                              .add(TextEditingController());
+                                          // TODO
+                                          //print("MEGNYOMTAD");
+                                        });
+                                      },
+                                      showIcon: false,
+                                    ),
 
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
 
-
-
-                                        if(is_hat_ketto)
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(color: Colors.grey.shade600, width: 2.0),
-                                            borderRadius: BorderRadius.circular(4.0),
-                                          ),
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                _optionControllers2.add(TextEditingController());
-                                                _optionControllers3.add(TextEditingController());
-                                                // TODO
-                                                //print("MEGNYOMTAD");
-                                              });
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              primary: AppColors.whitewhite,
-                                              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                              textStyle: TextStyle(fontSize: 20.0),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(4.0),
-                                              ),
-                                            ),
-                                            child: Text(
-                                              'Új megadása',
-                                              style: TextStyle(color: Colors.grey.shade800),
-                                            ),
-                                          ),
+                                    // if (currentQuestion.index == 22) // ||     currentQuestion.index == 23)
+                                    if (is_hat_ketto)
+                                      GradientButton(
+                                        text: 'TOVÁBB',
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.yellow,
+                                            AppColors.yellow
+                                          ],
                                         ),
-                                      SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-
-
-                                      if(currentQuestion.index==22 || currentQuestion.index==23)
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                                setState(() {
-                                                  is_hat_ketto = false;
-                                                });
-                                              quizProvider1.nextQuestion();
-                                              _scrollToTop();
-                                              if (quizProvider1.isQuizFinished) {
-                                                Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                              }
-                                              _controller.clear();
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            primary: AppColors.yellow,
-                                            padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                            textStyle: TextStyle(fontSize: 20.0),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(4.0),
-                                            ),
-                                          ),
-                                          child: Text(
-                                            'Tovább',
-                                            style: TextStyle(color: AppColors.whitewhite),
-                                          ),
-                                        ),
-                                      ),
-                                      
-                                      /*
-                                      if (_optionControllers2.isNotEmpty )
-                                        Container(
-                                        decoration: BoxDecoration(
-                                        border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                        borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                        child: ElevatedButton(
                                         onPressed: () {
                                           setState(() {
                                             is_hat_ketto = false;
                                           });
-                                        quizProvider1.nextQuestion();
-                                        _scrollToTop();
-                                        if (quizProvider1.isQuizFinished) {
-                                        Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                        }
+                                          quizProvider1.nextQuestion();
+                                          _scrollToTop();
+                                          if (quizProvider1.isQuizFinished) {
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ModuleOpening_M3()));
+                                          }
+                                          _controller.clear();
                                         },
-                                        style: ElevatedButton.styleFrom(
-                                        primary: AppColors.yellow,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                        textStyle: TextStyle(fontSize: 20.0),
-                                        shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                        ),
-                                        child: Text(
-                                        'Válasz mentése',
-                                        style: TextStyle(color: AppColors.whitewhite),
-                                        ),
-                                        ),
-                                        ),
-
-
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                            borderRadius: BorderRadius.circular(4.0),
-                                          ),
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                _rankableOptions = _optionControllers
-                                                    .map((controller) => controller.text)
-                                                    .where((text) => text.isNotEmpty)
-                                                    .toList();
-                                                _isReordering = true;
-
-                                                //TODO
-                                                //_optionControllers.clear();
-                                              });
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              primary: Colors.yellow,
-                                              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                              textStyle: TextStyle(fontSize: 20.0),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(4.0),
-                                              ),
-                                            ),
-                                            child: Text(
-                                              'Eddigiek mentése, sorbarendezés megkezdése',
-                                              style: TextStyle(color: Colors.grey.shade800),
-                                            ),
-                                          ),
-                                        ),*/
-
-
-                                    ],
-                                  ),
-                                //]
-
-                                /*
-                                if (currentQuestion.twoColumnEntries.any((entry) => entry.isFillable)) ...[
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey.shade600, width: 2.0),
-                                      borderRadius: BorderRadius.circular(4.0),
-                                    ),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          currentQuestion.twoColumnEntries.add(TwoColumnEntry(pros: '', cons: '', isFillable: true));
-                                          //hatosOptions.add("ADAM");
-
-                                        });
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: AppColors.whitewhite,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                        textStyle: TextStyle(fontSize: 20.0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
+                                        showIcon: true, // Show the icon
                                       ),
-                                      child: Text(
-                                        'Új sor hozzáadása',
-                                        style: TextStyle(color: Colors.grey.shade800),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                      borderRadius: BorderRadius.circular(4.0),
-                                    ),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        quizProvider1.nextQuestion();
-                                        _scrollToTop();
-                                        if (quizProvider1.isQuizFinished) {
-                                          Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                        }
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: AppColors.yellow,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                        textStyle: TextStyle(fontSize: 20.0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Válasz mentése',
-                                        style: TextStyle(color: AppColors.whitewhite),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ],
                             ),
-                          ]
-
-
-                          else ...currentQuestion.answers.map((answer) {
+                          ] else
+                            ...currentQuestion.answers.map((answer) {
                               if (answer.isScale) {
                                 return Column(
                                   children: [
-                                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                    Slider(
-                                      value: _sliderValue,
-                                      min: 0.0,
-                                      max: 10.0,
-                                      divisions: 10,
-                                      label: _sliderValue.round().toString(),
-                                      onChanged: (double value) {
-                                        setState(() {
-                                          _sliderValue = value;
-                                        });
-                                      },
-                                      activeColor: Colors.yellow,
-                                      inactiveColor: AppColors.whitewhite,
-                                      thumbColor: Colors.grey.shade600,
-                                    ),
-                                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                        borderRadius: BorderRadius.circular(4.0),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
+                                    SliderTheme(
+                                      data: SliderTheme.of(context).copyWith(
+                                        trackHeight: 12.0,
+                                        // Adjust the height to make it chunkier
+                                        activeTrackColor: Colors.yellow,
+                                        inactiveTrackColor:
+                                            AppColors.whitewhite,
+                                        thumbColor: Colors.grey.shade600,
+                                        overlayColor: Colors.grey.shade600
+                                            .withOpacity(0.2),
+                                        valueIndicatorColor:
+                                            Colors.grey.shade600,
+                                        thumbShape: RoundSliderThumbShape(
+                                            enabledThumbRadius: 12.0),
+                                        // Adjust the thumb size if needed
+                                        overlayShape: RoundSliderOverlayShape(
+                                            overlayRadius:
+                                                15.0), // Adjust the overlay size if needed
                                       ),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          print("TOVABBB");
-                                          quizProvider1.answerQuestion(answer.nextQuestionIndex);
-                                          _scrollToTop();
-                                          if (quizProvider1.isQuizFinished) {
-                                            Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                          }
+                                      child: Slider(
+                                        value: _sliderValue,
+                                        min: 0.0,
+                                        max: 10.0,
+                                        divisions: 10,
+                                        label: _sliderValue.round().toString(),
+                                        onChanged: (double value) {
+                                          setState(() {
+                                            _sliderValue = value;
+                                          });
                                         },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: AppColors.yellow,
-                                          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                          textStyle: TextStyle(fontSize: 20.0),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(4.0),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Tovább',
-                                          style: TextStyle(color: AppColors.whitewhite),
-                                        ),
                                       ),
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
+                                    GradientButton(
+                                      text: 'TOVÁBB',
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.yellow,
+                                          AppColors.yellow
+                                        ],
+                                      ),
+                                      onPressed: () {
+                                        quizProvider1.answerQuestion(
+                                            answer.nextQuestionIndex);
+                                        _scrollToTop();
+                                        if (quizProvider1.isQuizFinished) {
+                                          Navigator.of(context).pushReplacement(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ModuleOpening_M3()));
+                                        }
+                                      },
+                                      showIcon: true, // Show the icon
                                     ),
                                   ],
                                 );
@@ -1293,10 +1253,12 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   children: [
                                     Center(
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(20.0),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(20.0),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
                                           ),
                                           child: SizedBox(
                                             child: HtmlWidget(
@@ -1306,110 +1268,96 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width * 0.2,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                        borderRadius: BorderRadius.circular(4.0),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
+                                    GradientButton(
+                                      text: 'MEGNÉZTEM',
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.yellow,
+                                          AppColors.yellow
+                                        ],
                                       ),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          quizProvider1.answerQuestion(answer.nextQuestionIndex);
-                                          _scrollToTop();
-                                          if (quizProvider1.isQuizFinished) {
-                                            Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                          }
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: AppColors.yellow,
-                                          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                          textStyle: TextStyle(fontSize: 20.0),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(4.0),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Megnéztem',
-                                          style: TextStyle(color: AppColors.whitewhite),
-                                        ),
-                                      ),
+                                      onPressed: () {
+                                        quizProvider1.answerQuestion(
+                                            answer.nextQuestionIndex);
+                                        _scrollToTop();
+                                        if (quizProvider1.isQuizFinished) {
+                                          Navigator.of(context).pushReplacement(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ModuleOpening_M3()));
+                                        }
+                                      },
+                                      showIcon: true, // Show the icon
                                     ),
-                                    SizedBox(height: MediaQuery.of(context).size.width * 0.01),
                                   ],
                                 );
                               }
                               return Container();
                             }).toList(),
-                          if (currentQuestion.requiresTextInput && is_hat_ketto) ...[
+                          if (currentQuestion.requiresTextInput) ...[
                             TextField(
                               controller: _controller,
                               decoration: InputDecoration(
                                 labelText: 'A válaszod...',
-                                labelStyle: TextStyle(color: Colors.grey.shade600),
+                                labelStyle:
+                                    TextStyle(color: Colors.grey.shade600),
                                 border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.green, width: 2.0),
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 1.5),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.yellow, width: 2.0),
+                                  borderSide: BorderSide(
+                                      color: Colors.yellow, width: 1.5),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey.shade600, width: 2.0),
+                                  borderSide: BorderSide(
+                                      color: Colors.grey.shade600, width: 1.5),
                                 ),
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
-                              style: TextStyle(color: Colors.grey.shade800),
+                              style: TextStyle(color: Colors.grey.shade600),
                               maxLines: null,
                             ),
-                            SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                borderRadius: BorderRadius.circular(4.0),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02),
+                            GradientButton(
+                              text: 'TOVÁBB',
+                              gradient: LinearGradient(
+                                colors: [Colors.yellow, AppColors.yellow],
                               ),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if (_controller.text.isNotEmpty) {
-                                    if(currentQuestion.index == 23){
-                                      setState(() {
-                                        is_hat_ketto = false;
-                                      });
-                                    }
-
-                                    quizProvider1.nextQuestion();
-                                    _scrollToTop();
-                                    if (quizProvider1.isQuizFinished) {
-                                      Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                    }
-                                    _controller.clear();
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Kérlek írd be a válaszod!')),
-                                    );
+                              onPressed: () {
+                                if (_controller.text.isNotEmpty) {
+                                  quizProvider1.nextQuestion();
+                                  _scrollToTop();
+                                  if (quizProvider1.isQuizFinished) {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ModuleOpening_M3()));
                                   }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: AppColors.yellow,
-                                  padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                  textStyle: TextStyle(fontSize: 20.0),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                ),
-                                child: Text(
-                                  'Tovább',
-                                  style: TextStyle(color: AppColors.whitewhite),
-                                ),
-                              ),
+                                  _controller.clear();
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text('Kérlek írd be a válaszod!')),
+                                  );
+                                }
+                              },
+                              showIcon: true, // Show the icon
                             ),
                           ],
-
                         ],
                       ),
                     ),
                     Container(
-                      height: 800,
+                      height: MediaQuery.of(context).size.width * 0.5,
                       color: AppColors.lightshade,
                     ),
                   ],
@@ -1440,7 +1388,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.lightshade,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.03,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.03,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1458,7 +1407,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                 ),
                               ),
                               child: ListTile(
-                                leading: Image.asset('assets/images/2icon_m.png'),
+                                leading:
+                                    Image.asset('assets/images/2icon_m.png'),
                                 title: Text(
                                   'Kérdések',
                                   style: MyTextStyles.vastagyellow(context),
@@ -1478,7 +1428,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.lightshade,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1495,7 +1446,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1513,7 +1465,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                 ),
                               ),
                               child: ListTile(
-                                leading: Image.asset('assets/images/5icon_m.png'),
+                                leading:
+                                    Image.asset('assets/images/5icon_m.png'),
                                 title: Text(
                                   '1-2. hét terve',
                                   style: MyTextStyles.vastagbekezdes(context),
@@ -1536,7 +1489,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1568,7 +1522,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1600,7 +1555,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1632,7 +1588,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1664,7 +1621,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(

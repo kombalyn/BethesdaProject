@@ -226,7 +226,7 @@ class QuizProvider1 with ChangeNotifier {
       twoColumn: true, // Enable two-column input
       text: '6.2 kérdés: Nézz rá kérlek, a hátrányok-előnyök táblázatra! Látsz olyan elemeket, amik összefüggenek? Látsz-e olyan elemeket az előnyök oszlopban, amik megoldást kínálnak egy általad megnevezett nehézségre? \n Pl.: nehézség: fáradt vagyok elkezdeni a mozgást - előny: a mozgás energiával tölt fel. Itt láthatod, hogy a mozgás megadja azt, ami miatt nehéz belekezdeni. Minél többet mozogsz, annál kevésbé leszel fáradt belekezdeni és annál inkább többet fogsz mozogni. Ez egy önmagát erősítő kör. Keress hasonlókat, és írd le őket!',
       index: 23,
-      requiresTextInput: false,
+      requiresTextInput: true,
       answers: [],
       readonlyTwoColumnEntries: [
         TwoColumnEntry(pros: '', cons: '', isFillable: false), // Example entries
