@@ -54,6 +54,7 @@ dependencies:
   flutter_form_builder: ^7.3.0  # Check for the latest version on pub.dev
   gif: ^2.3.0
   lottie: ^2.2.0
+  flutter_svg: ^2.0.5
 
 
 dev_dependencies:
@@ -136,6 +137,8 @@ flutter:
     - assets/images/sokszin.svg
     - assets/images/sokszin.png
     - assets/images/hatterke.png
+    - assets/images/m3hatter.svg
+    - assets/images/m3hatter_kicsi (2).svg
 
 
     - assets/html/audio_player.html

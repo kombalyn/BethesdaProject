@@ -8,6 +8,7 @@ import 'package:bethesda_2/constants/colors.dart';
 import 'package:bethesda_2/styles.dart';
 import '../ModuleOpening_M3.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import '../meno_gomb.dart';
 
 class QuizScreen1 extends StatefulWidget {
   static const routeName = '/quiz1';
@@ -18,7 +19,8 @@ class QuizScreen1 extends StatefulWidget {
 
 class _QuizScreenState1 extends State<QuizScreen1> {
   final TextEditingController _controller = TextEditingController();
-  final TextEditingController _commentController = TextEditingController(); // Controller for comment input
+  final TextEditingController _commentController =
+      TextEditingController(); // Controller for comment input
   List<TextEditingController> _optionControllers = [];
   List<String> _rankableOptions = [];
   List<TextEditingController> _prosControllers = [];
@@ -141,14 +143,15 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               alignment: Alignment.center,
                               children: [
                                 Container(
-                                  width: MediaQuery.of(context).size.width * 0.55,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.55,
                                   margin: EdgeInsets.only(top: 20.0),
                                   padding: EdgeInsets.all(16.0),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     border: Border.all(
                                       color: Colors.grey.shade600,
-                                      width: 2.0,
+                                      width: 1.5,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
@@ -157,7 +160,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     style: TextStyle(
                                       fontSize: 24.0,
                                       fontStyle: FontStyle.italic,
-                                      color: Colors.grey.shade800,
+                                      color: Colors.grey.shade600,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -171,7 +174,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       borderRadius: BorderRadius.circular(20.0),
                                       border: Border.all(
                                         color: Colors.grey.shade600,
-                                        width: 2.0,
+                                        width: 1.5,
                                       ),
                                     ),
                                     child: ClipRRect(
@@ -179,7 +182,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       child: LinearProgressIndicator(
                                         value: progressValue,
                                         backgroundColor: AppColors.whitewhite,
-                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
                                           Colors.yellow,
                                         ),
                                         minHeight: 20.0,
@@ -193,7 +197,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                           if (currentQuestion.hasInfoButton) ...[
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: MediaQuery.of(context).size.width * 0.06),
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.06),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -201,7 +206,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     "Nincs ötleted? Szeretnéd, hogy segítsek?",
                                     style: TextStyle(
                                       fontSize: 16.0,
-                                      color: Colors.grey.shade800,
+                                      color: Colors.grey.shade600,
                                     ),
                                   ),
                                   SizedBox(width: 8.0),
@@ -213,20 +218,23 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               ),
                             ),
                           ],
-                          SizedBox(height: 20.0),
+                          SizedBox(
+                              height: MediaQuery.of(context).size.width * 0.03),
                           if (currentQuestion.requiresRanking) ...[
                             Column(
                               children: [
                                 if (_optionControllers.isNotEmpty)
                                   if (!_isReordering)
                                     Container(
-                                      width: MediaQuery.of(context).size.width * 0.5,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
                                       child: ListView.builder(
                                         shrinkWrap: true,
                                         physics: NeverScrollableScrollPhysics(),
                                         itemCount: _optionControllers.length,
                                         itemBuilder: (context, index) {
-                                          var controller = _optionControllers[index];
+                                          var controller =
+                                              _optionControllers[index];
                                           return Padding(
                                             key: ValueKey(controller),
                                             padding: const EdgeInsets.symmetric(
@@ -234,32 +242,44 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                             child: Row(
                                               children: [
                                                 Container(
-                                                  width: MediaQuery.of(context).size.width * 0.4,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
                                                   child: TextField(
                                                     controller: controller,
                                                     decoration: InputDecoration(
-                                                      labelText: 'Az ötleted...',
+                                                      labelText:
+                                                          'Az ötleted...',
                                                       labelStyle: TextStyle(
-                                                          color: Colors.grey.shade600),
-                                                      border: OutlineInputBorder(
+                                                          color: Colors
+                                                              .grey.shade600),
+                                                      border:
+                                                          OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color: Colors.green,
                                                             width: 2.0),
                                                       ),
-                                                      focusedBorder: OutlineInputBorder(
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                            color: Colors.yellow,
+                                                            color:
+                                                                Colors.yellow,
                                                             width: 2.0),
                                                       ),
-                                                      enabledBorder: OutlineInputBorder(
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                            color: Colors.grey.shade600,
+                                                            color: Colors
+                                                                .grey.shade600,
                                                             width: 2.0),
                                                       ),
                                                       filled: true,
                                                       fillColor: Colors.white,
                                                     ),
-                                                    style: TextStyle(color: Colors.grey.shade800),
+                                                    style: TextStyle(
+                                                        color: Colors
+                                                            .grey.shade600),
                                                     maxLines: null,
                                                   ),
                                                 ),
@@ -267,7 +287,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                                   icon: Icon(Icons.delete),
                                                   onPressed: () {
                                                     setState(() {
-                                                      _optionControllers.removeAt(index);
+                                                      _optionControllers
+                                                          .removeAt(index);
                                                     });
                                                   },
                                                 ),
@@ -283,269 +304,482 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     children: [
                                       Container(
                                         width: (currentQuestion.twoColumn)
-                                            ? MediaQuery.of(context).size.width * 0.45
-                                            : MediaQuery.of(context).size.width * 0.3,
+                                            ? MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.45
+                                            : MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.3,
                                         child: (currentQuestion.twoColumn)
                                             ? ListView(
-                                          shrinkWrap: true,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          children: [
-                                            for (int index = 0; index < _rankableOptions.length; index++)
-                                              Padding(
-                                                key: ValueKey(_rankableOptions[index]),
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 8.0, vertical: 4.0),
-                                                child: Row(
-                                                  children: [
-                                                    Container(
-                                                      width: MediaQuery.of(context).size.width * 0.2,
-                                                      decoration: BoxDecoration(
-                                                        color: AppColors.whitewhite,
-                                                        border: Border.all(
-                                                          color: Colors.grey.shade600,
-                                                          width: 1.0,
-                                                        ),
-                                                        borderRadius: BorderRadius.circular(8.0),
-                                                      ),
-                                                      child: ListTile(
-                                                        title: Text(
-                                                          _rankableOptions[index],
-                                                          style: TextStyle(color: Colors.grey.shade800),
-                                                        ),
-                                                        tileColor: Colors.grey.shade100,
+                                                shrinkWrap: true,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                children: [
+                                                  for (int index = 0;
+                                                      index <
+                                                          _rankableOptions
+                                                              .length;
+                                                      index++)
+                                                    Padding(
+                                                      key: ValueKey(
+                                                          _rankableOptions[
+                                                              index]),
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 8.0,
+                                                          vertical: 4.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Container(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.2,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: AppColors
+                                                                  .whitewhite,
+                                                              border:
+                                                                  Border.all(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600,
+                                                                width: 1.0,
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.0),
+                                                            ),
+                                                            child: ListTile(
+                                                              title: Text(
+                                                                _rankableOptions[
+                                                                    index],
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                              ),
+                                                              tileColor: Colors
+                                                                  .grey
+                                                                  .shade100,
+                                                            ),
+                                                          ),
+                                                          if (currentQuestion
+                                                              .twoColumn)
+                                                            Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.2,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: AppColors
+                                                                    .whitewhite,
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade600,
+                                                                  width: 1.0,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                              ),
+                                                              child: ListTile(
+                                                                title:
+                                                                    TextField(
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                                ),
+                                                                tileColor: Colors
+                                                                    .grey
+                                                                    .shade100,
+                                                              ),
+                                                            ),
+                                                        ],
                                                       ),
                                                     ),
-                                                    if (currentQuestion.twoColumn)
-                                                      Container(
-                                                        width: MediaQuery.of(context).size.width * 0.2,
-                                                        decoration: BoxDecoration(
-                                                          color: AppColors.whitewhite,
-                                                          border: Border.all(
-                                                            color: Colors.grey.shade600,
-                                                            width: 1.0,
-                                                          ),
-                                                          borderRadius: BorderRadius.circular(8.0),
-                                                        ),
-                                                        child: ListTile(
-                                                          title: TextField(
-                                                            style: TextStyle(color: Colors.grey.shade800),
-                                                          ),
-                                                          tileColor: Colors.grey.shade100,
-                                                        ),
-                                                      ),
-                                                  ],
-                                                ),
-                                              ),
-                                          ],
-                                        )
+                                                ],
+                                              )
                                             : ReorderableListView(
-                                          shrinkWrap: true,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          onReorder: (int oldIndex, int newIndex) {
-                                            setState(() {
-                                              if (newIndex > oldIndex) {
-                                                newIndex -= 1;
-                                              }
-                                              final item = _rankableOptions.removeAt(oldIndex);
-                                              _rankableOptions.insert(newIndex, item);
-                                            });
-                                          },
-                                          children: [
-                                            for (int index = 0; index < _rankableOptions.length; index++)
-                                              Padding(
-                                                key: ValueKey(_rankableOptions[index]),
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 8.0, vertical: 4.0),
-                                                child: Row(
-                                                  children: [
-                                                    Container(
-                                                      width: MediaQuery.of(context).size.width * 0.2,
-                                                      decoration: BoxDecoration(
-                                                        color: AppColors.whitewhite,
-                                                        border: Border.all(
-                                                          color: Colors.grey.shade600,
-                                                          width: 1.0,
-                                                        ),
-                                                        borderRadius: BorderRadius.circular(8.0),
-                                                      ),
-                                                      child: ListTile(
-                                                        title: Text(
-                                                          _rankableOptions[index],
-                                                          style: TextStyle(color: Colors.grey.shade800),
-                                                        ),
-                                                        tileColor: Colors.grey.shade100,
+                                                shrinkWrap: true,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                onReorder: (int oldIndex,
+                                                    int newIndex) {
+                                                  setState(() {
+                                                    if (newIndex > oldIndex) {
+                                                      newIndex -= 1;
+                                                    }
+                                                    final item =
+                                                        _rankableOptions
+                                                            .removeAt(oldIndex);
+                                                    _rankableOptions.insert(
+                                                        newIndex, item);
+                                                  });
+                                                },
+                                                children: [
+                                                  for (int index = 0;
+                                                      index <
+                                                          _rankableOptions
+                                                              .length;
+                                                      index++)
+                                                    Padding(
+                                                      key: ValueKey(
+                                                          _rankableOptions[
+                                                              index]),
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 8.0,
+                                                          vertical: 4.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Container(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.2,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: AppColors
+                                                                  .whitewhite,
+                                                              border:
+                                                                  Border.all(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600,
+                                                                width: 1.0,
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.0),
+                                                            ),
+                                                            child: ListTile(
+                                                              title: Text(
+                                                                _rankableOptions[
+                                                                    index],
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                              ),
+                                                              tileColor: Colors
+                                                                  .grey
+                                                                  .shade100,
+                                                            ),
+                                                          ),
+                                                          if (currentQuestion
+                                                              .twoColumn)
+                                                            Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.2,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: AppColors
+                                                                    .whitewhite,
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade600,
+                                                                  width: 1.0,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                              ),
+                                                              child: ListTile(
+                                                                title:
+                                                                    TextField(
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                                ),
+                                                                tileColor: Colors
+                                                                    .grey
+                                                                    .shade100,
+                                                              ),
+                                                            ),
+                                                        ],
                                                       ),
                                                     ),
-                                                    if (currentQuestion.twoColumn)
-                                                      Container(
-                                                        width: MediaQuery.of(context).size.width * 0.2,
-                                                        decoration: BoxDecoration(
-                                                          color: AppColors.whitewhite,
-                                                          border: Border.all(
-                                                            color: Colors.grey.shade600,
-                                                            width: 1.0,
-                                                          ),
-                                                          borderRadius: BorderRadius.circular(8.0),
-                                                        ),
-                                                        child: ListTile(
-                                                          title: TextField(
-                                                            style: TextStyle(color: Colors.grey.shade800),
-                                                          ),
-                                                          tileColor: Colors.grey.shade100,
-                                                        ),
-                                                      ),
-                                                  ],
-                                                ),
+                                                ],
                                               ),
-                                          ],
-                                        ),
                                       ),
                                     ],
                                   ),
-                                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                if (_optionControllers.isNotEmpty && _isReordering)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                      borderRadius: BorderRadius.circular(4.0),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.02),
+                                if (_optionControllers.isNotEmpty &&
+                                    _isReordering)
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //     border: Border.all(color: AppColors.whitewhite, width: 2.0),
+                                  //     borderRadius: BorderRadius.circular(4.0),
+                                  //   ),
+                                  //   child: ElevatedButton(
+                                  //     onPressed: () {
+                                  //       setState(() {
+                                  //         _isReordering = false;
+                                  //       });
+                                  //     },
+                                  //     style: ElevatedButton.styleFrom(
+                                  //       primary: AppColors.whitewhite,
+                                  //       padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                  //       textStyle: TextStyle(fontSize: 20.0),
+                                  //       shape: RoundedRectangleBorder(
+                                  //         borderRadius: BorderRadius.circular(4.0),
+                                  //       ),
+                                  //     ),
+                                  //     child: Text(
+                                  //       'Szerkesztés',
+                                  //       style: TextStyle(color: Colors.grey.shade800),
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  GradientButton(
+                                    text: 'SZERKESZTÉS',
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        AppColors.whitewhite,
+                                        Colors.yellow
+                                      ],
                                     ),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _isReordering = false;
-                                        });
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: AppColors.whitewhite,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                        textStyle: TextStyle(fontSize: 20.0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Szerkesztés',
-                                        style: TextStyle(color: Colors.grey.shade800),
-                                      ),
-                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _isReordering = false;
+                                      });
+                                    },
+                                    showIcon: false,
                                   ),
-                                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                if (_optionControllers.isNotEmpty && _isReordering)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                      borderRadius: BorderRadius.circular(4.0),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.02),
+                                if (_optionControllers.isNotEmpty &&
+                                    _isReordering)
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //     border: Border.all(color: AppColors.whitewhite, width: 2.0),
+                                  //     borderRadius: BorderRadius.circular(4.0),
+                                  //   ),
+                                  //   child: ElevatedButton(
+                                  //     onPressed: () {
+                                  //       quizProvider1.nextQuestion();
+                                  //       _scrollToTop();
+                                  //       if (quizProvider1.isQuizFinished) {
+                                  //         Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
+                                  //       }
+                                  //     },
+                                  //     style: ElevatedButton.styleFrom(
+                                  //       primary: AppColors.yellow,
+                                  //       padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                  //       textStyle: TextStyle(fontSize: 20.0),
+                                  //       shape: RoundedRectangleBorder(
+                                  //         borderRadius: BorderRadius.circular(4.0),
+                                  //       ),
+                                  //     ),
+                                  //     child: Text(
+                                  //       'Válasz mentése',
+                                  //       style: TextStyle(color: AppColors.whitewhite),
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  GradientButton(
+                                    text: 'VÁLASZ MENTÉSE',
+                                    gradient: LinearGradient(
+                                      colors: [Colors.yellow, AppColors.yellow],
                                     ),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        quizProvider1.nextQuestion();
-                                        _scrollToTop();
-                                        if (quizProvider1.isQuizFinished) {
-                                          Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                        }
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: AppColors.yellow,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                        textStyle: TextStyle(fontSize: 20.0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Válasz mentése',
-                                        style: TextStyle(color: AppColors.whitewhite),
-                                      ),
-                                    ),
+                                    onPressed: () {
+                                      quizProvider1.nextQuestion();
+                                      _scrollToTop();
+                                      if (quizProvider1.isQuizFinished) {
+                                        Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ModuleOpening_M3()));
+                                      }
+                                    },
+                                    showIcon: true, // Show the icon
                                   ),
-                                if (_optionControllers.isEmpty || !_isReordering)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey.shade600, width: 2.0),
-                                      borderRadius: BorderRadius.circular(4.0),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.02),
+                                if (_optionControllers.isEmpty ||
+                                    !_isReordering)
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //     border: Border.all(color: Colors.grey.shade600, width: 2.0),
+                                  //     borderRadius: BorderRadius.circular(4.0),
+                                  //   ),
+                                  //   child: ElevatedButton(
+                                  //     onPressed: () {
+                                  //       setState(() {
+                                  //         _optionControllers.add(TextEditingController());
+                                  //       });
+                                  //     },
+                                  //     style: ElevatedButton.styleFrom(
+                                  //       primary: AppColors.whitewhite,
+                                  //       padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                  //       textStyle: TextStyle(fontSize: 20.0),
+                                  //       shape: RoundedRectangleBorder(
+                                  //         borderRadius: BorderRadius.circular(4.0),
+                                  //       ),
+                                  //     ),
+                                  //     child: Text(
+                                  //       'Új megadása',
+                                  //       style: TextStyle(color: Colors.grey.shade800),
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  GradientButton(
+                                    text: 'ÚJ MEGADÁSA',
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        AppColors.whitewhite,
+                                        Colors.yellow
+                                      ],
                                     ),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _optionControllers.add(TextEditingController());
-                                        });
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: AppColors.whitewhite,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                        textStyle: TextStyle(fontSize: 20.0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Új megadása',
-                                        style: TextStyle(color: Colors.grey.shade800),
-                                      ),
-                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _optionControllers
+                                            .add(TextEditingController());
+                                      });
+                                    },
+                                    showIcon: false,
                                   ),
-                                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                if (_optionControllers.isNotEmpty && !_isReordering)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                      borderRadius: BorderRadius.circular(4.0),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.02),
+                                if (_optionControllers.isNotEmpty &&
+                                    !_isReordering)
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //     border: Border.all(color: AppColors.whitewhite, width: 2.0),
+                                  //     borderRadius: BorderRadius.circular(4.0),
+                                  //   ),
+                                  //   child: ElevatedButton(
+                                  //     onPressed: () {
+                                  //       setState(() {
+                                  //         _rankableOptions = _optionControllers
+                                  //             .map((controller) => controller.text)
+                                  //             .where((text) => text.isNotEmpty)
+                                  //             .toList();
+                                  //         _isReordering = true;
+                                  //       });
+                                  //     },
+                                  //     style: ElevatedButton.styleFrom(
+                                  //       primary: Colors.yellow,
+                                  //       padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                  //       textStyle: TextStyle(fontSize: 20.0),
+                                  //       shape: RoundedRectangleBorder(
+                                  //         borderRadius: BorderRadius.circular(4.0),
+                                  //       ),
+                                  //     ),
+                                  //     child: Text(
+                                  //       'Eddigiek mentése, sorbarendezés megkezdése',
+                                  //       style: TextStyle(color: Colors.grey.shade800),
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  GradientButton(
+                                    text:
+                                        'EDDIGIEK MENTÉSE, SORBARENDEZÉS MEGKEZDÉSE',
+                                    gradient: LinearGradient(
+                                      colors: [Colors.yellow, Colors.yellow],
                                     ),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _rankableOptions = _optionControllers
-                                              .map((controller) => controller.text)
-                                              .where((text) => text.isNotEmpty)
-                                              .toList();
-                                          _isReordering = true;
-                                        });
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.yellow,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                        textStyle: TextStyle(fontSize: 20.0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Eddigiek mentése, sorbarendezés megkezdése',
-                                        style: TextStyle(color: Colors.grey.shade800),
-                                      ),
-                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _rankableOptions = _optionControllers
+                                            .map(
+                                                (controller) => controller.text)
+                                            .where((text) => text.isNotEmpty)
+                                            .toList();
+                                        _isReordering = true;
+                                      });
+                                    },
+                                    showIcon: false, // Show the icon
                                   ),
                               ],
                             ),
                           ] else if (currentQuestion.requiresRadioOptions) ...[
                             Column(
                               children: [
-                                ...currentQuestion.radioOptions.map((radioOption) {
-                                  int index = currentQuestion.radioOptions.indexOf(radioOption);
+                                ...currentQuestion.radioOptions
+                                    .map((radioOption) {
+                                  int index = currentQuestion.radioOptions
+                                      .indexOf(radioOption);
+                                  bool isSelected =
+                                      _selectedAnswerIndex == index;
                                   return Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 24.0),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 24.0, vertical: 8.0),
                                     child: Theme(
                                       data: Theme.of(context).copyWith(
                                         unselectedWidgetColor: Colors.grey,
                                         radioTheme: RadioThemeData(
-                                          fillColor: MaterialStateColor.resolveWith((states) =>
-                                          states.contains(MaterialState.selected) ? AppColors.yellow : Colors.grey),
+                                          fillColor:
+                                              MaterialStateColor.resolveWith(
+                                                  (states) => states.contains(
+                                                          MaterialState
+                                                              .selected)
+                                                      ? AppColors.yellow
+                                                      : Colors.grey),
                                         ),
                                       ),
-                                      child: RadioListTile(
-                                        title: Text(radioOption.text),
-                                        value: index,
-                                        groupValue: _selectedAnswerIndex,
-                                        onChanged: (int? value) {
-                                          setState(() {
-                                            _selectedAnswerIndex = value!;
-                                          });
-                                        },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black12,
+                                              blurRadius: 4.0,
+                                              spreadRadius: 1.0,
+                                              offset: Offset(0, 2),
+                                            ),
+                                          ],
+                                          border: Border.all(
+                                            color: isSelected
+                                                ? Colors.yellow
+                                                : Colors.grey,
+                                            // Dynamic border color
+                                            width: 1.5,
+                                          ),
+                                        ),
+                                        child: RadioListTile(
+                                          title: Text(radioOption.text),
+                                          value: index,
+                                          groupValue: _selectedAnswerIndex,
+                                          onChanged: (int? value) {
+                                            setState(() {
+                                              _selectedAnswerIndex = value!;
+                                            });
+                                          },
+                                        ),
                                       ),
                                     ),
                                   );
                                 }).toList(),
-                                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+
                                 // Comment section
                                 if (currentQuestion.allowsComment) ...[
                                   SizedBox(height: 20.0),
@@ -553,7 +787,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     currentQuestion.commentText,
                                     style: TextStyle(
                                       fontSize: 16.0,
-                                      color: Colors.grey.shade800,
+                                      color: Colors.grey.shade600,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -562,53 +796,61 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     controller: _commentController,
                                     decoration: InputDecoration(
                                       labelText: 'Megjegyzés...',
-                                      labelStyle: TextStyle(color: Colors.grey.shade600),
+                                      labelStyle: TextStyle(
+                                          color: Colors.grey.shade600),
                                       border: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.green, width: 2.0),
+                                        borderSide: BorderSide(
+                                            color: Colors.green, width: 1.5),
                                       ),
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.yellow, width: 2.0),
+                                        borderSide: BorderSide(
+                                            color: Colors.yellow, width: 1.5),
                                       ),
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.grey.shade600, width: 2.0),
+                                        borderSide: BorderSide(
+                                            color: Colors.grey.shade600,
+                                            width: 1.5),
                                       ),
                                       filled: true,
                                       fillColor: Colors.white,
                                     ),
-                                    style: TextStyle(color: Colors.grey.shade800),
+                                    style:
+                                        TextStyle(color: Colors.grey.shade600),
                                     maxLines: null,
                                   ),
                                 ],
-                                SizedBox(height: MediaQuery.of(context).size.width*0.05),
-                                ElevatedButton(
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.02),
+                                GradientButton(
+                                  text: 'TOVÁBB',
+                                  gradient: LinearGradient(
+                                    colors: [Colors.yellow, AppColors.yellow],
+                                  ),
                                   onPressed: () {
                                     if (_selectedAnswerIndex != -1) {
-                                      quizProvider1.answerQuestion(currentQuestion.radioOptions[_selectedAnswerIndex].nextQuestionIndex);
+                                      quizProvider1.answerQuestion(
+                                          currentQuestion
+                                              .radioOptions[
+                                                  _selectedAnswerIndex]
+                                              .nextQuestionIndex);
                                       _scrollToTop();
                                       if (quizProvider1.isQuizFinished) {
-                                        Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
+                                        Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ModuleOpening_M3()));
                                       }
                                     }
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    primary: AppColors.yellow,
-                                    padding: EdgeInsets.symmetric(horizontal: 70.0, vertical: 12.0),
-                                    textStyle: TextStyle(fontSize: 20.0),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Tovább',
-                                    style: TextStyle(color: AppColors.whitewhite),
-                                  ),
+                                  showIcon: true, // Show the icon
                                 ),
-                                SizedBox(height: MediaQuery.of(context).size.width * 0.01),
+
                               ],
                             ),
 
                             ///TO DO ADAM
-                          ]else if (currentQuestion.twoColumn) ...[
+                          ] else if (currentQuestion.twoColumn) ...[
                             Column(
                               children: [
                                 Row(
@@ -619,7 +861,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         style: TextStyle(
                                           fontSize: 18.0,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.grey.shade800,
+                                          color: Colors.grey.shade600,
                                         ),
                                         textAlign: TextAlign.center,
                                       ),
@@ -630,7 +872,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         style: TextStyle(
                                           fontSize: 18.0,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.grey.shade800,
+                                          color: Colors.grey.shade600,
                                         ),
                                         textAlign: TextAlign.center,
                                       ),
@@ -640,211 +882,327 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                 ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
-                                  itemCount: currentQuestion.twoColumnEntries.length,
+                                  itemCount:
+                                      currentQuestion.twoColumnEntries.length,
                                   itemBuilder: (context, index) {
-                                    var entry = currentQuestion.twoColumnEntries[index];
+                                    var entry =
+                                        currentQuestion.twoColumnEntries[index];
                                     return Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0, vertical: 4.0),
                                       child: entry.isFillable
                                           ? Row(
-                                        children: [
-                                          Expanded(
-                                            child: TextField(
-                                              decoration: InputDecoration(
-                                                labelText: '${currentQuestion.prosText}...',
-                                                labelStyle: TextStyle(color: Colors.grey.shade600),
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.green, width: 2.0),
+                                              children: [
+                                                Expanded(
+                                                  child: TextField(
+                                                    decoration: InputDecoration(
+                                                      labelText:
+                                                          '${currentQuestion.prosText}...',
+                                                      labelStyle: TextStyle(
+                                                          color: Colors
+                                                              .grey.shade600),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors.green,
+                                                            width: 2.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                Colors.yellow,
+                                                            width: 2.0),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .grey.shade600,
+                                                            width: 2.0),
+                                                      ),
+                                                      filled: true,
+                                                      fillColor: Colors.white,
+                                                    ),
+                                                    style: TextStyle(
+                                                        color: Colors
+                                                            .grey.shade600),
+                                                    maxLines: null,
+                                                  ),
                                                 ),
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.yellow, width: 2.0),
+                                                SizedBox(width: 8.0),
+                                                Expanded(
+                                                  child: TextField(
+                                                    decoration: InputDecoration(
+                                                      labelText:
+                                                          '${currentQuestion.consText}...',
+                                                      labelStyle: TextStyle(
+                                                          color: Colors
+                                                              .grey.shade600),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors.green,
+                                                            width: 2.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                Colors.yellow,
+                                                            width: 2.0),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .grey.shade600,
+                                                            width: 2.0),
+                                                      ),
+                                                      filled: true,
+                                                      fillColor: Colors.white,
+                                                    ),
+                                                    style: TextStyle(
+                                                        color: Colors
+                                                            .grey.shade600),
+                                                    maxLines: null,
+                                                  ),
                                                 ),
-                                                enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.grey.shade600, width: 2.0),
+                                                IconButton(
+                                                  icon: Icon(Icons.delete),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      currentQuestion
+                                                          .twoColumnEntries
+                                                          .removeAt(index);
+                                                    });
+                                                  },
                                                 ),
-                                                filled: true,
-                                                fillColor: Colors.white,
-                                              ),
-                                              style: TextStyle(color: Colors.grey.shade800),
-                                              maxLines: null,
-                                            ),
-                                          ),
-                                          SizedBox(width: 8.0),
-                                          Expanded(
-                                            child: TextField(
-                                              decoration: InputDecoration(
-                                                labelText: '${currentQuestion.consText}...',
-                                                labelStyle: TextStyle(color: Colors.grey.shade600),
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.green, width: 2.0),
-                                                ),
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.yellow, width: 2.0),
-                                                ),
-                                                enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(color: Colors.grey.shade600, width: 2.0),
-                                                ),
-                                                filled: true,
-                                                fillColor: Colors.white,
-                                              ),
-                                              style: TextStyle(color: Colors.grey.shade800),
-                                              maxLines: null,
-                                            ),
-                                          ),
-                                          IconButton(
-                                            icon: Icon(Icons.delete),
-                                            onPressed: () {
-                                              setState(() {
-                                                currentQuestion.twoColumnEntries.removeAt(index);
-                                              });
-                                            },
-                                          ),
-                                        ],
-                                      )
+                                              ],
+                                            )
                                           : Row(
-                                        children: [
-                                          Expanded(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                border: Border.all(color: Colors.grey.shade600),
-                                                borderRadius: BorderRadius.circular(4.0),
-                                                color: Colors.grey.shade300,
-                                              ),
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                entry.pros,
-                                                style: TextStyle(color: Colors.grey.shade800),
-                                              ),
+                                              children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Colors
+                                                              .grey.shade600),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.0),
+                                                      color:
+                                                          Colors.grey.shade300,
+                                                    ),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      entry.pros,
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .grey.shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(width: 8.0),
+                                                Expanded(
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Colors
+                                                              .grey.shade600),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.0),
+                                                      color:
+                                                          Colors.grey.shade300,
+                                                    ),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      entry.cons,
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .grey.shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                          SizedBox(width: 8.0),
-                                          Expanded(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                border: Border.all(color: Colors.grey.shade600),
-                                                borderRadius: BorderRadius.circular(4.0),
-                                                color: Colors.grey.shade300,
-                                              ),
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                entry.cons,
-                                                style: TextStyle(color: Colors.grey.shade800),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
                                     );
                                   },
                                 ),
-                                if (currentQuestion.twoColumnEntries.any((entry) => entry.isFillable)) ...[
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey.shade600, width: 2.0),
-                                      borderRadius: BorderRadius.circular(4.0),
+                                if (currentQuestion.twoColumnEntries
+                                    .any((entry) => entry.isFillable)) ...[
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //     border: Border.all(color: Colors.grey.shade600, width: 2.0),
+                                  //     borderRadius: BorderRadius.circular(4.0),
+                                  //   ),
+                                  //   child: ElevatedButton(
+                                  //     onPressed: () {
+                                  //       setState(() {
+                                  //         currentQuestion.twoColumnEntries.add(TwoColumnEntry(pros: '', cons: '', isFillable: true));
+                                  //       });
+                                  //     },
+                                  //     style: ElevatedButton.styleFrom(
+                                  //       primary: AppColors.whitewhite,
+                                  //       padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                  //       textStyle: TextStyle(fontSize: 20.0),
+                                  //       shape: RoundedRectangleBorder(
+                                  //         borderRadius: BorderRadius.circular(4.0),
+                                  //       ),
+                                  //     ),
+                                  //     child: Text(
+                                  //       'Új sor hozzáadása',
+                                  //       style: TextStyle(color: Colors.grey.shade800),
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  GradientButton(
+                                    text: 'ÚJ SOR HOZZÁADÁSA',
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        AppColors.whitewhite,
+                                        Colors.yellow
+                                      ],
                                     ),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          currentQuestion.twoColumnEntries.add(TwoColumnEntry(pros: '', cons: '', isFillable: true));
-                                        });
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: AppColors.whitewhite,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                        textStyle: TextStyle(fontSize: 20.0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Új sor hozzáadása',
-                                        style: TextStyle(color: Colors.grey.shade800),
-                                      ),
-                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        currentQuestion.twoColumnEntries.add(
+                                            TwoColumnEntry(
+                                                pros: '',
+                                                cons: '',
+                                                isFillable: true));
+                                      });
+                                    },
+                                    showIcon: false,
                                   ),
-                                  SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                      borderRadius: BorderRadius.circular(4.0),
+                                  SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.02),
+                                  GradientButton(
+                                    text: 'VÁLASZ MENTÉSE',
+                                    gradient: LinearGradient(
+                                      colors: [Colors.yellow, AppColors.yellow],
                                     ),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        quizProvider1.nextQuestion();
-                                        _scrollToTop();
-                                        if (quizProvider1.isQuizFinished) {
-                                          Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                        }
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: AppColors.yellow,
-                                        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                        textStyle: TextStyle(fontSize: 20.0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Válasz mentése',
-                                        style: TextStyle(color: AppColors.whitewhite),
-                                      ),
-                                    ),
+                                    onPressed: () {
+                                      quizProvider1.nextQuestion();
+                                      _scrollToTop();
+                                      if (quizProvider1.isQuizFinished) {
+                                        Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ModuleOpening_M3()));
+                                      }
+                                    },
+                                    showIcon: true, // Show the icon
                                   ),
+                                  SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.02),
+
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //     border: Border.all(color: AppColors.whitewhite, width: 2.0),
+                                  //     borderRadius: BorderRadius.circular(4.0),
+                                  //   ),
+                                  //   child: ElevatedButton(
+                                  //     onPressed: () {
+                                  //       quizProvider1.nextQuestion();
+                                  //       _scrollToTop();
+                                  //       if (quizProvider1.isQuizFinished) {
+                                  //         Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
+                                  //       }
+                                  //     },
+                                  //     style: ElevatedButton.styleFrom(
+                                  //       primary: AppColors.yellow,
+                                  //       padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                  //       textStyle: TextStyle(fontSize: 20.0),
+                                  //       shape: RoundedRectangleBorder(
+                                  //         borderRadius: BorderRadius.circular(4.0),
+                                  //       ),
+                                  //     ),
+                                  //     child: Text(
+                                  //       'Válasz mentése',
+                                  //       style: TextStyle(color: AppColors.whitewhite),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ],
                             ),
-                          ]
-
-
-                          else ...currentQuestion.answers.map((answer) {
+                          ] else
+                            ...currentQuestion.answers.map((answer) {
                               if (answer.isScale) {
                                 return Column(
                                   children: [
-                                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                    Slider(
-                                      value: _sliderValue,
-                                      min: 0.0,
-                                      max: 10.0,
-                                      divisions: 10,
-                                      label: _sliderValue.round().toString(),
-                                      onChanged: (double value) {
-                                        setState(() {
-                                          _sliderValue = value;
-                                        });
-                                      },
-                                      activeColor: Colors.yellow,
-                                      inactiveColor: AppColors.whitewhite,
-                                      thumbColor: Colors.grey.shade600,
-                                    ),
-                                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                        borderRadius: BorderRadius.circular(4.0),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
+                                    SliderTheme(
+                                      data: SliderTheme.of(context).copyWith(
+                                        trackHeight: 12.0,
+                                        // Adjust the height to make it chunkier
+                                        activeTrackColor: Colors.yellow,
+                                        inactiveTrackColor:
+                                            AppColors.whitewhite,
+                                        thumbColor: Colors.grey.shade600,
+                                        overlayColor: Colors.grey.shade600
+                                            .withOpacity(0.2),
+                                        valueIndicatorColor:
+                                            Colors.grey.shade600,
+                                        thumbShape: RoundSliderThumbShape(
+                                            enabledThumbRadius: 12.0),
+                                        // Adjust the thumb size if needed
+                                        overlayShape: RoundSliderOverlayShape(
+                                            overlayRadius:
+                                                15.0), // Adjust the overlay size if needed
                                       ),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          quizProvider1.answerQuestion(answer.nextQuestionIndex);
-                                          _scrollToTop();
-                                          if (quizProvider1.isQuizFinished) {
-                                            Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                          }
+                                      child: Slider(
+                                        value: _sliderValue,
+                                        min: 0.0,
+                                        max: 10.0,
+                                        divisions: 10,
+                                        label: _sliderValue.round().toString(),
+                                        onChanged: (double value) {
+                                          setState(() {
+                                            _sliderValue = value;
+                                          });
                                         },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: AppColors.yellow,
-                                          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                          textStyle: TextStyle(fontSize: 20.0),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(4.0),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Tovább',
-                                          style: TextStyle(color: AppColors.whitewhite),
-                                        ),
                                       ),
                                     ),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
+                                    GradientButton(
+                                      text: 'TOVÁBB',
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.yellow,
+                                          AppColors.yellow
+                                        ],
+                                      ),
+                                      onPressed: () {
+                                        quizProvider1.answerQuestion(
+                                            answer.nextQuestionIndex);
+                                        _scrollToTop();
+                                        if (quizProvider1.isQuizFinished) {
+                                          Navigator.of(context).pushReplacement(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ModuleOpening_M3()));
+                                        }
+                                      },
+                                      showIcon: true, // Show the icon
+                                    ),
+
                                   ],
                                 );
                               } else if (answer.isVideo) {
@@ -852,10 +1210,12 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   children: [
                                     Center(
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(20.0),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(20.0),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
                                           ),
                                           child: SizedBox(
                                             child: HtmlWidget(
@@ -865,36 +1225,60 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width * 0.2,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                        borderRadius: BorderRadius.circular(4.0),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
+                                    // Container(
+                                    //   width: MediaQuery.of(context).size.width * 0.2,
+                                    //   decoration: BoxDecoration(
+                                    //     border: Border.all(color: AppColors.whitewhite, width: 2.0),
+                                    //     borderRadius: BorderRadius.circular(4.0),
+                                    //   ),
+                                    //   child: ElevatedButton(
+                                    //     onPressed: () {
+                                    //       quizProvider1.answerQuestion(answer.nextQuestionIndex);
+                                    //       _scrollToTop();
+                                    //       if (quizProvider1.isQuizFinished) {
+                                    //         Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
+                                    //       }
+                                    //     },
+                                    //     style: ElevatedButton.styleFrom(
+                                    //       primary: AppColors.yellow,
+                                    //       padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                                    //       textStyle: TextStyle(fontSize: 20.0),
+                                    //       shape: RoundedRectangleBorder(
+                                    //         borderRadius: BorderRadius.circular(4.0),
+                                    //       ),
+                                    //     ),
+                                    //     child: Text(
+                                    //       'Megnéztem',
+                                    //       style: TextStyle(color: AppColors.whitewhite),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                    GradientButton(
+                                      text: 'MEGNÉZTEM',
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.yellow,
+                                          AppColors.yellow
+                                        ],
                                       ),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          quizProvider1.answerQuestion(answer.nextQuestionIndex);
-                                          _scrollToTop();
-                                          if (quizProvider1.isQuizFinished) {
-                                            Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                          }
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: AppColors.yellow,
-                                          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                          textStyle: TextStyle(fontSize: 20.0),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(4.0),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Megnéztem',
-                                          style: TextStyle(color: AppColors.whitewhite),
-                                        ),
-                                      ),
+                                      onPressed: () {
+                                        quizProvider1.answerQuestion(
+                                            answer.nextQuestionIndex);
+                                        _scrollToTop();
+                                        if (quizProvider1.isQuizFinished) {
+                                          Navigator.of(context).pushReplacement(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ModuleOpening_M3()));
+                                        }
+                                      },
+                                      showIcon: true, // Show the icon
                                     ),
-                                    SizedBox(height: MediaQuery.of(context).size.width * 0.01),
+
                                   ],
                                 );
                               }
@@ -905,64 +1289,62 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               controller: _controller,
                               decoration: InputDecoration(
                                 labelText: 'A válaszod...',
-                                labelStyle: TextStyle(color: Colors.grey.shade600),
+                                labelStyle:
+                                    TextStyle(color: Colors.grey.shade600),
                                 border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.green, width: 2.0),
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 1.5),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.yellow, width: 2.0),
+                                  borderSide: BorderSide(
+                                      color: Colors.yellow, width: 1.5),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey.shade600, width: 2.0),
+                                  borderSide: BorderSide(
+                                      color: Colors.grey.shade600, width: 1.5),
                                 ),
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
-                              style: TextStyle(color: Colors.grey.shade800),
+                              style: TextStyle(color: Colors.grey.shade600),
                               maxLines: null,
                             ),
-                            SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                borderRadius: BorderRadius.circular(4.0),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02),
+                            GradientButton(
+                              text: 'TOVÁBB',
+                              gradient: LinearGradient(
+                                colors: [Colors.yellow, AppColors.yellow],
                               ),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if (_controller.text.isNotEmpty) {
-                                    quizProvider1.nextQuestion();
-                                    _scrollToTop();
-                                    if (quizProvider1.isQuizFinished) {
-                                      Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                    }
-                                    _controller.clear();
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Kérlek írd be a válaszod!')),
-                                    );
+                              onPressed: () {
+                                if (_controller.text.isNotEmpty) {
+                                  quizProvider1.nextQuestion();
+                                  _scrollToTop();
+                                  if (quizProvider1.isQuizFinished) {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ModuleOpening_M3()));
                                   }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: AppColors.yellow,
-                                  padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                  textStyle: TextStyle(fontSize: 20.0),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                ),
-                                child: Text(
-                                  'Tovább',
-                                  style: TextStyle(color: AppColors.whitewhite),
-                                ),
-                              ),
+                                  _controller.clear();
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text('Kérlek írd be a válaszod!')),
+                                  );
+                                }
+                              },
+                              showIcon: true, // Show the icon
                             ),
-                          ],
 
+                          ],
                         ],
                       ),
                     ),
                     Container(
-                      height: 800,
+                      height: MediaQuery.of(context).size.width*0.5,
                       color: AppColors.lightshade,
                     ),
                   ],
@@ -993,7 +1375,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.lightshade,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.03,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.03,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1011,7 +1394,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                 ),
                               ),
                               child: ListTile(
-                                leading: Image.asset('assets/images/2icon_m.png'),
+                                leading:
+                                    Image.asset('assets/images/2icon_m.png'),
                                 title: Text(
                                   'Kérdések',
                                   style: MyTextStyles.vastagyellow(context),
@@ -1031,7 +1415,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.lightshade,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1048,7 +1433,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1066,7 +1452,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                 ),
                               ),
                               child: ListTile(
-                                leading: Image.asset('assets/images/5icon_m.png'),
+                                leading:
+                                    Image.asset('assets/images/5icon_m.png'),
                                 title: Text(
                                   '1-2. hét terve',
                                   style: MyTextStyles.vastagbekezdes(context),
@@ -1089,7 +1476,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1121,7 +1509,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1153,7 +1542,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1185,7 +1575,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1217,7 +1608,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Container(
                               color: AppColors.whitewhite,
                               child: Container(
-                                height: MediaQuery.of(context).size.width * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(

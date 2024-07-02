@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import '../models/questions1.dart';
 
 class QuizProvider1 with ChangeNotifier {
-  List<Question> _questions = [
+  final List<Question> _questions = [
     Question(
-      text: 'Kérlek nézd meg ezt a videót!',
+      text: 'Kérlek, nézd meg ezt a videót!',
       index: 0,
       requiresTextInput: false,
       twoColumn: false,
@@ -22,7 +22,7 @@ class QuizProvider1 with ChangeNotifier {
     ),
     Question(
       twoColumn: false,
-      text: 'Most kérlek nézd meg ezt a videót!',
+      text: 'Most kérlek, nézd meg ezt a videót!',
       index: 2,
       requiresTextInput: false,
       answers: [
@@ -31,14 +31,14 @@ class QuizProvider1 with ChangeNotifier {
     ),
     Question(
       twoColumn: false,
-      text: '2. kérdés: Te is észrevetted már, hogy sok mindentől függ az, mikor és mennyire jelentkezik a fájdalmad? Kérlek írj pár összefüggést, amit megfigyeltél eddig!',
+      text: '2. kérdés: Te is észrevetted már, hogy sok mindentől függ az, mikor és mennyire jelentkezik a fájdalmad? Kérlek, írj pár összefüggést, amit megfigyeltél eddig!',
       index: 3,
       requiresTextInput: true,
       answers: [],
     ),
     Question(
       twoColumn: false,
-      text: 'Most kérlek nézd meg ezt a videót!',
+      text: 'Most kérlek, nézd meg ezt a videót!',
       index: 4,
       requiresTextInput: false,
       answers: [
@@ -77,7 +77,7 @@ class QuizProvider1 with ChangeNotifier {
     ),
     Question(
       twoColumn: false,
-      text: '3.3.1 kérdés: Mit szoktál mozogni? Ha több féle mozgást végzel, kérlek írd oda, milyen rendszerességgel és mennyi ideig végzed az adott mozgást!',
+      text: '3.3.1 kérdés: Mit szoktál mozogni? Ha több féle mozgást végzel, kérlek, írd oda, milyen rendszerességgel és mennyi ideig végzed az adott mozgást!',
       index: 8,
       requiresTextInput: true,
       answers: [],
@@ -109,7 +109,7 @@ class QuizProvider1 with ChangeNotifier {
     ),
     Question(
       twoColumn: false,
-      text: '3.5.1 kérdés: Hogyan történt ez? Kivel voltál és mik voltak a körülmények? Kérlek írd le olyan részletesen, ahogy tudod!',
+      text: '3.5.1 kérdés: Hogyan történt ez? Kivel voltál és mik voltak a körülmények? Kérlek, írd le olyan részletesen, ahogy tudod!',
       index: 11,
       requiresTextInput: true,
       answers: [],
@@ -127,14 +127,14 @@ class QuizProvider1 with ChangeNotifier {
     ),
     Question(
       twoColumn: false,
-      text: '3.6.1 kérdés: Hogyan történt ez? Kivel voltál és mik voltak a körülmények? Kérlek írd le olyan részletesen, ahogy tudod!',
+      text: '3.6.1 kérdés: Hogyan történt ez? Kivel voltál és mik voltak a körülmények? Kérlek, írd le olyan részletesen, ahogy tudod!',
       index: 13,
       requiresTextInput: true,
       answers: [],
     ),
     Question(
       twoColumn: false,
-      text: 'Most kérlek nézd meg ezt a videót!',
+      text: 'Most kérlek, nézd meg ezt a videót!',
       index: 14,
       requiresTextInput: false,
       answers: [
@@ -154,14 +154,14 @@ class QuizProvider1 with ChangeNotifier {
     ),
     Question(
       twoColumn: false,
-      text: '4.1.1 kérdés: Hogyan történt ez? Milyen mozgás, aktivitás volt az? Kivel voltál és mik voltak a körülmények? Kérlek írd le olyan részletesen, ahogy tudod!',
+      text: '4.1.1 kérdés: Hogyan történt ez? Milyen mozgás, aktivitás volt az? Kivel voltál és mik voltak a körülmények? Kérlek, írd le olyan részletesen, ahogy tudod!',
       index: 16,
       requiresTextInput: true,
       answers: [],
     ),
     Question(
       twoColumn: false,
-      text: 'Most kérlek nézd meg ezt a videót!',
+      text: 'Most kérlek, nézd meg ezt a videót!',
       index: 17,
       requiresTextInput: false,
       answers: [
@@ -181,7 +181,7 @@ class QuizProvider1 with ChangeNotifier {
       rankableOptions: [],
     ),
     Question(
-      text: '5.2 kérdés: Most hogy rangsoroltad, hogy milyen mozgást csinálnál szívesen, kérlek gondolkozz el azon, hogy milyen céljaid vannak az egyes mozgásokkal, amiket felsoroltál! Például: séta – heti 3x 30 perc azért, hogy kimozduljak otthonról, vagy otthoni torna – heti 2x 45 perc azért, mert szeretnék megerősödni',
+      text: '5.2 kérdés: Most hogy rangsoroltad, hogy milyen mozgást csinálnál szívesen, kérlek, gondolkozz el azon, hogy milyen céljaid vannak az egyes mozgásokkal, amiket felsoroltál! Például: séta – heti 3x 30 perc azért, hogy kimozduljak otthonról, vagy otthoni torna – heti 2x 45 perc azért, mert szeretnék megerősödni',
       index: 19,
       requiresRanking: true,
       twoColumn: true,
@@ -197,7 +197,7 @@ class QuizProvider1 with ChangeNotifier {
     ),
     Question(
       twoColumn: false,
-      text: 'Most kérlek nézd meg ezt a videót!',
+      text: 'Most kérlek, nézd meg ezt a videót!',
       index: 20,
       requiresTextInput: false,
       answers: [
@@ -224,7 +224,7 @@ class QuizProvider1 with ChangeNotifier {
 // Second question displaying the readonly table with an additional editable row
     Question(
       twoColumn: true, // Enable two-column input
-      text: '6.2 kérdés: Nézz rá kérlek a hátrányok-előnyök táblázatra! Látsz olyan elemeket, amik összefüggenek? Látsz-e olyan elemeket az előnyök oszlopban, amik megoldást kínálnak egy általad megnevezett nehézségre? \n Pl.: nehézség: fáradt vagyok elkezdeni a mozgást - előny: a mozgás energiával tölt fel. Itt láthatod, hogy a mozgás megadja azt, ami miatt nehéz belekezdeni. Minél többet mozogsz, annál kevésbé leszel fáradt belekezdeni és annál inkább többet fogsz mozogni. Ez egy önmagát erősítő kör. Keress hasonlókat, és írd le őket!',
+      text: '6.2 kérdés: Nézz rá kérlek, a hátrányok-előnyök táblázatra! Látsz olyan elemeket, amik összefüggenek? Látsz-e olyan elemeket az előnyök oszlopban, amik megoldást kínálnak egy általad megnevezett nehézségre? \n Pl.: nehézség: fáradt vagyok elkezdeni a mozgást - előny: a mozgás energiával tölt fel. Itt láthatod, hogy a mozgás megadja azt, ami miatt nehéz belekezdeni. Minél többet mozogsz, annál kevésbé leszel fáradt belekezdeni és annál inkább többet fogsz mozogni. Ez egy önmagát erősítő kör. Keress hasonlókat, és írd le őket!',
       index: 23,
       requiresTextInput: true,
       answers: [],
@@ -243,7 +243,7 @@ class QuizProvider1 with ChangeNotifier {
     ),
     Question(
       twoColumn: false,
-      text: 'Most kérlek nézd meg ezt a videót!',
+      text: 'Most kérlek, nézd meg ezt a videót!',
       index: 25,
       requiresTextInput: false,
       answers: [
@@ -273,7 +273,7 @@ class QuizProvider1 with ChangeNotifier {
     ),
     Question(
       twoColumn: false,
-      text: 'Most kérlek nézd meg ezt a videót!',
+      text: 'Most kérlek, nézd meg ezt a videót!',
       index: 29,
       requiresTextInput: false,
       answers: [
@@ -289,7 +289,7 @@ class QuizProvider1 with ChangeNotifier {
     ),
     Question(
       twoColumn: false,
-      text: 'Most kérlek nézd meg ezt a videót!',
+      text: 'Most kérlek, nézd meg ezt a videót!',
       index: 31,
       requiresTextInput: false,
       answers: [
@@ -318,16 +318,20 @@ class QuizProvider1 with ChangeNotifier {
   void answerQuestion(int nextQuestionIndex) {
     if (nextQuestionIndex < _questions.length) {
       _currentQuestionIndex = nextQuestionIndex;
-      _score++;
-      notifyListeners();
+    } else {
+      _currentQuestionIndex = _questions.length; // Mark as finished
     }
+    _score++;
+    notifyListeners();
   }
 
   void nextQuestion() {
     if (_currentQuestionIndex < _questions.length - 1) {
       _currentQuestionIndex++;
-      notifyListeners();
+    } else {
+      _currentQuestionIndex = _questions.length; // Mark as finished
     }
+    notifyListeners();
   }
 
   void resetQuiz() {

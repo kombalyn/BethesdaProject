@@ -179,7 +179,7 @@ class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
                           Expanded(
                             // This ensures the text fits within the available space and wraps.
                             child: Text(
-                              "Ezen a honlapon tudod meghallgatni a hipnózis gyakorlatokhat és segít abban is, hogy hol és mikor végezd őket. A legtöbb gyerek nagyon szereti hallgatni ezeket a gyakorlatokat és azt tapasztalja, hogy jót tesznek a pocakjának is.",
+                              "Ezen a honlapon tudod meghallgatni a hipnózis gyakorlatokat és segít abban is, hogy hol és mikor végezd őket. A legtöbb gyerek nagyon szereti hallgatni ezeket a gyakorlatokat és azt tapasztalja, hogy jót tesznek a pocakjának is.",
                               style: MyTextStyles.bekezdes(context),
                               textAlign: TextAlign.justify,
                             ),
