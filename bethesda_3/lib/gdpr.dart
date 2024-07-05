@@ -3086,7 +3086,7 @@ class _HomePageWidgetGdprState extends State<HomePageWidgetGdpr> {
                                   SizedBox(
                                       height:
                                           MediaQuery.of(context).size.width *
-                                              0.01),
+                                              0.03),
                                   CheckboxListTile(
                                     title: Text(
                                         "Elolvastam és megértettem a kutatás feltételeit, s benne az én szerepemet.",
@@ -3132,7 +3132,7 @@ class _HomePageWidgetGdprState extends State<HomePageWidgetGdpr> {
                             ),
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.03),
+                                    MediaQuery.of(context).size.width * 0.05),
                             ElevatedButton(
                               onPressed: (_consentGiven && _guardianAgreed && _termsRead) ? () {
                                 // Perform your action when all checkboxes are checked

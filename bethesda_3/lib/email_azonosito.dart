@@ -11,6 +11,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'main.dart';
 import 'styles.dart'; // Make sure this path is correct based on where you placed the styles.dart file
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 // Assuming 'main.dart' and 'home_page_model.dart' are correctly set up.
 
@@ -30,7 +31,7 @@ class Email extends StatelessWidget {
     return MaterialApp(
       title: 'Fájdalomkezelés regisztráció',
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.grey,
         useMaterial3: false,
         cardTheme: CardTheme(
           color: Colors.white, // This sets the background color of cards to white
@@ -50,12 +51,11 @@ class HomePageWidgetEmail extends StatefulWidget {
 
 class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
   late WebSocketChannel _channel = WebSocketChannel.connect(
-    //Uri.parse('ws://34.72.67.6:8089'),
     Uri.parse('ws://146.148.43.137:8089'),
   );
 
   late HomePageModel _model;
-  String? _selectedOption; // Change to String?
+  String? _selectedOption;
   bool _showBigContainer = false;
 
   bool _termsRead = false;
@@ -63,11 +63,12 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
   bool _guardianAgreed = false;
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    _model = HomePageModel(); // Ensure that HomePageModel is correctly initialized
+    _model = HomePageModel();
 
     _model.textController1 = TextEditingController();
     _model.textController2 = TextEditingController();
@@ -164,627 +165,546 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      // color: AppColors.lightshade,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/hatterke.png'),
-                          fit: BoxFit.cover, // Adjust the fit as needed
-                          colorFilter: ColorFilter.mode(
-                            Colors.white.withOpacity(0.2), // Adjust the opacity as needed
-                            BlendMode.dstATop,
+                      child: Opacity(
+                        opacity: 0.6,
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 1.2,
+                          child: SvgPicture.asset(
+                            "assets/images/reg.svg",
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.of(context).size.width * 0.3,
-                            vertical: MediaQuery.of(context).size.width * 0.03),
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.001,
+                            right: MediaQuery.of(context).size.width * 0.05,
+                            top: MediaQuery.of(context).size.width * 0.01,
+                            bottom: MediaQuery.of(context).size.width * 0.03),
                         child: Container(
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.5), // Shadow color
-                                spreadRadius: 5, // Spread radius
-                                blurRadius: 7, // Blur radius
-                                offset: Offset(0, 3), // Offset in the direction of top-left
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: Offset(0, 3),
                               ),
                             ],
-                            color: Colors.white, // Background color
-                            borderRadius: BorderRadius.circular(8), // Optional: Add border radius for rounded corners
-                            // image: DecorationImage(
-                            //   image: AssetImage('assets/images/hatterke.png'), // Image
-                            //   fit: BoxFit.cover,
-                            //   colorFilter: ColorFilter.mode(
-                            //     Colors.white.withOpacity(0.4), // Adjust the opacity here
-                            //     BlendMode.dstATop,
-                            //   ),
-                            // ),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Column(
-                            children: [
-                              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                              Center(
-                                child: Text("Készítsük el a profilod", style: MyTextStyles.cim(context)),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                child: Column(
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional.centerStart,
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, MediaQuery.of(context).size.width * 0.03, 0, 0),
-                                        child: Text(
-                                          'Regisztráló neve:',
-                                          textAlign: TextAlign.center,
-                                          style: MyTextStyles.bekezdes(context),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                                Center(
+                                  child: Text("Készítsük el a profilod", style: MyTextStyles.cim(context)),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width * 0.35,
+                                  child: Column(
+                                    children: [
+                                      Align(
+                                        alignment: AlignmentDirectional.centerStart,
+                                        child: Padding(
+                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                              0, MediaQuery.of(context).size.width * 0.03, 0, 0),
+                                          child: Text(
+                                            'Regisztráló neve:',
+                                            textAlign: TextAlign.center,
+                                            style: MyTextStyles.bekezdes(context),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: AppColors.whitewhite,
-                                              border: Border.all(
-                                                color: Colors.grey,
-                                                width: 0.5,
-                                              ),
-                                              borderRadius: BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                  MediaQuery.of(context).size.width * 0.005, 0,
-                                                  MediaQuery.of(context).size.width * 0.005, 0),
-                                              child: TextFormField(
-                                                controller: _model.textController1,
-                                                focusNode: _model.textFieldFocusNode1,
-                                                autofocus: true,
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  contentPadding: EdgeInsets.zero,
-                                                  labelText: 'Vezetéknév...',
-                                                  labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
-                                                  enabledBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 0,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  focusedBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 0,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  errorBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.red,
-                                                      width: 2,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  focusedErrorBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.red,
-                                                      width: 2,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                ),
-                                                style: MyTextStyles.kicsibekezdes(context),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(width: 10),
-                                        // Add spacing between the containers
-                                        Expanded(
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: AppColors.whitewhite,
-                                              border: Border.all(
-                                                color: Colors.grey,
-                                                width: 0.5,
-                                              ),
-                                              borderRadius: BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                  MediaQuery.of(context).size.width * 0.005, 0,
-                                                  MediaQuery.of(context).size.width * 0.005, 0),
-                                              child: TextFormField(
-                                                controller: _model.textController2,
-                                                focusNode: _model.textFieldFocusNode2,
-                                                autofocus: true,
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  contentPadding: EdgeInsets.zero,
-                                                  labelText: 'Keresztnév...',
-                                                  labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
-                                                  enabledBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 0,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  focusedBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 0,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  errorBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.red,
-                                                      width: 2,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  focusedErrorBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.red,
-                                                      width: 2,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                ),
-                                                style: MyTextStyles.kicsibekezdes(context),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-
-                                    //EMAIL
-                                    Container(
-                                      width: MediaQuery.of(context).size.width * 0.35,
-                                      child: Column(
+                                      Row(
                                         children: [
-                                          Align(
-                                            alignment: AlignmentDirectional.centerStart,
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                  0, MediaQuery.of(context).size.width * 0.03, 0, 0),
-                                              child: Text(
-                                                'E-mail:',
-                                                textAlign: TextAlign.center,
-                                                style: MyTextStyles.bekezdes(context),
+                                          Expanded(
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.whitewhite,
+                                                border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 0.5,
+                                                ),
+                                                borderRadius: BorderRadius.circular(8.0),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(
+                                                    MediaQuery.of(context).size.width * 0.005, 0,
+                                                    MediaQuery.of(context).size.width * 0.005, 0),
+                                                child: TextFormField(
+                                                  controller: _model.textController1,
+                                                  focusNode: _model.textFieldFocusNode1,
+                                                  autofocus: true,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    contentPadding: EdgeInsets.zero,
+                                                    labelText: 'Vezetéknév...',
+                                                    labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
+                                                    enabledBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.white,
+                                                        width: 0,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    focusedBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.white,
+                                                        width: 0,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    errorBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.red,
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    focusedErrorBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.red,
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                  ),
+                                                  style: MyTextStyles.kicsibekezdes(context),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Kérjük, töltse ki ezt a mezőt';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
                                               ),
                                             ),
                                           ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: AppColors.whitewhite,
-                                              // Background color of the container
-                                              border: Border.all(
-                                                color: Colors.grey, // Outline color
-                                                width: 0.5, // Outline thickness
-                                              ),
-                                              // If you also want to have rounded corners, add the borderRadius property
-                                              borderRadius: BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                  MediaQuery.of(context).size.width * 0.005, 0,
-                                                  MediaQuery.of(context).size.width * 0.005, 0),
-                                              child: TextFormField(
-                                                controller: _model.textController3,
-                                                focusNode: _model.textFieldFocusNode1,
-                                                autofocus: true,
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  contentPadding: EdgeInsets.zero,
-                                                  // <-- Set contentPadding to zero
-                                                  labelText: '...',
-                                                  labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
-                                                  //hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                                                  enabledBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 0,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  focusedBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 0,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  errorBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.red,
-                                                      width: 2,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  focusedErrorBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.red,
-                                                      width: 2,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
+                                          SizedBox(width: 10),
+                                          Expanded(
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.whitewhite,
+                                                border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 0.5,
                                                 ),
-                                                style: MyTextStyles.kicsibekezdes(context),
-                                                //validator: _model.textController1Validator.asValidator(context),
+                                                borderRadius: BorderRadius.circular(8.0),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(
+                                                    MediaQuery.of(context).size.width * 0.005, 0,
+                                                    MediaQuery.of(context).size.width * 0.005, 0),
+                                                child: TextFormField(
+                                                  controller: _model.textController2,
+                                                  focusNode: _model.textFieldFocusNode2,
+                                                  autofocus: true,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    contentPadding: EdgeInsets.zero,
+                                                    labelText: 'Keresztnév...',
+                                                    labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
+                                                    enabledBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.white,
+                                                        width: 0,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    focusedBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.white,
+                                                        width: 0,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    errorBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.red,
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    focusedErrorBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.red,
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                  ),
+                                                  style: MyTextStyles.kicsibekezdes(context),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Kérjük, töltse ki ezt a mezőt';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ),
 
-                                    //DÖNTÉS
-                                    Container(
-                                      width: MediaQuery.of(context).size.width * 0.35,
-                                      child: Column(
-                                        children: [
-                                          Align(
-                                            alignment: AlignmentDirectional.centerStart,
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                  0, MediaQuery.of(context).size.width * 0.03, 0, 0),
-                                              child: Text(
-                                                'Szülőként vagy gyermekként regisztrál:',
-                                                textAlign: TextAlign.center,
-                                                style: MyTextStyles.bekezdes(context),
+                                      //EMAIL
+                                      Container(
+                                        width: MediaQuery.of(context).size.width * 0.35,
+                                        child: Column(
+                                          children: [
+                                            Align(
+                                              alignment: AlignmentDirectional.centerStart,
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(
+                                                    0, MediaQuery.of(context).size.width * 0.03, 0, 0),
+                                                child: Text(
+                                                  'E-mail:',
+                                                  textAlign: TextAlign.center,
+                                                  style: MyTextStyles.bekezdes(context),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: AppColors.whitewhite,
-                                              border: Border.all(
-                                                color: Colors.grey,
-                                                width: 0.5,
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.whitewhite,
+                                                border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 0.5,
+                                                ),
+                                                borderRadius: BorderRadius.circular(8.0),
                                               ),
-                                              borderRadius: BorderRadius.circular(8.0),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(
+                                                    MediaQuery.of(context).size.width * 0.005, 0,
+                                                    MediaQuery.of(context).size.width * 0.005, 0),
+                                                child: TextFormField(
+                                                  controller: _model.textController3,
+                                                  focusNode: _model.textFieldFocusNode1,
+                                                  autofocus: true,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    contentPadding: EdgeInsets.zero,
+                                                    labelText: '...',
+                                                    labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
+                                                    enabledBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.white,
+                                                        width: 0,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    focusedBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.white,
+                                                        width: 0,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    errorBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.red,
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    focusedErrorBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.red,
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                  ),
+                                                  style: MyTextStyles.kicsibekezdes(context),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Kérjük, töltse ki ezt a mezőt';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                              ),
                                             ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                  MediaQuery.of(context).size.width * 0.005, 0,
-                                                  MediaQuery.of(context).size.width * 0.005, 0),
-                                              child: DropdownButtonFormField<String>(
-                                                value: _selectedOption,
-                                                onChanged: (String? newValue) {
-                                                  // Change parameter type to String?
-                                                  setState(() {
-                                                    _selectedOption = newValue;
-                                                  });
-                                                },
-                                                items: <String?>['szülő', 'gyermek']
-                                                    .map<DropdownMenuItem<String>>((String? value) {
-                                                  return DropdownMenuItem<String>(
-                                                    value: value,
-                                                    child: Text(
-                                                      value ?? 'Kattints ide...',
-                                                      // Handle null value
-                                                      style: MyTextStyles.kicsibekezdes(context),
+                                          ],
+                                        ),
+                                      ),
+
+                                      //DÖNTÉS
+                                      Container(
+                                        width: MediaQuery.of(context).size.width * 0.35,
+                                        child: Column(
+                                          children: [
+                                            Align(
+                                              alignment: AlignmentDirectional.centerStart,
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(
+                                                    0, MediaQuery.of(context).size.width * 0.03, 0, 0),
+                                                child: Text(
+                                                  'Szülőként vagy gyermekként regisztrál:',
+                                                  textAlign: TextAlign.center,
+                                                  style: MyTextStyles.bekezdes(context),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.whitewhite,
+                                                border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 0.5,
+                                                ),
+                                                borderRadius: BorderRadius.circular(8.0),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(
+                                                    MediaQuery.of(context).size.width * 0.005, 0,
+                                                    MediaQuery.of(context).size.width * 0.005, 0),
+                                                child: DropdownButtonFormField<String>(
+                                                  value: _selectedOption,
+                                                  onChanged: (String? newValue) {
+                                                    setState(() {
+                                                      _selectedOption = newValue;
+                                                    });
+                                                  },
+                                                  items: <String?>['szülő', 'gyermek']
+                                                      .map<DropdownMenuItem<String>>((String? value) {
+                                                    return DropdownMenuItem<String>(
+                                                      value: value,
+                                                      child: Text(
+                                                        value ?? 'Kattints ide...',
+                                                        style: MyTextStyles.kicsibekezdes(context),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                  decoration: InputDecoration(
+                                                    contentPadding: EdgeInsets.zero,
+                                                    labelText: 'Válassz...',
+                                                    labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
+                                                    enabledBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.white,
+                                                        width: 0,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    focusedBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.white,
+                                                        width: 0,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    errorBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.red,
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    focusedErrorBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.red,
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Kérjük, válasszon egy lehetőséget';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+
+                                      //ROKON ADAT
+                                      Container(
+                                        width: MediaQuery.of(context).size.width * 0.35,
+                                        child: Column(
+                                          children: [
+                                            Align(
+                                              alignment: AlignmentDirectional.centerStart,
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(
+                                                    0, MediaQuery.of(context).size.width * 0.03, 0, 0),
+                                                child: Text(
+                                                  _selectedOption == 'szülő'
+                                                      ? 'Kutatásban résztvevő gyermekének a TAJ száma:'
+                                                      : 'A TAJ számod:',
+                                                  textAlign: TextAlign.center,
+                                                  style: MyTextStyles.bekezdes(context),
+                                                ),
+                                              ),
+                                            ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: List.generate(9, (index) {
+                                                return Expanded(
+                                                  child: Container(
+                                                    margin: EdgeInsets.symmetric(horizontal: 2.0),
+                                                    decoration: BoxDecoration(
+                                                      color: AppColors.whitewhite,
+                                                      border: Border.all(
+                                                        color: Colors.grey,
+                                                        width: 0.5,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8.0),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: EdgeInsets.symmetric(vertical: 2.0),
+                                                      child: TextFormField(
+                                                        keyboardType: TextInputType.number,
+                                                        inputFormatters: [
+                                                          FilteringTextInputFormatter.digitsOnly,
+                                                          LengthLimitingTextInputFormatter(1),
+                                                        ],
+                                                        textAlign: TextAlign.center,
+                                                        decoration: InputDecoration(
+                                                          border: InputBorder.none,
+                                                          counterText: '',
+                                                        ),
+                                                        style: MyTextStyles.kicsibekezdes(context),
+                                                        onChanged: (value) {
+                                                          if (value.length == 1) {
+                                                            if (index < 8) {
+                                                              FocusScope.of(context).nextFocus();
+                                                            } else {
+                                                              FocusScope.of(context).unfocus();
+                                                            }
+                                                          }
+                                                        },
+                                                        validator: (value) {
+                                                          if (value == null || value.isEmpty) {
+                                                            return ' ';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+
+                                      SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          if (_formKey.currentState!.validate()) {
+                                            setState(() {
+                                              print("regisztracio most en");
+                                              _showBigContainer = true;
+
+                                              String? szov1 = _model.textController1?.text;
+                                              String? szov2 = _model.textController2?.text;
+                                              String? szov3 = _model.textController3?.text;
+                                              String? szov4 = _model.textController4?.text;
+                                              String? szov5 = _model.textController5?.text;
+                                              print("regisztracio|$szov3-$szov1,$szov2,$_selectedOption,NULL,BARMI");
+
+                                              _channel = WebSocketChannel.connect(
+                                                Uri.parse('ws://146.148.43.137:8089'),
+                                              );
+                                              _channel.sink.add(
+                                                  "regisztracio|$szov3-$szov1,$szov2,$_selectedOption,NULL,BARMI");
+                                              _channel.stream.listen((message) {
+                                                print('Received message: $message');
+                                                if (message == "True") {
+                                                  showDialog<String>(
+                                                    context: context,
+                                                    builder: (BuildContext context) => AlertDialog(
+                                                      title: Text("Regisztrációs Hiba"),
+                                                      content: Text(
+                                                          "A bevitt adatokkal már regisztráltak. Kérem lépjen be regisztráció helyett a létező fiókjába az email-ben kapott azonosító segítségével."),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          onPressed: () => Navigator.pop(context, 'OK'),
+                                                          child: const Text('OK'),
+                                                        ),
+                                                      ],
                                                     ),
                                                   );
-                                                }).toList(),
-                                                decoration: InputDecoration(
-                                                  contentPadding: EdgeInsets.zero,
-                                                  labelText: 'Válassz...',
-                                                  labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
-                                                  enabledBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 0,
+                                                  Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (BuildContext context) => MyApp(),
                                                     ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  focusedBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 0,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  errorBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.red,
-                                                      width: 2,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                  focusedErrorBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.red,
-                                                      width: 2,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-
-                                    //ROKON ADAT
-                                    Container(
-                                      width: MediaQuery.of(context).size.width * 0.35,
-                                      child: Column(
-                                        children: [
-                                          Align(
-                                            alignment: AlignmentDirectional.centerStart,
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                  0, MediaQuery.of(context).size.width * 0.03, 0, 0),
-                                              child: Text(
-                                                _selectedOption == 'szülő'
-                                                    ? 'Kutatásban résztvevő gyermekének a TAJ száma:'
-                                                    : 'A TAJ számod:',
-                                                textAlign: TextAlign.center,
-                                                style: MyTextStyles.bekezdes(context),
-                                              ),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                            children: List.generate(9, (index) {
-                                              return Expanded(
-                                                child: Container(
-                                                  margin: EdgeInsets.symmetric(horizontal: 2.0),
-                                                  decoration: BoxDecoration(
-                                                    color: AppColors.whitewhite,
-                                                    border: Border.all(
-                                                      color: Colors.grey,
-                                                      width: 0.5,
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(8.0),
-                                                  ),
-                                                  child: Padding(
-                                                    padding: EdgeInsets.symmetric(vertical: 2.0),
-                                                    child: TextFormField(
-                                                      keyboardType: TextInputType.number,
-                                                      inputFormatters: [
-                                                        FilteringTextInputFormatter.digitsOnly,
-                                                        LengthLimitingTextInputFormatter(1),
+                                                  );
+                                                } else {
+                                                  showDialog<String>(
+                                                    context: context,
+                                                    builder: (BuildContext context) => AlertDialog(
+                                                      title: Text("Regisztráció Sikeres"),
+                                                      content: Text("Regisztrációját sikeresen mentettük."),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          onPressed: () => Navigator.pop(context, 'OK'),
+                                                          child: const Text('OK'),
+                                                        ),
                                                       ],
-                                                      textAlign: TextAlign.center,
-                                                      decoration: InputDecoration(
-                                                        border: InputBorder.none,
-                                                        counterText: '', // Hide character counter
-                                                      ),
-                                                      style: MyTextStyles.kicsibekezdes(context),
-                                                      onChanged: (value) {
-                                                        if (value.length == 1) {
-                                                          if (index < 8) {
-                                                            FocusScope.of(context).nextFocus();
-                                                          } else {
-                                                            FocusScope.of(context).unfocus();
-                                                          }
-                                                        }
-                                                      },
-                                                      validator: (value) {
-                                                        if (value == null || value.isEmpty) {
-                                                          return ' ';
-                                                        }
-                                                        return null;
-                                                      },
                                                     ),
-                                                  ),
-                                                ),
-                                              );
-                                            }),
+                                                  );
+                                                  Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (BuildContext context) => MyApp(),
+                                                    ),
+                                                  );
+                                                }
+                                              });
+
+                                              print("regisztracio vege");
+                                            });
+                                          } else {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text('Kérjük, töltse ki az összes mezőt.'),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        style: ButtonStyle(
+                                          backgroundColor: MaterialStateProperty.all<Color>(
+                                              AppColors.bethesdacolor),
+                                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-
-                                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                    //GOMB
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          print("regisztracio most en");
-                                          _showBigContainer = true;
-
-                                          String? szov1 = _model.textController1?.text;
-                                          String? szov2 = _model.textController2?.text;
-                                          String? szov3 = _model.textController3?.text;
-                                          String? szov4 = _model.textController4?.text;
-                                          String? szov5 = _model.textController5?.text;
-                                          //String? szov6 = _model.textController6?.text;
-                                          print("regisztracio|$szov3-$szov1,$szov2,$_selectedOption,NULL,BARMI");
-
-                                          _channel = WebSocketChannel.connect(
-                                            //Uri.parse('ws://34.72.67.6:8089'),
-                                            Uri.parse('ws://146.148.43.137:8089'),
-                                          );
-                                          //kerdes = "$_selectedLocaleId | $kerdes";
-                                          _channel.sink.add(
-                                              "regisztracio|$szov3-$szov1,$szov2,$_selectedOption,NULL,BARMI");
-                                          //_channel.sink.add("bejelentkezes|adam@ali.com");
-                                          _channel.stream.listen((message) {
-                                            print('Received message: $message');
-                                            if (message == "True") {
-                                              showDialog<String>(
-                                                context: context,
-                                                builder: (BuildContext context) => AlertDialog(
-                                                  title: Text("Regisztrációs Hiba"),
-                                                  content: Text(
-                                                      "A bevitt adatokkal már regisztráltak. Kérem lépjen be regisztráció helyett a létező fiókjába az email-ben kapott azonosító segítségével."),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      onPressed: () => Navigator.pop(context, 'OK'),
-                                                      child: const Text('OK'),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                              Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (BuildContext context) => MyApp(),
-                                                ),
-                                              );
-                                            } else {
-                                              showDialog<String>(
-                                                context: context,
-                                                builder: (BuildContext context) => AlertDialog(
-                                                  title: Text("Regisztráció Sikeres"),
-                                                  content: Text("Regisztrációját sikeresen mentettük."),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      onPressed: () => Navigator.pop(context, 'OK'),
-                                                      child: const Text('OK'),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                              Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (BuildContext context) => MyApp(),
-                                                ),
-                                              );
-                                            }
-                                          });
-
-                                          print("regisztracio vege");
-                                        });
-                                      },
-                                      style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all<Color>(
-                                            AppColors.bethesdacolor),
-                                        // Change the color to your desired color
-                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10), // Adjust the value as needed
+                                          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                                            EdgeInsets.symmetric(
+                                                vertical: 12, horizontal: 24),
                                           ),
                                         ),
-                                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                                          EdgeInsets.symmetric(
-                                              vertical: 12, horizontal: 24), // Adjust the padding as needed
+                                        child: Text(
+                                          "Regisztrálok",
+                                          textAlign: TextAlign.center,
+                                          style: MyTextStyles.gomb(context),
                                         ),
                                       ),
-                                      child: Text(
-                                        "Regisztrálok",
-                                        textAlign: TextAlign.center,
-                                        style: MyTextStyles.gomb(context),
-                                      ),
-                                    ),
-                                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                                  ],
+                                      SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Center(
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey.withOpacity(0.5),
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Center(
-                          child: Container(
-                            child: HtmlWidget(
-                              '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="https://redcapdemo.vumc.org/surveys/?s=YN98PRHNDJAD8T3P" frameborder="0" ></iframe>',
+                              ],
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Row(
-                children: [
-                  Center(child: Text("Kitöltötted?", style: MyTextStyles.bekezdes(context))),
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      color: AppColors.bethesdacolor,
-                      // Use your desired background color
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      // Adjust padding as needed
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width * 0.05),
-                                // Adjust the padding as necessary
-                                child: Image.asset(
-                                  "assets/images/bethesda_white_logo_name.png",
-                                  // Replace with your logo asset path
-                                  width: MediaQuery.of(context).size.width * 0.05, // Adjust the size as necessary
-                                ),
-                              ),
-                              Expanded(
-                                child: Text(
-                                  'Magyarországi Református Egyház Bethesda Gyermekkórháza – 1146 Budapest, Bethesda utca 3. (Zugló)',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: MediaQuery.of(context).size.width * 0.012,
-                                    color: AppColors.lightshade,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    right: MediaQuery.of(context).size.width * 0.05),
-                                // Adjust the padding as necessary
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '+36 1 920 6000',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: MediaQuery.of(context).size.width * 0.0115,
-                                        color: AppColors.lightshade,
-                                      ),
-                                    ),
-                                    Text(
-                                      'bethesda@bethesda.hu',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: MediaQuery.of(context).size.width * 0.0115,
-                                        color: AppColors.lightshade,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
                       ),
                     ),
                   ),

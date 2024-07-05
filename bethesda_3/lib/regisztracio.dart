@@ -265,7 +265,7 @@ class Regisztracio extends StatelessWidget {
     return MaterialApp(
       title: 'Fájdalomkezelés regisztráció',
       theme: ThemeData(
-
+        primarySwatch: Colors.grey,
         /*colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.deepPurple,
         ),*/
