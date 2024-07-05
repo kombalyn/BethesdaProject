@@ -66,6 +66,7 @@ class Answer {
   final bool isHat;
   final bool isVideo;
   final String video;
+  final bool isFillable;
 
   Answer({
     this.text = '',
@@ -76,6 +77,7 @@ class Answer {
     this.isHat = false,
     this.isVideo = false,
     this.video = '',
+    this.isFillable = true,
   });
 }
 

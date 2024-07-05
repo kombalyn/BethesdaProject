@@ -109,7 +109,7 @@ class _ModuleOpening_M3_WidgetState extends State<ModuleOpening_M3_Widget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.whitewhite,
+        backgroundColor: AppColors.lightshade,
         scrolledUnderElevation: 3.0,
         elevation: 3,
         shadowColor: Colors.grey.shade300,
@@ -404,7 +404,7 @@ class _ModuleOpening_M3_WidgetState extends State<ModuleOpening_M3_Widget> {
                                 leading:
                                     Image.asset('assets/images/5icon_m.png'),
                                 title: Text(
-                                  '1-2. hét terve',
+                                  '1-2. hét',
                                   style: MyTextStyles.vastagbekezdes(context),
                                 ),
                                 subtitle: Text(

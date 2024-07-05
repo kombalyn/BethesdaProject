@@ -195,6 +195,7 @@ class QuizProvider1 with ChangeNotifier {
         'Activity 4',
       ],
     ),
+
     Question(
       twoColumn: false,
       text: 'Most kérlek, nézd meg ezt a videót!',
@@ -213,8 +214,9 @@ class QuizProvider1 with ChangeNotifier {
       infoButtonText: 'Itt egy lista arról, hogy milyen nehézségekbe ütköznek a kortársaid és egy lista arról, hogy miért éri meg mégis a számukra a mozgás (ide akár betehetnénk erről egy hivatkozást is, ha megjelenik a cikk)',
       index: 22,
       requiresTextInput: false,
-      answers: [],
-      twoColumnEntries: [
+      answers: [
+        Answer(nextQuestionIndex: 23, isFillable: true,),
+      ],      twoColumnEntries: [
         TwoColumnEntry(pros: 'Nehézségek', cons: 'Előnyök, amiért megéri',  isFillable: true), // Example entries
       ],
       prosText: 'Nehézségek', // Custom text for pros
@@ -227,7 +229,9 @@ class QuizProvider1 with ChangeNotifier {
       text: '6.2 kérdés: Nézz rá kérlek, a hátrányok-előnyök táblázatra! Látsz olyan elemeket, amik összefüggenek? Látsz-e olyan elemeket az előnyök oszlopban, amik megoldást kínálnak egy általad megnevezett nehézségre? \n Pl.: nehézség: fáradt vagyok elkezdeni a mozgást - előny: a mozgás energiával tölt fel. Itt láthatod, hogy a mozgás megadja azt, ami miatt nehéz belekezdeni. Minél többet mozogsz, annál kevésbé leszel fáradt belekezdeni és annál inkább többet fogsz mozogni. Ez egy önmagát erősítő kör. Keress hasonlókat, és írd le őket!',
       index: 23,
       requiresTextInput: true,
-      answers: [],
+      answers: [
+        Answer(nextQuestionIndex: 24, isFillable: false,),
+      ],
       readonlyTwoColumnEntries: [
         TwoColumnEntry(pros: '', cons: '', isFillable: false), // Example entries
       ],
