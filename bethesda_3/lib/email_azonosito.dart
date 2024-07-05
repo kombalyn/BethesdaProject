@@ -1,3 +1,4 @@
+import 'package:bethesda_2/email_azonosito_2.dart';
 import 'package:bethesda_2/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
@@ -642,7 +643,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                   Navigator.pushReplacement(
                                                     context,
                                                     MaterialPageRoute(
-                                                      builder: (BuildContext context) => MyApp(),
+                                                      builder: (BuildContext context) => Email_2(),
                                                     ),
                                                   );
                                                 } else {
@@ -662,7 +663,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                   Navigator.pushReplacement(
                                                     context,
                                                     MaterialPageRoute(
-                                                      builder: (BuildContext context) => MyApp(),
+                                                      builder: (BuildContext context) => Email_2(),
                                                     ),
                                                   );
                                                 }
