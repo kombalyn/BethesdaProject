@@ -49,6 +49,19 @@ class HomePageWidgetGdpr extends StatefulWidget {
 class _HomePageWidgetGdprState extends State<HomePageWidgetGdpr> {
   late HomePageModel _model;
 
+  bool is1TextVisible = false; // To control the visibility of the text section
+  bool is1Checked = false; // Controls the state of the checkbox
+  bool is2TextVisible = false; // To control the visibility of the text section
+  bool is2Checked = false; // Controls the state of the checkbox
+  bool is3TextVisible = false; // To control the visibility of the text section
+  bool is3Checked = false; // Controls the state of the checkbox
+  bool is4TextVisible = false; // To control the visibility of the text section
+  bool is4Checked = false; // Controls the state of the checkbox
+  bool is5TextVisible = false; // To control the visibility of the text section
+  bool is5Checked = false; // Controls the state of the checkbox
+  bool is6TextVisible = false; // To control the visibility of the text section
+  bool is6Checked = false; // Controls the state of the checkbox
+
   bool _termsRead = false;
   bool _consentGiven = false;
   bool _guardianAgreed = false;
@@ -147,26 +160,56 @@ class _HomePageWidgetGdprState extends State<HomePageWidgetGdpr> {
                   top: MediaQuery.of(context).size.width * 0.02,
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(
-                      child: Card(
-                        elevation: 5,
+                    // Center(
+                    //   child: Card(
+                    //     elevation: 5,
+                    //     color: AppColors.whitewhite,
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(0),
+                    //     ),
+                    //     child: Padding(
+                    //       padding: EdgeInsets.all(
+                    //           MediaQuery.of(context).size.width * 0.02),
+                      Container(
+                        decoration: BoxDecoration(
                         color: AppColors.whitewhite,
-                        shape: RoundedRectangleBorder(
+                          // Background color of the Container
                           borderRadius: BorderRadius.circular(0),
+                          // Rounded corners for the container
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              // Shadow color with some transparency
+                              spreadRadius: 1,
+                              blurRadius: 10,
+                              offset:
+                              Offset(0, 4), // Vertical offset for the shadow
+                            ),
+                          ],
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(
-                              MediaQuery.of(context).size.width * 0.02),
-                          child: Text(
-                            "Adatvédelmi nyilatkozat a Gyermekhipnózis Alapítvány részére",
-                            textAlign: TextAlign.center,
-                            style: MyTextStyles.bethesdabekezdes(context),
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.width * 0.02,
+                              left: MediaQuery.of(context).size.width * 0.015,
+                              bottom: MediaQuery.of(context).size.width * 0.02,
+                              right: MediaQuery.of(context).size.width * 0.015,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Tájékoztatók és beleegyező nyilatkozatok",
+                                textAlign: TextAlign.center,
+                                style: MyTextStyles.bethesdabekezdes(context),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ),
+  ////////////////////////////////////////////////////////////////////////////////////////
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
                     Container(
                       decoration: BoxDecoration(
@@ -193,168 +236,2833 @@ class _HomePageWidgetGdprState extends State<HomePageWidgetGdpr> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            RichText(
-                              textAlign: TextAlign.justify,
-                              text: TextSpan(
-                                style: MyTextStyles.bekezdes(context),
-                                // Your common text style
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: "A személyes adatok feldolgozása a ",
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              decoration: BoxDecoration(
+                                color: AppColors.whitewhite,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border(
+                                  left: BorderSide(
+                                    color: AppColors.bethesdacolor,
+                                    width: 3,
                                   ),
-                                  TextSpan(
-                                    text: "www.hypnosis4abdominalpain.com",
-                                    style: MyTextStyles.bekezdes(context)
-                                        .copyWith(color: Colors.blue),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        _launchURL(
-                                            'http://www.hypnosis4abdominalpain.com');
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          is1TextVisible =
+                                          !is1TextVisible; // Toggle visibility of the text
+                                        });
                                       },
-                                  ),
-                                  TextSpan(
-                                    text:
-                                        " weboldalon keresztül történik a Holland Gyermekhipnózis Alapítvány (DFHC) által. A DFHC nagy jelentőséget tulajdonít a személyes adatok gondos kezelésének. A személyes adatokat ezért gondosan kezeljük és biztosítjuk. A feldolgozás során betartjuk az adatvédelmi törvény követelményeit. Ez többek között azt jelenti, hogy:",
+                                      child: Text(
+                                        "TÁJÉKOZTATÓ A VIZSGÁLATI SZEMÉLYEK "
+                                            "SZÜLEI (JOGI KÉPVISELŐI) SZÁMÁRA",
+                                        style:
+                                        MyTextStyles.bekezdes(context),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
+                            AnimatedSize(
+                              duration: Duration(milliseconds: 300),
+                              child: Visibility(
+                                visible: is1TextVisible,
+                                maintainState: true,
+                                maintainAnimation: true,
+                                maintainSize: false,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whitewhite,
+                                    borderRadius: BorderRadius.circular(13),
+                                    // Rounded corners
+                                    boxShadow: [
+                                      // Optional: add shadow for elevation effect
+                                      BoxShadow(
+                                        color: AppColors.bethesdacolor
+                                            .withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 4,
+                                        offset: Offset(0,
+                                            5), // Shifts shadow downwards
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Tisztelt Szülő!",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // flex: 3,
+                                              // Higher flex value for more space
+                                              child: Text(
+                                                "Köszönjük, hogy Ön és "
+                                                  "gyermeke részt vesz "
+                                                  "tudományos "
+                                                  "vizsgálatunkban. "
+                                                  "Ez a tájékoztató részletesen ismerteti a vizsgálatot, és benne az Ön és gyermeke szerepét. Ha bármilyen kérdése van, tegye fel azt a vizsgálatvezetőnek. Ha vállalkozik a részvételre, kérjük, fogadja el a beleegyező nyilatkozatot.",
+                                                style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+                                        Row(
+                                            children: [
+                                              Expanded(
+                                                child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                  text: TextSpan(
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      // Default text color
+                                                      fontSize: 16,
+                                                    ),
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                    text: "A vizsgálat neve: ",
+                                                    style: MyTextStyles
+                                                      .vastagbekezdes(
+                                                      context),
+                                                  ),
+                                                  TextSpan(
+                                                    text: "Funkcionális hasi "
+                                                        "fájdalomzavarok online hipnózis és mozgás-motivációs "
+                                                      "tréning kezelésének "
+                                                        "hatásvizsgálata tizenévesek körében",
+                                                    style: MyTextStyles
+                                                      .bekezdes(
+                                                      context),
+                                                  ),
+                                                ],
+                                              ),
+                                              ),),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                  text: TextSpan(
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      // Default text color
+                                                      fontSize: 16,
+                                                    ),
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                    text: "A vizsgálat célkitűzései: ",
+                                                    style: MyTextStyles
+                                                        .vastagbekezdes(
+                                                        context),
+                                                  ),
+                                                  TextSpan(
+                                                    text: "A vizsgálatnak két"
+                                                        " fő célja van. Az első, hogy az olyan fiatalok és "
+                                                        "családjuk számára, aki "
+                                                        "funkcionális hasi fájdalomzavarral (legalább 2 hónapja tartó visszatérő hasi "
+                                                        "fájdalommal) élnek "
+                                                        "online is elérhetővé tegyünk két terápiát, a mozgás-motivációs tréninget (M3 "
+                                                        "Tréning) és a bél-fókuszú hipnózis "
+                                                        "terápiát. Így sokkal egyszerűbben és gyorsabban tudnak "
+                                                        "segítséget kapni a hasi panaszokkal élő fiatalok "
+                                                        " a problémájukkal kapcsolatban. Ahhoz viszont, "
+                                                        "hogy valóban hatékony terápiákat tudjunk "
+                                                        "nyújtani, előbb meg kell vizsgálnunk ezen módszerek "
+                                                        "hatékonyságát. Így a vizsgálat második "
+                                                        "célkitűzése, hogy ezt a két online terápiát (M3 Tréning és "
+                                                        "a bél-fókuszú hipnózis) egymással, a általános "
+                                                        "gyermek-gasztroenterológiai kezelésekkel, "
+                                                        "valamint az interdiszciplináris, multimodális fájdalomterápiás ellátással összehasonlítsuk.",
+                                                    style: MyTextStyles
+                                                        .bekezdes(
+                                                        context),),
+                                                ],
+                                               ),
+                                             ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: RichText(
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                  text: TextSpan(
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      // Default text color
+                                                      fontSize: 16,
+                                                    ),
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: "A vizsgálat "
+                                                            "menete: ",
+                                                        style: MyTextStyles
+                                                            .vastagbekezdes(
+                                                            context),
+                                                      ),
+                                                      TextSpan(
+                                                        text: "A "
+                                                          "gyermek-gasztroenterológiai vizsgálatok végén, vagy ha a gyermekének a "
+                                                          "panaszai az "
+                                                          "alkalmazott terápia során nem változtak, és a panaszok alapján besorolható a "
+                                                          "funkcionális hasi "
+                                                          "fájdalomzavarok egyikébe (funkcionális diszpepszia, irritábilis bél szindróma, "
+                                                          "hasi migrén, "
+                                                          "máshova nem besorolt funkcionális hasi fájdalomzavar), akkor kutatásban való "
+                                                          "részvétel "
+                                                          "felajánlásra kerül. Ilyenkor a kezelő orvos a gasztroenterológiai vizsgálat végén Önnek "
+                                                          "és gyermekének egy "
+                                                          "QR-kódot ad, mely a vizsgálati honlapra fogja irányítani Önöket. A QR kód "
+                                                          "beolvasására 3 nap áll rendelkezésre.",
+                                                        style: MyTextStyles
+                                                            .bekezdes(
+                                                            context),),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: RichText(
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                  text: TextSpan(
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      // Default text color
+                                                      fontSize: 16,
+                                                    ),
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: "A honlapon "
+                                                          "előszön is kérjük a vizsgálatba való ismételt beleegyezést. Ezután néhány információt "
+                                                          "szükséges "
+                                                          "megadniuk, melyek segítik a további kommunikációt Önök és kutatócsoport között. A "
+                                                          "honlapon továbbá egy "
+                                                          "kérdőívcsomagot "
+                                                          "kell mind Önnek, mind pedig gyermekének kitöltenie. "
+                                                          "Ezután történik "
+                                                          "meg a különböző "
+                                                          "vizsgálati ágakba történő, random besorolás és az egyéni kutatási "
+                                                          "azonosítók kiosztása.",
+                                                        style: MyTextStyles
+                                                            .bekezdes(
+                                                            context),),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "Az öt vizsgálati ág:",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .all(20.0),
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "1.  A "
+                                                      "gyermek-gasztroenterológus által javasolt terápia folytatása 12 hétig, majd ezt követően "
+                                                  "online bél-fókuszú hipnózis terápia "
+                                                  "további 12 hétig\n"
+                                                  "2.  Online "
+                                                  "mozgás-motivációs tréning (M3 Tréning) 12 hétig, majd ezt követően online bél-"
+                                                  "fókuszú hipnózis terápia "
+                                                  "további 12 hétig\n"
+                                                  "3.  Online bél-fókuszú "
+                                                      "hipnózis terápia további 12 hétig, majd ezt követően online mozgás-"
+                                                  "motivációs tréning (M3 Tréning) "
+                                                  "további 12 hétig\n"
+                                                  "4.  A "
+                                                  "gyermek-gasztroenterol"
+                                                  "ógus által javasolt terápia folytatása 24 hétig\n"
+                                                  "5.  Fél napos, "
+                                                  "interdiszciplináris, multimodális fájdalomterápia, majd ezt követően 12 hét "
+                                                  "múlva kontroll alkalom"
+                                                  ,
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ), ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+///////////////////////////////////////////////////////////////////////////
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "Amennyiben a panaszok a "
+                                                  "kutatás kezdetétől számított 6 hónapon belül is fennálnak, úgy minden "
+                                                  "résztvevőnek lehetősége "
+                                                  "van részt venni a fél napos, interdiszciplináris, multimodális "
+                                                  "fájdalomterápián.",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "A kutatás teljes "
+                                                  "időtartama 9 hónap, mely során a kérdőíveket több alkalommal szükséges kitölteni "
+                                                  "(3. hét, 6. hét, 9.hét, 12. hét, 15. hét, 18. hét, 21. hét és 24. hét). Erről automatikus emlékeztető e-"
+                                                  "mailt küldünk ki az Ön és gyermeke részére.",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "A kutatásban tervezetten 400 fő vesz részt.",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "A kutatás várható időtartama: 2024.04.15.-2026.12.31.",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "A kutatás helye: online, "
+                                                  "otthon, az egyéni napirendnek megfelelően, valamint a Bethesda "
+                                                  "Gyermekkórház Fájdalomkezelő Centrumában.",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "A vizsgálatban való "
+                                                  "részvétel önkéntes. A vizsgálatba történő beleegyezés a beleegyező "
+                                                  "nyilatkozat elfogadásával válik "
+                                                  "érvényessé. Ellenkező esetben a kutatásban való részvétel nem "
+                                                  "érvényes. A beleegyezés bármikor szóban vagy írásban, indokolás nélkül visszavonható.",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "A kérdőívcsomag kitöltése "
+                                                  "önkéntes, a kitöltők, valamint jogi képviselőjük beleegyező "
+                                                  "nyilatkozatot írnak alá a "
+                                                  "szakorvosi ellátást követően adataik tudományos célú felhasználására "
+                                                  "vonatkozóan. A kiskorú tizenévesek"
+                                                  " a kérdőívet csak a szülői beleegyezést követően kapják meg. "
+                                                  "A kérdőívek kiértékelése anonim "
+                                                  "módon, a személyiségi jogok tiszteletben tartásával történik. A "
+                                                  "kérdőívek kitöltésére a RedCap "
+                                                  "webapplikáción kerül sor, melyhez a kitöltők egy erre a célra "
+                                                  "létrehozott kutatási honlapon "
+                                                  "kapnak hozzáférést. A kitöltött kérdőívek eredményei önálló "
+                                                  "adatbázisba kerülnek, melyeket "
+                                                  "kizárólag kutatási célokra használunk fel és csak a kutatásban "
+                                                  "résztvevő kutatók férnek hozzá.",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "Az adatok statisztikai "
+                                                  "feldolgozása névtelen módon, összesítve történik, így az Ön és gyermeke "
+                                                  "személyazonossága az orvosi "
+                                                  "titoktartásnak, az adatvédelmi és a személyiségi jogok védelméről "
+                                                  "szóló törvénynek "
+                                                  "megfelelően teljes mértékben "
+                                                  "ismeretlen marad. Az adatok kutatási célokat "
+                                                  "szolgálnak.",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "A vizsgálatban való részvételnek nincs ismert hátránya.",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "A vizsgálatért felelős "
+                                                  "személy: Dr. Major János, főorvos, Bethesda Gyermekkórház "
+                                                  "Fájdalomkezelő Centrum (1146 Budapest, Bethesda u. 3.).",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "A kutatáshoz az "
+                                                  "Egészségügyi Tudományos Tanács Tudományos és Kutatásetikai Bizottsága "
+                                                  "járult hozzá (engedélyszám).",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                                  0.03
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "Intézményi kutatás-etikai "
+                                                  "bizottság elnöke: Dr. Hantos "
+                                                  "Mónika (+36 1 364 "
+                                                  "9020)\n"
+                                                  "Független orvos (23/2002. (V. 9.) EüM rendelet alapján): dr. Gyömörei Beáta (+36 1 422 2825)",
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                              ///////////////////////////////////////////////////////////
+                                  ),
+                                ),
+                              ),
+
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.01),
-                            Padding(
+                                MediaQuery.of(context).size.width * 0.01),
+
+                            // MÁSODIK //
+
+                            Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal:
-                                      MediaQuery.of(context).size.width * 0.01),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  horizontal: 20, vertical: 10),
+                              decoration: BoxDecoration(
+                                color: AppColors.whitewhite,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border(
+                                  left: BorderSide(
+                                    color: AppColors.bethesdacolor,
+                                    width: 3,
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                    // "• E-mail cím;",
-                                    "•  Világosan jelezzük, hogy milyen célból dolgozunk fel személyes adatokat. Ezt a jelen adatvédelmi nyilatkozaton keresztül tesszük;",
-                                    style: MyTextStyles.bekezdes(context),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                  Text(
-                                    "•  Igyekszünk a személyes adatok gyűjtését csak a törvényes célokhoz szükséges személyes adatokra korlátozni;",
-                                    style: MyTextStyles.bekezdes(context),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                  Text(
-                                    "•  Először kifejezett engedélyt kérünk Öntől személyes adatai feldolgozásához, amennyiben az Ön engedélye szükséges;",
-                                    style: MyTextStyles.bekezdes(context),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                  Text(
-                                    "• Megfelelő biztonsági intézkedéseket teszünk az Ön személyes adatainak védelme érdekében, és ugyanezt megköveteljük a személyes adatokat a nevünkben feldolgozó felektől is;",
-                                    style: MyTextStyles.bekezdes(context),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                  Text(
-                                    "• Tiszteletben tartjuk az Ön azon jogát, hogy személyes adatait az Ön kérésére betekintés, helyesbítés vagy törlés céljából hozzáférhetővé tegyük.",
-                                    style: MyTextStyles.bekezdes(context),
-                                    textAlign: TextAlign.justify,
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          is2TextVisible =
+                                          !is2TextVisible; // Toggle
+                                          // visibility of the text
+                                        });
+                                      },
+                                      child: Text(
+                                        "BELEEGYEZŐ NYILATKOZAT SZÜLŐ (JOGI "
+                                            "KÉPVISELŐ) RÉSZÉRE",
+                                        style:
+                                        MyTextStyles.bekezdes(context),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.02),
-                            Text(
-                              "Mi vagyunk felelősek az adatfeldolgozásért. Ebben az adatvédelmi nyilatkozatban ismertetjük, hogy milyen személyes adatokat gyűjtünk és használunk fel, és milyen célból. Javasoljuk, hogy figyelmesen olvassa el ezt a nyilatkozatot.",
-                              style: MyTextStyles.bekezdes(context),
-                              textAlign: TextAlign.justify,
+                            AnimatedSize(
+                              duration: Duration(milliseconds: 300),
+                              child: Visibility(
+                                visible: is2TextVisible,
+                                maintainState: true,
+                                maintainAnimation: true,
+                                maintainSize: false,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whitewhite,
+                                    borderRadius: BorderRadius.circular(13),
+                                    // Rounded corners
+                                    boxShadow: [
+                                      // Optional: add shadow for elevation effect
+                                      BoxShadow(
+                                        color: AppColors.bethesdacolor
+                                            .withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 4,
+                                        offset: Offset(0,
+                                            5), // Shifts shadow downwards
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Tisztelt Hölgyem/Uram!",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Ahhoz, hogy az online "
+                                                "bél-fókuszú hipnoterápia, az online mozgás-motivációs tréning (M3 "
+                                                "Tréning), valamint az "
+                                                "interdiszciplináris, multimodális fájdalomterápia programok hatékonyságát, "
+                                                "valamint a kérdőívek adatait a program "
+                                                "hatásvizsgálata szempontjából tudományosan "
+                                                "elemezhessük, a személyiségjogok "
+                                                "értelmében az Ön beleegyezése szükséges. Ezért kérjük, "
+                                                "olvassa el és töltse ki az alábbi nyilatkozatot.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "NYILATKOZAT",
+                                                style:
+                                                MyTextStyles.vastagbekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: RichText(
+                                              textAlign:
+                                              TextAlign.justify,
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    // Default text color
+                                                    fontSize: 16,
+                                                  ),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: "Hozzájárulok, "
+                                                          "hogy a Bethesda "
+                                                          "Gyermekkórház a ",
+                                                      style: MyTextStyles.bekezdes(
+                                                      context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: '„Funkcionális hasi fájdalomzavarok online'
+                                                        'hipnózis és '
+                                                        'mozgás-motivációs '
+                                                        'tréning kezelésének hatásvizsgálata tizenévesek körében” ',
+                                                      style: MyTextStyles
+                                                          .vastagbekezdes(
+                                                          context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "c. "
+                                                        "tudományos "
+                                                        "vizsgálatában, az általam kitöltött kérdőív adatai és az online bél-fókuszú "
+                                                        "hipnoterápiával, az "
+                                                        "online mozgás-motivációs tréninggel (M3 Tréning), valamint az "
+                                                        "interdiszciplináris, "
+                                                        "multimodális fájdalomterápiával kapcsolatos adatok, tudományos "
+                                                        "felhasználásra kerüljenek. Kérjük, jelölje meg a megfelelő választ!",
+                                                      style: MyTextStyles.bekezdes(
+                                                          context),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Elfogadom ${' ' * 10}1. Igen"
+                                                "${' ' * 10}2. Nem",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálat menetéről és körülményeiről megfelelő és elfogadható felvilágosítást kaptam.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálat a Helsinki Deklaráció szellemében történik.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                              ///////////////////////////////////////////////////////////
+                                ),
+                              ),
                             ),
+
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02),
-                            Text(
-                              "Az online hipnózisgyakorlatok megrendelésekor bizonyos információkat meg kell osztania velünk. Ezek a személyes adatok és az Ön fizetési módja a Mollie felületen keresztül. Csak azokat a személyes adatokat tároljuk és használjuk fel, amelyeket Ön közvetlenül megad, vagy amelyekről egyértelműen azonosíthatóak, hogy adatfeldolgozásra a rendelkezésünkre bocsájtja. A személyes adatokat más célra nem használjuk fel, kivéve, ha Ön előzetesen engedélyt adott rá, vagy ha erre törvényi felhatalmazásunk vagy kötelezettségünk van. A következő adatokat vesszük fel Öntől:",
-                              style: MyTextStyles.bekezdes(context),
-                              textAlign: TextAlign.justify,
-                            ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.01),
-                            Padding(
+                                MediaQuery.of(context).size.width * 0.01),
+
+                            ///// KEZDŐDIK /////
+
+                            Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal:
-                                      MediaQuery.of(context).size.width * 0.01),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Text(
-                                    "• Annak a gyermeknek a kereszt- és vezetékneve, akinek a számára a kezelést megvásárolja;",
-                                    style: MyTextStyles.bekezdes(context),
-                                    textAlign: TextAlign.justify,
+                                  horizontal: 20, vertical: 10),
+                              decoration: BoxDecoration(
+                                color: AppColors.whitewhite,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border(
+                                  left: BorderSide(
+                                    color: AppColors.bethesdacolor,
+                                    width: 3,
                                   ),
-                                  Text(
-                                    "• E-mail cím;",
-                                    style: MyTextStyles.bekezdes(context),
-                                    textAlign: TextAlign.justify,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          is3TextVisible =
+                                          !is3TextVisible; // Toggle
+                                          // visibility of the text
+                                        });
+                                      },
+                                      child: Text(
+                                        "TÁJÉKOZTATÓ KAMASZ VIZSGÁLATI "
+                                        "SZEMÉLYEK SZÁMÁRA 12-14 ÉV KÖZÖTT",
+                                        style:
+                                        MyTextStyles.bekezdes(context),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.02),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Text(
-                                    "A fenti adatokat a következő célokra használjuk fel:",
-                                    style: MyTextStyles.bekezdes(context),
-                                    textAlign: TextAlign.left,
+                            AnimatedSize(
+                              duration: Duration(milliseconds: 300),
+                              child: Visibility(
+                                visible: is3TextVisible,
+                                maintainState: true,
+                                maintainAnimation: true,
+                                maintainSize: false,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whitewhite,
+                                    borderRadius: BorderRadius.circular(13),
+                                    // Rounded corners
+                                    boxShadow: [
+                                      // Optional: add shadow for elevation effect
+                                      BoxShadow(
+                                        color: AppColors.bethesdacolor
+                                            .withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 4,
+                                        offset: Offset(0,
+                                            5), // Shifts shadow downwards
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Tisztelt Szülő!",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // flex: 3,
+                                              // Higher flex value for more space
+                                              child: Text(
+                                                "Köszönjük, hogy Ön és "
+                                                    "gyermeke részt vesz "
+                                                    "tudományos "
+                                                    "vizsgálatunkban. "
+                                                    "Ez a tájékoztató részletesen ismerteti a vizsgálatot, és benne az Ön és gyermeke szerepét. Ha bármilyen kérdése van, tegye fel azt a vizsgálatvezetőnek. Ha vállalkozik a részvételre, kérjük, fogadja el a beleegyező nyilatkozatot.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    // Default text color
+                                                    fontSize: 16,
+                                                  ),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: "A vizsgálat neve: ",
+                                                      style: MyTextStyles
+                                                          .vastagbekezdes(
+                                                          context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "Funkcionális hasi "
+                                                          "fájdalomzavarok online hipnózis és mozgás-motivációs "
+                                                          "tréning kezelésének "
+                                                          "hatásvizsgálata tizenévesek körében",
+                                                      style: MyTextStyles
+                                                          .bekezdes(
+                                                          context),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    // Default text color
+                                                    fontSize: 16,
+                                                  ),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: "A vizsgálat célkitűzései: ",
+                                                      style: MyTextStyles
+                                                          .vastagbekezdes(
+                                                          context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "A vizsgálatnak két"
+                                                          " fő célja van. Az első, hogy az olyan fiatalok és "
+                                                          "családjuk számára, aki "
+                                                          "funkcionális hasi fájdalomzavarral (legalább 2 hónapja tartó visszatérő hasi "
+                                                          "fájdalommal) élnek "
+                                                          "online is elérhetővé tegyünk két terápiát, a mozgás-motivációs tréninget (M3 "
+                                                          "Tréning) és a bél-fókuszú hipnózis "
+                                                          "terápiát. Így sokkal egyszerűbben és gyorsabban tudnak "
+                                                          "segítséget kapni a hasi panaszokkal élő fiatalok "
+                                                          " a problémájukkal kapcsolatban. Ahhoz viszont, "
+                                                          "hogy valóban hatékony terápiákat tudjunk "
+                                                          "nyújtani, előbb meg kell vizsgálnunk ezen módszerek "
+                                                          "hatékonyságát. Így a vizsgálat második "
+                                                          "célkitűzése, hogy ezt a két online terápiát (M3 Tréning és "
+                                                          "a bél-fókuszú hipnózis) egymással, a általános "
+                                                          "gyermek-gasztroenterológiai kezelésekkel, "
+                                                          "valamint az interdiszciplináris, multimodális fájdalomterápiás ellátással összehasonlítsuk.",
+                                                      style: MyTextStyles
+                                                          .bekezdes(
+                                                          context),),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    // Default text color
+                                                    fontSize: 16,
+                                                  ),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: "A vizsgálat "
+                                                          "menete: ",
+                                                      style: MyTextStyles
+                                                          .vastagbekezdes(
+                                                          context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "A "
+                                                          "gyermek-gasztroenterológiai vizsgálatok végén, vagy ha a gyermekének a "
+                                                          "panaszai az "
+                                                          "alkalmazott terápia során nem változtak, és a panaszok alapján besorolható a "
+                                                          "funkcionális hasi "
+                                                          "fájdalomzavarok egyikébe (funkcionális diszpepszia, irritábilis bél szindróma, "
+                                                          "hasi migrén, "
+                                                          "máshova nem besorolt funkcionális hasi fájdalomzavar), akkor kutatásban való "
+                                                          "részvétel "
+                                                          "felajánlásra kerül. Ilyenkor a kezelő orvos a gasztroenterológiai vizsgálat végén Önnek "
+                                                          "és gyermekének egy "
+                                                          "QR-kódot ad, mely a vizsgálati honlapra fogja irányítani Önöket. A QR kód "
+                                                          "beolvasására 3 nap áll rendelkezésre.",
+                                                      style: MyTextStyles
+                                                          .bekezdes(
+                                                          context),),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    // Default text color
+                                                    fontSize: 16,
+                                                  ),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: "A honlapon "
+                                                          "előszön is kérjük a vizsgálatba való ismételt beleegyezést. Ezután néhány információt "
+                                                          "szükséges "
+                                                          "megadniuk, melyek segítik a további kommunikációt Önök és kutatócsoport között. A "
+                                                          "honlapon továbbá egy "
+                                                          "kérdőívcsomagot "
+                                                          "kell mind Önnek, mind pedig gyermekének kitöltenie. "
+                                                          "Ezután történik "
+                                                          "meg a különböző "
+                                                          "vizsgálati ágakba történő, random besorolás és az egyéni kutatási "
+                                                          "azonosítók kiosztása.",
+                                                      style: MyTextStyles
+                                                          .bekezdes(
+                                                          context),),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Az öt vizsgálati ág:",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets
+                                                    .all(20.0),
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "1.  A "
+                                                      "gyermek-gasztroenterológus által javasolt terápia folytatása 12 hétig, majd ezt követően "
+                                                      "online bél-fókuszú hipnózis terápia "
+                                                      "további 12 hétig\n"
+                                                      "2.  Online "
+                                                      "mozgás-motivációs tréning (M3 Tréning) 12 hétig, majd ezt követően online bél-"
+                                                      "fókuszú hipnózis terápia "
+                                                      "további 12 hétig\n"
+                                                      "3.  Online bél-fókuszú "
+                                                      "hipnózis terápia további 12 hétig, majd ezt követően online mozgás-"
+                                                      "motivációs tréning (M3 Tréning) "
+                                                      "további 12 hétig\n"
+                                                      "4.  A "
+                                                      "gyermek-gasztroenterol"
+                                                      "ógus által javasolt terápia folytatása 24 hétig\n"
+                                                      "5.  Fél napos, "
+                                                      "interdiszciplináris, multimodális fájdalomterápia, majd ezt követően 12 hét "
+                                                      "múlva kontroll alkalom"
+                                                  ,
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ), ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+///////////////////////////////////////////////////////////////////////////
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Amennyiben a panaszok a "
+                                                    "kutatás kezdetétől számított 6 hónapon belül is fennálnak, úgy minden "
+                                                    "résztvevőnek lehetősége "
+                                                    "van részt venni a fél napos, interdiszciplináris, multimodális "
+                                                    "fájdalomterápián.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kutatás teljes "
+                                                    "időtartama 9 hónap, mely során a kérdőíveket több alkalommal szükséges kitölteni "
+                                                    "(3. hét, 6. hét, 9.hét, 12. hét, 15. hét, 18. hét, 21. hét és 24. hét). Erről automatikus emlékeztető e-"
+                                                    "mailt küldünk ki az Ön és gyermeke részére.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kutatásban tervezetten 400 fő vesz részt.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kutatás várható időtartama: 2024.04.15.-2026.12.31.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kutatás helye: online, "
+                                                    "otthon, az egyéni napirendnek megfelelően, valamint a Bethesda "
+                                                    "Gyermekkórház Fájdalomkezelő Centrumában.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálatban való "
+                                                    "részvétel önkéntes. A vizsgálatba történő beleegyezés a beleegyező "
+                                                    "nyilatkozat elfogadásával válik "
+                                                    "érvényessé. Ellenkező esetben a kutatásban való részvétel nem "
+                                                    "érvényes. A beleegyezés bármikor szóban vagy írásban, indokolás nélkül visszavonható.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kérdőívcsomag kitöltése "
+                                                    "önkéntes, a kitöltők, valamint jogi képviselőjük beleegyező "
+                                                    "nyilatkozatot írnak alá a "
+                                                    "szakorvosi ellátást követően adataik tudományos célú felhasználására "
+                                                    "vonatkozóan. A kiskorú tizenévesek"
+                                                    " a kérdőívet csak a szülői beleegyezést követően kapják meg. "
+                                                    "A kérdőívek kiértékelése anonim "
+                                                    "módon, a személyiségi jogok tiszteletben tartásával történik. A "
+                                                    "kérdőívek kitöltésére a RedCap "
+                                                    "webapplikáción kerül sor, melyhez a kitöltők egy erre a célra "
+                                                    "létrehozott kutatási honlapon "
+                                                    "kapnak hozzáférést. A kitöltött kérdőívek eredményei önálló "
+                                                    "adatbázisba kerülnek, melyeket "
+                                                    "kizárólag kutatási célokra használunk fel és csak a kutatásban "
+                                                    "résztvevő kutatók férnek hozzá.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Az adatok statisztikai "
+                                                    "feldolgozása névtelen módon, összesítve történik, így az Ön és gyermeke "
+                                                    "személyazonossága az orvosi "
+                                                    "titoktartásnak, az adatvédelmi és a személyiségi jogok védelméről "
+                                                    "szóló törvénynek "
+                                                    "megfelelően teljes mértékben "
+                                                    "ismeretlen marad. Az adatok kutatási célokat "
+                                                    "szolgálnak.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálatban való részvételnek nincs ismert hátránya.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálatért felelős "
+                                                    "személy: Dr. Major János, főorvos, Bethesda Gyermekkórház "
+                                                    "Fájdalomkezelő Centrum (1146 Budapest, Bethesda u. 3.).",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kutatáshoz az "
+                                                    "Egészségügyi Tudományos Tanács Tudományos és Kutatásetikai Bizottsága "
+                                                    "járult hozzá (engedélyszám).",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Intézményi kutatás-etikai "
+                                                    "bizottság elnöke: Dr. Hantos "
+                                                    "Mónika (+36 1 364 "
+                                                    "9020)\n"
+                                                    "Független orvos (23/2002. (V. 9.) EüM rendelet alapján): dr. Gyömörei Beáta (+36 1 422 2825)",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  ///////////////////////////////////////////////////////////
+                                ),
                               ),
                             ),
+
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.01),
-                            Padding(
+                                MediaQuery.of(context).size.width * 0.01),
+
+                            // NEGYEDIK //
+
+                            Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal:
-                                      MediaQuery.of(context).size.width * 0.01),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Text(
-                                    "• Annak érdekében, hogy Ön igénybe vehesse szolgáltatásainkat;",
-                                    style: MyTextStyles.bekezdes(context),
-                                    textAlign: TextAlign.justify,
+                                  horizontal: 20, vertical: 10),
+                              decoration: BoxDecoration(
+                                color: AppColors.whitewhite,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border(
+                                  left: BorderSide(
+                                    color: AppColors.bethesdacolor,
+                                    width: 3,
                                   ),
-                                  Text(
-                                    "• Az Ön által a weboldalon vagy az ott megadott e-mail címen keresztül feltett kérdések megválaszolása;",
-                                    style: MyTextStyles.bekezdes(context),
-                                    textAlign: TextAlign.justify,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          is4TextVisible =
+                                          !is4TextVisible; // Toggle
+                                          // visibility of the text
+                                        });
+                                      },
+                                      child: Text(
+                                        "BELEEGYEZŐ NYILATKOZAT KAMASZ "
+                                        "RÉSZÉRE "
+                                        "12-14 ÉV KÖZÖTT",
+                                        style:
+                                        MyTextStyles.bekezdes(context),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.02),
-                            Text(
-                              "A Holland Gyermekhipnózis Alapítvány nem tárolja az Ön adatait tovább, mint amennyi a jelen adatvédelmi nyilatkozatban meghatározott célok eléréséhez szükséges. Nem adjuk át az Ön által megadott adatokat más feleknek, ha Ön nem adott erre engedélyt, kivéve, ha ez törvényileg szükséges vagy megengedett. Csalás vagy szolgáltatásainkkal való visszaélés gyanúja esetén a személyes adatokat átadhatjuk az illetékes hatóságoknak. \nMegfelelő biztonsági intézkedéseket tettünk az Ön személyes adataival való visszaélés és az azokhoz való jogosulatlan hozzáférés korlátozása érdekében. \nEz a nyilatkozat nem vonatkozik a weboldalunkhoz kapcsolódó harmadik fél webhelyeire.\nNem tudjuk garantálni, hogy ezek a harmadik felek megbízható vagy biztonságos módon kezelik az Ön személyes adatait. Javasoljuk, hogy a webhelyek használata előtt olvassa el ezen webhelyek adatvédelmi nyilatkozatát.\nEz az adatvédelmi nyilatkozat legutóbb 20-05-2022.05.20-án módosult, és az 1.0 verziószámot viseli. Fenntartjuk a jogot a jelen nyilatkozat módosítására. A módosításokat ezen a weboldalon közzétesszük. Javasoljuk, hogy rendszeresen tekintse meg ezt a nyilatkozatot, hogy tisztában legyen ezekkel a változásokkal.",
-                              style: MyTextStyles.bekezdes(context),
-                              textAlign: TextAlign.justify,
+                            AnimatedSize(
+                              duration: Duration(milliseconds: 300),
+                              child: Visibility(
+                                visible: is4TextVisible,
+                                maintainState: true,
+                                maintainAnimation: true,
+                                maintainSize: false,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whitewhite,
+                                    borderRadius: BorderRadius.circular(13),
+                                    // Rounded corners
+                                    boxShadow: [
+                                      // Optional: add shadow for elevation effect
+                                      BoxShadow(
+                                        color: AppColors.bethesdacolor
+                                            .withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 4,
+                                        offset: Offset(0,
+                                            5), // Shifts shadow downwards
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Tisztelt Hölgyem/Uram!",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Ahhoz, hogy az online "
+                                                    "bél-fókuszú hipnoterápia, az online mozgás-motivációs tréning (M3 "
+                                                    "Tréning), valamint az "
+                                                    "interdiszciplináris, multimodális fájdalomterápia programok hatékonyságát, "
+                                                    "valamint a kérdőívek adatait a program "
+                                                    "hatásvizsgálata szempontjából tudományosan "
+                                                    "elemezhessük, a személyiségjogok "
+                                                    "értelmében az Ön beleegyezése szükséges. Ezért kérjük, "
+                                                    "olvassa el és töltse ki az alábbi nyilatkozatot.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "NYILATKOZAT",
+                                                style:
+                                                MyTextStyles.vastagbekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    // Default text color
+                                                    fontSize: 16,
+                                                  ),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: "Hozzájárulok, "
+                                                          "hogy a Bethesda "
+                                                          "Gyermekkórház a ",
+                                                      style: MyTextStyles.bekezdes(
+                                                          context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: '„Funkcionális hasi fájdalomzavarok online'
+                                                          'hipnózis és '
+                                                          'mozgás-motivációs '
+                                                          'tréning kezelésének hatásvizsgálata tizenévesek körében” ',
+                                                      style: MyTextStyles
+                                                          .vastagbekezdes(
+                                                          context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "c. "
+                                                          "tudományos "
+                                                          "vizsgálatában, az általam kitöltött kérdőív adatai és az online bél-fókuszú "
+                                                          "hipnoterápiával, az "
+                                                          "online mozgás-motivációs tréninggel (M3 Tréning), valamint az "
+                                                          "interdiszciplináris, "
+                                                          "multimodális fájdalomterápiával kapcsolatos adatok, tudományos "
+                                                          "felhasználásra kerüljenek. Kérjük, jelölje meg a megfelelő választ!",
+                                                      style: MyTextStyles.bekezdes(
+                                                          context),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Elfogadom ${' ' * 10}1. Igen"
+                                                    "${' ' * 10}2. Nem",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálat menetéről és körülményeiről megfelelő és elfogadható felvilágosítást kaptam.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálat a Helsinki Deklaráció szellemében történik.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  ///////////////////////////////////////////////////////////
+                                ),
+                              ),
                             ),
+
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02),
-                            Text(
-                              "Ha Ön személyes adatokat adott meg nekünk, akkor kérheti, hogy beletekintsen az adataiba, hogy módosítsuk vagy töröljük ezeket az adatokat. Ezt a kérelmet a info@hypnosis4abdominalpain.com címen keresztül küldheti el. \nTermészetesen szívesen segítünk Önnek, ha panasza van személyes adatainak feldolgozásával kapcsolatban. Az adatvédelmi törvény értelmében Önnek joga van panaszt tenni a holland adatvédelmi hatóságnál is.\nHa bármilyen kérdése van az adatvédelemmel, valamint az adatvédelmi és cookie-nyilatkozatunkkal kapcsolatban, a info@hypnosis4abdominalpain.com e-mail címen teheti fel azokat.",
-                              style: MyTextStyles.bekezdes(context),
-                              textAlign: TextAlign.justify,
+                                MediaQuery.of(context).size.width * 0.01),
+
+                            //// ÖTÖDIK KEZDŐDIK ////
+
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              decoration: BoxDecoration(
+                                color: AppColors.whitewhite,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border(
+                                  left: BorderSide(
+                                    color: AppColors.bethesdacolor,
+                                    width: 3,
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          is5TextVisible =
+                                          !is5TextVisible; // Toggle
+                                          // visibility of the text
+                                        });
+                                      },
+                                      child: Text(
+                                        "TÁJÉKOZTATÓ KAMASZ VIZSGÁLATI "
+                                        "SZEMÉLYEK SZÁMÁRA 15-18 ÉV KÖZÖTT",
+                                        style:
+                                        MyTextStyles.bekezdes(context),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
+                            AnimatedSize(
+                              duration: Duration(milliseconds: 300),
+                              child: Visibility(
+                                visible: is5TextVisible,
+                                maintainState: true,
+                                maintainAnimation: true,
+                                maintainSize: false,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whitewhite,
+                                    borderRadius: BorderRadius.circular(13),
+                                    // Rounded corners
+                                    boxShadow: [
+                                      // Optional: add shadow for elevation effect
+                                      BoxShadow(
+                                        color: AppColors.bethesdacolor
+                                            .withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 4,
+                                        offset: Offset(0,
+                                            5), // Shifts shadow downwards
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Tisztelt Szülő!",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // flex: 3,
+                                              // Higher flex value for more space
+                                              child: Text(
+                                                "Köszönjük, hogy Ön és "
+                                                    "gyermeke részt vesz "
+                                                    "tudományos "
+                                                    "vizsgálatunkban. "
+                                                    "Ez a tájékoztató részletesen ismerteti a vizsgálatot, és benne az Ön és gyermeke szerepét. Ha bármilyen kérdése van, tegye fel azt a vizsgálatvezetőnek. Ha vállalkozik a részvételre, kérjük, fogadja el a beleegyező nyilatkozatot.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    // Default text color
+                                                    fontSize: 16,
+                                                  ),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: "A vizsgálat neve: ",
+                                                      style: MyTextStyles
+                                                          .vastagbekezdes(
+                                                          context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "Funkcionális hasi "
+                                                          "fájdalomzavarok online hipnózis és mozgás-motivációs "
+                                                          "tréning kezelésének "
+                                                          "hatásvizsgálata tizenévesek körében",
+                                                      style: MyTextStyles
+                                                          .bekezdes(
+                                                          context),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    // Default text color
+                                                    fontSize: 16,
+                                                  ),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: "A vizsgálat célkitűzései: ",
+                                                      style: MyTextStyles
+                                                          .vastagbekezdes(
+                                                          context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "A vizsgálatnak két"
+                                                          " fő célja van. Az első, hogy az olyan fiatalok és "
+                                                          "családjuk számára, aki "
+                                                          "funkcionális hasi fájdalomzavarral (legalább 2 hónapja tartó visszatérő hasi "
+                                                          "fájdalommal) élnek "
+                                                          "online is elérhetővé tegyünk két terápiát, a mozgás-motivációs tréninget (M3 "
+                                                          "Tréning) és a bél-fókuszú hipnózis "
+                                                          "terápiát. Így sokkal egyszerűbben és gyorsabban tudnak "
+                                                          "segítséget kapni a hasi panaszokkal élő fiatalok "
+                                                          " a problémájukkal kapcsolatban. Ahhoz viszont, "
+                                                          "hogy valóban hatékony terápiákat tudjunk "
+                                                          "nyújtani, előbb meg kell vizsgálnunk ezen módszerek "
+                                                          "hatékonyságát. Így a vizsgálat második "
+                                                          "célkitűzése, hogy ezt a két online terápiát (M3 Tréning és "
+                                                          "a bél-fókuszú hipnózis) egymással, a általános "
+                                                          "gyermek-gasztroenterológiai kezelésekkel, "
+                                                          "valamint az interdiszciplináris, multimodális fájdalomterápiás ellátással összehasonlítsuk.",
+                                                      style: MyTextStyles
+                                                          .bekezdes(
+                                                          context),),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    // Default text color
+                                                    fontSize: 16,
+                                                  ),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: "A vizsgálat "
+                                                          "menete: ",
+                                                      style: MyTextStyles
+                                                          .vastagbekezdes(
+                                                          context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "A "
+                                                          "gyermek-gasztroenterológiai vizsgálatok végén, vagy ha a gyermekének a "
+                                                          "panaszai az "
+                                                          "alkalmazott terápia során nem változtak, és a panaszok alapján besorolható a "
+                                                          "funkcionális hasi "
+                                                          "fájdalomzavarok egyikébe (funkcionális diszpepszia, irritábilis bél szindróma, "
+                                                          "hasi migrén, "
+                                                          "máshova nem besorolt funkcionális hasi fájdalomzavar), akkor kutatásban való "
+                                                          "részvétel "
+                                                          "felajánlásra kerül. Ilyenkor a kezelő orvos a gasztroenterológiai vizsgálat végén Önnek "
+                                                          "és gyermekének egy "
+                                                          "QR-kódot ad, mely a vizsgálati honlapra fogja irányítani Önöket. A QR kód "
+                                                          "beolvasására 3 nap áll rendelkezésre.",
+                                                      style: MyTextStyles
+                                                          .bekezdes(
+                                                          context),),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    // Default text color
+                                                    fontSize: 16,
+                                                  ),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: "A honlapon "
+                                                          "előszön is kérjük a vizsgálatba való ismételt beleegyezést. Ezután néhány információt "
+                                                          "szükséges "
+                                                          "megadniuk, melyek segítik a további kommunikációt Önök és kutatócsoport között. A "
+                                                          "honlapon továbbá egy "
+                                                          "kérdőívcsomagot "
+                                                          "kell mind Önnek, mind pedig gyermekének kitöltenie. "
+                                                          "Ezután történik "
+                                                          "meg a különböző "
+                                                          "vizsgálati ágakba történő, random besorolás és az egyéni kutatási "
+                                                          "azonosítók kiosztása.",
+                                                      style: MyTextStyles
+                                                          .bekezdes(
+                                                          context),),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Az öt vizsgálati ág:",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets
+                                                    .all(20.0),
+                                                // This ensures the text fits within the available space and wraps.
+                                                child: Text(
+                                                  "1.  A "
+                                                      "gyermek-gasztroenterológus által javasolt terápia folytatása 12 hétig, majd ezt követően "
+                                                      "online bél-fókuszú hipnózis terápia "
+                                                      "további 12 hétig\n"
+                                                      "2.  Online "
+                                                      "mozgás-motivációs tréning (M3 Tréning) 12 hétig, majd ezt követően online bél-"
+                                                      "fókuszú hipnózis terápia "
+                                                      "további 12 hétig\n"
+                                                      "3.  Online bél-fókuszú "
+                                                      "hipnózis terápia további 12 hétig, majd ezt követően online mozgás-"
+                                                      "motivációs tréning (M3 Tréning) "
+                                                      "további 12 hétig\n"
+                                                      "4.  A "
+                                                      "gyermek-gasztroenterol"
+                                                      "ógus által javasolt terápia folytatása 24 hétig\n"
+                                                      "5.  Fél napos, "
+                                                      "interdiszciplináris, multimodális fájdalomterápia, majd ezt követően 12 hét "
+                                                      "múlva kontroll alkalom"
+                                                  ,
+                                                  style:
+                                                  MyTextStyles.bekezdes(
+                                                      context),
+                                                  textAlign:
+                                                  TextAlign.justify,
+                                                ), ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+///////////////////////////////////////////////////////////////////////////
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Amennyiben a panaszok a "
+                                                    "kutatás kezdetétől számított 6 hónapon belül is fennálnak, úgy minden "
+                                                    "résztvevőnek lehetősége "
+                                                    "van részt venni a fél napos, interdiszciplináris, multimodális "
+                                                    "fájdalomterápián.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kutatás teljes "
+                                                    "időtartama 9 hónap, mely során a kérdőíveket több alkalommal szükséges kitölteni "
+                                                    "(3. hét, 6. hét, 9.hét, 12. hét, 15. hét, 18. hét, 21. hét és 24. hét). Erről automatikus emlékeztető e-"
+                                                    "mailt küldünk ki az Ön és gyermeke részére.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kutatásban tervezetten 400 fő vesz részt.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kutatás várható időtartama: 2024.04.15.-2026.12.31.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kutatás helye: online, "
+                                                    "otthon, az egyéni napirendnek megfelelően, valamint a Bethesda "
+                                                    "Gyermekkórház Fájdalomkezelő Centrumában.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálatban való "
+                                                    "részvétel önkéntes. A vizsgálatba történő beleegyezés a beleegyező "
+                                                    "nyilatkozat elfogadásával válik "
+                                                    "érvényessé. Ellenkező esetben a kutatásban való részvétel nem "
+                                                    "érvényes. A beleegyezés bármikor szóban vagy írásban, indokolás nélkül visszavonható.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kérdőívcsomag kitöltése "
+                                                    "önkéntes, a kitöltők, valamint jogi képviselőjük beleegyező "
+                                                    "nyilatkozatot írnak alá a "
+                                                    "szakorvosi ellátást követően adataik tudományos célú felhasználására "
+                                                    "vonatkozóan. A kiskorú tizenévesek"
+                                                    " a kérdőívet csak a szülői beleegyezést követően kapják meg. "
+                                                    "A kérdőívek kiértékelése anonim "
+                                                    "módon, a személyiségi jogok tiszteletben tartásával történik. A "
+                                                    "kérdőívek kitöltésére a RedCap "
+                                                    "webapplikáción kerül sor, melyhez a kitöltők egy erre a célra "
+                                                    "létrehozott kutatási honlapon "
+                                                    "kapnak hozzáférést. A kitöltött kérdőívek eredményei önálló "
+                                                    "adatbázisba kerülnek, melyeket "
+                                                    "kizárólag kutatási célokra használunk fel és csak a kutatásban "
+                                                    "résztvevő kutatók férnek hozzá.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Az adatok statisztikai "
+                                                    "feldolgozása névtelen módon, összesítve történik, így az Ön és gyermeke "
+                                                    "személyazonossága az orvosi "
+                                                    "titoktartásnak, az adatvédelmi és a személyiségi jogok védelméről "
+                                                    "szóló törvénynek "
+                                                    "megfelelően teljes mértékben "
+                                                    "ismeretlen marad. Az adatok kutatási célokat "
+                                                    "szolgálnak.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálatban való részvételnek nincs ismert hátránya.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálatért felelős "
+                                                    "személy: Dr. Major János, főorvos, Bethesda Gyermekkórház "
+                                                    "Fájdalomkezelő Centrum (1146 Budapest, Bethesda u. 3.).",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A kutatáshoz az "
+                                                    "Egészségügyi Tudományos Tanács Tudományos és Kutatásetikai Bizottsága "
+                                                    "járult hozzá (engedélyszám).",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Intézményi kutatás-etikai "
+                                                    "bizottság elnöke: Dr. Hantos "
+                                                    "Mónika (+36 1 364 "
+                                                    "9020)\n"
+                                                    "Független orvos (23/2002. (V. 9.) EüM rendelet alapján): dr. Gyömörei Beáta (+36 1 422 2825)",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  ///////////////////////////////////////////////////////////
+                                ),
+                              ),
+                            ),
+
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02),
+                                MediaQuery.of(context).size.width * 0.01),
+
+                            // HATODIK //
+
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              decoration: BoxDecoration(
+                                color: AppColors.whitewhite,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border(
+                                  left: BorderSide(
+                                    color: AppColors.bethesdacolor,
+                                    width: 3,
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          is6TextVisible =
+                                          !is6TextVisible; // Toggle
+                                          // visibility of the text
+                                        });
+                                      },
+                                      child: Text(
+                                        "BELEEGYEZŐ NYILATKOZAT KAMASZ "
+                                        "RÉSZÉRE 15-18 ÉV KÖZÖTT",
+                                        style:
+                                        MyTextStyles.bekezdes(context),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            AnimatedSize(
+                              duration: Duration(milliseconds: 300),
+                              child: Visibility(
+                                visible: is6TextVisible,
+                                maintainState: true,
+                                maintainAnimation: true,
+                                maintainSize: false,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whitewhite,
+                                    borderRadius: BorderRadius.circular(13),
+                                    // Rounded corners
+                                    boxShadow: [
+                                      // Optional: add shadow for elevation effect
+                                      BoxShadow(
+                                        color: AppColors.bethesdacolor
+                                            .withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 4,
+                                        offset: Offset(0,
+                                            5), // Shifts shadow downwards
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Tisztelt Hölgyem/Uram!",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Ahhoz, hogy az online "
+                                                    "bél-fókuszú hipnoterápia, az online mozgás-motivációs tréning (M3 "
+                                                    "Tréning), valamint az "
+                                                    "interdiszciplináris, multimodális fájdalomterápia programok hatékonyságát, "
+                                                    "valamint a kérdőívek adatait a program "
+                                                    "hatásvizsgálata szempontjából tudományosan "
+                                                    "elemezhessük, a személyiségjogok "
+                                                    "értelmében az Ön beleegyezése szükséges. Ezért kérjük, "
+                                                    "olvassa el és töltse ki az alábbi nyilatkozatot.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "NYILATKOZAT",
+                                                style:
+                                                MyTextStyles.vastagbekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: RichText(
+                                                textAlign:
+                                                TextAlign.justify,
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    // Default text color
+                                                    fontSize: 16,
+                                                  ),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: "Hozzájárulok, "
+                                                          "hogy a Bethesda "
+                                                          "Gyermekkórház a ",
+                                                      style: MyTextStyles.bekezdes(
+                                                          context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: '„Funkcionális hasi fájdalomzavarok online'
+                                                          'hipnózis és '
+                                                          'mozgás-motivációs '
+                                                          'tréning kezelésének hatásvizsgálata tizenévesek körében” ',
+                                                      style: MyTextStyles
+                                                          .vastagbekezdes(
+                                                          context),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "c. "
+                                                          "tudományos "
+                                                          "vizsgálatában, az általam kitöltött kérdőív adatai és az online bél-fókuszú "
+                                                          "hipnoterápiával, az "
+                                                          "online mozgás-motivációs tréninggel (M3 Tréning), valamint az "
+                                                          "interdiszciplináris, "
+                                                          "multimodális fájdalomterápiával kapcsolatos adatok, tudományos "
+                                                          "felhasználásra kerüljenek. Kérjük, jelölje meg a megfelelő választ!",
+                                                      style: MyTextStyles.bekezdes(
+                                                          context),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "Elfogadom ${' ' * 10}1. Igen"
+                                                    "${' ' * 10}2. Nem",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálat menetéről és körülményeiről megfelelő és elfogadható felvilágosítást kaptam.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                0.03),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              // This ensures the text fits within the available space and wraps.
+                                              child: Text(
+                                                "A vizsgálat a Helsinki Deklaráció szellemében történik.",
+                                                style:
+                                                MyTextStyles.bekezdes(
+                                                    context),
+                                                textAlign:
+                                                TextAlign.justify,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  ///////////////////////////////////////////////////////////
+                                ),
+                              ),
+                            ),
+
+
+
+                            //// CHECKBOXOK KEZDŐDNEK ////
+
                             Theme(
                               data: Theme.of(context).copyWith(
                                 checkboxTheme: CheckboxThemeData(
@@ -426,15 +3134,15 @@ class _HomePageWidgetGdprState extends State<HomePageWidgetGdpr> {
                                 height:
                                     MediaQuery.of(context).size.width * 0.03),
                             ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushReplacement(
+                              onPressed: (_consentGiven && _guardianAgreed && _termsRead) ? () {
+                                // Perform your action when all checkboxes are checked
+                                // For example, navigate to the next screen
+                                Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Email()), // Replace `Gdpr` with the correct widget class name if different
+                                  MaterialPageRoute(builder: (context) => Email()),
                                 );
-                                print("Tovább button was pressed.");
-                              },
+                              } : null,
+
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.bethesdacolor,
                                 // Button color
@@ -526,7 +3234,7 @@ class _HomePageWidgetGdprState extends State<HomePageWidgetGdpr> {
                   ],
                 ),
               ),
-            ],
+            ],  // children
           ),
         ),
       ),
