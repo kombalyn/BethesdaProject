@@ -47,23 +47,25 @@ class _QuizScreenState1 extends State<QuizScreen1> {
   void _startRanking() {
     setState(() {
       if (_optionControllers.length >= 5) {
-        final texts = _optionControllers.map((controller) => controller.text).toList();
+        final texts =
+            _optionControllers.map((controller) => controller.text).toList();
         final duplicates = texts.toSet().length != texts.length;
         if (duplicates) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Kérlek, írj különböző válaszokat!')));
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Kérlek, írj különböző válaszokat!')));
         } else if (texts.any((text) => text.isEmpty)) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Kérlek, írd be a válaszaid!')));
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Kérlek, írd be a válaszaid!')));
         } else {
           _rankableOptions = List<String>.from(texts);
           _isReordering = true;
         }
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Kérlek, adj meg legalább 5 választ!')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Kérlek, adj meg legalább 5 választ!')));
       }
     });
   }
-
-
 
   @override
   void dispose() {
@@ -253,75 +255,59 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                           ],
                           SizedBox(
                               height: MediaQuery.of(context).size.width * 0.03),
+
+
+
                           if (currentQuestion.requiresRanking) ...[
                             Column(
                               children: [
                                 if (_optionControllers.isNotEmpty)
                                   if (!_isReordering)
                                     Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
+                                      width: MediaQuery.of(context).size.width * 0.5,
                                       child: ListView.builder(
                                         shrinkWrap: true,
                                         physics: NeverScrollableScrollPhysics(),
                                         itemCount: _optionControllers.length,
                                         itemBuilder: (context, index) {
-                                          var controller =
-                                          _optionControllers[index];
+                                          var controller = _optionControllers[index];
                                           return Padding(
                                             key: ValueKey(controller),
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8.0, vertical: 4.0),
+                                            padding:
+                                            const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                                             child: Row(
                                               children: [
                                                 Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      0.4,
+                                                  width: MediaQuery.of(context).size.width * 0.4,
                                                   child: TextField(
                                                     controller: controller,
                                                     decoration: InputDecoration(
-                                                      labelText:
-                                                      'Az ötleted...',
-                                                      labelStyle: TextStyle(
-                                                          color: Colors
-                                                              .grey.shade600),
-                                                      border:
-                                                      OutlineInputBorder(
+                                                      labelText: 'Az ötleted...',
+                                                      labelStyle: TextStyle(color: Colors.grey.shade600),
+                                                      border: OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                            color: Colors.green,
-                                                            width: 2.0),
+                                                            color: Colors.green, width: 2.0),
                                                       ),
-                                                      focusedBorder:
-                                                      OutlineInputBorder(
+                                                      focusedBorder: OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                            color:
-                                                            Colors.yellow,
-                                                            width: 2.0),
+                                                            color: Colors.yellow, width: 2.0),
                                                       ),
-                                                      enabledBorder:
-                                                      OutlineInputBorder(
+                                                      enabledBorder: OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                            color: Colors
-                                                                .grey.shade600,
-                                                            width: 2.0),
+                                                            color: Colors.grey.shade600, width: 2.0),
                                                       ),
                                                       filled: true,
                                                       fillColor: Colors.white,
                                                     ),
-                                                    style: TextStyle(
-                                                        color: Colors
-                                                            .grey.shade600),
+                                                    style: TextStyle(color: Colors.grey.shade600),
                                                     maxLines: null,
                                                   ),
                                                 ),
                                                 IconButton(
-                                                  icon: Icon(Icons.delete),
+                                                  icon: Icon(Icons.delete, color: Colors.grey),
                                                   onPressed: () {
                                                     setState(() {
-                                                      _optionControllers
-                                                          .removeAt(index);
+                                                      _optionControllers.removeAt(index);
                                                     });
                                                   },
                                                 ),
@@ -337,217 +323,151 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     children: [
                                       Container(
                                         width: (currentQuestion.twoColumn)
-                                            ? MediaQuery.of(context)
-                                            .size
-                                            .width *
-                                            0.45
-                                            : MediaQuery.of(context)
-                                            .size
-                                            .width *
-                                            0.3,
+                                            ? MediaQuery.of(context).size.width * 0.45
+                                            : MediaQuery.of(context).size.width * 0.3,
                                         child: (currentQuestion.twoColumn)
-                                            ? ListView(
-                                          shrinkWrap: true,
-                                          physics:
-                                          NeverScrollableScrollPhysics(),
+                                            ? Row(
                                           children: [
-                                            for (int index = 0;
-                                            index <
-                                                _rankableOptions
-                                                    .length;
-                                            index++)
-                                              Padding(
-                                                key: ValueKey(
-                                                    _rankableOptions[
-                                                    index]),
-                                                padding: const EdgeInsets
-                                                    .symmetric(
-                                                    horizontal: 8.0,
-                                                    vertical: 4.0),
-                                                child: Row(
-                                                  children: [
-                                                    Container(
-                                                      width: MediaQuery.of(
-                                                          context)
-                                                          .size
-                                                          .width *
-                                                          0.2,
-                                                      decoration:
-                                                      BoxDecoration(
-                                                        color: AppColors
-                                                            .whitewhite,
-                                                        border:
-                                                        Border.all(
-                                                          color: Colors
-                                                              .grey
-                                                              .shade600,
-                                                          width: 1.0,
-                                                        ),
-                                                        borderRadius:
-                                                        BorderRadius
-                                                            .circular(
-                                                            8.0),
-                                                      ),
-                                                      child: ListTile(
-                                                        title: Text(
-                                                          _rankableOptions[
-                                                          index],
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .grey
-                                                                  .shade600),
-                                                        ),
-                                                        tileColor: Colors
-                                                            .grey
-                                                            .shade100,
+                                            Expanded(
+                                              child: ListView(
+                                                shrinkWrap: true,
+                                                physics: NeverScrollableScrollPhysics(),
+                                                children: [
+                                                  for (int index = 0;
+                                                  index < _rankableOptions.length;
+                                                  index++)
+                                                    Padding(
+                                                      key: ValueKey(_rankableOptions[index]),
+                                                      padding: const EdgeInsets.symmetric(
+                                                          horizontal: 8.0, vertical: 4.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Container(
+                                                            width: MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                                0.2,
+                                                            decoration: BoxDecoration(
+                                                              color: AppColors.whitewhite,
+                                                              border: Border.all(
+                                                                color: Colors.grey.shade600,
+                                                                width: 1.0,
+                                                              ),
+                                                              borderRadius:
+                                                              BorderRadius.circular(8.0),
+                                                            ),
+                                                            child: ListTile(
+                                                              title: Text(
+                                                                _rankableOptions[index],
+                                                                style: TextStyle(
+                                                                    color: Colors.grey.shade600),
+                                                              ),
+                                                              tileColor: Colors.grey.shade100,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                              width: MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                                  0.02),
+                                                          if (currentQuestion.twoColumn)
+                                                            Container(
+                                                              width: MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                                  0.2,
+                                                              decoration: BoxDecoration(
+                                                                color: AppColors.whitewhite,
+                                                                border: Border.all(
+                                                                  color: Colors.grey.shade600,
+                                                                  width: 1.0,
+                                                                ),
+                                                                borderRadius:
+                                                                BorderRadius.circular(8.0),
+                                                              ),
+                                                              child: ListTile(
+                                                                title: TextField(
+                                                                  style: TextStyle(
+                                                                      color: Colors.grey.shade600),
+                                                                ),
+                                                                tileColor: Colors.grey.shade100,
+                                                              ),
+                                                            ),
+                                                        ],
                                                       ),
                                                     ),
-                                                    if (currentQuestion
-                                                        .twoColumn)
-                                                      Container(
-                                                        width: MediaQuery.of(
-                                                            context)
-                                                            .size
-                                                            .width *
-                                                            0.2,
-                                                        decoration:
-                                                        BoxDecoration(
-                                                          color: AppColors
-                                                              .whitewhite,
-                                                          border:
-                                                          Border.all(
-                                                            color: Colors
-                                                                .grey
-                                                                .shade600,
-                                                            width: 1.0,
-                                                          ),
-                                                          borderRadius:
-                                                          BorderRadius
-                                                              .circular(
-                                                              8.0),
-                                                        ),
-                                                        child: ListTile(
-                                                          title:
-                                                          TextField(
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade600),
-                                                          ),
-                                                          tileColor: Colors
-                                                              .grey
-                                                              .shade100,
-                                                        ),
-                                                      ),
-                                                  ],
-                                                ),
+                                                ],
                                               ),
+                                            ),
                                           ],
                                         )
                                             : ReorderableListView(
                                           shrinkWrap: true,
-                                          physics:
-                                          NeverScrollableScrollPhysics(),
-                                          onReorder: (int oldIndex,
-                                              int newIndex) {
+                                          physics: NeverScrollableScrollPhysics(),
+                                          onReorder: (int oldIndex, int newIndex) {
                                             setState(() {
                                               if (newIndex > oldIndex) {
                                                 newIndex -= 1;
                                               }
                                               final item =
-                                              _rankableOptions
-                                                  .removeAt(oldIndex);
-                                              _rankableOptions.insert(
-                                                  newIndex, item);
+                                              _rankableOptions.removeAt(oldIndex);
+                                              _rankableOptions.insert(newIndex, item);
                                             });
                                           },
                                           children: [
                                             for (int index = 0;
-                                            index <
-                                                _rankableOptions
-                                                    .length;
+                                            index < _rankableOptions.length;
                                             index++)
                                               Padding(
-                                                key: ValueKey(
-                                                    _rankableOptions[
-                                                    index]),
-                                                padding: const EdgeInsets
-                                                    .symmetric(
-                                                    horizontal: 8.0,
-                                                    vertical: 4.0),
+                                                key: ValueKey(_rankableOptions[index]),
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 8.0, vertical: 4.0),
                                                 child: Row(
                                                   children: [
                                                     Container(
-                                                      width: MediaQuery.of(
-                                                          context)
+                                                      width: MediaQuery.of(context)
                                                           .size
                                                           .width *
                                                           0.2,
-                                                      decoration:
-                                                      BoxDecoration(
-                                                        color: AppColors
-                                                            .whitewhite,
-                                                        border:
-                                                        Border.all(
-                                                          color: Colors
-                                                              .grey
-                                                              .shade600,
+                                                      decoration: BoxDecoration(
+                                                        color: AppColors.whitewhite,
+                                                        border: Border.all(
+                                                          color: Colors.grey.shade600,
                                                           width: 1.0,
                                                         ),
                                                         borderRadius:
-                                                        BorderRadius
-                                                            .circular(
-                                                            8.0),
+                                                        BorderRadius.circular(8.0),
                                                       ),
                                                       child: ListTile(
                                                         title: Text(
-                                                          _rankableOptions[
-                                                          index],
+                                                          _rankableOptions[index],
                                                           style: TextStyle(
-                                                              color: Colors
-                                                                  .grey
-                                                                  .shade600),
+                                                              color: Colors.grey.shade600),
                                                         ),
-                                                        tileColor: Colors
-                                                            .grey
-                                                            .shade100,
+                                                        tileColor: Colors.grey.shade100,
                                                       ),
                                                     ),
-                                                    if (currentQuestion
-                                                        .twoColumn)
+                                                    if (currentQuestion.twoColumn)
                                                       Container(
-                                                        width: MediaQuery.of(
-                                                            context)
+                                                        width: MediaQuery.of(context)
                                                             .size
                                                             .width *
                                                             0.2,
-                                                        decoration:
-                                                        BoxDecoration(
-                                                          color: AppColors
-                                                              .whitewhite,
-                                                          border:
-                                                          Border.all(
-                                                            color: Colors
-                                                                .grey
-                                                                .shade600,
+                                                        decoration: BoxDecoration(
+                                                          color: AppColors.whitewhite,
+                                                          border: Border.all(
+                                                            color: Colors.grey.shade600,
                                                             width: 1.0,
                                                           ),
                                                           borderRadius:
-                                                          BorderRadius
-                                                              .circular(
-                                                              8.0),
+                                                          BorderRadius.circular(8.0),
                                                         ),
                                                         child: ListTile(
-                                                          title:
-                                                          TextField(
+                                                          title: TextField(
                                                             style: TextStyle(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade600),
+                                                                color: Colors.grey.shade600),
                                                           ),
-                                                          tileColor: Colors
-                                                              .grey
-                                                              .shade100,
+                                                          tileColor: Colors.grey.shade100,
                                                         ),
                                                       ),
                                                   ],
@@ -558,43 +478,12 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       ),
                                     ],
                                   ),
-                                SizedBox(
-                                    height: MediaQuery.of(context).size.width *
-                                        0.02),
-                                if (_optionControllers.isNotEmpty &&
-                                    _isReordering)
-                                // Container(
-                                //   decoration: BoxDecoration(
-                                //     border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                //     borderRadius: BorderRadius.circular(4.0),
-                                //   ),
-                                //   child: ElevatedButton(
-                                //     onPressed: () {
-                                //       setState(() {
-                                //         _isReordering = false;
-                                //       });
-                                //     },
-                                //     style: ElevatedButton.styleFrom(
-                                //       primary: AppColors.whitewhite,
-                                //       padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                //       textStyle: TextStyle(fontSize: 20.0),
-                                //       shape: RoundedRectangleBorder(
-                                //         borderRadius: BorderRadius.circular(4.0),
-                                //       ),
-                                //     ),
-                                //     child: Text(
-                                //       'Szerkesztés',
-                                //       style: TextStyle(color: Colors.grey.shade800),
-                                //     ),
-                                //   ),
-                                // ),
+                                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                                if (_optionControllers.isNotEmpty && _isReordering)
                                   GradientButton(
                                     text: 'SZERKESZTÉS',
                                     gradient: LinearGradient(
-                                      colors: [
-                                        AppColors.whitewhite,
-                                        Colors.yellow
-                                      ],
+                                      colors: [AppColors.whitewhite, Colors.yellow],
                                     ),
                                     onPressed: () {
                                       setState(() {
@@ -603,157 +492,69 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     },
                                     showIcon: false,
                                   ),
-                                SizedBox(
-                                    height: MediaQuery.of(context).size.width *
-                                        0.02),
-                                if (_optionControllers.isNotEmpty &&
-                                    _isReordering)
-                                // Container(
-                                //   decoration: BoxDecoration(
-                                //     border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                //     borderRadius: BorderRadius.circular(4.0),
-                                //   ),
-                                //   child: ElevatedButton(
-                                //     onPressed: () {
-                                //       quizProvider1.nextQuestion();
-                                //       _scrollToTop();
-                                //       if (quizProvider1.isQuizFinished) {
-                                //         Navigator.of(context).pushReplacementNamed(ResultScreen1.routeName);
-                                //       }
-                                //     },
-                                //     style: ElevatedButton.styleFrom(
-                                //       primary: AppColors.yellow,
-                                //       padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                //       textStyle: TextStyle(fontSize: 20.0),
-                                //       shape: RoundedRectangleBorder(
-                                //         borderRadius: BorderRadius.circular(4.0),
-                                //       ),
-                                //     ),
-                                //     child: Text(
-                                //       'Válasz mentése',
-                                //       style: TextStyle(color: AppColors.whitewhite),
-                                //     ),
-                                //   ),
-                                // ),
+                                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                                if (_optionControllers.isNotEmpty && _isReordering)
                                   GradientButton(
                                     text: 'VÁLASZ MENTÉSE',
-                                    gradient: LinearGradient(
-                                      colors: [Colors.yellow, AppColors.yellow],
-                                    ),
+                                    gradient: LinearGradient(colors: [Colors.yellow, AppColors.yellow]),
                                     onPressed: () {
                                       quizProvider1.nextQuestion();
                                       _scrollToTop();
                                       if (quizProvider1.isQuizFinished) {
                                         Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ModuleOpening_M3()));
+                                            MaterialPageRoute(builder: (context) => ModuleOpening_M3()));
                                       }
                                     },
-                                    showIcon: true, // Show the icon
+                                    showIcon: true,
                                   ),
-                                // SizedBox(
-                                //     height: MediaQuery.of(context).size.width *
-                                //         0.02),
-                                if (_optionControllers.isEmpty ||
-                                    !_isReordering)
-                                // Container(
-                                //   decoration: BoxDecoration(
-                                //     border: Border.all(color: Colors.grey.shade600, width: 2.0),
-                                //     borderRadius: BorderRadius.circular(4.0),
-                                //   ),
-                                //   child: ElevatedButton(
-                                //     onPressed: () {
-                                //       setState(() {
-                                //         _optionControllers.add(TextEditingController());
-                                //       });
-                                //     },
-                                //     style: ElevatedButton.styleFrom(
-                                //       primary: AppColors.whitewhite,
-                                //       padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                //       textStyle: TextStyle(fontSize: 20.0),
-                                //       shape: RoundedRectangleBorder(
-                                //         borderRadius: BorderRadius.circular(4.0),
-                                //       ),
-                                //     ),
-                                //     child: Text(
-                                //       'Új megadása',
-                                //       style: TextStyle(color: Colors.grey.shade800),
-                                //     ),
-                                //   ),
-                                // ),
+                                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                                if (_optionControllers.isEmpty || !_isReordering)
                                   GradientButton(
                                     text: 'ÚJ MEGADÁSA',
                                     gradient: LinearGradient(
-                                      colors: [
-                                        AppColors.whitewhite,
-                                        Colors.yellow
-                                      ],
+                                      colors: [AppColors.whitewhite, Colors.yellow],
                                     ),
                                     onPressed: () {
                                       setState(() {
-                                        _optionControllers
-                                            .add(TextEditingController());
+                                        _optionControllers.add(TextEditingController());
                                       });
                                     },
                                     showIcon: false,
                                   ),
-                                SizedBox(
-                                    height: MediaQuery.of(context).size.width *
-                                        0.02),
-                                if (_optionControllers.isNotEmpty &&
-                                    !_isReordering)
-                                // Container(
-                                //   decoration: BoxDecoration(
-                                //     border: Border.all(color: AppColors.whitewhite, width: 2.0),
-                                //     borderRadius: BorderRadius.circular(4.0),
-                                //   ),
-                                //   child: ElevatedButton(
-                                //     onPressed: () {
-                                //       setState(() {
-                                //         _rankableOptions = _optionControllers
-                                //             .map((controller) => controller.text)
-                                //             .where((text) => text.isNotEmpty)
-                                //             .toList();
-                                //         _isReordering = true;
-                                //       });
-                                //     },
-                                //     style: ElevatedButton.styleFrom(
-                                //       primary: Colors.yellow,
-                                //       padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                                //       textStyle: TextStyle(fontSize: 20.0),
-                                //       shape: RoundedRectangleBorder(
-                                //         borderRadius: BorderRadius.circular(4.0),
-                                //       ),
-                                //     ),
-                                //     child: Text(
-                                //       'Eddigiek mentése, sorbarendezés megkezdése',
-                                //       style: TextStyle(color: Colors.grey.shade800),
-                                //     ),
-                                //   ),
-                                // ),
+                                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                                if (_optionControllers.isNotEmpty && !_isReordering)
                                   GradientButton(
-                                    text:
-                                    'EDDIGIEK MENTÉSE, SORBARENDEZÉS MEGKEZDÉSE',
-                                    gradient: LinearGradient(
-                                      colors: [Colors.yellow, Colors.yellow],
-                                    ),
+                                    text: 'EDDIGIEK MENTÉSE, SORBARENDEZÉS MEGKEZDÉSE',
+                                    gradient: LinearGradient(colors: [Colors.yellow, Colors.yellow]),
                                     onPressed: () {
                                       setState(() {
-                                        _rankableOptions = _optionControllers
-                                            .map(
-                                                (controller) => controller.text)
+                                        List<String> answers = _optionControllers
+                                            .map((controller) => controller.text)
                                             .where((text) => text.isNotEmpty)
                                             .toList();
-                                        _isReordering = true;
+
+                                        // Validate at least 5 different answers
+                                        if (answers.length >= 5 &&
+                                            answers.toSet().length == answers.length) {
+                                          _rankableOptions = answers;
+                                          _isReordering = true;
+                                        } else {
+                                          // Show an alert or a message to the user
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                            content: Text('Kérlek, adj meg legalább 5 különböző választ.'),
+                                          ));
+                                        }
                                       });
                                     },
-                                    showIcon: false, // Show the icon
+                                    showIcon: false,
                                   ),
                               ],
                             ),
                           ]
-                         else if (currentQuestion.requiresRadioOptions) ...[
+
+
+
+                          else if (currentQuestion.requiresRadioOptions) ...[
                             Column(
                               children: [
                                 ...currentQuestion.radioOptions

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) => MaterialApp(
         title: 'Fájdalomkezelés bejelentkezés',
         theme: ThemeData(
-          primarySwatch: Colors.deepOrange,
+          primarySwatch: Colors.grey,
           useMaterial3: false,
         ),
         home:
