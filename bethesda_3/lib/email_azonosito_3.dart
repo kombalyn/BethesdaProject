@@ -12,12 +12,11 @@ import 'main.dart';
 import 'styles.dart'; // Make sure this path is correct based on where you placed the styles.dart file
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:bethesda_2/email_azonosito_3.dart';
 
 // Assuming 'main.dart' and 'home_page_model.dart' are correctly set up.
 
-class Email_2 extends StatelessWidget {
-  const Email_2({Key? key}) : super(key: key);
+class Email_3 extends StatelessWidget {
+  const Email_3({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -237,14 +236,8 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (BuildContext context) => Email_3(),
-                                      ),
-                                    );
+                                    // Define your onPressed logic here
                                   },
-
                                   child: Text(
                                     "Felírtam",
                                     textAlign: TextAlign.center,

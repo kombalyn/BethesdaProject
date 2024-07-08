@@ -177,6 +177,13 @@ class MyTextStyles {
       color: AppColors.darkshade, // Replace with your color variable if you have a custom one like AppColors.darkshade
     );
   }
+  static TextStyle kicsibekezdes2(BuildContext context) {
+    return TextStyle(
+      fontFamily: 'Open_Sans.light',
+      fontSize: 14.sp,  // This scales based on the screen width
+      color: Colors.grey, // Replace with your color variable if you have a custom one like AppColors.darkshade
+    );
+  }
   static TextStyle kicsibluebekezdes(BuildContext context) {
     return TextStyle(
       fontFamily: 'Open_Sans.light',

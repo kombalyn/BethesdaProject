@@ -248,7 +248,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                   decoration: InputDecoration(
                                                     contentPadding: EdgeInsets.zero,
                                                     labelText: 'Vezetéknév...',
-                                                    labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
+                                                    labelStyle: MyTextStyles.kicsibekezdes2(context),
                                                     enabledBorder: UnderlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color: Colors.white,
@@ -312,7 +312,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                   decoration: InputDecoration(
                                                     contentPadding: EdgeInsets.zero,
                                                     labelText: 'Keresztnév...',
-                                                    labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
+                                                    labelStyle: MyTextStyles.kicsibekezdes2(context),
                                                     enabledBorder: UnderlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color: Colors.white,
@@ -394,7 +394,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                   decoration: InputDecoration(
                                                     contentPadding: EdgeInsets.zero,
                                                     labelText: '...',
-                                                    labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
+                                                    labelStyle: MyTextStyles.kicsibekezdes2(context),
                                                     enabledBorder: UnderlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color: Colors.white,
@@ -488,7 +488,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                   decoration: InputDecoration(
                                                     contentPadding: EdgeInsets.zero,
                                                     labelText: 'Válassz...',
-                                                    labelStyle: MyTextStyles.kicsisbethesdabekezdes(context),
+                                                    labelStyle: MyTextStyles.kicsibekezdes2(context),
                                                     enabledBorder: UnderlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color: Colors.white,
