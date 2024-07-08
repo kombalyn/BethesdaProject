@@ -635,7 +635,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                       actions: <Widget>[
                                                         TextButton(
                                                           onPressed: () => Navigator.pop(context, 'OK'),
-                                                          child: const Text('OK'),
+                                                          child: Text('OK', style: TextStyle(color: AppColors.bethesdacolor)),
                                                         ),
                                                       ],
                                                     ),
@@ -643,7 +643,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                   Navigator.pushReplacement(
                                                     context,
                                                     MaterialPageRoute(
-                                                      builder: (BuildContext context) => Email_2(),
+                                                      builder: (BuildContext context) => HomePageWidget(),
                                                     ),
                                                   );
                                                 } else {
@@ -655,7 +655,7 @@ class _HomePageWidgetEmailState extends State<HomePageWidgetEmail> {
                                                       actions: <Widget>[
                                                         TextButton(
                                                           onPressed: () => Navigator.pop(context, 'OK'),
-                                                          child: const Text('OK'),
+                                                          child: Text('OK', style: TextStyle(color: AppColors.bethesdacolor)),
                                                         ),
                                                       ],
                                                     ),
