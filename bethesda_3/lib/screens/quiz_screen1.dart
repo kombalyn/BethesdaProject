@@ -6,6 +6,7 @@ import 'package:bethesda_2/constants/colors.dart';
 import 'package:bethesda_2/styles.dart';
 import '../ModuleOpening_M3.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 import '../meno_gomb.dart';
 
 class QuizScreen1 extends StatefulWidget {
@@ -29,42 +30,28 @@ class _QuizScreenState1 extends State<QuizScreen1> {
   final ScrollController _scrollController = ScrollController();
   int _selectedAnswerIndex = -1;
   bool is_hat_ketto = true;
-  bool _isSecondColumnVisible = false; // Define _isSecondColumnVisible
+  bool _isSecondColumnVisible = false;
 
-  List<String> _secondColumnTexts = []; // Define _secondColumnTexts
+  List<String> _secondColumnTexts = [];
+
+  WebSocketChannel? _channel;
 
   @override
   void initState() {
     super.initState();
-  }
+    _channel = WebSocketChannel.connect(
+      // Uri.parse('ws://34.72.67.6:8089'),
+      Uri.parse('ws://146.148.43.137:8089'),
+    );
 
-  void _addNewOption() {
-    setState(() {
-      _optionControllers.add(TextEditingController());
+    _channel?.stream.listen((message) {
+      print('Received message: $message');
     });
   }
 
-  void _startRanking() {
-    setState(() {
-      if (_optionControllers.length >= 5) {
-        final texts =
-            _optionControllers.map((controller) => controller.text).toList();
-        final duplicates = texts.toSet().length != texts.length;
-        if (duplicates) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Kérlek, írj különböző válaszokat!')));
-        } else if (texts.any((text) => text.isEmpty)) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Kérlek, írd be a válaszaid!')));
-        } else {
-          _rankableOptions = List<String>.from(texts);
-          _isReordering = true;
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Kérlek, adj meg legalább 5 választ!')));
-      }
-    });
+  void _sendAnswer(int questionIndex, String answer) {
+    String message = 'save|Azonosito;M3;1-2;$questionIndex,$answer';
+    _channel?.sink.add(message);
   }
 
   @override
@@ -81,6 +68,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
       controller.dispose();
     }
     _scrollController.dispose();
+    _channel?.sink.close();
     super.dispose();
   }
 
@@ -176,7 +164,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               children: [
                                 Container(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.55,
+                                  MediaQuery.of(context).size.width * 0.55,
                                   margin: EdgeInsets.only(top: 20.0),
                                   padding: EdgeInsets.all(16.0),
                                   decoration: BoxDecoration(
@@ -215,7 +203,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         value: progressValue,
                                         backgroundColor: AppColors.whitewhite,
                                         valueColor:
-                                            AlwaysStoppedAnimation<Color>(
+                                        AlwaysStoppedAnimation<Color>(
                                           Colors.yellow,
                                         ),
                                         minHeight: 20.0,
@@ -230,7 +218,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal:
-                                      MediaQuery.of(context).size.width * 0.06),
+                                  MediaQuery.of(context).size.width * 0.06),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -255,8 +243,6 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                           ],
                           SizedBox(
                               height: MediaQuery.of(context).size.width * 0.03),
-
-
 
                           if (currentQuestion.requiresRanking) ...[
                             Column(
@@ -498,6 +484,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     text: 'VÁLASZ MENTÉSE',
                                     gradient: LinearGradient(colors: [Colors.yellow, AppColors.yellow]),
                                     onPressed: () {
+                                      _sendAnswer(quizProvider1.currentQuestion.index, _rankableOptions.join(', '));
                                       quizProvider1.nextQuestion();
                                       _scrollToTop();
                                       if (quizProvider1.isQuizFinished) {
@@ -550,11 +537,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   ),
                               ],
                             ),
-                          ]
-
-
-
-                          else if (currentQuestion.requiresRadioOptions) ...[
+                          ] else if (currentQuestion.requiresRadioOptions) ...[
                             Column(
                               children: [
                                 ...currentQuestion.radioOptions
@@ -571,19 +554,19 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         unselectedWidgetColor: Colors.grey,
                                         radioTheme: RadioThemeData(
                                           fillColor:
-                                              MaterialStateColor.resolveWith(
+                                          MaterialStateColor.resolveWith(
                                                   (states) => states.contains(
-                                                          MaterialState
-                                                              .selected)
-                                                      ? AppColors.yellow
-                                                      : Colors.grey),
+                                                  MaterialState
+                                                      .selected)
+                                                  ? AppColors.yellow
+                                                  : Colors.grey),
                                         ),
                                       ),
                                       child: Container(
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
-                                              BorderRadius.circular(8.0),
+                                          BorderRadius.circular(8.0),
                                           boxShadow: [
                                             BoxShadow(
                                               color: Colors.black12,
@@ -635,24 +618,24 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         decoration: InputDecoration(
                                           labelText: 'Megjegyzés...',
                                           labelStyle:
-                                              TextStyle(color: Colors.grey),
+                                          TextStyle(color: Colors.grey),
                                           border: OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                            BorderRadius.circular(8.0),
                                             borderSide: BorderSide(
                                                 color: Colors.grey.shade600,
                                                 width: 1.5),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                            BorderRadius.circular(8.0),
                                             borderSide: BorderSide(
                                                 color: Colors.yellow,
                                                 width: 1.5),
                                           ),
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                            BorderRadius.circular(8.0),
                                             borderSide: BorderSide(
                                                 color: Colors.grey, width: 1.5),
                                           ),
@@ -676,10 +659,11 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   ),
                                   onPressed: () {
                                     if (_selectedAnswerIndex != -1) {
+                                      _sendAnswer(currentQuestion.index, currentQuestion.radioOptions[_selectedAnswerIndex].text);
                                       quizProvider1.answerQuestion(
                                           currentQuestion
                                               .radioOptions[
-                                                  _selectedAnswerIndex]
+                                          _selectedAnswerIndex]
                                               .nextQuestionIndex);
                                       _scrollToTop();
                                       if (quizProvider1.isQuizFinished) {
@@ -705,10 +689,9 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         child: Padding(
                                           padding: EdgeInsets.only(
                                               left: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
+                                                  .size
+                                                  .width *
                                                   0.05),
-                                          // Adjust the left padding value as needed
                                           child: Text(
                                             currentQuestion.prosText,
                                             style: TextStyle(
@@ -726,10 +709,9 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         child: Padding(
                                           padding: EdgeInsets.only(
                                               right: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
+                                                  .size
+                                                  .width *
                                                   0.05),
-                                          // Adjust the left padding value as needed
                                           child: Text(
                                             currentQuestion.consText,
                                             style: TextStyle(
@@ -751,299 +733,295 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   children: [
                                     is_hat_ketto
                                         ? Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.5,
-                                            child: ListView.builder(
-                                              shrinkWrap: true,
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemCount:
-                                                  _optionControllers2.length,
-                                              itemBuilder: (context, index) {
-                                                var controller =
-                                                    _optionControllers2[index];
-                                                var controller2 =
-                                                    _optionControllers3[index];
-                                                return Padding(
-                                                  key: ValueKey(controller),
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 8.0,
-                                                      vertical: 4.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding: EdgeInsets.only(
-                                                              left: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.01),
-                                                          // Adjust the left padding value as needed
-                                                          child: TextField(
-                                                            controller:
-                                                                controller,
-                                                            decoration:
-                                                                InputDecoration(
-                                                              labelText:
-                                                                  'nehézség...',
-                                                              labelStyle: TextStyle(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade600),
-                                                              border:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .shade600,
-                                                                    width: 1.5),
-                                                              ),
-                                                              focusedBorder:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .yellow,
-                                                                    width: 1.5),
-                                                              ),
-                                                              enabledBorder:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    width: 1.5),
-                                                              ),
-                                                              filled: true,
-                                                              fillColor:
-                                                                  Colors.white,
-                                                            ),
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade800),
-                                                            maxLines: null,
-                                                          ),
+                                      width: MediaQuery.of(context)
+                                          .size
+                                          .width *
+                                          0.5,
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        physics:
+                                        NeverScrollableScrollPhysics(),
+                                        itemCount:
+                                        _optionControllers2.length,
+                                        itemBuilder: (context, index) {
+                                          var controller =
+                                          _optionControllers2[index];
+                                          var controller2 =
+                                          _optionControllers3[index];
+                                          return Padding(
+                                            key: ValueKey(controller),
+                                            padding: const EdgeInsets
+                                                .symmetric(
+                                                horizontal: 8.0,
+                                                vertical: 4.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .center,
+                                              children: [
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: MediaQuery.of(
+                                                            context)
+                                                            .size
+                                                            .width *
+                                                            0.01),
+                                                    child: TextField(
+                                                      controller:
+                                                      controller,
+                                                      decoration:
+                                                      InputDecoration(
+                                                        labelText:
+                                                        'nehézség...',
+                                                        labelStyle: TextStyle(
+                                                            color: Colors
+                                                                .grey
+                                                                .shade600),
+                                                        border:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              8.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .grey
+                                                                  .shade600,
+                                                              width: 1.5),
                                                         ),
-                                                      ),
-                                                      SizedBox(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              0.1),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding: EdgeInsets.only(
-                                                              right: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.01),
-                                                          // Adjust the right padding value as needed
-                                                          child: TextField(
-                                                            controller:
-                                                                controller2,
-                                                            decoration:
-                                                                InputDecoration(
-                                                              labelText:
-                                                                  'előny...',
-                                                              labelStyle: TextStyle(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade600),
-                                                              border:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .shade600,
-                                                                    width: 1.5),
-                                                              ),
-                                                              focusedBorder:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .yellow,
-                                                                    width: 1.5),
-                                                              ),
-                                                              enabledBorder:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    width: 1.5),
-                                                              ),
-                                                              filled: true,
-                                                              fillColor:
-                                                                  Colors.white,
-                                                            ),
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade800),
-                                                            maxLines: null,
-                                                          ),
+                                                        focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              8.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .yellow,
+                                                              width: 1.5),
                                                         ),
+                                                        enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              8.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .grey,
+                                                              width: 1.5),
+                                                        ),
+                                                        filled: true,
+                                                        fillColor:
+                                                        Colors.white,
                                                       ),
-                                                    ],
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .grey
+                                                              .shade800),
+                                                      maxLines: null,
+                                                    ),
                                                   ),
-                                                );
-                                              },
+                                                ),
+                                                SizedBox(
+                                                    width: MediaQuery.of(
+                                                        context)
+                                                        .size
+                                                        .width *
+                                                        0.1),
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        right: MediaQuery.of(
+                                                            context)
+                                                            .size
+                                                            .width *
+                                                            0.01),
+                                                    child: TextField(
+                                                      controller:
+                                                      controller2,
+                                                      decoration:
+                                                      InputDecoration(
+                                                        labelText:
+                                                        'előny...',
+                                                        labelStyle: TextStyle(
+                                                            color: Colors
+                                                                .grey
+                                                                .shade600),
+                                                        border:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              8.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .grey
+                                                                  .shade600,
+                                                              width: 1.5),
+                                                        ),
+                                                        focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              8.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .yellow,
+                                                              width: 1.5),
+                                                        ),
+                                                        enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              8.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .grey,
+                                                              width: 1.5),
+                                                        ),
+                                                        filled: true,
+                                                        fillColor:
+                                                        Colors.white,
+                                                      ),
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .grey
+                                                              .shade800),
+                                                      maxLines: null,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          )
+                                          );
+                                        },
+                                      ),
+                                    )
                                         : Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.5,
-                                            child: ListView.builder(
-                                              shrinkWrap: true,
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemCount:
-                                                  _optionControllers2.length,
-                                              itemBuilder: (context, index) {
-                                                var text2 =
-                                                    _optionControllers2[index]
-                                                        .text;
-                                                var text3 =
-                                                    _optionControllers3[index]
-                                                        .text;
-                                                return Padding(
-                                                  key: ValueKey(text2),
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 8.0,
-                                                      vertical: 4.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding: EdgeInsets.only(
-                                                              left: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.01),
-                                                          // Adjust the left padding value as needed
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade600,
-                                                                  width: 2.0),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8.0),
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Text(
-                                                              text2,
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade800),
-                                                            ),
-                                                          ),
-                                                        ),
+                                      width: MediaQuery.of(context)
+                                          .size
+                                          .width *
+                                          0.5,
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        physics:
+                                        NeverScrollableScrollPhysics(),
+                                        itemCount:
+                                        _optionControllers2.length,
+                                        itemBuilder: (context, index) {
+                                          var text2 =
+                                              _optionControllers2[index]
+                                                  .text;
+                                          var text3 =
+                                              _optionControllers3[index]
+                                                  .text;
+                                          return Padding(
+                                            key: ValueKey(text2),
+                                            padding: const EdgeInsets
+                                                .symmetric(
+                                                horizontal: 8.0,
+                                                vertical: 4.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .center,
+                                              children: [
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: MediaQuery.of(
+                                                            context)
+                                                            .size
+                                                            .width *
+                                                            0.01),
+                                                    child: Container(
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .grey
+                                                                .shade600,
+                                                            width: 2.0),
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            8.0),
+                                                        color:
+                                                        Colors.white,
                                                       ),
-                                                      SizedBox(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              0.1),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding: EdgeInsets.only(
-                                                              right: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.01),
-                                                          // Adjust the right padding value as needed
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade600,
-                                                                  width: 2.0),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8.0),
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Text(
-                                                              text3,
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade800),
-                                                            ),
-                                                          ),
-                                                        ),
+                                                      padding:
+                                                      const EdgeInsets
+                                                          .all(8.0),
+                                                      child: Text(
+                                                        text2,
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .grey
+                                                                .shade800),
                                                       ),
-                                                    ],
+                                                    ),
                                                   ),
-                                                );
-                                              },
+                                                ),
+                                                SizedBox(
+                                                    width: MediaQuery.of(
+                                                        context)
+                                                        .size
+                                                        .width *
+                                                        0.1),
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        right: MediaQuery.of(
+                                                            context)
+                                                            .size
+                                                            .width *
+                                                            0.01),
+                                                    child: Container(
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .grey
+                                                                .shade600,
+                                                            width: 2.0),
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            8.0),
+                                                        color:
+                                                        Colors.white,
+                                                      ),
+                                                      padding:
+                                                      const EdgeInsets
+                                                          .all(8.0),
+                                                      child: Text(
+                                                        text3,
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .grey
+                                                                .shade800),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ),
+                                          );
+                                        },
+                                      ),
+                                    ),
                                     ...currentQuestion.answers.map((answer) {
                                       if (answer.isFillable) {
                                         return Column(
                                           children: [
                                             SizedBox(
                                                 height: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
+                                                    .size
+                                                    .width *
                                                     0.02),
                                             GradientButton(
                                               text: 'ÚJ MEGADÁSA',
@@ -1065,8 +1043,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                             ),
                                             SizedBox(
                                                 height: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
+                                                    .size
+                                                    .width *
                                                     0.02),
                                           ],
                                         );
@@ -1092,9 +1070,9 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                           if (quizProvider1.isQuizFinished) {
                                             Navigator.of(context)
                                                 .pushReplacement(
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            ModuleOpening_M3('Azonosito')));
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ModuleOpening_M3('Azonosito')));
                                           }
                                           _controller.clear();
                                         },
@@ -1114,19 +1092,19 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   children: [
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.02),
+                                        MediaQuery.of(context).size.width *
+                                            0.02),
                                     SliderTheme(
                                       data: SliderTheme.of(context).copyWith(
                                         trackHeight: 12.0,
                                         activeTrackColor: Colors.yellow,
                                         inactiveTrackColor:
-                                            AppColors.whitewhite,
+                                        AppColors.whitewhite,
                                         thumbColor: Colors.grey.shade600,
                                         overlayColor: Colors.grey.shade600
                                             .withOpacity(0.2),
                                         valueIndicatorColor:
-                                            Colors.grey.shade600,
+                                        Colors.grey.shade600,
                                         thumbShape: RoundSliderThumbShape(
                                             enabledThumbRadius: 12.0),
                                         overlayShape: RoundSliderOverlayShape(
@@ -1147,8 +1125,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     ),
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.02),
+                                        MediaQuery.of(context).size.width *
+                                            0.02),
                                     GradientButton(
                                       text: 'TOVÁBB',
                                       gradient: LinearGradient(
@@ -1158,6 +1136,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         ],
                                       ),
                                       onPressed: () {
+                                        _sendAnswer(currentQuestion.index, _sliderValue.toString());
                                         quizProvider1.answerQuestion(
                                             answer.nextQuestionIndex);
                                         _scrollToTop();
@@ -1178,11 +1157,11 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     Center(
                                       child: ClipRRect(
                                         borderRadius:
-                                            BorderRadius.circular(20.0),
+                                        BorderRadius.circular(20.0),
                                         child: Container(
                                           decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                            BorderRadius.circular(20.0),
                                           ),
                                           child: SizedBox(
                                             child: HtmlWidget(
@@ -1194,8 +1173,8 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     ),
                                     SizedBox(
                                         height:
-                                            MediaQuery.of(context).size.width *
-                                                0.02),
+                                        MediaQuery.of(context).size.width *
+                                            0.02),
                                     GradientButton(
                                       text: 'MEGNÉZTEM',
                                       gradient: LinearGradient(
@@ -1205,6 +1184,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         ],
                                       ),
                                       onPressed: () {
+                                        _sendAnswer(currentQuestion.index, "Watched Video");
                                         quizProvider1.answerQuestion(
                                             answer.nextQuestionIndex);
                                         _scrollToTop();
@@ -1233,7 +1213,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   decoration: InputDecoration(
                                     labelText: 'A válaszod...',
                                     labelStyle:
-                                        TextStyle(color: Colors.grey.shade600),
+                                    TextStyle(color: Colors.grey.shade600),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8.0),
                                       borderSide: BorderSide(
@@ -1260,7 +1240,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             ),
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02),
+                                MediaQuery.of(context).size.width * 0.02),
                             GradientButton(
                               text: 'TOVÁBB',
                               gradient: LinearGradient(
@@ -1268,6 +1248,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               ),
                               onPressed: () {
                                 if (_controller.text.isNotEmpty) {
+                                  _sendAnswer(currentQuestion.index, _controller.text);
                                   quizProvider1.nextQuestion();
                                   _scrollToTop();
                                   if (quizProvider1.isQuizFinished) {
@@ -1281,7 +1262,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content:
-                                            Text('Kérlek, írd be a válaszod!')),
+                                        Text('Kérlek, írd be a válaszod!')),
                                   );
                                 }
                               },
@@ -1324,7 +1305,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.lightshade,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.03,
+                                MediaQuery.of(context).size.width * 0.03,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1343,7 +1324,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               ),
                               child: ListTile(
                                 leading:
-                                    Image.asset('assets/images/2icon_m.png'),
+                                Image.asset('assets/images/2icon_m.png'),
                                 title: Text(
                                   'Kérdések',
                                   style: MyTextStyles.vastagyellow(context),
@@ -1355,7 +1336,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.lightshade,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1373,7 +1354,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1392,7 +1373,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               ),
                               child: ListTile(
                                 leading:
-                                    Image.asset('assets/images/5icon_m.png'),
+                                Image.asset('assets/images/5icon_m.png'),
                                 title: Text(
                                   '1-2. hét',
                                   style: MyTextStyles.vastagbekezdes(context),
@@ -1408,7 +1389,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1433,7 +1414,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1458,7 +1439,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1483,7 +1464,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
@@ -1508,7 +1489,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               color: AppColors.whitewhite,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.width * 0.02,
+                                MediaQuery.of(context).size.width * 0.02,
                                 decoration: BoxDecoration(
                                   color: AppColors.whitewhite,
                                   borderRadius: BorderRadius.only(
