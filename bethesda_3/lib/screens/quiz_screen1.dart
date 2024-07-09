@@ -1253,7 +1253,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                             if(currentQuestion.index==24)
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.85,
-                                height: MediaQuery.of(context).size.width * 0.55,
+                                height: MediaQuery.of(context).size.width * 0.30,
                                 //width: MediaQuery.of(context).size.width * 0.2,
                                 // Make the cells narrower
                                 decoration: BoxDecoration(
@@ -1272,290 +1272,107 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                 ListView(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
-                                  /*onReorder: (int oldIndex, int newIndex) {
-                                    setState(() {
-                                      if (newIndex > oldIndex) {
-                                        newIndex -= 1;
-                                      }
-                                      final item = _rankableOptions_
-                                          .removeAt(oldIndex);
-                                      _rankableOptions_.insert(
-                                          newIndex, item);
-                                    });
-                                  },*/
                                   children: [
-                                    for (int index = 0;
-                                    index < _rankableOptions_.length;
-                                    index++)
+                                    // Header row
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                      child: Container(
+                                        width: MediaQuery.of(context).size.width * 0.7,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                          borderRadius: BorderRadius.circular(8.0),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context).size.width * 0.1,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                                borderRadius: BorderRadius.circular(8.0),
+                                              ),
+                                              child: ListTile(
+                                                title: Text(
+                                                  "isősáv",
+                                                  style: TextStyle(color: Colors.grey.shade800),
+                                                ),
+                                                tileColor: Colors.grey.shade100,
+                                              ),
+                                            ),
+                                            for (int i = 1; i <= 7; i++)
+                                              Container(
+                                                width: MediaQuery.of(context).size.width * 0.05,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                                  borderRadius: BorderRadius.circular(8.0),
+                                                ),
+                                                child: ListTile(
+                                                  title: Text(
+                                                    "$i.nap",
+                                                    style: TextStyle(color: Colors.grey.shade800),
+                                                  ),
+                                                  tileColor: Colors.grey.shade100,
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    // Original rows
+                                    for (int index = 0; index < _rankableOptions_.length; index++)
                                       Padding(
-                                        key: ValueKey(
-                                            _rankableOptions_[index]),
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8.0, vertical: 4.0),
-                                        child: // Adam tette be, kesobb kiveheto:
-                                        Container(
+                                        key: ValueKey(_rankableOptions_[index]),
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                        child: Container(
                                           width: MediaQuery.of(context).size.width * 0.7,
-                                          // Make the cells narrower
                                           decoration: BoxDecoration(
                                             color: Colors.white,
-                                            // Background color for the container
-                                            border: Border.all(
-                                                color: Colors.grey.shade600,
-                                                width: 1.0),
-                                            // Border color and width
-                                            borderRadius:
-                                            BorderRadius.circular(
-                                                8.0), // Border radius
+                                            border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                            borderRadius: BorderRadius.circular(8.0),
                                           ),
-                                          child:
-                                          Row(
+                                          child: Row(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-
-
-
-                                              /*
                                               Container(
                                                 width: MediaQuery.of(context).size.width * 0.1,
-                                                child: Icon(icon_most[_Types[index]],size: MediaQuery.of(context).size.width * 0.05,),),
-                                              */
-
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                    0.1,
-                                                // Make the cells narrower
                                                 decoration: BoxDecoration(
                                                   color: Colors.white,
-                                                  // Background color for the container
-                                                  border: Border.all(
-                                                      color: Colors.grey.shade600,
-                                                      width: 1.0),
-                                                  // Border color and width
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      8.0), // Border radius
+                                                  border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                                  borderRadius: BorderRadius.circular(8.0),
                                                 ),
                                                 child: ListTile(
-                                                  title: Text(felirat_most[_Types[index]]!,
-                                                    style: TextStyle(
-                                                        color: Colors.grey
-                                                            .shade800), // Text color
+                                                  title: Text(
+                                                    felirat_most[_Types[index]]!,
+                                                    style: TextStyle(color: Colors.grey.shade800),
                                                   ),
-                                                  tileColor: Colors.grey
-                                                      .shade100, // Background color for the tile
+                                                  tileColor: Colors.grey.shade100,
                                                 ),
                                               ),
-
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                    0.05,
-                                                // Make the cells narrower
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  // Background color for the container
-                                                  border: Border.all(
-                                                      color: Colors.grey.shade600,
-                                                      width: 1.0),
-                                                  // Border color and width
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      8.0), // Border radius
-                                                ),
-                                                child: ListTile(
-                                                  title: TextField(
-                                                    style: TextStyle(
-                                                        color: Colors.grey
-                                                            .shade800), // Text color
+                                              for (int i = 0; i < 7; i++)
+                                                Container(
+                                                  width: MediaQuery.of(context).size.width * 0.05,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                                    borderRadius: BorderRadius.circular(8.0),
                                                   ),
-                                                  tileColor: Colors.grey
-                                                      .shade100, // Background color for the tile
-                                                ),
-                                              ),
-
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                    0.05,
-                                                // Make the cells narrower
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  // Background color for the container
-                                                  border: Border.all(
-                                                      color: Colors.grey.shade600,
-                                                      width: 1.0),
-                                                  // Border color and width
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      8.0), // Border radius
-                                                ),
-                                                child: ListTile(
-                                                  title: TextField(
-                                                    style: TextStyle(
-                                                        color: Colors.grey
-                                                            .shade800), // Text color
+                                                  child: ListTile(
+                                                    title: TextField(
+                                                      style: TextStyle(color: Colors.grey.shade800),
+                                                    ),
+                                                    tileColor: Colors.grey.shade100,
                                                   ),
-                                                  tileColor: Colors.grey
-                                                      .shade100, // Background color for the tile
                                                 ),
-                                              ),
-
-
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                    0.05,
-                                                // Make the cells narrower
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  // Background color for the container
-                                                  border: Border.all(
-                                                      color: Colors.grey.shade600,
-                                                      width: 1.0),
-                                                  // Border color and width
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      8.0), // Border radius
-                                                ),
-                                                child: ListTile(
-                                                  title: TextField(
-                                                    style: TextStyle(
-                                                        color: Colors.grey
-                                                            .shade800), // Text color
-                                                  ),
-                                                  tileColor: Colors.grey
-                                                      .shade100, // Background color for the tile
-                                                ),
-                                              ),
-
-
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                    0.05,
-                                                // Make the cells narrower
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  // Background color for the container
-                                                  border: Border.all(
-                                                      color: Colors.grey.shade600,
-                                                      width: 1.0),
-                                                  // Border color and width
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      8.0), // Border radius
-                                                ),
-                                                child: ListTile(
-                                                  title: TextField(
-                                                    style: TextStyle(
-                                                        color: Colors.grey
-                                                            .shade800), // Text color
-                                                  ),
-                                                  tileColor: Colors.grey
-                                                      .shade100, // Background color for the tile
-                                                ),
-                                              ),
-
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                    0.05,
-                                                // Make the cells narrower
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  // Background color for the container
-                                                  border: Border.all(
-                                                      color: Colors.grey.shade600,
-                                                      width: 1.0),
-                                                  // Border color and width
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      8.0), // Border radius
-                                                ),
-                                                child: ListTile(
-                                                  title: TextField(
-                                                    style: TextStyle(
-                                                        color: Colors.grey
-                                                            .shade800), // Text color
-                                                  ),
-                                                  tileColor: Colors.grey
-                                                      .shade100, // Background color for the tile
-                                                ),
-                                              ),
-
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                    0.05,
-                                                // Make the cells narrower
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  // Background color for the container
-                                                  border: Border.all(
-                                                      color: Colors.grey.shade600,
-                                                      width: 1.0),
-                                                  // Border color and width
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      8.0), // Border radius
-                                                ),
-                                                child: ListTile(
-                                                  title: TextField(
-                                                    style: TextStyle(
-                                                        color: Colors.grey
-                                                            .shade800), // Text color
-                                                  ),
-                                                  tileColor: Colors.grey
-                                                      .shade100, // Background color for the tile
-                                                ),
-                                              ),
-
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                    0.05,
-                                                // Make the cells narrower
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  // Background color for the container
-                                                  border: Border.all(
-                                                      color: Colors.grey.shade600,
-                                                      width: 1.0),
-                                                  // Border color and width
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      8.0), // Border radius
-                                                ),
-                                                child: ListTile(
-                                                  title: TextField(
-                                                    style: TextStyle(
-                                                        color: Colors.grey
-                                                            .shade800), // Text color
-                                                  ),
-                                                  tileColor: Colors.grey
-                                                      .shade100, // Background color for the tile
-                                                ),
-                                              ),
-
-
-
-
                                             ],
                                           ),
                                         ),
-
                                       ),
                                   ],
-                                ),
+                                )
+
                               ),
 
 
