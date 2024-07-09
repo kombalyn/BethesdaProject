@@ -1056,23 +1056,27 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       GradientButton(
                                         text: 'TOVÁBB',
                                         gradient: LinearGradient(
-                                          colors: [
-                                            Colors.yellow,
-                                            AppColors.yellow
-                                          ],
+                                          colors: [Colors.yellow, AppColors.yellow],
                                         ),
                                         onPressed: () {
                                           setState(() {
                                             is_hat_ketto = false;
                                           });
+                                          List<String> combinedAnswers = [];
+                                          for (int i = 0; i < _optionControllers2.length; i++) {
+                                            // Combining two columns into a single answer per row
+                                            String answerRow = _optionControllers2[i].text + ':' + _optionControllers3[i].text;
+                                            combinedAnswers.add(answerRow);
+                                          }
+                                          // Format: 1-answers;2-answers
+                                          String finalAnswer = combinedAnswers.join(',');
+                                          _sendAnswer(currentQuestion.index, finalAnswer);
                                           quizProvider1.nextQuestion();
                                           _scrollToTop();
                                           if (quizProvider1.isQuizFinished) {
-                                            Navigator.of(context)
-                                                .pushReplacement(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ModuleOpening_M3('Azonosito')));
+                                            Navigator.of(context).pushReplacement(
+                                                MaterialPageRoute(builder: (context) => ModuleOpening_M3('Azonosito'))
+                                            );
                                           }
                                           _controller.clear();
                                         },

@@ -8,8 +8,8 @@ export 'home_page_model.dart';
 
 
 
-class ModuleOpening extends StatelessWidget {
-  const ModuleOpening({super.key});
+class ModuleM3 extends StatelessWidget {
+  const ModuleM3({super.key});
 
   // This widget is the root of your application.
   @override
@@ -35,21 +35,21 @@ class ModuleOpening extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ModuleOpeningWidget(),
+      home: const ModuleM3Widget(),
     );
   }
 }
 
 
 
-class ModuleOpeningWidget extends StatefulWidget {
-  const ModuleOpeningWidget({super.key});
+class ModuleM3Widget extends StatefulWidget {
+  const ModuleM3Widget({super.key});
 
   @override
-  State<ModuleOpeningWidget> createState() => _ModuleOpeningWidgetState();
+  State<ModuleM3Widget> createState() => _ModuleM3WidgetState();
 }
 
-class _ModuleOpeningWidgetState extends State<ModuleOpeningWidget> {
+class _ModuleM3WidgetState extends State<ModuleM3Widget> {
   late HomePageModel _model;
 
   late VideoPlayerController _controller;
