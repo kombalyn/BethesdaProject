@@ -22,6 +22,7 @@ import 'ModuleHipnomp3_1.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'AudioPlayerPage.dart';
 
 class BulletList extends StatelessWidget {
   final List<String> strings;
@@ -291,11 +292,13 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                 ),
                                 child: SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
-                                  height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
-                                  child: HtmlWidget(
-                                    '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/Progr_relax_nagyoknak.mp3" ></audio>',
-                                    // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
-                                  ),
+                                  child:
+                                  AudioPlayerPage(url: "http://pigssh.ddns.net:8080/assets/assets/A szinek bolygoja.mp3"),
+
+                                // HtmlWidget(
+                                  //   '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/Progr_relax_nagyoknak.mp3" ></audio>',
+                                  //   // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
+                                  // ),
                                 ),
                               ),
                             ),
@@ -350,11 +353,11 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                 ),
                                 child: SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
-                                  height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
-                                  child: HtmlWidget(
-                                    '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/Progr_relax_nagyoknak.mp3" ></audio>',
-                                    // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
-                                  ),
+                                  child:  AudioPlayerPage(url: "http://pigssh.ddns.net:8080/assets/assets/Progr_relax_nagyoknak.mp3"),
+
+                                  // HtmlWidget(
+                                  //   '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/Progr_relax_nagyoknak.mp3" ></audio>',
+                                  //   // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
                                 ),
                               ),
                             ),
@@ -410,11 +413,11 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                 ),
                                 child: SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
-                                  height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
-                                  child: HtmlWidget(
-                                    '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" ></audio>',
-                                    // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
-                                  ),
+                                  child:  AudioPlayerPage(url: "http://pigssh.ddns.net:8080/assets/assets/A szinek bolygoja.mp3"),
+
+                                // HtmlWidget(
+                                //     '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" ></audio>',
+                                //     // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
                                 ),
                               ),
                             ),
@@ -471,11 +474,11 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                 ),
                                 child: SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
-                                  height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
-                                  child: HtmlWidget(
-                                    '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A gondtalan tengerpart.mp3" ></audio>',
-                                    // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
-                                  ),
+                                  child:  AudioPlayerPage(url: "http://pigssh.ddns.net:8080/assets/assets/A gondtalan tengerpart.mp3"),
+                                // HtmlWidget(
+                                //     '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A gondtalan tengerpart.mp3" ></audio>',
+                                //     // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
+
                                 ),
                               ),
                             ),
@@ -531,11 +534,13 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                 ),
                                 child: SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
-                                  height:  MediaQuery.of(context).size.width * 0.05, // Adjust the height to make it thin
-                                  child: HtmlWidget(
-                                    '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A csuszda.mp3" ></audio>',
-                                    // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
-                                  ),
+
+                                  child:  AudioPlayerPage(url: "http://pigssh.ddns.net:8080/assets/assets/A csuszda.mp3"),
+
+                                  // child: HtmlWidget(
+                                  //   '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A csuszda.mp3" ></audio>',
+                                  //   // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
+                                  // ),
                                 ),
                               ),
                             ),

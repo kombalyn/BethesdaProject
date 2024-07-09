@@ -435,8 +435,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               MaterialPageRoute(
                                                 builder: (BuildContext context) =>
                                                     //TO DO AZONOSITO ES IDO ALAPJAN MELYIK NYILJON MEG
-                                                    //ModuleOpening('Azonosito'),
-                                                    ModuleOpening_M3(),
+                                                    // ModuleOpening('Azonosito'),
+                                                    ModuleOpening_M3('Azonosito'),
                                               ),
                                             );
                                           }else{

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:bethesda_2/home_page_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
+import 'AudioPlayerPage.dart';
 
 import 'dart:html' as html;
 import 'AudioPlayerPage.dart';
@@ -336,21 +337,18 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
           """,
                         ), */
 
+
                         Center(
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10), // Adjust the corner radius
-                              color: Colors.white, // Add a background color to ensure visibility
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 3), // changes position of shadow
-                                ),
-                              ],
                             ),
-                            child:  AudioPlayerPage("assets/sound/Progr_relax_nagyoknak.mp3"),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
+
+                              child:  AudioPlayerPage(url: "http://pigssh.ddns.net:8080/assets/assets/Progr_relax_nagyoknak.mp3"),
+
+                            ),
                           ),
                         ),
 

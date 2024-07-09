@@ -119,7 +119,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (BuildContext context) => ModuleOpening_M3(),
+                          builder: (BuildContext context) => ModuleOpening_M3('Azonosito'),
                         ),
                       );
                       print("homegomb");
@@ -502,7 +502,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       _scrollToTop();
                                       if (quizProvider1.isQuizFinished) {
                                         Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(builder: (context) => ModuleOpening_M3()));
+                                            MaterialPageRoute(builder: (context) => ModuleOpening_M3('Azonosito')));
                                       }
                                     },
                                     showIcon: true,
@@ -686,7 +686,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ModuleOpening_M3()));
+                                                    ModuleOpening_M3('Azonosito')));
                                       }
                                     }
                                   },
@@ -1094,7 +1094,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                                 .pushReplacement(
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            ModuleOpening_M3()));
+                                                            ModuleOpening_M3('Azonosito')));
                                           }
                                           _controller.clear();
                                         },
@@ -1165,7 +1165,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                           Navigator.of(context).pushReplacement(
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      ModuleOpening_M3()));
+                                                      ModuleOpening_M3('Azonosito')));
                                         }
                                       },
                                       showIcon: true,
@@ -1212,7 +1212,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                           Navigator.of(context).pushReplacement(
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      ModuleOpening_M3()));
+                                                      ModuleOpening_M3('Azonosito')));
                                         }
                                       },
                                       showIcon: true,
@@ -1274,7 +1274,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                ModuleOpening_M3()));
+                                                ModuleOpening_M3('Azonosito')));
                                   }
                                   _controller.clear();
                                 } else {

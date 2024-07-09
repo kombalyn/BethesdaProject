@@ -13,6 +13,7 @@ import 'ModuleHipno_page3.dart';
 import 'ModuleHipno.dart';
 import 'ModuleHipnomp3_1.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'AudioPlayerPage.dart';
 
 import 'ModuleOpening.dart';
 
@@ -316,23 +317,21 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
 
                         SizedBox(
                             height: MediaQuery.of(context).size.width * 0.02),
+
                         Center(
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10), // Adjust the corner radius
-                              color: Colors.white, // Add a background color to ensure visibility
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 3), // changes position of shadow
-                                ),
-                              ],
                             ),
-                            child:  AudioPlayerPage("assets/sound/A csuszda.mp3"),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
+
+                              child:  AudioPlayerPage(url: "http://pigssh.ddns.net:8080/assets/assets/A csuszda.mp3"),
+
+                            ),
                           ),
                         ),
+
 
                         Row(
                           children: [

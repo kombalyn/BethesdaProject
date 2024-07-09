@@ -123,7 +123,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
   void _playAudio() {
     print("play");
     if (isOpened == false){
-      _assetsAudioPlayer.open(Audio("assets/sound/A_gondtalan_tengerpart_hangositott.mp3"));
+      _assetsAudioPlayer.open(Audio("http://pigssh.ddns.net:8080/assets/assets/A_gondtalan_tengerpart_hangositott.mp3"));
       isOpened = true;
     }
     _assetsAudioPlayer.play();
@@ -792,7 +792,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                                     (9 / 16),
                                                 // Maintain a 16:9 aspect ratio
                                                 child: HtmlWidget(
-                                                  '<video controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/mi%C3%A9rt%20j%C3%B3%20a%20hipn%C3%B3zis%20hasi%20f%C3%A1jdalomra.mp4" ></video>',
+                                                  '<video controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://pigssh.ddns.net:8080/assets/assets/mi%C3%A9rt%20j%C3%B3%20a%20hipn%C3%B3zis%20hasi%20f%C3%A1jdalomra.mp4" ></video>',
                                                   // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
                                                 ),
                                               ),
@@ -1126,7 +1126,7 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                                     (9 / 16),
                                                 // Maintain a 16:9 aspect ratio
                                                 child: HtmlWidget(
-                                                  '<video controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/hogyan%20alakul%20ki%20a%20%C3%BAl%C3%A9rz%C3%A9keny%20b%C3%A9lm%C5%B1k%C3%B6d%C3%A9s.mp4" ></video>',
+                                                  '<video controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://pigssh.ddns.net:8080/assets/assets/hogyan%20alakul%20ki%20a%20%C3%BAl%C3%A9rz%C3%A9keny%20b%C3%A9lm%C5%B1k%C3%B6d%C3%A9s.mp4" ></video>',
                                                 ),
                                               ),
                                             ),
@@ -1875,19 +1875,17 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(10), // Adjust the corner radius
-                                                  color: Colors.white, // Add a background color to ensure visibility
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey.withOpacity(0.5),
-                                                      spreadRadius: 5,
-                                                      blurRadius: 7,
-                                                      offset: Offset(0, 3), // changes position of shadow
-                                                    ),
-                                                  ],
                                                 ),
-                                                child:  AudioPlayerPage("assets/sound/Progr_relax_nagyoknak.mp3"),
+                                                child: SizedBox(
+                                                  width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
+
+                                                  child:  AudioPlayerPage(url: "http://pigssh.ddns.net:8080/assets/assets/Progr_relax_nagyoknak.mp3"),
+
+                                                ),
                                               ),
                                             ),
+
+                                        
                                             SizedBox(
                                                 height: MediaQuery.of(context)
                                                         .size
@@ -2023,19 +2021,20 @@ class _ModuleHipnotState extends State<ModuleHipnoWidget> {
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(10), // Adjust the corner radius
-                                                  color: Colors.white, // Add a background color to ensure visibility
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey.withOpacity(0.5),
-                                                      spreadRadius: 5,
-                                                      blurRadius: 7,
-                                                      offset: Offset(0, 3), // changes position of shadow
-                                                    ),
-                                                  ],
                                                 ),
-                                                child:  AudioPlayerPage("assets/sound/A_szinek_bolygoja.mp3"),
+                                                child: SizedBox(
+                                                  width: MediaQuery.of(context).size.width * 0.43, // Adjust the width as needed
+                                                  child:  AudioPlayerPage(url: "http://pigssh.ddns.net:8080/assets/assets/A szinek bolygoja.mp3"),
+
+                                                  // HtmlWidget(
+                                                  //   '<audio controls controlsList="nodownload" style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/Progr_relax_nagyoknak.mp3" ></audio>',
+                                                  //   // '<iframe style="border:none; margin:0; padding:0; width:100%; height:100%;" src="http://baby.analogic.sztaki.hu/assets/nas/data/PUBLIC/anagy/Bethesda_vids/A szinek bolygoja.mp3" frameborder="0" allowfullscreen></iframe>',
+                                                  // ),
+                                                ),
                                               ),
                                             ),
+
+                                           
                                             SizedBox(
                                                 height: MediaQuery.of(context)
                                                         .size

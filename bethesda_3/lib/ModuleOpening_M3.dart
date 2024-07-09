@@ -11,7 +11,8 @@ import 'package:bethesda_2/constants/colors.dart'; // Make sure this path is cor
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ModuleOpening_M3 extends StatelessWidget {
-  const ModuleOpening_M3({super.key});
+  String Azonosito = '';
+  ModuleOpening_M3(String s, {super.key}){Azonosito=s;}
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +28,25 @@ class ModuleOpening_M3 extends StatelessWidget {
         // Set the initial route to module opening screen
         routes: {
           '/quiz1': (context) => QuizScreen1(),
-          '/module_opening': (context) => const ModuleOpening_M3_Widget(),
+          '/module_opening': (context) =>  ModuleOpening_M3_Widget(Azonosito),
           // Adding the existing module screen as a route
         },
-        home: const ModuleOpening_M3_Widget(), // Default home screen
+        home:  ModuleOpening_M3_Widget(Azonosito), // Default home screen
       ),
     );
   }
 }
 
 class ModuleOpening_M3_Widget extends StatefulWidget {
-  const ModuleOpening_M3_Widget({super.key});
+  final String Azonosito;
+
+  ModuleOpening_M3_Widget(this.Azonosito, {Key? key}) : super(key: key);
 
   @override
-  State<ModuleOpening_M3_Widget> createState() =>
+  _ModuleOpening_M3_WidgetState createState() =>
       _ModuleOpening_M3_WidgetState();
 }
+
 
 class _ModuleOpening_M3_WidgetState extends State<ModuleOpening_M3_Widget> {
   late HomePageModel _model;
@@ -55,6 +59,7 @@ class _ModuleOpening_M3_WidgetState extends State<ModuleOpening_M3_Widget> {
   final ScrollController _scrollController = ScrollController();
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  String Azonosito = '';
 
   @override
   void initState() {
@@ -128,7 +133,7 @@ class _ModuleOpening_M3_WidgetState extends State<ModuleOpening_M3_Widget> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (BuildContext context) => ModuleOpening_M3(),
+                          builder: (BuildContext context) => ModuleOpening_M3('Azonosito'),
                         ),
                       );
                       print("homegomb");
@@ -354,7 +359,7 @@ class _ModuleOpening_M3_WidgetState extends State<ModuleOpening_M3_Widget> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          ModuleOpening_M3(),
+                                          ModuleOpening_M3('Azonosito'),
                                     ),
                                   );
                                   print("gomb");
@@ -416,7 +421,7 @@ class _ModuleOpening_M3_WidgetState extends State<ModuleOpening_M3_Widget> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          ModuleOpening_M3(),
+                                          ModuleOpening_M3('Azonosito'),
                                     ),
                                   );
                                 },
@@ -450,7 +455,7 @@ class _ModuleOpening_M3_WidgetState extends State<ModuleOpening_M3_Widget> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        ModuleOpening_M3(),
+                                        ModuleOpening_M3('Azonosito'),
                                   ),
                                 );
                               },
@@ -483,7 +488,7 @@ class _ModuleOpening_M3_WidgetState extends State<ModuleOpening_M3_Widget> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        ModuleOpening_M3(),
+                                        ModuleOpening_M3('Azonosito'),
                                   ),
                                 );
                               },
@@ -516,7 +521,7 @@ class _ModuleOpening_M3_WidgetState extends State<ModuleOpening_M3_Widget> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        ModuleOpening_M3(),
+                                        ModuleOpening_M3('Azonosito'),
                                   ),
                                 );
                               },
@@ -549,7 +554,7 @@ class _ModuleOpening_M3_WidgetState extends State<ModuleOpening_M3_Widget> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        ModuleOpening_M3(),
+                                        ModuleOpening_M3('Azonosito'),
                                   ),
                                 );
                               },
