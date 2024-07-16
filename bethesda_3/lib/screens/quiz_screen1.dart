@@ -1211,7 +1211,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                               }
                               return Container();
                             }).toList(),
-                          if (currentQuestion.requiresTextInput) ...[
+                            if (currentQuestion.requiresTextInput) ...[
                             Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 24.0, vertical: 8.0),
@@ -1372,7 +1372,164 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                       ),
                                   ],
                                 )
+                              ),
 
+
+
+
+                            // ADAM tette be es kesobb kiveheto
+                            if(currentQuestion.index==27)
+                              Container(
+                                  width: MediaQuery.of(context).size.width * 0.85,
+                                  height: MediaQuery.of(context).size.width * 0.30,
+                                  //width: MediaQuery.of(context).size.width * 0.2,
+                                  // Make the cells narrower
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    // Background color for the container
+                                    border: Border.all(
+                                        color: Colors.grey.shade600,
+                                        width: 1.0),
+                                    // Border color and width
+                                    borderRadius:
+                                    BorderRadius.circular(
+                                        8.0), // Border radius
+                                  ),
+                                  child:
+                                  //ReorderableListView(
+                                  ListView(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    children: [
+                                      // Header row
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                        child: Container(
+                                          width: MediaQuery.of(context).size.width * 0.7,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                            borderRadius: BorderRadius.circular(8.0),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: MediaQuery.of(context).size.width * 0.1,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                                  borderRadius: BorderRadius.circular(8.0),
+                                                ),
+                                                child: ListTile(
+                                                  title: Text(
+                                                    "isősáv",
+                                                    style: TextStyle(color: Colors.grey.shade800),
+                                                  ),
+                                                  tileColor: Colors.grey.shade100,
+                                                ),
+                                              ),
+                                              for (int i = 1; i <= 7; i++)
+                                                Container(
+                                                  width: MediaQuery.of(context).size.width * 0.05,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                                    borderRadius: BorderRadius.circular(8.0),
+                                                  ),
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      "$i.nap",
+                                                      style: TextStyle(color: Colors.grey.shade800),
+                                                    ),
+                                                    tileColor: Colors.grey.shade100,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: MediaQuery.of(context).size.width * 0.1,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                                    borderRadius: BorderRadius.circular(8.0),
+                                                  ),
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      "Magabiztossági szint",
+                                                      style: TextStyle(color: Colors.grey.shade800),
+                                                    ),
+                                                    tileColor: Colors.grey.shade100,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: MediaQuery.of(context).size.width * 0.1,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                                    borderRadius: BorderRadius.circular(8.0),
+                                                  ),
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      "Segítők – hogyan?",
+                                                      style: TextStyle(color: Colors.grey.shade800),
+                                                    ),
+                                                    tileColor: Colors.grey.shade100,
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      // Original rows
+                                      for (int index = 0; index < _rankableOptions_.length; index++)
+                                        Padding(
+                                          key: ValueKey(_rankableOptions_[index]),
+                                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                          child: Container(
+                                            width: MediaQuery.of(context).size.width * 0.7,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                              borderRadius: BorderRadius.circular(8.0),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  width: MediaQuery.of(context).size.width * 0.1,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                                    borderRadius: BorderRadius.circular(8.0),
+                                                  ),
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      felirat_most[_Types[index]]!,
+                                                      style: TextStyle(color: Colors.grey.shade800),
+                                                    ),
+                                                    tileColor: Colors.grey.shade100,
+                                                  ),
+                                                ),
+                                                for (int i = 0; i < 9; i++)
+                                                  Container(
+                                                     width: (i<7)? MediaQuery.of(context).size.width * 0.05 : MediaQuery.of(context).size.width * 0.1,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      border: Border.all(color: Colors.grey.shade600, width: 1.0),
+                                                      borderRadius: BorderRadius.circular(8.0),
+                                                    ),
+                                                    child: ListTile(
+                                                      title: TextField(
+                                                        style: TextStyle(color: Colors.grey.shade800),
+                                                      ),
+                                                      tileColor: Colors.grey.shade100,
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  )
                               ),
 
 
@@ -1405,6 +1562,7 @@ class _QuizScreenState1 extends State<QuizScreen1> {
                                         Text('Kérlek, írd be a válaszod!')),
                                   );
                                 }
+                                print(currentQuestion.index);
                               },
                               showIcon: true,
                             ),
